@@ -34,11 +34,11 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0mU-C2-n1y">
                                 <rect key="frame" x="27.5" y="560" width="320" height="77"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ub5-OG-4ZH">
+                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ub5-OG-4ZH">
                                         <rect key="frame" x="0.0" y="0.0" width="150" height="77"/>
                                         <color key="backgroundColor" red="0.64895304570000001" green="0.64895304570000001" blue="0.64895304570000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-HeavyItalic" family="Avenir Next" pointSize="17"/>
-                                        <state key="normal" title="Ikut !">
+                                        <state key="normal" title="Ikut !" backgroundImage="MainScreen - Button">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
                                     </button>
@@ -46,7 +46,7 @@
                                         <rect key="frame" x="170" y="0.0" width="150" height="77"/>
                                         <color key="backgroundColor" red="0.64895304570000001" green="0.64895304570000001" blue="0.64895304570000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-HeavyItalic" family="Avenir Next" pointSize="17"/>
-                                        <state key="normal" title="Main">
+                                        <state key="normal" title="Main" backgroundImage="MainScreen - Button">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
                                     </button>
@@ -138,40 +138,44 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Ksq-ad-LaC">
-                                <rect key="frame" x="90" y="539" width="195" height="83"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ff3-Lf-7VL">
+                                <rect key="frame" x="25" y="529" width="325" height="128"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZh-dZ-vXe">
-                                        <rect key="frame" x="0.0" y="0.0" width="195" height="40"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
-                                        <state key="normal" title="Ikut !">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ttK-MS-Xe9">
-                                        <rect key="frame" x="0.0" y="43" width="195" height="40"/>
-                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="HangingWood" translatesAutoresizingMaskIntoConstraints="NO" id="Hn8-iv-myJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ttK-MS-Xe9">
+                                        <rect key="frame" x="8" y="74" width="224" height="46"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
                                         <state key="normal" title="Batal">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZh-dZ-vXe">
+                                        <rect key="frame" x="8" y="12" width="224" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
+                                        <state key="normal" title="Ikut !">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                    </button>
                                 </subviews>
-                            </stackView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Ksq-ad-LaC" firstAttribute="top" secondItem="pfS-Mj-ISO" secondAttribute="bottom" constant="8" id="AFh-hf-XhU"/>
+                            <constraint firstItem="Ff3-Lf-7VL" firstAttribute="top" secondItem="pfS-Mj-ISO" secondAttribute="bottom" constant="-2" id="4i9-lw-ruC"/>
+                            <constraint firstItem="Ff3-Lf-7VL" firstAttribute="centerX" secondItem="1NE-0i-waK" secondAttribute="centerX" id="Gb6-Ex-OjA"/>
                             <constraint firstItem="1NE-0i-waK" firstAttribute="bottom" secondItem="pfS-Mj-ISO" secondAttribute="bottom" constant="136" id="MaH-kw-Dev"/>
                             <constraint firstItem="NhH-qA-KL8" firstAttribute="top" secondItem="1NE-0i-waK" secondAttribute="top" id="ZjO-Md-HfV"/>
                             <constraint firstItem="pfS-Mj-ISO" firstAttribute="top" secondItem="NhH-qA-KL8" secondAttribute="bottom" constant="8" id="dIc-fa-qN3"/>
-                            <constraint firstItem="1NE-0i-waK" firstAttribute="bottom" secondItem="Ksq-ad-LaC" secondAttribute="bottom" constant="45" id="flY-am-1m3"/>
                             <constraint firstItem="1NE-0i-waK" firstAttribute="trailing" secondItem="pfS-Mj-ISO" secondAttribute="trailing" constant="25" id="h3c-cF-Kdi"/>
-                            <constraint firstItem="1NE-0i-waK" firstAttribute="trailing" secondItem="Ksq-ad-LaC" secondAttribute="trailing" constant="90" id="j1G-nV-YSu"/>
+                            <constraint firstItem="1NE-0i-waK" firstAttribute="bottom" secondItem="Ff3-Lf-7VL" secondAttribute="bottom" constant="10" id="lOr-Cj-0QA"/>
                             <constraint firstItem="NhH-qA-KL8" firstAttribute="centerX" secondItem="1NE-0i-waK" secondAttribute="centerX" id="lhi-Ux-ae7"/>
                             <constraint firstItem="pfS-Mj-ISO" firstAttribute="leading" secondItem="1NE-0i-waK" secondAttribute="leading" constant="25" id="oiU-e8-UBd"/>
-                            <constraint firstItem="Ksq-ad-LaC" firstAttribute="leading" secondItem="1NE-0i-waK" secondAttribute="leading" constant="90" id="qJr-G1-6NI"/>
                             <constraint firstItem="pfS-Mj-ISO" firstAttribute="centerX" secondItem="1NE-0i-waK" secondAttribute="centerX" id="r7d-fC-gdL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1NE-0i-waK"/>
@@ -225,4 +229,8 @@
             <point key="canvasLocation" x="1884" y="133.5832083958021"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="HangingWood" width="856" height="402"/>
+        <image name="MainScreen - Button" width="2625" height="1730"/>
+    </resources>
 </document>
