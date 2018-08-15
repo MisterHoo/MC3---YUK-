@@ -19,13 +19,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sxy-vy-XDc">
-                                <rect key="frame" x="27" y="60" width="320" height="480"/>
+                                <rect key="frame" x="27" y="70" width="320" height="470"/>
                             </imageView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Tsi-RL-6Xk">
                                 <rect key="frame" x="168" y="503" width="39" height="37"/>
                             </pageControl>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Username" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mZe-sZ-sbW">
-                                <rect key="frame" x="27" y="20" width="320" height="30"/>
+                                <rect key="frame" x="27" y="30" width="320" height="30"/>
                                 <color key="backgroundColor" red="0.85445748730000004" green="0.85445748730000004" blue="0.85445748730000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-HeavyItalic" family="Avenir Next" pointSize="17"/>
@@ -65,7 +65,7 @@
                             <constraint firstItem="mZe-sZ-sbW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="27" id="bNK-Wb-QlA"/>
                             <constraint firstItem="sxy-vy-XDc" firstAttribute="width" secondItem="mZe-sZ-sbW" secondAttribute="width" id="dXz-5l-7no"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="0mU-C2-n1y" secondAttribute="bottom" constant="30" id="ejq-O4-cNN"/>
-                            <constraint firstItem="mZe-sZ-sbW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="qhl-oQ-I8g"/>
+                            <constraint firstItem="mZe-sZ-sbW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="qhl-oQ-I8g"/>
                             <constraint firstItem="0mU-C2-n1y" firstAttribute="top" secondItem="sxy-vy-XDc" secondAttribute="bottom" constant="20" id="xyu-zy-nNR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mZe-sZ-sbW" secondAttribute="trailing" constant="28" id="yYm-qa-HWn"/>
                         </constraints>
