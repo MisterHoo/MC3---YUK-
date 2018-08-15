@@ -10,6 +10,22 @@ import UIKit
 
 class LobbyViewController: UIViewController {
 
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var menuCollectionView: UICollectionView!
+    @IBOutlet weak var backgroundButton: UIImageView!
+    @IBOutlet weak var ikutButtonOutlet: UIButton!
+    @IBOutlet weak var batalButtonOutlet: UIButton!
+    
+    
+    @IBAction func ikutButtonAction(_ sender: UIButton) {
+        performSegue(withIdentifier: "lobbyToGame", sender: self)
+    }
+    
+    
+    @IBAction func batalButtonAction(_ sender: UIButton) {
+        performSegue(withIdentifier: "lobbyToMenu", sender: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

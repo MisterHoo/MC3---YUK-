@@ -41,6 +41,9 @@
                                         <state key="normal" title="Ikut !" backgroundImage="MainScreen - Button">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
+                                        <connections>
+                                            <action selector="ikutButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oGT-HE-akO"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iY0-cQ-1g5">
                                         <rect key="frame" x="170" y="0.0" width="150" height="77"/>
@@ -49,6 +52,9 @@
                                         <state key="normal" title="Main" backgroundImage="MainScreen - Button">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
+                                        <connections>
+                                            <action selector="mainButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="72U-6i-emd"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -71,15 +77,24 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="ikutButtonOutlet" destination="Ub5-OG-4ZH" id="eL2-DH-Bg2"/>
+                        <outlet property="mainButtonOutlet" destination="iY0-cQ-1g5" id="Q1a-yE-tLz"/>
+                        <outlet property="menuImageView" destination="sxy-vy-XDc" id="eTj-BZ-Kuu"/>
+                        <outlet property="menuSlider" destination="Tsi-RL-6Xk" id="GBj-Hj-ema"/>
+                        <outlet property="usernameTextField" destination="mZe-sZ-sbW" id="rJU-qO-Neg"/>
+                        <segue destination="aCb-XS-yaH" kind="show" identifier="menuToLobby" id="n5h-yG-11E"/>
+                        <segue destination="oHS-1f-FFs" kind="show" identifier="menuToGame" id="8Xt-dR-TY0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="132" y="133.5832083958021"/>
         </scene>
-        <!--View Controller-->
+        <!--Lobby View Controller-->
         <scene sceneID="gxk-T3-vV6">
             <objects>
-                <viewController id="aCb-XS-yaH" sceneMemberID="viewController">
+                <viewController id="aCb-XS-yaH" customClass="LobbyViewController" customModule="MC_3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bTZ-3H-Tno">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -150,6 +165,9 @@
                                         <state key="normal" title="Ikut !">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
+                                        <connections>
+                                            <action selector="ikutButtonAction:" destination="aCb-XS-yaH" eventType="touchUpInside" id="ZIk-Jj-7am"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ttK-MS-Xe9">
                                         <rect key="frame" x="50" y="74" width="224" height="46"/>
@@ -157,6 +175,9 @@
                                         <state key="normal" title="Batal">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
+                                        <connections>
+                                            <action selector="batalButtonAction:" destination="aCb-XS-yaH" eventType="touchUpInside" id="Cov-oc-d9t"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -190,15 +211,24 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1NE-0i-waK"/>
                     </view>
+                    <connections>
+                        <outlet property="backgroundButton" destination="Hn8-iv-myJ" id="ZSQ-48-88R"/>
+                        <outlet property="batalButtonOutlet" destination="ttK-MS-Xe9" id="4YY-Ua-b5E"/>
+                        <outlet property="ikutButtonOutlet" destination="KZh-dZ-vXe" id="tp2-i2-tLr"/>
+                        <outlet property="menuCollectionView" destination="pfS-Mj-ISO" id="Pyt-aJ-54O"/>
+                        <outlet property="titleLabel" destination="NhH-qA-KL8" id="mce-Z7-kgR"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="lobbyToMenu" id="hYt-uy-QJZ"/>
+                        <segue destination="oHS-1f-FFs" kind="show" identifier="lobbyToGame" id="jSL-cw-N1a"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="De7-pd-G3o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="997.60000000000002" y="133.5832083958021"/>
+            <point key="canvasLocation" x="903" y="-639"/>
         </scene>
-        <!--View Controller-->
+        <!--Gameplay View Controller-->
         <scene sceneID="2uv-AX-PwS">
             <objects>
-                <viewController id="oHS-1f-FFs" sceneMemberID="viewController">
+                <viewController id="oHS-1f-FFs" customClass="GameplayViewController" customModule="MC_3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E5i-0k-DhP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -244,4 +274,7 @@
         <image name="HangingWood" width="856" height="402"/>
         <image name="MainScreen - Button" width="2625" height="1730"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="jSL-cw-N1a"/>
+    </inferredMetricsTieBreakers>
 </document>
