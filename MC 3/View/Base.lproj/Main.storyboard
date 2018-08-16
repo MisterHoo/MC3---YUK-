@@ -89,7 +89,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="133.5832083958021"/>
+            <point key="canvasLocation" x="108" y="180"/>
         </scene>
         <!--Lobby View Controller-->
         <scene sceneID="gxk-T3-vV6">
@@ -260,6 +260,9 @@
                                         <state key="normal" backgroundImage="BackButton">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
+                                        <connections>
+                                            <action selector="backButtonAction:" destination="oHS-1f-FFs" eventType="touchUpInside" id="bBq-HU-99S"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -282,6 +285,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FOD-Le-I73"/>
                     </view>
+                    <connections>
+                        <outlet property="backButtonOutlet" destination="hru-EZ-2aQ" id="elZ-kN-AXE"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="gameToMenu" id="EUE-q9-ch9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R4J-X9-M1p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -294,6 +301,7 @@
         <image name="MainScreen - Button" width="2625" height="1730"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jSL-cw-N1a"/>
+        <segue reference="8Xt-dR-TY0"/>
+        <segue reference="EUE-q9-ch9"/>
     </inferredMetricsTieBreakers>
 </document>

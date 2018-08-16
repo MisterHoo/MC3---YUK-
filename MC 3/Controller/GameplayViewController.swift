@@ -10,6 +10,13 @@ import UIKit
 
 class GameplayViewController: UIViewController {
 
+    @IBOutlet weak var backButtonOutlet: UIButton!
+    
+    @IBAction func backButtonAction(_ sender: UIButton)
+    {
+        performSegue(withIdentifier: "gameToMenu", sender: self)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
