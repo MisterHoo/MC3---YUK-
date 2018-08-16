@@ -1,5 +1,5 @@
 //
-//  GameplayViewController.swift
+//  LobbyViewController.swift
 //  MC 3
 //
 //  Created by Rhesa Febrin Saputra on 8/15/18.
@@ -8,15 +8,23 @@
 
 import UIKit
 
-class GameplayViewController: UIViewController {
+class LobbyViewController: UIViewController {
 
-    @IBOutlet weak var backButtonOutlet: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var menuCollectionView: UICollectionView!
+    @IBOutlet weak var backgroundButton: UIImageView!
+    @IBOutlet weak var ikutButtonOutlet: UIButton!
+    @IBOutlet weak var batalButtonOutlet: UIButton!
     
-    @IBAction func backButtonAction(_ sender: UIButton)
-    {
-        performSegue(withIdentifier: "gameToMenu", sender: self)
+    
+    @IBAction func ikutButtonAction(_ sender: UIButton) {
+        performSegue(withIdentifier: "lobbyToGame", sender: self)
     }
     
+    
+    @IBAction func batalButtonAction(_ sender: UIButton) {
+        performSegue(withIdentifier: "lobbyToMenu", sender: self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
