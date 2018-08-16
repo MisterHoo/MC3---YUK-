@@ -253,7 +253,11 @@
                                             <constraint firstAttribute="width" constant="20" id="mCy-2m-ENh"/>
                                             <constraint firstAttribute="height" constant="22" id="r7M-zM-qPj"/>
                                         </constraints>
+                                        <color key="tintColor" red="0.64895304570000001" green="0.64895304570000001" blue="0.64895304570000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" backgroundImage="Unlocked"/>
+                                        <connections>
+                                            <action selector="lockButtonAction:" destination="oHS-1f-FFs" eventType="touchUpInside" id="5Qx-Y6-kFB"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hru-EZ-2aQ">
                                         <rect key="frame" x="0.0" y="3" width="80" height="45"/>
@@ -292,6 +296,7 @@
                     </view>
                     <connections>
                         <outlet property="backButtonOutlet" destination="hru-EZ-2aQ" id="elZ-kN-AXE"/>
+                        <outlet property="lockButtonOutlet" destination="Bmh-kr-v40" id="qJy-p6-712"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="gameToMenu" id="EUE-q9-ch9"/>
                     </connections>
                 </viewController>

@@ -16,6 +16,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var ikutButtonOutlet: UIButton!
     @IBOutlet weak var mainButtonOutlet: UIButton!
     
+    var testImage = [UIImage(named: "Test1"), UIImage(named: "Test2"), UIImage(named: "Test3")]
+    
     @IBAction func ikutButtonAction(_ sender: UIButton) {
         performSegue(withIdentifier: "menuToLobby", sender: self)
     }

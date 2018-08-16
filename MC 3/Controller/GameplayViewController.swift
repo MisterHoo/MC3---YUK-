@@ -11,6 +11,7 @@ import UIKit
 class GameplayViewController: UIViewController {
 
     @IBOutlet weak var backButtonOutlet: UIButton!
+    @IBOutlet weak var lockButtonOutlet: UIButton!
     
     @IBAction func backButtonAction(_ sender: UIButton)
     {
@@ -18,9 +19,22 @@ class GameplayViewController: UIViewController {
     }
     
     
+    @IBAction func lockButtonAction(_ sender: UIButton)
+    {
+        if lockButtonOutlet.currentImage == UIImage(named: "Unlocked")
+        {
+            lockButtonOutlet.setImage(UIImage(named: "Locked"), for: .normal)
+        }else{
+            lockButtonOutlet.setImage(UIImage(named: "Unlocked"), for: .normal)
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        lockButtonOutlet.setImage(UIImage(named: "Unlocked"), for: .normal)
+        
         // Do any additional setup after loading the view.
     }
     
