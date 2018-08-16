@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.3.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -233,9 +233,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F4c-IF-UuU">
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F4c-IF-UuU">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </arscnView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rEy-G5-UVk">
                                 <rect key="frame" x="16" y="20" width="343" height="50"/>
@@ -257,7 +256,11 @@
                                             <constraint firstAttribute="width" constant="20" id="mCy-2m-ENh"/>
                                             <constraint firstAttribute="height" constant="22" id="r7M-zM-qPj"/>
                                         </constraints>
+                                        <color key="tintColor" red="0.64895304570000001" green="0.64895304570000001" blue="0.64895304570000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" backgroundImage="Unlocked"/>
+                                        <connections>
+                                            <action selector="lockButtonAction:" destination="oHS-1f-FFs" eventType="touchUpInside" id="5Qx-Y6-kFB"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hru-EZ-2aQ">
                                         <rect key="frame" x="0.0" y="3" width="80" height="45"/>
@@ -286,21 +289,26 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="F4c-IF-UuU" secondAttribute="bottom" id="Hbg-Zx-jQo"/>
                             <constraint firstItem="rEy-G5-UVk" firstAttribute="top" secondItem="FOD-Le-I73" secondAttribute="top" id="K28-mJ-NCN"/>
                             <constraint firstItem="rEy-G5-UVk" firstAttribute="centerX" secondItem="FOD-Le-I73" secondAttribute="centerX" id="bsZ-a8-qLj"/>
+                            <constraint firstItem="F4c-IF-UuU" firstAttribute="top" secondItem="E5i-0k-DhP" secondAttribute="top" id="eZb-Kd-Yo7"/>
                             <constraint firstItem="rEy-G5-UVk" firstAttribute="leading" secondItem="FOD-Le-I73" secondAttribute="leading" constant="16" id="n2Q-KN-N7G"/>
+                            <constraint firstItem="FOD-Le-I73" firstAttribute="trailing" secondItem="F4c-IF-UuU" secondAttribute="trailing" id="p3A-wG-WhB"/>
+                            <constraint firstItem="F4c-IF-UuU" firstAttribute="leading" secondItem="FOD-Le-I73" secondAttribute="leading" id="ybu-Pp-3yq"/>
                             <constraint firstItem="FOD-Le-I73" firstAttribute="bottom" secondItem="rEy-G5-UVk" secondAttribute="bottom" constant="597" id="yfg-mo-xsN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FOD-Le-I73"/>
                     </view>
                     <connections>
                         <outlet property="backButtonOutlet" destination="hru-EZ-2aQ" id="elZ-kN-AXE"/>
+                        <outlet property="lockButtonOutlet" destination="Bmh-kr-v40" id="qJy-p6-712"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="gameToMenu" id="EUE-q9-ch9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R4J-X9-M1p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1884" y="133.5832083958021"/>
+            <point key="canvasLocation" x="1884" y="132.68365817091455"/>
         </scene>
     </scenes>
     <resources>
