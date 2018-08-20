@@ -9,7 +9,15 @@
 import UIKit
 import MultipeerConnectivity
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControllerDelegate {
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        
+    }
+    
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        
+    }
+    
 
     @IBOutlet weak var menuSlider: UIPageControl!
     @IBOutlet weak var usernameTextField: UITextField!
@@ -17,14 +25,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var mainButtonOutlet: UIButton!
     
     var appDelegate:AppDelegate!
+    let multiPeer = MultiPeerHandeler()
     
     @IBAction func ikutButtonAction(_ sender: UIButton) {
-        performSegue(withIdentifier: "menuToLobby", sender: self)
-        
+        //performSegue(withIdentifier: "menuToLobby", sender: self)
+        multiPeer.joinSession()
+        present(multiPeer.mcBrowser, animated: true)
     }
     
     @IBAction func mainButtonAction(_ sender: UIButton) {
         performSegue(withIdentifier: "menuToGame", sender: self)
+        multiPeer.startHosting()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -40,7 +51,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         if let username = UserDefaults.standard.value(forKey: "Username") as? String{
             usernameTextField.text = username
+            multiPeer.namaPlayer = username
         }
+        multiPeer.setupConnectivity()
         usernameTextField.delegate = self
     }
 

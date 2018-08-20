@@ -11,52 +11,84 @@ import MultipeerConnectivity
 
 class MultiPeerHandeler: NSObject, MCSessionDelegate, MCBrowserViewControllerDelegate {
     
-    
     var peerID:MCPeerID!
     var mcSession:MCSession!
     var mcAdvertiserAssistant:MCAdvertiserAssistant!
-    var browser:MCBrowserViewController!
+    var mcBrowser:MCBrowserViewController!
+    var namaPlayer:String = "u"
     
     //bikin nama player
-    func setupPeerWithDisplayName(displayName: String){
-        peerID = MCPeerID(displayName: displayName)
-    }
-    
+
     func setupConnectivity(){
+         peerID = MCPeerID(displayName: namaPlayer)
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         mcSession.delegate = self
+        print(mcSession)
     }
-    func joinSession(){
-        browser = MCBrowserViewController(serviceType: "ba-td", session: self.mcSession)
+    
+    func startHosting() {
+        mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "hws-kb", discoveryInfo: nil, session: mcSession)
+        mcAdvertiserAssistant.start()
     }
-    func hostSession() {
-        self.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "ba-td", discoveryInfo: nil, session: self.mcSession)
-        self.mcAdvertiserAssistant.start()
-    }
-    func stopSession(){
-        self.mcAdvertiserAssistant.stop()
-        self.mcAdvertiserAssistant = nil
-    }
-   
-    // MARK: - MC Delegate Func
-    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        switch state {
-        case MCSessionState.connected:
-            print("connected: \(peerID.displayName)")
-        case MCSessionState.connecting:
-            print("Connecting: \(peerID.displayName)")
-        case MCSessionState.notConnected:
-            print("Not Commected: \(peerID.displayName)")
-        }
-    }
-    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+    
+    func joinSession() {
+        mcBrowser = MCBrowserViewController(serviceType: "hws-kb", session: mcSession)
+        mcBrowser.delegate = self
+        
         
     }
+    
+//    func joinSession(){
+//        browser = MCBrowserViewController(serviceType: "ba-td", session: self.mcSession)
+//    }
+//    func host(advertise: Bool) {
+//        if advertise {
+//            self.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "ba-td", discoveryInfo: nil, session: self.mcSession)
+//            self.mcAdvertiserAssistant.start()
+//        }else{
+//            self.mcAdvertiserAssistant.stop()
+//            self.mcAdvertiserAssistant = nil
+//        }
+//    }
+    
+    // MARK: - Send Data
+//    func sendImage(img: UIImage) {
+//        if mcSession.connectedPeers.count > 0 {
+//            if let imageData = UIImagePNGRepresentation(img) {
+//                do {
+//                    try mcSession.send(imageData, toPeers: mcSession.connectedPeers, with: .reliable)
+//                } catch let error as NSError {
+//                    let ac = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
+//                    ac.addAction(UIAlertAction(title: "OK", style: .default))
+//                    present(ac, animated: true)
+//                }
+//            }
+//        }
+//    }
+   
+    // MARK: - MC Delegate Func
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         
     }
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        
+    }
+    
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        switch state {
+        case MCSessionState.connected:
+            print("Connected: \(peerID.displayName)")
+            
+        case MCSessionState.connecting:
+            print("Connecting: \(peerID.displayName)")
+            
+        case MCSessionState.notConnected:
+            print("Not Connected: \(peerID.displayName)")
+        }
+    }
+    // recive data
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         
     }
     
@@ -71,5 +103,5 @@ class MultiPeerHandeler: NSObject, MCSessionDelegate, MCBrowserViewControllerDel
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         
     }
-    
 }
+
