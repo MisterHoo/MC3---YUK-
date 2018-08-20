@@ -95,32 +95,81 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         var node : SCNNode?
         
         if let planeAnchor = anchor as? ARPlaneAnchor{
-            node = SCNNode()
-            planeGeometry = SCNPlane(width: CGFloat(planeAnchor.extent.x), height: CGFloat(planeAnchor.extent.z))
-            planeGeometry.firstMaterial?.diffuse.contents = UIColor.white.withAlphaComponent(0.6)
+            if anchors.count == 0{
+                node = SCNNode()
+                
+                
+                var width : CGFloat = 0
+                var height : CGFloat = 0
+                
+                width = CGFloat(planeAnchor.extent.x)
+                height = CGFloat(planeAnchor.extent.z)
+    
+                
+                //validate width & height
+                if planeAnchor.extent.x >= 0.5{
+                    width = 0.5
+                }
+                if planeAnchor.extent.z >= 0.3{
+                    height = 0.3
+                }
+                
+                
+                planeGeometry = SCNPlane(width: width, height: height)
+                
+                print(width)
+                print(height)
+                
+               
+                
+                
+                planeGeometry.firstMaterial?.diffuse.contents = UIColor.white.withAlphaComponent(0.4)
             
-            let planeNode = SCNNode(geometry: planeGeometry)
-            planeNode.position = SCNVector3(planeAnchor.center.x, 0, planeAnchor.center.z)
-            planeNode.transform = SCNMatrix4MakeRotation(-Float.pi / 2,1,0,0)
+                let planeNode = SCNNode(geometry: planeGeometry)
+                
+                planeNode.position = SCNVector3(planeAnchor.center.x, 0, planeAnchor.center.z)
+                planeNode.transform = SCNMatrix4MakeRotation(-Float.pi / 2,1,0,0)
             
-            updateMaterial()
+                updateMaterial()
             
-            node?.addChildNode(planeNode)
-            anchors.append(planeAnchor)
+                node?.addChildNode(planeNode)
+                anchors.append(planeAnchor)
+            }
         }
         return node
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+        
         if let planeAnchor = anchor as? ARPlaneAnchor {
+            
             if anchors.contains(planeAnchor){
+                
                 if node.childNodes.count <= 1{
+                    
                     let planeNode = node.childNodes.first!
                     planeNode.position = SCNVector3(planeAnchor.center.x, 0, planeAnchor.center.z)
                     
                     if let plane = planeNode.geometry as? SCNPlane {
-                        plane.width = CGFloat(planeAnchor.extent.x)
-                        plane.height = CGFloat(planeAnchor.extent.z)
+                        
+                        var width : CGFloat = 0
+                        var height : CGFloat = 0
+                        
+                        width = CGFloat(planeAnchor.extent.x)
+                        height = CGFloat(planeAnchor.extent.z)
+                        
+                        
+                        //validate width & height
+                        if planeAnchor.extent.x >= 0.5{
+                            width = 0.5
+                        }
+                        if planeAnchor.extent.z >= 0.3{
+                            height = 0.3
+                        }
+                        
+                        
+                        plane.width = width
+                        plane.height = height
                         updateMaterial()
                     }
                 }
@@ -150,11 +199,11 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                 , result.worldTransform.columns.3.z)
             //adding object
             
-             let shipNode = SpaceShip()
-             shipNode.loadModel()
-             shipNode.position = newLocation
+             let gameBoard = SpaceShip()
+             gameBoard.loadModel()
+             gameBoard.position = newLocation
              
-             sceneView.scene.rootNode.addChildNode(shipNode)
+             sceneView.scene.rootNode.addChildNode(gameBoard)
             
         }
         
