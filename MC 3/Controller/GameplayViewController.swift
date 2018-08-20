@@ -149,13 +149,13 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                 , result.worldTransform.columns.3.y
                 , result.worldTransform.columns.3.z)
             //adding object
-            /*
-             let shipNode = spaceShip()
-             shipNode.loadModal()
+            
+             let shipNode = SpaceShip()
+             shipNode.loadModel()
              shipNode.position = newLocation
              
              sceneView.scene.rootNode.addChildNode(shipNode)
-             */
+            
         }
         
     }
