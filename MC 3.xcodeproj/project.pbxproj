@@ -15,7 +15,7 @@
 		6697DB0E2122B32800E3EF32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6697DB0C2122B32800E3EF32 /* LaunchScreen.storyboard */; };
 		6697DB192122B32800E3EF32 /* MC_3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6697DB182122B32800E3EF32 /* MC_3Tests.swift */; };
 		6697DB242122B32800E3EF32 /* MC_3UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6697DB232122B32800E3EF32 /* MC_3UITests.swift */; };
-		CF86BD52212A87D1006091DB /* ModelAsset.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = CF86BD51212A87D1006091DB /* ModelAsset.scnassets */; };
+		66DEF8D1212A958900130A38 /* ModelAsset.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 66DEF8D0212A958900130A38 /* ModelAsset.scnassets */; };
 		CFD305B22123EE7A008B820B /* LobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD305B12123EE7A008B820B /* LobbyViewController.swift */; };
 		CFD5A2372122BAC70084776F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFD5A2362122BAC70084776F /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -52,7 +52,7 @@
 		6697DB1F2122B32800E3EF32 /* MC 3UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MC 3UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6697DB232122B32800E3EF32 /* MC_3UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC_3UITests.swift; sourceTree = "<group>"; };
 		6697DB252122B32800E3EF32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CF86BD51212A87D1006091DB /* ModelAsset.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; name = ModelAsset.scnassets; path = "MC 3/Support/ModelAsset.scnassets"; sourceTree = SOURCE_ROOT; };
+		66DEF8D0212A958900130A38 /* ModelAsset.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = ModelAsset.scnassets; sourceTree = "<group>"; };
 		CFD305B12123EE7A008B820B /* LobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyViewController.swift; sourceTree = "<group>"; };
 		CFD5A2362122BAC70084776F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "MC 3/Support/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -150,8 +150,8 @@
 		CF3964DD2122B803005E868C /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				CF86BD51212A87D1006091DB /* ModelAsset.scnassets */,
 				CFD5A2362122BAC70084776F /* Assets.xcassets */,
+				66DEF8D0212A958900130A38 /* ModelAsset.scnassets */,
 			);
 			name = Support;
 			path = ../Support;
@@ -276,7 +276,7 @@
 			files = (
 				6697A7972122E73200DA0814 /* Main.storyboard in Resources */,
 				6697DB0E2122B32800E3EF32 /* LaunchScreen.storyboard in Resources */,
-				CF86BD52212A87D1006091DB /* ModelAsset.scnassets in Resources */,
+				66DEF8D1212A958900130A38 /* ModelAsset.scnassets in Resources */,
 				CFD5A2372122BAC70084776F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -480,7 +480,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DK7HPF3UVL;
+				DEVELOPMENT_TEAM = 3ZHR6JDHY4;
 				INFOPLIST_FILE = "MC 3/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -498,7 +498,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DK7HPF3UVL;
+				DEVELOPMENT_TEAM = 3ZHR6JDHY4;
 				INFOPLIST_FILE = "MC 3/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
