@@ -8,15 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var menuSlider: UIPageControl!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var ikutButtonOutlet: UIButton!
     @IBOutlet weak var mainButtonOutlet: UIButton!
-    
-    var testImage = [UIImage(named: "Test1"), UIImage(named: "Test2"), UIImage(named: "Test3")]
-    
     
     @IBAction func ikutButtonAction(_ sender: UIButton) {
         performSegue(withIdentifier: "menuToLobby", sender: self)
@@ -26,15 +23,21 @@ class ViewController: UIViewController {
         performSegue(withIdentifier: "menuToGame", sender: self)
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        UserDefaults.standard.set(usernameTextField.text, forKey: "Username")
+        
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-        
-        print("berhasil")
-        print("test rhesa push")
-        print("test rhesa commit")
-        
+        if let username = UserDefaults.standard.value(forKey: "Username") as? String{
+            usernameTextField.text = username
+        }
+        usernameTextField.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
