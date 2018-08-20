@@ -11,26 +11,33 @@ import MultipeerConnectivity
 
 class MultiPeerHandeler: NSObject, MCSessionDelegate, MCBrowserViewControllerDelegate {
     
+    
     var peerID:MCPeerID!
     var mcSession:MCSession!
     var mcAdvertiserAssistant:MCAdvertiserAssistant!
+    var browser:MCBrowserViewController!
     
+    //bikin nama player
+    func setupPeerWithDisplayName(displayName: String){
+        peerID = MCPeerID(displayName: displayName)
+    }
     
     func setupConnectivity(){
-        peerID = MCPeerID(displayName: UIDevice.current.name)
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         mcSession.delegate = self
+    }
+    func joinSession(){
+        browser = MCBrowserViewController(serviceType: "ba-td", session: self.mcSession)
     }
     func hostSession() {
         self.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "ba-td", discoveryInfo: nil, session: self.mcSession)
         self.mcAdvertiserAssistant.start()
     }
-    func joinSession(){
-        let mcBroswer = MCBrowserViewController(serviceType: "ba-td", session: self.mcSession)
-        mcBroswer.delegate = self
-        //self.present(mcBroswer, animated: true,completion: nil)
-        
+    func stopSession(){
+        self.mcAdvertiserAssistant.stop()
+        self.mcAdvertiserAssistant = nil
     }
+   
     // MARK: - MC Delegate Func
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
@@ -42,21 +49,16 @@ class MultiPeerHandeler: NSObject, MCSessionDelegate, MCBrowserViewControllerDel
             print("Not Commected: \(peerID.displayName)")
         }
     }
-    
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         
     }
-    
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         
     }
     
-    
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
         
     }
-    
-    
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
         

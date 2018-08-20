@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MultipeerConnectivity
 
 class ViewController: UIViewController, UITextFieldDelegate {
 
@@ -15,8 +16,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var ikutButtonOutlet: UIButton!
     @IBOutlet weak var mainButtonOutlet: UIButton!
     
+    var appDelegate:AppDelegate!
+    
     @IBAction func ikutButtonAction(_ sender: UIButton) {
         performSegue(withIdentifier: "menuToLobby", sender: self)
+        
     }
     
     @IBAction func mainButtonAction(_ sender: UIButton) {
@@ -33,7 +37,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if let username = UserDefaults.standard.value(forKey: "Username") as? String{
             usernameTextField.text = username
         }
