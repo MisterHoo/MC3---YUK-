@@ -23,6 +23,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     var plantIdentifiers : [UUID] = []
     var anchors : [ARAnchor] = []
     var sceneLight : SCNLight!
+    var objectFlag : Bool = false
     
     
     
@@ -145,7 +146,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             
             if anchors.contains(planeAnchor){
                 
-                if node.childNodes.count <= 1{
+                if node.childNodes.count > 0 && objectFlag == false{
                     
                     let planeNode = node.childNodes.first!
                     planeNode.position = SCNVector3(planeAnchor.center.x, 0, planeAnchor.center.z)
@@ -191,17 +192,26 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         
         let hitResults = sceneView.hitTest(location, types: .existingPlaneUsingExtent)
         
-        if hitResults.count > 0{
+        if hitResults.count > 0 && objectFlag == false{
             
             let result = hitResults.first!
-            let newLocation = SCNVector3(result.worldTransform.columns.3.x
-                , result.worldTransform.columns.3.y
-                , result.worldTransform.columns.3.z)
+            
+            print("\(result.worldTransform.columns.0.x),\(result.worldTransform.columns.0.y)),\(result.worldTransform.columns.0.z))")
+            print("\(result.worldTransform.columns.1.x),\(result.worldTransform.columns.1.y)),\(result.worldTransform.columns.1.z))")
+            print("\(result.worldTransform.columns.2.x),\(result.worldTransform.columns.2.y)),\(result.worldTransform.columns.2.z))")
+            print("\(result.worldTransform.columns.3.x),\(result.worldTransform.columns.3.y)),\(result.worldTransform.columns.3.z))")
+            
+            let anchor = anchors.first as! ARPlaneAnchor
+            
+            let newLocation = SCNVector3Make(anchor.extent.x, anchor.extent.y, anchor.extent.z)
             //adding object
             
-             let gameBoard = SpaceShip()
+             let gameBoard = GameBoard()
              gameBoard.loadModel()
              gameBoard.position = newLocation
+            
+            //validate no more object
+            objectFlag = true
              
              sceneView.scene.rootNode.addChildNode(gameBoard)
             

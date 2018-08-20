@@ -8,18 +8,17 @@
 
 import ARKit
 
-class GameBoard : SCNNode{
+class GameBoard : SCNNode {
     
     func loadModel(){
-        guard let virtualObjectScene = SCNScene(named: "ModelAsset.scnassets/congklak.scn") else {return}
+        guard let virtualObjectScene = SCNScene(named: "ModelAsset.scnassets/congklak/congklak.scn") else {return}
         
         let wrapperNode = SCNNode()
         for child in virtualObjectScene.rootNode.childNodes{
             wrapperNode.addChildNode(child)
         }
         print("ada Object koq")
-        
+
         self.addChildNode(wrapperNode)
-        
     }
 }

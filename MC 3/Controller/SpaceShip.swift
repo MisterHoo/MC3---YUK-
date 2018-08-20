@@ -8,7 +8,7 @@
 
 import ARKit
 
-class SpaceShip : SCNNode {
+class SpaceShip : SCNNode{
     
     func loadModel(){
         guard let virtualObjectScene = SCNScene(named: "ModelAsset.scnassets/ship.scn") else {return}
