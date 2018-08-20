@@ -22,7 +22,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     var planeGeometry : SCNPlane!
     var plantIdentifiers : [UUID] = []
     var anchors : [ARAnchor] = []
-//    var sceneLight : SCNLight!
+    var sceneLight : SCNLight!
     
     
     
@@ -54,6 +54,17 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         let scene = SCNScene()
         sceneView.scene = scene
         
+        // add Light
+        sceneView.autoenablesDefaultLighting = false
+        sceneLight = SCNLight()
+        sceneLight.type = .omni
+        
+        let lightNode = SCNNode()
+        lightNode.light = sceneLight
+        lightNode.position = SCNVector3(0, 10, 2)
+        
+        sceneView.scene.rootNode.addChildNode(lightNode)
+        
         // Do any additional setup after loading the view.
     }
     
@@ -81,9 +92,10 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
+        var node : SCNNode?
         
         if let planeAnchor = anchor as? ARPlaneAnchor{
+            node = SCNNode()
             planeGeometry = SCNPlane(width: CGFloat(planeAnchor.extent.x), height: CGFloat(planeAnchor.extent.z))
             planeGeometry.firstMaterial?.diffuse.contents = UIColor.white.withAlphaComponent(0.6)
             
@@ -93,7 +105,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             
             updateMaterial()
             
-            node.addChildNode(planeNode)
+            node?.addChildNode(planeNode)
             anchors.append(planeAnchor)
         }
         return node
@@ -102,7 +114,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         if let planeAnchor = anchor as? ARPlaneAnchor {
             if anchors.contains(planeAnchor){
-                if node.childNodes.count > 0{
+                if node.childNodes.count <= 1{
                     let planeNode = node.childNodes.first!
                     planeNode.position = SCNVector3(planeAnchor.center.x, 0, planeAnchor.center.z)
                     
