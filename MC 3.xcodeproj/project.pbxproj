@@ -17,6 +17,7 @@
 		6697DB242122B32800E3EF32 /* MC_3UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6697DB232122B32800E3EF32 /* MC_3UITests.swift */; };
 		66BDD2EF212AAF3A00680D43 /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BDD2EE212AAF3A00680D43 /* GameBoard.swift */; };
 		66FF9FB2212A9C8200CA52CC /* SpaceShip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF9FB1212A9C8200CA52CC /* SpaceShip.swift */; };
+		CDDA749C212AAC8A00A6B003 /* MultiPeerHandeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA749B212AAC8900A6B003 /* MultiPeerHandeler.swift */; };
 		CFCC5925212A9B6D0036C6B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFCC5923212A9B6D0036C6B2 /* Assets.xcassets */; };
 		CFCC5926212A9B6D0036C6B2 /* ModelAsset.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = CFCC5924212A9B6D0036C6B2 /* ModelAsset.scnassets */; };
 		CFD305B22123EE7A008B820B /* LobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD305B12123EE7A008B820B /* LobbyViewController.swift */; };
@@ -56,6 +57,7 @@
 		6697DB252122B32800E3EF32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66BDD2EE212AAF3A00680D43 /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
 		66FF9FB1212A9C8200CA52CC /* SpaceShip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceShip.swift; sourceTree = "<group>"; };
+		CDDA749B212AAC8900A6B003 /* MultiPeerHandeler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiPeerHandeler.swift; sourceTree = "<group>"; };
 		CFCC5923212A9B6D0036C6B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "MC 3/Support/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
 		CFCC5924212A9B6D0036C6B2 /* ModelAsset.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; name = ModelAsset.scnassets; path = "MC 3/Support/ModelAsset.scnassets"; sourceTree = SOURCE_ROOT; };
 		CFD305B12123EE7A008B820B /* LobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 		6697DAFF2122B32500E3EF32 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CDDA749B212AAC8900A6B003 /* MultiPeerHandeler.swift */,
 				66FF9FB1212A9C8200CA52CC /* SpaceShip.swift */,
 				66BDD2EE212AAF3A00680D43 /* GameBoard.swift */,
 				6697A7982123D30B00DA0814 /* GameplayViewController.swift */,
@@ -308,6 +311,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDDA749C212AAC8A00A6B003 /* MultiPeerHandeler.swift in Sources */,
 				66FF9FB2212A9C8200CA52CC /* SpaceShip.swift in Sources */,
 				6697DB032122B32500E3EF32 /* ViewController.swift in Sources */,
 				6697DB012122B32500E3EF32 /* AppDelegate.swift in Sources */,
