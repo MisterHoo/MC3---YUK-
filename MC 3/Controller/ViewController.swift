@@ -70,7 +70,6 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
         super.viewWillDisappear(animated)
         
         // Don't forget to reset when view is being removed
-        AppUtility.lockOrientation(.all)
     }
     
     override func didReceiveMemoryWarning() {

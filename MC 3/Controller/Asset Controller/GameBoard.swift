@@ -17,7 +17,6 @@ class GameBoard : SCNNode {
         for child in virtualObjectScene.rootNode.childNodes{
             wrapperNode.addChildNode(child)
         }
-        print("ada Object koq")
 
         self.addChildNode(wrapperNode)
     }

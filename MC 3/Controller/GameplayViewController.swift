@@ -72,6 +72,8 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        AppUtility.lockOrientation(.all)
+        
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = .horizontal
         configuration.isLightEstimationEnabled = true
@@ -118,12 +120,6 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                 
                 planeGeometry = SCNPlane(width: width, height: height)
                 
-                print(width)
-                print(height)
-                
-               
-                
-                
                 planeGeometry.firstMaterial?.diffuse.contents = UIColor.white.withAlphaComponent(0.4)
             
                 let planeNode = SCNNode(geometry: planeGeometry)
@@ -132,6 +128,8 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                 planeNode.transform = SCNMatrix4MakeRotation(-Float.pi / 2,1,0,0)
             
                 updateMaterial()
+                
+                planeNode.name = "planeNode"
             
                 node?.addChildNode(planeNode)
                 anchors.append(planeAnchor)
@@ -196,12 +194,10 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             
             let result = hitResults.first!
             
-            print("\(result.worldTransform.columns.0.x),\(result.worldTransform.columns.0.y)),\(result.worldTransform.columns.0.z))")
-            print("\(result.worldTransform.columns.1.x),\(result.worldTransform.columns.1.y)),\(result.worldTransform.columns.1.z))")
-            print("\(result.worldTransform.columns.2.x),\(result.worldTransform.columns.2.y)),\(result.worldTransform.columns.2.z))")
-            print("\(result.worldTransform.columns.3.x),\(result.worldTransform.columns.3.y)),\(result.worldTransform.columns.3.z))")
-            
-            let anchor = anchors.first as! ARPlaneAnchor
+//            print("\(result.worldTransform.columns.0.x),\(result.worldTransform.columns.0.y)),\(result.worldTransform.columns.0.z))")
+//            print("\(result.worldTransform.columns.1.x),\(result.worldTransform.columns.1.y)),\(result.worldTransform.columns.1.z))")
+//            print("\(result.worldTransform.columns.2.x),\(result.worldTransform.columns.2.y)),\(result.worldTransform.columns.2.z))")
+//            print("\(result.worldTransform.columns.3.x),\(result.worldTransform.columns.3.y)),\(result.worldTransform.columns.3.z))")
             
             let newLocation = SCNVector3Make(result.worldTransform.columns.3.x,result.worldTransform.columns.3.y,result.worldTransform.columns.3.z)
             
@@ -210,18 +206,18 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             
             let gameBoard = GameBoard()
             gameBoard.loadModel()
-            gameBoard.pivot = SCNMatrix4MakeTranslation(0.2,0,0)
             gameBoard.position = newLocation
            
-            //print(gameBoard.rotation)
-            
             sceneView.scene.rootNode.addChildNode(gameBoard)
+            
             
             //validate no more object
             boardFlag = true
             
             //remove plane
              
+            let planeNode = sceneView.scene.rootNode.childNode(withName: "planeNode", recursively: true)
+            planeNode?.removeFromParentNode()
             
             
         }
