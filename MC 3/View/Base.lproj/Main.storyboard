@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.3.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,27 +14,27 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MC_3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wlz-qq-iNF">
-                                <rect key="frame" x="28.5" y="70" width="318.5" height="470"/>
+                                <rect key="frame" x="28.333333333333343" y="94" width="318.33333333333326" height="557"/>
                             </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Tsi-RL-6Xk">
-                                <rect key="frame" x="168" y="503" width="39" height="37"/>
+                                <rect key="frame" x="168" y="614" width="39" height="37"/>
                             </pageControl>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mZe-sZ-sbW">
-                                <rect key="frame" x="27.5" y="30" width="318.5" height="30"/>
+                                <rect key="frame" x="27.666666666666657" y="54" width="318.33333333333337" height="30"/>
                                 <color key="backgroundColor" red="0.85445748730000004" green="0.85445748730000004" blue="0.85445748730000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-HeavyItalic" family="Avenir Next" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="cT8-Pg-Uqr">
-                                <rect key="frame" x="28.5" y="570" width="318.5" height="67"/>
+                                <rect key="frame" x="28.333333333333343" y="681" width="318.33333333333326" height="67"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oqZ-0U-emi">
-                                        <rect key="frame" x="0.0" y="0.0" width="149" height="67"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="149.33333333333334" height="67"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-HeavyItalic" family="Avenir Next" pointSize="27"/>
                                         <state key="normal" title="Ikut !" backgroundImage="MainScreen - Button">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -44,7 +44,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hK9-DC-3r8">
-                                        <rect key="frame" x="169" y="0.0" width="149.5" height="67"/>
+                                        <rect key="frame" x="169.33333333333331" y="0.0" width="149" height="67"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-HeavyItalic" family="Avenir Next" pointSize="28"/>
                                         <state key="normal" title="Main" backgroundImage="MainScreen - Button">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -92,17 +92,17 @@
             <objects>
                 <viewController id="aCb-XS-yaH" customClass="LobbyViewController" customModule="MC_3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bTZ-3H-Tno">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pilih yang mau diikuti!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NhH-qA-KL8">
-                                <rect key="frame" x="70" y="20" width="235" height="28"/>
+                                <rect key="frame" x="70" y="44" width="235" height="28"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-HeavyItalic" family="Avenir Next" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pfS-Mj-ISO">
-                                <rect key="frame" x="25" y="56" width="325" height="475"/>
+                                <rect key="frame" x="25" y="80" width="325" height="562"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xtN-vU-FF5">
                                     <size key="itemSize" width="50" height="50"/>
@@ -150,10 +150,10 @@
                                 </cells>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ff3-Lf-7VL">
-                                <rect key="frame" x="25" y="529" width="325" height="128"/>
+                                <rect key="frame" x="25" y="640" width="325" height="128"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HangingWood" translatesAutoresizingMaskIntoConstraints="NO" id="Hn8-iv-myJ">
-                                        <rect key="frame" x="42.5" y="0.0" width="240" height="128"/>
+                                        <rect key="frame" x="42.666666666666686" y="0.0" width="240" height="128"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZh-dZ-vXe">
                                         <rect key="frame" x="50" y="15" width="224" height="40"/>
@@ -226,14 +226,14 @@
             <objects>
                 <viewController id="oHS-1f-FFs" customClass="GameplayViewController" customModule="MC_3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E5i-0k-DhP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F4c-IF-UuU">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </arscnView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rEy-G5-UVk">
-                                <rect key="frame" x="16" y="20" width="343" height="50"/>
+                                <rect key="frame" x="16" y="44" width="343" height="137"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" text="Passcode" borderStyle="roundedRect" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xay-RZ-LIm">
                                         <rect key="frame" x="127" y="10" width="180" height="30"/>
@@ -290,8 +290,8 @@
                             <constraint firstItem="F4c-IF-UuU" firstAttribute="top" secondItem="E5i-0k-DhP" secondAttribute="top" id="eZb-Kd-Yo7"/>
                             <constraint firstAttribute="bottom" secondItem="F4c-IF-UuU" secondAttribute="bottom" id="lS4-n1-4UE"/>
                             <constraint firstItem="rEy-G5-UVk" firstAttribute="leading" secondItem="FOD-Le-I73" secondAttribute="leading" constant="16" id="n2Q-KN-N7G"/>
-                            <constraint firstItem="FOD-Le-I73" firstAttribute="trailing" secondItem="F4c-IF-UuU" secondAttribute="trailing" id="p3A-wG-WhB"/>
-                            <constraint firstItem="F4c-IF-UuU" firstAttribute="leading" secondItem="FOD-Le-I73" secondAttribute="leading" id="ybu-Pp-3yq"/>
+                            <constraint firstAttribute="trailing" secondItem="F4c-IF-UuU" secondAttribute="trailing" id="p3A-wG-WhB"/>
+                            <constraint firstItem="F4c-IF-UuU" firstAttribute="leading" secondItem="E5i-0k-DhP" secondAttribute="leading" id="ybu-Pp-3yq"/>
                             <constraint firstItem="FOD-Le-I73" firstAttribute="bottom" secondItem="rEy-G5-UVk" secondAttribute="bottom" constant="597" id="yfg-mo-xsN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FOD-Le-I73"/>
@@ -315,7 +315,7 @@
         <image name="Unlocked" width="166" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8Xt-dR-TY0"/>
-        <segue reference="EUE-q9-ch9"/>
+        <segue reference="jSL-cw-N1a"/>
+        <segue reference="hYt-uy-QJZ"/>
     </inferredMetricsTieBreakers>
 </document>
