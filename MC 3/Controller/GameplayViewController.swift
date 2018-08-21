@@ -23,7 +23,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     var plantIdentifiers : [UUID] = []
     var anchors : [ARAnchor] = []
     var sceneLight : SCNLight!
-    var objectFlag : Bool = false
+    var boardFlag : Bool = false
     
     
     
@@ -96,7 +96,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         var node : SCNNode?
         
         if let planeAnchor = anchor as? ARPlaneAnchor{
-            if anchors.count == 0{
+            if anchors.count == 0 && boardFlag == false{
                 node = SCNNode()
                 
                 
@@ -146,7 +146,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             
             if anchors.contains(planeAnchor){
                 
-                if node.childNodes.count > 0 && objectFlag == false{
+                if node.childNodes.count > 0 && boardFlag == false{
                     
                     let planeNode = node.childNodes.first!
                     planeNode.position = SCNVector3(planeAnchor.center.x, 0, planeAnchor.center.z)
@@ -192,7 +192,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         
         let hitResults = sceneView.hitTest(location, types: .existingPlaneUsingExtent)
         
-        if hitResults.count > 0 && objectFlag == false{
+        if hitResults.count > 0 && boardFlag == false{
             
             let result = hitResults.first!
             
@@ -203,17 +203,26 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             
             let anchor = anchors.first as! ARPlaneAnchor
             
-            let newLocation = SCNVector3Make(anchor.extent.x, anchor.extent.y, anchor.extent.z)
+            let newLocation = SCNVector3Make(result.worldTransform.columns.3.x,result.worldTransform.columns.3.y,result.worldTransform.columns.3.z)
+            
+            
             //adding object
             
-             let gameBoard = GameBoard()
-             gameBoard.loadModel()
-             gameBoard.position = newLocation
+            let gameBoard = GameBoard()
+            gameBoard.loadModel()
+            gameBoard.pivot = SCNMatrix4MakeTranslation(0.2,0,0)
+            gameBoard.position = newLocation
+           
+            //print(gameBoard.rotation)
+            
+            sceneView.scene.rootNode.addChildNode(gameBoard)
             
             //validate no more object
-            objectFlag = true
+            boardFlag = true
+            
+            //remove plane
              
-             sceneView.scene.rootNode.addChildNode(gameBoard)
+            
             
         }
         
