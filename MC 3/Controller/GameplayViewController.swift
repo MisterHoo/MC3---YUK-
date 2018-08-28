@@ -84,7 +84,10 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
 //        sceneView.debugOptions = option
 
     }
-    
+    func writeWorldMap(_ worldMap: ARWorldMap, to url: URL) throws {
+        let data = try NSKeyedArchiver.archivedData(withRootObject: worldMap, requiringSecureCoding: true)
+        try data.write(to: url)
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -94,21 +97,25 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
 //            print(multiPeer.session.connectedPeers.count)
 //        }
         
-        let configuration = ARWorldTrackingConfiguration()
-        configuration.planeDetection = .horizontal
-        configuration.isLightEstimationEnabled = true
+//        let configuration = ARWorldTrackingConfiguration()
+//        configuration.planeDetection = .horizontal
+//        configuration.isLightEstimationEnabled = true
         
         if isServer == true{
+            let configuration = ARWorldTrackingConfiguration()
+            configuration.planeDetection = .horizontal
+            configuration.isLightEstimationEnabled = true
             print("server")
             sceneView.session.run(configuration)
         }else{
+            print("bukan Server")
             print(multiPeer.receivedData)
             loadWorldMap(from: multiPeer.receivedData)
             //print(worldMap)
             print(multiPeer.session)
             //print("bukan Server")
-            configuration.initialWorldMap = worldMap
-            sceneView.session.run(configuration)
+//            configuration.initialWorldMap = worldMap
+//            sceneView.session.run(configuration)
         }
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -299,16 +306,30 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     func loadWorldMap(from archivedData: Data) {
         do {
             let uncompressedData = try archivedData.decompressed()
-            guard let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: uncompressedData) else {
-                DispatchQueue.main.async {
-                    print("error unarchived map")
-                }
-                return 
+//            guard let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: uncompressedData) else {
+//                DispatchQueue.main.async {
+//                    print("error unarchived map")
+//                }
+//                return
+//            }
+//
+//            DispatchQueue.main.async {
+//                self.worldMap = worldMap
+//                print(self.worldMap)
+//            }
+            if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: uncompressedData) {
+                // Run the session with the received world map.
+                let configuration = ARWorldTrackingConfiguration()
+                configuration.planeDetection = .horizontal
+                configuration.initialWorldMap = worldMap
+                sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
             }
-            
-            DispatchQueue.main.async {
-                self.worldMap = worldMap
-                print(self.worldMap)
+            else
+                if let anchor = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARAnchor.self, from: uncompressedData) {
+                    // Add anchor to the session, ARSCNView delegate adds visible content.
+                    sceneView.session.add(anchor: anchor)
+                }else{
+                    print("fail")
             }
         } catch {
             DispatchQueue.main.async {
