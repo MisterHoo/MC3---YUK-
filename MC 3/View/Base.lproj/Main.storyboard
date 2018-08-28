@@ -251,7 +251,7 @@
         <!--Gameplay View Controller-->
         <scene sceneID="2uv-AX-PwS">
             <objects>
-                <viewController id="oHS-1f-FFs" customClass="GameplayViewController" customModule="MC_3" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="gamePlay" id="oHS-1f-FFs" customClass="GameplayViewController" customModule="MC_3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E5i-0k-DhP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

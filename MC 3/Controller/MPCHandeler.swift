@@ -12,6 +12,7 @@ import MultipeerConnectivity
 
 class MPCHandeler: NSObject, MCSessionDelegate,MCBrowserViewControllerDelegate, MCAdvertiserAssistantDelegate {
     
+    let viewController = ViewController()
     
     static let serviceType = "Traadisional"
     
@@ -52,6 +53,17 @@ class MPCHandeler: NSObject, MCSessionDelegate,MCBrowserViewControllerDelegate, 
     }
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        switch state {
+        case MCSessionState.connected:
+            print("Connected: \(peerID.displayName)")
+           
+        case MCSessionState.connecting:
+            print("Connecting: \(peerID.displayName)")
+            
+        case MCSessionState.notConnected:
+            print("Not Connected: \(peerID.displayName)")
+        }
+        
         let userInfo = ["peerID":peerID,"state":state.rawValue] as [String : Any]
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: MyClass.myNotification, object: nil, userInfo: userInfo)
