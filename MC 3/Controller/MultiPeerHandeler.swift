@@ -9,22 +9,37 @@
 import UIKit
 import MultipeerConnectivity
 
-class MultiPeerHandeler: NSObject, MCSessionDelegate, MCBrowserViewControllerDelegate {
+class MultiPeerHandeler: NSObject, MCSessionDelegate, MCBrowserViewControllerDelegate{
+//    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
+//        print(peerID)
+//        print(info)
+//    }
+//
+//    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+//        print(peerID)
+//    }
+//
+//    , MCNearbyServiceBrowserDelegate
+    
     
     var peerID:MCPeerID!
     var mcSession:MCSession!
     var mcAdvertiserAssistant:MCAdvertiserAssistant!
+//    var mcServiceBrowser:MCNearbyServiceBrowser!
     var mcBrowser:MCBrowserViewController!
-    var namaPlayer:String = "u"
+    
+    var namaPlayer:String = UIDevice.current.name
+    var receivedData : Data!
     
     //bikin nama player
 
     func setupConnectivity(){
-         peerID = MCPeerID(displayName: namaPlayer)
-        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+        peerID = MCPeerID(displayName: namaPlayer)
+        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .none)
         mcSession.delegate = self
         print(mcSession)
-        
+//        mcServiceBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: "hws-kb")
+//        mcServiceBrowser.delegate = self
     }
     
     func startHosting() {
@@ -36,8 +51,10 @@ class MultiPeerHandeler: NSObject, MCSessionDelegate, MCBrowserViewControllerDel
         mcBrowser = MCBrowserViewController(serviceType: "hws-kb", session: mcSession)
         mcBrowser.delegate = self
         
+//        mcServiceBrowser.startBrowsingForPeers()
         
     }
+   
     
 //    func joinSession(){
 //        browser = MCBrowserViewController(serviceType: "ba-td", session: self.mcSession)
@@ -90,6 +107,7 @@ class MultiPeerHandeler: NSObject, MCSessionDelegate, MCBrowserViewControllerDel
     }
     // recive data
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        receivedData = data
         
     }
     

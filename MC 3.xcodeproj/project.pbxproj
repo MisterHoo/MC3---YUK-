@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		668399172133B6F800BDBC13 /* MPCHandeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668399162133B6F800BDBC13 /* MPCHandeler.swift */; };
 		6697A7972122E73200DA0814 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6697A7952122E73200DA0814 /* Main.storyboard */; };
 		6697A7992123D30B00DA0814 /* GameplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6697A7982123D30B00DA0814 /* GameplayViewController.swift */; };
 		6697DB012122B32500E3EF32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6697DB002122B32500E3EF32 /* AppDelegate.swift */; };
@@ -15,7 +16,12 @@
 		6697DB0E2122B32800E3EF32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6697DB0C2122B32800E3EF32 /* LaunchScreen.storyboard */; };
 		6697DB192122B32800E3EF32 /* MC_3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6697DB182122B32800E3EF32 /* MC_3Tests.swift */; };
 		6697DB242122B32800E3EF32 /* MC_3UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6697DB232122B32800E3EF32 /* MC_3UITests.swift */; };
+		669B3BEA21350AC00045580A /* KacangObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669B3BE921350AC00045580A /* KacangObject.swift */; };
 		66BDD2EF212AAF3A00680D43 /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BDD2EE212AAF3A00680D43 /* GameBoard.swift */; };
+		66CB45B8212E9E0500A183AE /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CB45B7212E9E0500A183AE /* GameManager.swift */; };
+		66CB45BC212FE28100A183AE /* Data+ext+compress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CB45BB212FE28100A183AE /* Data+ext+compress.swift */; };
+		66CB45BE21300B4E00A183AE /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CB45BD21300B4E00A183AE /* DataManager.swift */; };
+		66CB45C221300EA100A183AE /* WorldMapItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CB45C121300EA100A183AE /* WorldMapItem.swift */; };
 		CDDA749C212AAC8A00A6B003 /* MultiPeerHandeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA749B212AAC8900A6B003 /* MultiPeerHandeler.swift */; };
 		CF8A8F28212BE15000FFFFE5 /* LockOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8A8F27212BE15000FFFFE5 /* LockOrientation.swift */; };
 		CFCC5925212A9B6D0036C6B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFCC5923212A9B6D0036C6B2 /* Assets.xcassets */; };
@@ -41,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		668399162133B6F800BDBC13 /* MPCHandeler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCHandeler.swift; sourceTree = "<group>"; };
 		6697A7962122E73200DA0814 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6697A7982123D30B00DA0814 /* GameplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameplayViewController.swift; path = "MC 3/Controller/GameplayViewController.swift"; sourceTree = SOURCE_ROOT; };
 		6697DAFD2122B32500E3EF32 /* MC 3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MC 3.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,7 +62,12 @@
 		6697DB1F2122B32800E3EF32 /* MC 3UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MC 3UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6697DB232122B32800E3EF32 /* MC_3UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC_3UITests.swift; sourceTree = "<group>"; };
 		6697DB252122B32800E3EF32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		669B3BE921350AC00045580A /* KacangObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KacangObject.swift; sourceTree = "<group>"; };
 		66BDD2EE212AAF3A00680D43 /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
+		66CB45B7212E9E0500A183AE /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
+		66CB45BB212FE28100A183AE /* Data+ext+compress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+ext+compress.swift"; sourceTree = "<group>"; };
+		66CB45BD21300B4E00A183AE /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		66CB45C121300EA100A183AE /* WorldMapItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMapItem.swift; sourceTree = "<group>"; };
 		CDDA749B212AAC8900A6B003 /* MultiPeerHandeler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiPeerHandeler.swift; sourceTree = "<group>"; };
 		CF8A8F27212BE15000FFFFE5 /* LockOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockOrientation.swift; sourceTree = "<group>"; };
 		CFCC5923212A9B6D0036C6B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "MC 3/Support/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
@@ -114,10 +126,14 @@
 				66DD9466212C084600859DB5 /* Asset Controller */,
 				66DD9465212C083D00859DB5 /* Helper */,
 				CDDA749B212AAC8900A6B003 /* MultiPeerHandeler.swift */,
+				668399162133B6F800BDBC13 /* MPCHandeler.swift */,
+				66CB45BD21300B4E00A183AE /* DataManager.swift */,
+				66CB45C121300EA100A183AE /* WorldMapItem.swift */,
 				6697DB022122B32500E3EF32 /* ViewController.swift */,
+				66CB45B7212E9E0500A183AE /* GameManager.swift */,
+				6697A7982123D30B00DA0814 /* GameplayViewController.swift */,
 				CFD305B12123EE7A008B820B /* LobbyViewController.swift */,
 				6697DB002122B32500E3EF32 /* AppDelegate.swift */,
-				6697A7982123D30B00DA0814 /* GameplayViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -143,6 +159,7 @@
 		66DD9465212C083D00859DB5 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				66CB45BB212FE28100A183AE /* Data+ext+compress.swift */,
 				CF8A8F27212BE15000FFFFE5 /* LockOrientation.swift */,
 			);
 			path = Helper;
@@ -152,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				66BDD2EE212AAF3A00680D43 /* GameBoard.swift */,
+				669B3BE921350AC00045580A /* KacangObject.swift */,
 			);
 			path = "Asset Controller";
 			sourceTree = "<group>";
@@ -328,13 +346,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDDA749C212AAC8A00A6B003 /* MultiPeerHandeler.swift in Sources */,
+				66CB45B8212E9E0500A183AE /* GameManager.swift in Sources */,
 				6697DB032122B32500E3EF32 /* ViewController.swift in Sources */,
 				CF8A8F28212BE15000FFFFE5 /* LockOrientation.swift in Sources */,
 				6697DB012122B32500E3EF32 /* AppDelegate.swift in Sources */,
+				669B3BEA21350AC00045580A /* KacangObject.swift in Sources */,
+				668399172133B6F800BDBC13 /* MPCHandeler.swift in Sources */,
 				66BDD2EF212AAF3A00680D43 /* GameBoard.swift in Sources */,
 				6697A7992123D30B00DA0814 /* GameplayViewController.swift in Sources */,
 				6697DB092122B32500E3EF32 /* MC_3.xcdatamodeld in Sources */,
+				66CB45BE21300B4E00A183AE /* DataManager.swift in Sources */,
 				CFD305B22123EE7A008B820B /* LobbyViewController.swift in Sources */,
+				66CB45C221300EA100A183AE /* WorldMapItem.swift in Sources */,
+				66CB45BC212FE28100A183AE /* Data+ext+compress.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,7 +532,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZP5Y9ZPS3B;
+				DEVELOPMENT_TEAM = 3ZHR6JDHY4;
 				INFOPLIST_FILE = "MC 3/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -527,7 +551,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZP5Y9ZPS3B;
+				DEVELOPMENT_TEAM = 3ZHR6JDHY4;
 				INFOPLIST_FILE = "MC 3/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
