@@ -10,9 +10,13 @@ import UIKit
 import MultipeerConnectivity
 
 class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControllerDelegate {
+    
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         DispatchQueue.main.async {
             self.dismiss(animated: true, completion: nil)
+            self.moveToGame()
+            
+            
 //            browserViewController.delegate = self
 //            self.isServer = false
 //            NotificationCenter.default.post(name: Notification.Name(rawValue: "MOVE"), object: nil)
@@ -22,6 +26,10 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     @objc func moveToGameVC(){
         print("bener")
         self.performSegue(withIdentifier: "menuToGame", sender: self)
+    }
+    func moveToGame(){
+        let seconVC = self.storyboard!.instantiateViewController(withIdentifier: "gamePlay")
+        self.present(seconVC, animated: true, completion: nil)
     }
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
