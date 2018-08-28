@@ -9,14 +9,16 @@
 import UIKit
 import MultipeerConnectivity
 
-class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControllerDelegate {
+class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControllerDelegate, UIScrollViewDelegate {
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var pageControl: UIPageControl!
+    
+    var imageArray = [UIImage]()
     
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         DispatchQueue.main.async {
             self.dismiss(animated: true, completion: nil)
-            self.moveToGame()
-            
-            
 //            browserViewController.delegate = self
 //            self.isServer = false
 //            NotificationCenter.default.post(name: Notification.Name(rawValue: "MOVE"), object: nil)
@@ -27,17 +29,10 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
         print("bener")
         self.performSegue(withIdentifier: "menuToGame", sender: self)
     }
-    func moveToGame(){
-        let seconVC = self.storyboard!.instantiateViewController(withIdentifier: "gamePlay")
-        self.present(seconVC, animated: true, completion: nil)
-    }
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
         dismiss(animated: false, completion: nil)
     }
-    
-    
-    
     
     //VC
 
@@ -93,8 +88,22 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        multiPeer = (UIApplication.shared.delegate as! AppDelegate).multiPeer
         
+        imageArray = [UIImage(named: "Image Asset - Congklak"),UIImage(named: "Image Asset - Congklak"),UIImage(named: "Image Asset - Congklak")] as! [UIImage]
+        
+        for i in 0..<imageArray.count
+        {
+            let imageView = UIImageView()
+            imageView.image = imageArray[i]
+            let xPosition = self.scrollView.frame.width * CGFloat(i)
+            imageView.frame = CGRect(x: xPosition, y: 0, width: self.scrollView.frame.width, height: self.scrollView.frame.height)
+            
+            scrollView.contentSize.width = scrollView.frame.width * CGFloat(i + 1)
+            scrollView.addSubview(imageView)
+        }
+        self.scrollView.delegate = self
+        
+        multiPeer = (UIApplication.shared.delegate as! AppDelegate).multiPeer
         
         if let username = UserDefaults.standard.value(forKey: "Username") as? String{
             usernameTextField.text = username
@@ -105,13 +114,23 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
         usernameTextField.delegate = self
     }
 
+    func scrollViewDidScroll(_ scrollView: UIScrollView)
+    {
+        let pageNumber = scrollView.contentOffset.x / scrollView.frame.size.width
+        pageControl.currentPage = Int(pageNumber)
+    }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView)
+    {
+        
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         AppUtility.lockOrientation(.portrait)
         // Or to rotate and lock
         // AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
