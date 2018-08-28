@@ -11,31 +11,47 @@ import MultipeerConnectivity
 
 class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControllerDelegate {
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-        
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
+//            browserViewController.delegate = self
+//            self.isServer = false
+//            NotificationCenter.default.post(name: Notification.Name(rawValue: "MOVE"), object: nil)
+        }
+    }
+    
+    @objc func moveToGameVC(){
+        print("bener")
+        self.performSegue(withIdentifier: "menuToGame", sender: self)
     }
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-        
+        dismiss(animated: false, completion: nil)
     }
     
+    
+    
+    
+    //VC
 
     @IBOutlet weak var menuSlider: UIPageControl!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var ikutButtonOutlet: UIButton!
     @IBOutlet weak var mainButtonOutlet: UIButton!
     
-    var appDelegate:AppDelegate!
-    let multiPeer = MultiPeerHandeler()
+    var multiPeer : MPCHandeler!
+    var isServer : Bool = false
     
     @IBAction func ikutButtonAction(_ sender: UIButton) {
         //performSegue(withIdentifier: "menuToLobby", sender: self)
-        multiPeer.joinSession()
-        present(multiPeer.mcBrowser, animated: true)
+        multiPeer.sessionBrowser()
+        multiPeer.mcBrowser.delegate = self
+        present(multiPeer.mcBrowser, animated: false)
     }
     
     @IBAction func mainButtonAction(_ sender: UIButton) {
+        multiPeer.hosting()
+        isServer = true
         performSegue(withIdentifier: "menuToGame", sender: self)
-        multiPeer.startHosting()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -46,14 +62,38 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
         return true
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination = segue.destination as? GameplayViewController
+        
+        destination?.isServer = isServer
+    }
+    
+    public class MyClass {
+        static let myNotification = Notification.Name("MPC_DidChangeStateNotification")
+    }
+    
+    public class MyClass2 {
+        static let myNotification = Notification.Name("MPC_DidRecieveDataNotification")
+    }
+
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(moveToGameVC), name: NSNotification.Name(rawValue: "MPC_DidRecieveDataNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(moveToGameVC), name: NSNotification.Name(rawValue: "MPC_DidChangeStateNotification"), object: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        multiPeer = (UIApplication.shared.delegate as! AppDelegate).multiPeer
+        
         
         if let username = UserDefaults.standard.value(forKey: "Username") as? String{
             usernameTextField.text = username
-            multiPeer.namaPlayer = username
+            //multiPeer.namaPlayer = username
         }
-        multiPeer.setupConnectivity()
+        //multiPeer.setupPeerId()
+        multiPeer.setupPeerId()
         usernameTextField.delegate = self
     }
 
