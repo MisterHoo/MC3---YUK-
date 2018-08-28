@@ -24,6 +24,7 @@ class MultiPeerHandeler: NSObject, MCSessionDelegate, MCBrowserViewControllerDel
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         mcSession.delegate = self
         print(mcSession)
+        
     }
     
     func startHosting() {

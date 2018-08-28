@@ -68,7 +68,10 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         
         // Do any additional setup after loading the view.
     }
-    
+    func writeWorldMap(_ worldMap: ARWorldMap, to url: URL) throws {
+        let data = try NSKeyedArchiver.archivedData(withRootObject: worldMap, requiringSecureCoding: true)
+        try data.write(to: url)
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
