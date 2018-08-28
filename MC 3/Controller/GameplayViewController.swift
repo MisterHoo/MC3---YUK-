@@ -79,6 +79,10 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         sceneView.scene.rootNode.addChildNode(lightNode)
         
         // Do any additional setup after loading the view.
+        
+//        var option = SCNDebugOptions.showPhysicsShapes
+//        sceneView.debugOptions = option
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -184,13 +188,12 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                         width = CGFloat(planeAnchor.extent.x)
                         height = CGFloat(planeAnchor.extent.z)
                         
-                        
                         //validate width & height
-                        if planeAnchor.extent.x >= 0.5{
-                            width = 0.5
+                        if planeAnchor.extent.x >= 0.3{
+                            width = 0.3
                         }
-                        if planeAnchor.extent.z >= 0.3{
-                            height = 0.3
+                        if planeAnchor.extent.z >= 0.5{
+                            height = 0.5
                         }
                         
                         
@@ -224,9 +227,15 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             
             //adding object
             
+            let gameNode = SCNNode()
+            
             let gameBoard = GameBoard()
             gameBoard.loadModel()
             gameBoard.position = newLocation
+            
+            gameNode.addChildNode(gameBoard)
+        
+            //let gamePhysicsShape = SCNPhysicsShape(node: gameNode, options: SCNPhysicsShape.Option.type)
             
             sceneView.scene.rootNode.addChildNode(gameBoard)
             
@@ -235,12 +244,12 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             print(gameBoard.position)
             
             for holeNode in gameBoard.holeNode{
-                for _ in 1...7{
+                print(holeNode.position)
+                print(holeNode.worldPosition)
+                for i in 1...7{
                     let kacang = KacangObject()
                     kacang.loadModel()
-                    
-                    kacang.position = SCNVector3Make(newLocation.x + holeNode.position.x, newLocation.y + holeNode.position.y
-                        , newLocation.z + holeNode.position.z)
+                    kacang.position = SCNVector3Make(gameBoard.position.x + holeNode.position.x, gameBoard.position.y + holeNode.position.y, gameBoard.position.z + holeNode.position.z)
                     print(kacang.position)
                     sceneView.scene.rootNode.addChildNode(kacang)
                     count += 1
