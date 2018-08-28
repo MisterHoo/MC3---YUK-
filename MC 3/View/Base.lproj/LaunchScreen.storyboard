@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Splash Screen" translatesAutoresizingMaskIntoConstraints="NO" id="FbB-BB-Hxj">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashScreen" translatesAutoresizingMaskIntoConstraints="NO" id="FbB-BB-Hxj">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <variation key="heightClass=regular-widthClass=regular" image="Splash Screen - iPad"/>
                             </imageView>
@@ -38,7 +38,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Splash Screen" width="125" height="270"/>
         <image name="Splash Screen - iPad" width="1024" height="1366"/>
+        <image name="SplashScreen" width="187" height="406"/>
     </resources>
 </document>
