@@ -39,6 +39,6 @@
     </scenes>
     <resources>
         <image name="Splash Screen - iPad" width="1024" height="1366"/>
-        <image name="SplashScreen" width="187" height="406"/>
+        <image name="SplashScreen" width="375" height="812"/>
     </resources>
 </document>
