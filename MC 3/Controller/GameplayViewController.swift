@@ -38,6 +38,8 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
     let gameNode = SCNNode()
     
+    let gameBoard = GameBoard()
+    
     @IBAction func backButtonAction(_ sender: UIButton)
     {
         
@@ -137,7 +139,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             //when board already deployed
             let selectedHole = chooseHoleToGetBean(location: location!)
             
-            if selectedHole = gameNode.childNode(withName: <#T##String#>, recursively: <#T##Bool#>)
+            //if selectedHole = gameNode.childNode(withName: <#T##String#>, recursively: <#T##Bool#>)
             
         }
         
@@ -260,10 +262,10 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             
             
             //Papan
-            let gameBoard = GameBoard()
+            
             gameBoard.loadModel()
             gameBoard.position = newLocation
-            
+            print(newLocation)
             
             gameNode.addChildNode(gameBoard)
         
@@ -365,7 +367,14 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                 let configuration = ARWorldTrackingConfiguration()
                 configuration.planeDetection = .horizontal
                 configuration.initialWorldMap = worldMap
-                sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+                sceneView.session.run(configuration)
+                
+//                gameBoard.loadModel()
+//                gameBoard.position
+//
+//
+//                gameNode.addChildNode(gameBoard)
+                
             }
             else
                 if let anchor = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARAnchor.self, from: uncompressedData) {
