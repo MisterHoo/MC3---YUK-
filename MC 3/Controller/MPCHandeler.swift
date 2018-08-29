@@ -24,6 +24,8 @@ class MPCHandeler: NSObject, MCSessionDelegate,MCBrowserViewControllerDelegate, 
     var receivedData : Data!
     
     //private let reciveDataHandler: (Data, MCPeerID) -> Void
+    var gamePlayViewController = GameplayViewController()
+    
     
     func setupPeerId(){
         session = MCSession(peer: myPeerId, securityIdentity: nil, encryptionPreference: .none)
@@ -70,7 +72,8 @@ class MPCHandeler: NSObject, MCSessionDelegate,MCBrowserViewControllerDelegate, 
         }
     }
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        receivedData = data
+        gamePlayViewController.loadWorldMap(from: data)
+        //receivedData = data
         let userInfo = ["data":data, "peerID":peerID] as [String : Any]
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: MyClass2.myNotification, object: nil, userInfo: userInfo)
