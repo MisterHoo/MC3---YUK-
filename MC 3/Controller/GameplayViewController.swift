@@ -80,10 +80,14 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         
         sceneView.scene.rootNode.addChildNode(lightNode)
         
+        
+//        var option = SCNDebugOptions.showPhysicsShapes
+//        sceneView.debugOptions = option
+//
+        
         // Do any additional setup after loading the view.
         
-        var option = SCNDebugOptions.showPhysicsShapes
-        sceneView.debugOptions = option
+
 
     }
     func writeWorldMap(_ worldMap: ARWorldMap, to url: URL) throws {
@@ -124,23 +128,6 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         super.viewWillAppear(animated)
         
         sceneView.session.pause()
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first
-        let location = touch?.location(in: sceneView)
-        
-        //when board hasn't delploy
-        if boardFlag == false {
-            addNodeAtLocation(location: location!)
-        }else{
-            //when board already deployed
-            let selectedHole = chooseHoleToGetBean(location: location!)
-            
-            if selectedHole = gameNode.childNode(withName: <#T##String#>, recursively: <#T##Bool#>)
-            
-        }
-        
     }
     
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
@@ -230,14 +217,32 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         material.diffuse.contentsTransform = SCNMatrix4MakeScale(Float(self.planeGeometry.width), Float(self.planeGeometry.height), 1)
     }
     
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        let location = touch?.location(in: sceneView)
+        
+        //when board hasn't delploy
+        if boardFlag == false {
+            addNodeAtLocation(location: location!)
+        }else{
+            //when board already deployed
+            let selectedHole = chooseHoleToGetBean(location: location!)
+            print(selectedHole?.name)
+            
+        }
+        
+    }
+    
+    
     func chooseHoleToGetBean (location : CGPoint) -> SCNNode?{
-        let hitTestOptions : [SCNHitTestOption : Any] = [.boundingBoxOnly : true]
+        let hitTestOptions : [SCNHitTestOption : Any] = [.categoryBitMask : 3]
         let hitResults = sceneView.hitTest(location, options: hitTestOptions)
         
         return hitResults.lazy.compactMap { result in
-            guard let parent = result.node.parent else {return nil}
-            print(parent)
-            return parent
+            guard let node = result.node.parent as? SCNNode else {return nil}
+            print(node)
+            return node
         }.first
     }
     
@@ -265,8 +270,8 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             gameBoard.position = newLocation
             
             
-            gameNode.addChildNode(gameBoard)
-        
+            
+            gameNode.addChildNode(gameBoard.congklak)
             //let gamePhysicsShape = SCNPhysicsShape(node: gameNode, options: SCNPhysicsShape.Option.type)
             
             var count = 0
@@ -284,26 +289,15 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                         
                         //print(kacang.position)
                         //sceneView.scene.rootNode.addChildNode(kacang)
+                        //gameNode.addChildNode(kacang)
                         
-                        gameNode.addChildNode(kacang)
+                        holeNode.addChildNode(kacang)
                         count += 1
                     }
                 }
             }
             
-//            for holeNode in gameBoard.holeNode{
-//                for i in 1...7{
-//                    let kacang = KacangObject()
-//                    kacang.loadModel()
-//                    kacang.position = SCNVector3Make(gameBoard.position.x + holeNode.position.x, gameBoard.position.y + holeNode.position.y, gameBoard.position.z + holeNode.position.z)
-//                    print(kacang.position)
-//                    gameNode.addChildNode(kacang)
-//                    //sceneView.scene.rootNode.addChildNode(kacang)
-//                    count += 1
-//                }
-//            }
             
-            //tambah ke AR
             sceneView.scene.rootNode.addChildNode(gameNode)
             
             print(count)
