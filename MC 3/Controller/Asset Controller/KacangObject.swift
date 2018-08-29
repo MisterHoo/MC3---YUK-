@@ -14,7 +14,7 @@ class KacangObject : SCNNode {
     var nama : String = "kacang"
     
     func loadModel (){
-        guard let kacangObjectScene = SCNScene(named: "ModelAsset.scnassets/bijinya/kacang5.scn") else {return}
+        guard let kacangObjectScene = SCNScene(named: "ModelAsset.scnassets/bijinya/kacang22.scn") else {return}
         
         let wrapperNode = SCNNode()
         
