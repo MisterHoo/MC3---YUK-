@@ -36,6 +36,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
     var multiPeer : MPCHandeler!
     
+    let gameNode = SCNNode()
     
     @IBAction func backButtonAction(_ sender: UIButton)
     {
@@ -63,7 +64,6 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
 
         lockButtonOutlet.setImage(UIImage(named: "Unlocked"), for: .normal)
         //delegate sceneView
-        
         sceneView.delegate = self
         
         let scene = SCNScene()
@@ -82,17 +82,14 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         
         // Do any additional setup after loading the view.
         
-//        var option = SCNDebugOptions.showPhysicsShapes
-//        sceneView.debugOptions = option
+        var option = SCNDebugOptions.showPhysicsShapes
+        sceneView.debugOptions = option
 
     }
-//
-//    func writeWorldMap(_ worldMap: ARWorldMap, to url: URL) throws {
-//        let data = try NSKeyedArchiver.archivedData(withRootObject: worldMap, requiringSecureCoding: true)
-//        try data.write(to: url)
-//    }
-    
-    
+    func writeWorldMap(_ worldMap: ARWorldMap, to url: URL) throws {
+        let data = try NSKeyedArchiver.archivedData(withRootObject: worldMap, requiringSecureCoding: true)
+        try data.write(to: url)
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -102,27 +99,25 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
 //            print(multiPeer.session.connectedPeers.count)
 //        }
         
-        let configuration = ARWorldTrackingConfiguration()
-        configuration.planeDetection = .horizontal
-        configuration.isLightEstimationEnabled = true
-        
-        sceneView.delegate = self
+//        let configuration = ARWorldTrackingConfiguration()
+//        configuration.planeDetection = .horizontal
+//        configuration.isLightEstimationEnabled = true
         
         if isServer == true{
-//            let configuration = ARWorldTrackingConfiguration()
-//            configuration.planeDetection = .horizontal
-//            configuration.isLightEstimationEnabled = true
+            let configuration = ARWorldTrackingConfiguration()
+            configuration.planeDetection = .horizontal
+            configuration.isLightEstimationEnabled = true
             print("server")
             sceneView.session.run(configuration)
         }else{
             print("bukan Server")
-            //print(multiPeer.receivedData)
-            //loadWorldMap(from: multiPeer.receivedData)
+            print(multiPeer.receivedData)
+            loadWorldMap(from: multiPeer.receivedData)
             //print(worldMap)
             print(multiPeer.session)
             //print("bukan Server")
 //            configuration.initialWorldMap = worldMap
-            sceneView.session.run(configuration)
+//            sceneView.session.run(configuration)
         }
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -135,7 +130,16 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         let touch = touches.first
         let location = touch?.location(in: sceneView)
         
-        addNodeAtLocation(location: location!)
+        //when board hasn't delploy
+        if boardFlag == false {
+            addNodeAtLocation(location: location!)
+        }else{
+            //when board already deployed
+            let selectedHole = chooseHoleToGetBean(location: location!)
+            
+            if selectedHole = gameNode.childNode(withName: <#T##String#>, recursively: <#T##Bool#>)
+            
+        }
         
     }
     
@@ -226,6 +230,17 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         material.diffuse.contentsTransform = SCNMatrix4MakeScale(Float(self.planeGeometry.width), Float(self.planeGeometry.height), 1)
     }
     
+    func chooseHoleToGetBean (location : CGPoint) -> SCNNode?{
+        let hitTestOptions : [SCNHitTestOption : Any] = [.boundingBoxOnly : true]
+        let hitResults = sceneView.hitTest(location, options: hitTestOptions)
+        
+        return hitResults.lazy.compactMap { result in
+            guard let parent = result.node.parent else {return nil}
+            print(parent)
+            return parent
+        }.first
+    }
+    
     func addNodeAtLocation (location : CGPoint){
         guard anchors.count > 0 else{
             print("anchors are not created yet")
@@ -239,36 +254,57 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             let result = hitResults.first!
             let newLocation = SCNVector3Make(result.worldTransform.columns.3.x,result.worldTransform.columns.3.y,result.worldTransform.columns.3.z)
             
+            
+            
             //adding object
             
-            let gameNode = SCNNode()
             
+            //Papan
             let gameBoard = GameBoard()
             gameBoard.loadModel()
             gameBoard.position = newLocation
+            
             
             gameNode.addChildNode(gameBoard)
         
             //let gamePhysicsShape = SCNPhysicsShape(node: gameNode, options: SCNPhysicsShape.Option.type)
             
-            sceneView.scene.rootNode.addChildNode(gameBoard)
-            
             var count = 0
             
             print(gameBoard.position)
             
-            for holeNode in gameBoard.holeNode{
-                print(holeNode.position)
-                print(holeNode.worldPosition)
-                for i in 1...7{
-                    let kacang = KacangObject()
-                    kacang.loadModel()
-                    kacang.position = SCNVector3Make(gameBoard.position.x + holeNode.position.x, gameBoard.position.y + holeNode.position.y, gameBoard.position.z + holeNode.position.z)
-                    print(kacang.position)
-                    sceneView.scene.rootNode.addChildNode(kacang)
-                    count += 1
+            
+            //Kacang
+            for holeNodeColl in gameBoard.holeNode{
+                for holeNode in holeNodeColl{
+                    for i in 1...7{
+                        let kacang = KacangObject()
+                        kacang.loadModel()
+                        kacang.position = SCNVector3Make(gameBoard.position.x + holeNode.position.x, gameBoard.position.y + holeNode.position.y, gameBoard.position.z + holeNode.position.z)
+                        
+                        //print(kacang.position)
+                        //sceneView.scene.rootNode.addChildNode(kacang)
+                        
+                        gameNode.addChildNode(kacang)
+                        count += 1
+                    }
                 }
             }
+            
+//            for holeNode in gameBoard.holeNode{
+//                for i in 1...7{
+//                    let kacang = KacangObject()
+//                    kacang.loadModel()
+//                    kacang.position = SCNVector3Make(gameBoard.position.x + holeNode.position.x, gameBoard.position.y + holeNode.position.y, gameBoard.position.z + holeNode.position.z)
+//                    print(kacang.position)
+//                    gameNode.addChildNode(kacang)
+//                    //sceneView.scene.rootNode.addChildNode(kacang)
+//                    count += 1
+//                }
+//            }
+            
+            //tambah ke AR
+            sceneView.scene.rootNode.addChildNode(gameNode)
             
             print(count)
             
@@ -327,10 +363,9 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: uncompressedData) {
                 // Run the session with the received world map.
                 let configuration = ARWorldTrackingConfiguration()
-                c//onfiguration.planeDetection = .horizontal
+                configuration.planeDetection = .horizontal
                 configuration.initialWorldMap = worldMap
-                sceneView.session.run(configuration)
-                
+                sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
             }
             else
                 if let anchor = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARAnchor.self, from: uncompressedData) {
