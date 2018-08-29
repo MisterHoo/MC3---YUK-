@@ -11,6 +11,8 @@ import SceneKit
 
 class KacangObject : SCNNode {
     
+    var nama : String = "kacang"
+    
     func loadModel (){
         guard let kacangObjectScene = SCNScene(named: "ModelAsset.scnassets/bijinya/kacang5.scn") else {return}
         

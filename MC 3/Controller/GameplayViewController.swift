@@ -37,6 +37,15 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     var multiPeer : MPCHandeler!
     
     let gameNode = SCNNode()
+    let gameBoard = GameBoard()
+    
+    
+    var counterHand : Int = 0
+    var counterA : Int = 0
+    var counterB : Int = 0
+    
+    var indexHoleColumn : Int = 0
+    var indexHoleRow : Int = 0
     
     @IBAction func backButtonAction(_ sender: UIButton)
     {
@@ -83,7 +92,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         
 //        var option = SCNDebugOptions.showPhysicsShapes
 //        sceneView.debugOptions = option
-//
+
         
         // Do any additional setup after loading the view.
         
@@ -117,6 +126,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             print("bukan Server")
             print(multiPeer.receivedData)
             loadWorldMap(from: multiPeer.receivedData)
+
             //print(worldMap)
             print(multiPeer.session)
             //print("bukan Server")
@@ -230,10 +240,55 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             let selectedHole = chooseHoleToGetBean(location: location!)
             print(selectedHole?.name)
             
+            if counterHand == 0{
+                for i in 0...1{
+                    for j in 0...6{
+                        if selectedHole?.name == gameBoard.holeBox[i][j].name{
+                            indexHoleColumn = i
+                            indexHoleRow = j+1
+                        
+                            for child in (selectedHole?.childNodes)!{
+                                print(child.name)
+                                if child.name == nil{
+                                    counterHand += 1
+                                    child.removeFromParentNode()
+                                }
+                            }
+                        }
+                    }
+                }
+            }else{
+                print("Sum in Hand : \(counterHand)")
+                if selectedHole?.name == gameBoard.goalPostBoxA.name{
+                    addKacang(parentNode: gameBoard.goalPostBoxA)
+                    indexHoleColumn = 1
+                    indexHoleRow = 0
+                    counterHand -= 1
+                    counterA += 1
+                    print(counterA)
+                }else if selectedHole?.name == gameBoard.goalPostBoxB.name{
+                    addKacang(parentNode: gameBoard.goalPostBoxB)
+                    indexHoleColumn = 0
+                    indexHoleRow = 0
+                    counterHand -= 1
+                    counterB += 1
+                    print(counterB)
+                }else if selectedHole?.name == gameBoard.holeBox[indexHoleColumn][indexHoleRow].name{
+                    addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
+                    indexHoleRow += 1
+                    counterHand -= 1
+                }
+            }
         }
-        
     }
     
+    func addKacang(parentNode : SCNNode){
+        let kacang = KacangObject()
+        kacang.loadModel()
+        kacang.position = SCNVector3Make(0, 0, 0)
+        
+        parentNode.addChildNode(kacang)
+    }
     
     func chooseHoleToGetBean (location : CGPoint) -> SCNNode?{
         let hitTestOptions : [SCNHitTestOption : Any] = [.categoryBitMask : 3]
@@ -241,7 +296,6 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         
         return hitResults.lazy.compactMap { result in
             guard let node = result.node.parent as? SCNNode else {return nil}
-            print(node)
             return node
         }.first
     }
@@ -265,42 +319,77 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             
             
             //Papan
-            let gameBoard = GameBoard()
+            
             gameBoard.loadModel()
             gameBoard.position = newLocation
             
             
             
-            gameNode.addChildNode(gameBoard.congklak)
+          
             //let gamePhysicsShape = SCNPhysicsShape(node: gameNode, options: SCNPhysicsShape.Option.type)
-            
-            var count = 0
-            
-            print(gameBoard.position)
             
             
             //Kacang
-            for holeNodeColl in gameBoard.holeNode{
-                for holeNode in holeNodeColl{
-                    for i in 1...7{
+            
+            
+            for i in 0...1{
+                for j in 0...6{
+                    for k in 1...7{
                         let kacang = KacangObject()
                         kacang.loadModel()
-                        kacang.position = SCNVector3Make(gameBoard.position.x + holeNode.position.x, gameBoard.position.y + holeNode.position.y, gameBoard.position.z + holeNode.position.z)
+                        //kacang.position = SCNVector3Make(gameBoard.position.x + gameBoard.holeNode[i][j].position.x, gameBoard.position.y + gameBoard.holeNode[i][j].position.y + Float(k) * 0.01, gameBoard.position.z + gameBoard.holeNode[i][j].position.z)
                         
-                        //print(kacang.position)
-                        //sceneView.scene.rootNode.addChildNode(kacang)
+                        kacang.position = SCNVector3Make(0, Float(k) * 0.01, 0)
+
+                        print(kacang.position)
                         //gameNode.addChildNode(kacang)
+                        gameBoard.holeBox[i][j].addChildNode(kacang)
                         
-                        holeNode.addChildNode(kacang)
-                        count += 1
+                        //sceneView.scene.rootNode.addChildNode(kacang)
+                    }
+                   
+//                    gameNode.addChildNode(gameBoard.holeNode[i][j])
+//                    gameNode.addChildNode(gameBoard.holeBox[i][j])
+                }
+            }
+            
+            for i in 0...1{
+                for j in 0...6{
+                    let index = gameBoard.holeBox[i][j].childNodes
+                    print(index.count)
+                    for child in gameBoard.holeBox[i][j].childNodes{
+                        print(child.name)
+                        print(child.position)
                     }
                 }
             }
             
+            sceneView.scene.rootNode.addChildNode(gameBoard)
+          
+
+
+//            gameNode.addChildNode(gameBoard.goalPostBoxA)
+//            gameNode.addChildNode(gameBoard.goalPostBoxB)
+//
+//            gameNode.addChildNode(gameBoard.goalPostHoleA)
+//            gameNode.addChildNode(gameBoard.goalPostHoleB)
             
-            sceneView.scene.rootNode.addChildNode(gameNode)
-            
-            print(count)
+//
+//            for holeBoxColl in gameBoard.holeBox{
+//                for holeNode in holeBoxColl{
+//                    for i in 1...7{
+//                        let kacang = KacangObject()
+//                        kacang.loadModel()
+//                        kacang.position = SCNVector3Make(gameBoard.position.x + holeNode.position.x, gameBoard.position.y + holeNode.position.y, gameBoard.position.z + holeNode.position.z)
+//
+//                        //holeNode.addChildNode(kacang)
+//                        gameNode.addChildNode(kacang)
+//
+//                    }
+//                }
+//            }
+//            gameNode.addChildNode(gameBoard)
+//            sceneView.scene.rootNode.addChildNode(gameNode)
             
            
             //convert World Map to Data
