@@ -36,6 +36,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
     var multiPeer : MPCHandeler!
     
+    
     @IBAction func backButtonAction(_ sender: UIButton)
     {
         
@@ -62,6 +63,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
 
         lockButtonOutlet.setImage(UIImage(named: "Unlocked"), for: .normal)
         //delegate sceneView
+        
         sceneView.delegate = self
         
         let scene = SCNScene()
@@ -84,10 +86,13 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
 //        sceneView.debugOptions = option
 
     }
-    func writeWorldMap(_ worldMap: ARWorldMap, to url: URL) throws {
-        let data = try NSKeyedArchiver.archivedData(withRootObject: worldMap, requiringSecureCoding: true)
-        try data.write(to: url)
-    }
+//
+//    func writeWorldMap(_ worldMap: ARWorldMap, to url: URL) throws {
+//        let data = try NSKeyedArchiver.archivedData(withRootObject: worldMap, requiringSecureCoding: true)
+//        try data.write(to: url)
+//    }
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -97,25 +102,27 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
 //            print(multiPeer.session.connectedPeers.count)
 //        }
         
-//        let configuration = ARWorldTrackingConfiguration()
-//        configuration.planeDetection = .horizontal
-//        configuration.isLightEstimationEnabled = true
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = .horizontal
+        configuration.isLightEstimationEnabled = true
+        
+        sceneView.delegate = self
         
         if isServer == true{
-            let configuration = ARWorldTrackingConfiguration()
-            configuration.planeDetection = .horizontal
-            configuration.isLightEstimationEnabled = true
+//            let configuration = ARWorldTrackingConfiguration()
+//            configuration.planeDetection = .horizontal
+//            configuration.isLightEstimationEnabled = true
             print("server")
             sceneView.session.run(configuration)
         }else{
             print("bukan Server")
-            print(multiPeer.receivedData)
-            loadWorldMap(from: multiPeer.receivedData)
+            //print(multiPeer.receivedData)
+            //loadWorldMap(from: multiPeer.receivedData)
             //print(worldMap)
             print(multiPeer.session)
             //print("bukan Server")
 //            configuration.initialWorldMap = worldMap
-//            sceneView.session.run(configuration)
+            sceneView.session.run(configuration)
         }
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -320,9 +327,10 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: uncompressedData) {
                 // Run the session with the received world map.
                 let configuration = ARWorldTrackingConfiguration()
-                configuration.planeDetection = .horizontal
+                c//onfiguration.planeDetection = .horizontal
                 configuration.initialWorldMap = worldMap
-                sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+                sceneView.session.run(configuration)
+                
             }
             else
                 if let anchor = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARAnchor.self, from: uncompressedData) {
