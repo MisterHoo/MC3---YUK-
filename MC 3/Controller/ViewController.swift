@@ -143,10 +143,6 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first
-        if let location = touch?.location(in: scrollView){
-            usernameTextField.resignFirstResponder()
-        }
         usernameTextField.resignFirstResponder()
     }
     
