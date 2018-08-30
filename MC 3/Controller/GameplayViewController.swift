@@ -12,6 +12,9 @@ import ARKit
 
 class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
+    //var view score
+    @IBOutlet weak var viewScore: UIView!
+    
     //var layouting
     @IBOutlet weak var backButtonOutlet: UIButton!
     @IBOutlet weak var lockButtonOutlet: UIButton!
@@ -78,6 +81,9 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewScore.layer.cornerRadius = 5
+        viewScore.layer.masksToBounds = true
         
         multiPeer = (UIApplication.shared.delegate as! AppDelegate).multiPeer
 
