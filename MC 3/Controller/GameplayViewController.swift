@@ -54,6 +54,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     var indexHoleRow : Int = 0
     
     var currentPlayer : Int = 1
+    var enemyPlayer : Int = 1
     var curPlayerTime : Int = 0
     
     @IBAction func backButtonAction(_ sender: UIButton)
@@ -264,7 +265,12 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             
             if counterHand == 0 {
                 freeWillPick(parentNode: selectedHole!, currentPlayer: currentPlayer)
+                if currentPlayer == enemyPlayer{
+                    curPlayerTime = 0
+                    enemyPlayer = currentPlayer
+                }
             }else if counterHand == 1{
+                curPlayerTime += 1
                 if indexHoleColumn == currentPlayer - 1{
                    
                     if selectedHole?.name == gameBoard.goalPostBoxA.name && indexHoleRow == 7 && indexHoleColumn == currentPlayer - 1{
@@ -300,14 +306,33 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                             
                         }else{
                             // TEMBAKKK
-                            addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
-                            takeBeanToHand(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], currentPlayer: currentPlayer)
-                            indexHoleRow += 1
-                            counterHand -= 1
+                            if curPlayerTime > 8 {
+                                addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
+                                counterHand -= 1
+                                
+                                var enemyHoleColumn : Int = 0
+                                if indexHoleColumn == 1{
+                                    enemyHoleColumn = 0
+                                }else{
+                                    enemyHoleColumn = 1
+                                }
+                                
+                                tembak(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], indexEnemyColumn: enemyHoleColumn, curPlayer: currentPlayer)
+                                
+                                if currentPlayer == 1{
+                                    currentPlayer = 2
+                                    updateLabel(label: currentPlayerLabel, input: currentPlayer)
+                                }else{
+                                    currentPlayer = 1
+                                    updateLabel(label: currentPlayerLabel, input: currentPlayer)
+                                }
+                                
+                            }
                         }
                     }
                 }else{
                     //jatuh di tempat musuh
+                    curPlayerTime += 1
                     if selectedHole?.name == gameBoard.holeBox[indexHoleColumn][indexHoleRow].name && indexHoleRow < 7{
                         if checkIfEmpty(parentNode: selectedHole!) == false{
                             //gak Kosong
@@ -322,6 +347,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                             }
                             
                         }else{
+                            //Kosong, ganti Player
                             addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
                             counterHand -= 1
                             if currentPlayer == 1{
@@ -338,6 +364,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                 print("Sum in Hand : \(counterHand)")
                 if currentPlayer == 1{
                     if selectedHole?.name == gameBoard.goalPostBoxA.name && indexHoleRow == 7 && indexHoleColumn == 0{
+                        //jatuh di goalPost kita
                         addKacang(parentNode: gameBoard.goalPostBoxA)
                         indexHoleColumn = 1
                         indexHoleRow = 0
@@ -346,17 +373,20 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                         updateLabel(label: scoreALabel, input: counterA)
                         print(counterA)
                     }else if selectedHole?.name == gameBoard.holeBox[1][6].name{
+                        //berada di hole terakhir sbelum goalPost musuh, nextTarget ke hole kita (skip goalPost musuh)
                         addKacang(parentNode: gameBoard.holeBox[1][6])
                         indexHoleColumn = 0
                         indexHoleRow = 0
                         counterHand -= 1
                     }else if selectedHole?.name == gameBoard.holeBox[indexHoleColumn][indexHoleRow].name && indexHoleRow < 7{
+                        //default Run
                         addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
                         indexHoleRow += 1
                         counterHand -= 1
                     }
                 }else if currentPlayer == 2{
                     if selectedHole?.name == gameBoard.goalPostBoxB.name && indexHoleRow == 7 && indexHoleColumn == 1{
+                        //jatuh di goalPost kita
                         addKacang(parentNode: gameBoard.goalPostBoxB)
                         indexHoleColumn = 0
                         indexHoleRow = 0
@@ -365,11 +395,13 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                         updateLabel(label: scoreBLabel, input: counterB)
                         print(counterB)
                     }else if selectedHole?.name == gameBoard.holeBox[0][6].name{
+                        //berada di hole terakhir sbelum goalPost musuh, nextTarget hole kita (skip goalPost musuh)
                         addKacang(parentNode: gameBoard.holeBox[0][6])
                         indexHoleColumn = 1
                         indexHoleRow = 0
                         counterHand -= 1
                     }else if selectedHole?.name == gameBoard.holeBox[indexHoleColumn][indexHoleRow].name && indexHoleRow < 7{
+                        //default Run
                         addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
                         indexHoleRow += 1
                         counterHand -= 1
@@ -377,6 +409,25 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                 }
             }
             updateLabel(label: currentBeanInHandLabel, input: counterHand)
+        }
+    }
+    
+    func tembak(parentNode : SCNNode, indexEnemyColumn : Int, curPlayer : Int){
+        takeBeanToHand(parentNode: parentNode, currentPlayer: curPlayer)
+        takeBeanToHand(parentNode: gameBoard.holeBox[indexEnemyColumn][6-indexHoleRow], currentPlayer: curPlayer)
+        
+        if curPlayer == 1{
+            while counterHand != 0 {
+                addKacang(parentNode: gameBoard.goalPostBoxA)
+                counterA += 1
+                counterHand -= 1
+            }
+        }else if curPlayer == 2{
+            while counterHand != 0 {
+                addKacang(parentNode: gameBoard.goalPostBoxB)
+                counterB += 1
+                counterHand -= 1
+            }
         }
     }
     
