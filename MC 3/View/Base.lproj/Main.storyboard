@@ -377,21 +377,46 @@
                                     <constraint firstItem="Xky-db-cNf" firstAttribute="leading" secondItem="9eZ-6D-hGI" secondAttribute="leading" constant="10" id="zct-KC-TQM"/>
                                 </constraints>
                             </view>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ssa-EV-E19">
+                                <rect key="frame" x="138" y="718" width="99" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjh-ky-9z7">
+                                        <rect key="frame" x="0.0" y="17" width="100" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="35"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sisa" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1j3-Pp-cjc">
+                                        <rect key="frame" x="0.0" y="1" width="100" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.66799789669999998" green="0.47512125970000002" blue="0.25860109930000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="ssa-EV-E19" firstAttribute="top" secondItem="FOD-Le-I73" secondAttribute="top" constant="674" id="4YG-zb-Vee"/>
                             <constraint firstItem="9eZ-6D-hGI" firstAttribute="leading" secondItem="FOD-Le-I73" secondAttribute="leading" constant="16" id="6m3-Gj-6Tj"/>
                             <constraint firstItem="F4c-IF-UuU" firstAttribute="top" secondItem="E5i-0k-DhP" secondAttribute="top" id="AW6-6A-rkw"/>
                             <constraint firstItem="9eZ-6D-hGI" firstAttribute="top" secondItem="rEy-G5-UVk" secondAttribute="bottom" constant="8" id="CTF-nP-Peg"/>
                             <constraint firstItem="rEy-G5-UVk" firstAttribute="top" secondItem="FOD-Le-I73" secondAttribute="top" id="HnQ-KU-Uza"/>
                             <constraint firstItem="FOD-Le-I73" firstAttribute="bottom" secondItem="9eZ-6D-hGI" secondAttribute="bottom" constant="621" id="IWV-dY-KFU"/>
                             <constraint firstItem="rEy-G5-UVk" firstAttribute="leading" secondItem="FOD-Le-I73" secondAttribute="leading" constant="16" id="Jqd-MV-lNE"/>
+                            <constraint firstItem="FOD-Le-I73" firstAttribute="trailing" secondItem="ssa-EV-E19" secondAttribute="trailing" constant="138" id="Kca-Tu-dlH"/>
                             <constraint firstItem="F4c-IF-UuU" firstAttribute="bottom" secondItem="E5i-0k-DhP" secondAttribute="bottom" id="PZM-Al-uY8"/>
                             <constraint firstItem="rEy-G5-UVk" firstAttribute="width" secondItem="F4c-IF-UuU" secondAttribute="width" id="Pyb-DQ-R7F"/>
                             <constraint firstItem="F4c-IF-UuU" firstAttribute="trailing" secondItem="E5i-0k-DhP" secondAttribute="trailing" id="SFh-sJ-7AF"/>
                             <constraint firstItem="F4c-IF-UuU" firstAttribute="leading" secondItem="E5i-0k-DhP" secondAttribute="leading" id="XsX-ks-6gT"/>
                             <constraint firstItem="9eZ-6D-hGI" firstAttribute="centerX" secondItem="FOD-Le-I73" secondAttribute="centerX" id="dIt-Pn-pmv"/>
+                            <constraint firstItem="ssa-EV-E19" firstAttribute="centerX" secondItem="FOD-Le-I73" secondAttribute="centerX" id="fzN-ZU-S4c"/>
+                            <constraint firstItem="FOD-Le-I73" firstAttribute="bottom" secondItem="ssa-EV-E19" secondAttribute="bottom" id="g0F-bO-Pyd"/>
+                            <constraint firstItem="ssa-EV-E19" firstAttribute="leading" secondItem="FOD-Le-I73" secondAttribute="leading" constant="138" id="u1h-Ac-1Tk"/>
                             <constraint firstItem="FOD-Le-I73" firstAttribute="trailing" secondItem="9eZ-6D-hGI" secondAttribute="trailing" constant="16" id="wLT-X1-inP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FOD-Le-I73"/>
