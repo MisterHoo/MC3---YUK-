@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.3.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -423,6 +423,7 @@
                     </view>
                     <connections>
                         <outlet property="backButtonOutlet" destination="hru-EZ-2aQ" id="elZ-kN-AXE"/>
+                        <outlet property="currentBeanInHandLabel" destination="cjh-ky-9z7" id="55p-17-Bk9"/>
                         <outlet property="currentPlayerLabel" destination="Rmn-Qn-4CU" id="LOb-Eb-xWp"/>
                         <outlet property="lockButtonOutlet" destination="Bmh-kr-v40" id="qJy-p6-712"/>
                         <outlet property="sceneView" destination="F4c-IF-UuU" id="LFD-vX-JWq"/>

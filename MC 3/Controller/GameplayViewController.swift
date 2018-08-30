@@ -263,10 +263,10 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         }else{
             //when board already deployed
             let selectedHole = chooseHoleToGetBean(location: location!)
-            print(selectedHole?.name)
+            //print(selectedHole?.name)
             
             if indexHoleRow < 7{
-                print(gameBoard.holeBox[indexHoleColumn][indexHoleRow].name)
+                //print(gameBoard.holeBox[indexHoleColumn][indexHoleRow].name)
             }
             
             if counterHand == 0 {
@@ -279,142 +279,157 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                 curPlayerTime += 1
                 if indexHoleColumn == currentPlayer - 1{
                    
-                    if selectedHole?.name == gameBoard.goalPostBoxA.name && indexHoleRow == 7 && indexHoleColumn == currentPlayer - 1{
+                    if indexHoleRow == 7 && indexHoleColumn == currentPlayer - 1{
+                        if selectedHole?.name == gameBoard.goalPostBoxA.name{
                          //Goal Post player 1
-                        addKacang(parentNode: gameBoard.goalPostBoxA )
-                        counterHand -= 1
-                        counterA += 1
-                        updateLabel(label: scoreALabel, input: counterA)
-                        print(counterA)
-                    }else if selectedHole?.name == gameBoard.goalPostBoxB.name && indexHoleRow == 7 && indexHoleColumn == currentPlayer - 1{
-                        //Goal Post Player 2
-                        addKacang(parentNode: gameBoard.goalPostBoxB )
-                        counterHand -= 1
-                        counterB += 1
-                        updateLabel(label: scoreBLabel, input: counterB)
-                        print(counterA)
-                    }else if selectedHole?.name == gameBoard.holeBox[indexHoleColumn][indexHoleRow].name && indexHoleRow < 7{
-                        if checkIfEmpty(parentNode: selectedHole!) == false{
-                             //jatuh di tempat sendiri, gak kosong
-                            print("masuk SINI WOYY")
-                            addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
-                            takeBeanToHand(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], currentPlayer: currentPlayer)
-                            
-                            indexHoleRow += 1
+                            addKacang(parentNode: gameBoard.goalPostBoxA )
                             counterHand -= 1
-                            
-                            if selectedHole?.name == gameBoard.holeBox[1][6].name{
-                                indexHoleColumn = 0
-                                indexHoleRow = 0
-                            }
-                            
-                            
-                            
-                        }else{
-                            // TEMBAKKK
-                            if curPlayerTime > 8 {
+                            counterA += 1
+                            updateLabel(label: scoreALabel, input: counterA)
+                            print(counterA)
+                        }
+                    }else if indexHoleRow == 7 && indexHoleColumn == currentPlayer - 1{
+                        if selectedHole?.name == gameBoard.goalPostBoxB.name{
+                            //Goal Post Player 2
+                            addKacang(parentNode: gameBoard.goalPostBoxB )
+                            counterHand -= 1
+                            counterB += 1
+                            updateLabel(label: scoreBLabel, input: counterB)
+                            print(counterA)
+                        }
+                    }else if indexHoleRow < 7{
+                        if selectedHole?.name == gameBoard.holeBox[indexHoleColumn][indexHoleRow].name {
+                            if checkIfEmpty(parentNode: selectedHole!) == false{
+                             //jatuh di tempat sendiri, gak kosong
                                 addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
+                                takeBeanToHand(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], currentPlayer: currentPlayer)
+                            
+                                indexHoleRow += 1
                                 counterHand -= 1
-                                
-                                var enemyHoleColumn : Int = 0
-                                if indexHoleColumn == 1{
-                                    enemyHoleColumn = 0
-                                }else{
-                                    enemyHoleColumn = 1
+                            
+                                if selectedHole?.name == gameBoard.holeBox[1][6].name{
+                                    indexHoleColumn = 0
+                                    indexHoleRow = 0
                                 }
+                            }else{
+                            // TEMBAKKK
+                                if curPlayerTime > 8 {
+                                    addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
+                                    counterHand -= 1
                                 
-                                tembak(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], indexEnemyColumn: enemyHoleColumn, curPlayer: currentPlayer)
+                                    var enemyHoleColumn : Int = 0
+                                    if indexHoleColumn == 1{
+                                        enemyHoleColumn = 0
+                                    }else{
+                                        enemyHoleColumn = 1
+                                    }
                                 
-                                if currentPlayer == 1{
-                                    currentPlayer = 2
-                                    updateLabel(label: currentPlayerLabel, input: currentPlayer)
-                                }else{
-                                    currentPlayer = 1
-                                    updateLabel(label: currentPlayerLabel, input: currentPlayer)
+                                    tembak(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], indexEnemyColumn: enemyHoleColumn, curPlayer: currentPlayer)
+                                    
+                                    if currentPlayer == 1{
+                                        currentPlayer = 2
+                                        updateLabel(label: currentPlayerLabel, input: currentPlayer)
+                                    }else{
+                                        currentPlayer = 1
+                                        updateLabel(label: currentPlayerLabel, input: currentPlayer)
+                                    }
                                 }
-                                
                             }
                         }
                     }
                 }else{
                     //jatuh di tempat musuh
-                    curPlayerTime += 1
-                    if selectedHole?.name == gameBoard.holeBox[indexHoleColumn][indexHoleRow].name && indexHoleRow < 7{
-                        if checkIfEmpty(parentNode: selectedHole!) == false{
-                            //gak Kosong
-                            addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
-                            takeBeanToHand(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], currentPlayer: currentPlayer)
-                            indexHoleRow += 1
-                            counterHand -= 1
+                    
+                        if indexHoleRow < 7{
+                            if selectedHole?.name == gameBoard.holeBox[indexHoleColumn][indexHoleRow].name{
+                                if checkIfEmpty(parentNode: selectedHole!) == false{
+                                    //gak Kosong
+                                    addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
+                                    takeBeanToHand(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], currentPlayer:     currentPlayer)
+                                    indexHoleRow += 1
+                                    counterHand -= 1
                             
-                            if selectedHole?.name == gameBoard.holeBox[0][6].name{
-                                indexHoleColumn = 1
-                                indexHoleRow = 0
-                            }
-                            
-                        }else{
-                            //Kosong, ganti Player
-                            addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
-                            counterHand -= 1
-                            if currentPlayer == 1{
-                                currentPlayer = 2
-                                updateLabel(label: currentPlayerLabel, input: currentPlayer)
-                            }else{
-                                currentPlayer = 1
-                                updateLabel(label: currentPlayerLabel, input: currentPlayer)
+                                    if selectedHole?.name == gameBoard.holeBox[0][6].name{
+                                        indexHoleColumn = 1
+                                        indexHoleRow = 0
+                                    }
+                                }else{
+                                    //Kosong, ganti Player
+                                    addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
+                                    counterHand -= 1
+                                    if currentPlayer == 1{
+                                        currentPlayer = 2
+                                        updateLabel(label: currentPlayerLabel, input: currentPlayer)
+                                    }else{
+                                        currentPlayer = 1
+                                        updateLabel(label: currentPlayerLabel, input: currentPlayer)
+                                }
                             }
                         }
                     }
                 }
             }else{
-                print("Sum in Hand : \(counterHand)")
+                curPlayerTime += 1
                 if currentPlayer == 1{
-                    if selectedHole?.name == gameBoard.goalPostBoxA.name && indexHoleRow == 7 && indexHoleColumn == 0{
+                    if indexHoleRow == 7 && indexHoleColumn == 0{
+                        if  selectedHole?.name == gameBoard.goalPostBoxA.name {
                         //jatuh di goalPost kita
-                        addKacang(parentNode: gameBoard.goalPostBoxA)
-                        indexHoleColumn = 1
-                        indexHoleRow = 0
-                        counterHand -= 1
-                        counterA += 1
-                        updateLabel(label: scoreALabel, input: counterA)
-                        print(counterA)
-                    }else if selectedHole?.name == gameBoard.holeBox[1][6].name{
-                        //berada di hole terakhir sbelum goalPost musuh, nextTarget ke hole kita (skip goalPost musuh)
-                        addKacang(parentNode: gameBoard.holeBox[1][6])
-                        indexHoleColumn = 0
-                        indexHoleRow = 0
-                        counterHand -= 1
-                    }else if selectedHole?.name == gameBoard.holeBox[indexHoleColumn][indexHoleRow].name && indexHoleRow < 7{
-                        //default Run
-                        addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
-                        indexHoleRow += 1
-                        counterHand -= 1
+                            addKacang(parentNode: gameBoard.goalPostBoxA)
+                            indexHoleColumn = 1
+                            indexHoleRow = 0
+                            counterHand -= 1
+                            counterA += 1
+                            updateLabel(label: scoreALabel, input: counterA)
+                            //print(counterA)
+                        }
+                    }else if indexHoleRow == 6 && indexHoleColumn == 1{
+                        if selectedHole?.name == gameBoard.holeBox[indexHoleColumn][indexHoleRow].name{
+                            //berada di hole terakhir sbelum goalPost musuh, nextTarget ke hole kita (skip goalPost musuh)
+                            addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
+                            indexHoleColumn = 0
+                            indexHoleRow = 0
+                            counterHand -= 1
+                        }
+                    }else if indexHoleRow < 7 {
+                        if  selectedHole?.name == gameBoard.holeBox[indexHoleColumn][indexHoleRow].name {
+                            //default Run
+                            addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
+                            indexHoleRow += 1
+                            counterHand -= 1
+                        }
                     }
                 }else if currentPlayer == 2{
-                    if selectedHole?.name == gameBoard.goalPostBoxB.name && indexHoleRow == 7 && indexHoleColumn == 1{
-                        //jatuh di goalPost kita
-                        addKacang(parentNode: gameBoard.goalPostBoxB)
-                        indexHoleColumn = 0
-                        indexHoleRow = 0
-                        counterHand -= 1
-                        counterB += 1
-                        updateLabel(label: scoreBLabel, input: counterB)
-                        print(counterB)
-                    }else if selectedHole?.name == gameBoard.holeBox[0][6].name{
-                        //berada di hole terakhir sbelum goalPost musuh, nextTarget hole kita (skip goalPost musuh)
-                        addKacang(parentNode: gameBoard.holeBox[0][6])
-                        indexHoleColumn = 1
-                        indexHoleRow = 0
-                        counterHand -= 1
-                    }else if selectedHole?.name == gameBoard.holeBox[indexHoleColumn][indexHoleRow].name && indexHoleRow < 7{
-                        //default Run
-                        addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
-                        indexHoleRow += 1
-                        counterHand -= 1
+                    if  indexHoleRow == 7 && indexHoleColumn == 1{
+                        if selectedHole?.name == gameBoard.goalPostBoxB.name{
+                            //jatuh di goalPost kita
+                            addKacang(parentNode: gameBoard.goalPostBoxB)
+                            indexHoleColumn = 0
+                            indexHoleRow = 0
+                            counterHand -= 1
+                            counterB += 1
+                            updateLabel(label: scoreBLabel, input: counterB)
+                            //print(counterB)
+                        }
+                    }else if indexHoleColumn == 0 && indexHoleRow == 6{
+                        if  selectedHole?.name == gameBoard.holeBox[indexHoleColumn][indexHoleRow].name{
+                            //berada di hole terakhir sbelum goalPost musuh, nextTarget hole kita (skip goalPost musuh)
+                            addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
+                            indexHoleColumn = 1
+                            indexHoleRow = 0
+                            counterHand -= 1
+                        }
+                    }else if indexHoleRow < 7{
+                        if selectedHole?.name == gameBoard.holeBox[indexHoleColumn][indexHoleRow].name{
+                            //default Run
+                            addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
+                            indexHoleRow += 1
+                            counterHand -= 1
+                        }
                     }
                 }
             }
             updateLabel(label: currentBeanInHandLabel, input: counterHand)
+            print("\(indexHoleColumn),\(indexHoleRow)")
         }
     }
     
@@ -428,12 +443,14 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                 counterA += 1
                 counterHand -= 1
             }
+            updateLabel(label: scoreALabel, input: counterA)
         }else if curPlayer == 2{
             while counterHand != 0 {
                 addKacang(parentNode: gameBoard.goalPostBoxB)
                 counterB += 1
                 counterHand -= 1
             }
+            updateLabel(label: scoreBLabel, input: counterB)
         }
     }
     
@@ -466,7 +483,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
     func takeBeanToHand(parentNode : SCNNode, currentPlayer : Int){
         for child in parentNode.childNodes{
-            print(child.name)
+            //print(child.name)
             if child.name == nil{
                 counterHand += 1
                 child.removeFromParentNode()
