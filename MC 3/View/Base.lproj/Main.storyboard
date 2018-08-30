@@ -334,6 +334,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XzZ-48-Rco">
+                                <rect key="frame" x="16" y="757" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
@@ -350,6 +357,7 @@
                     </view>
                     <connections>
                         <outlet property="backButtonOutlet" destination="hru-EZ-2aQ" id="elZ-kN-AXE"/>
+                        <outlet property="currentBeanInHandLabel" destination="XzZ-48-Rco" id="eHm-fT-TBk"/>
                         <outlet property="currentPlayerLabel" destination="Rmn-Qn-4CU" id="LOb-Eb-xWp"/>
                         <outlet property="lockButtonOutlet" destination="Bmh-kr-v40" id="qJy-p6-712"/>
                         <outlet property="sceneView" destination="F4c-IF-UuU" id="LFD-vX-JWq"/>

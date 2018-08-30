@@ -22,6 +22,8 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var currentPlayerLabel: UILabel!
     @IBOutlet weak var scoreBLabel: UILabel!
     @IBOutlet weak var scoreALabel: UILabel!
+    @IBOutlet weak var currentBeanInHandLabel: UILabel!
+    
     
     var worldMap : ARWorldMap!
     var worldMapData : Data!
@@ -52,6 +54,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     var indexHoleRow : Int = 0
     
     var currentPlayer : Int = 1
+    var curPlayerTime : Int = 0
     
     @IBAction func backButtonAction(_ sender: UIButton)
     {
@@ -96,6 +99,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         updateLabel(label: currentPlayerLabel, input: currentPlayer)
         updateLabel(label: scoreALabel, input: 0)
         updateLabel(label: scoreBLabel, input: 0)
+        updateLabel(label: currentBeanInHandLabel, input: 0)
         
         sceneView.scene.rootNode.addChildNode(lightNode)
         
@@ -254,6 +258,10 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             let selectedHole = chooseHoleToGetBean(location: location!)
             print(selectedHole?.name)
             
+            if indexHoleRow < 7{
+                print(gameBoard.holeBox[indexHoleColumn][indexHoleRow].name)
+            }
+            
             if counterHand == 0 {
                 freeWillPick(parentNode: selectedHole!, currentPlayer: currentPlayer)
             }else if counterHand == 1{
@@ -276,13 +284,26 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                     }else if selectedHole?.name == gameBoard.holeBox[indexHoleColumn][indexHoleRow].name && indexHoleRow < 7{
                         if checkIfEmpty(parentNode: selectedHole!) == false{
                              //jatuh di tempat sendiri, gak kosong
+                            print("masuk SINI WOYY")
                             addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
                             takeBeanToHand(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], currentPlayer: currentPlayer)
-                            indexHoleColumn = 1
-                            indexHoleRow = 0
+                            
+                            indexHoleRow += 1
                             counterHand -= 1
+                            
+                            if selectedHole?.name == gameBoard.holeBox[1][6].name{
+                                indexHoleColumn = 0
+                                indexHoleRow = 0
+                            }
+                            
+                            
+                            
                         }else{
                             // TEMBAKKK
+                            addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
+                            takeBeanToHand(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], currentPlayer: currentPlayer)
+                            indexHoleRow += 1
+                            counterHand -= 1
                         }
                     }
                 }else{
@@ -292,9 +313,14 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                             //gak Kosong
                             addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
                             takeBeanToHand(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], currentPlayer: currentPlayer)
-                            indexHoleColumn = 1
-                            indexHoleRow = 0
+                            indexHoleRow += 1
                             counterHand -= 1
+                            
+                            if selectedHole?.name == gameBoard.holeBox[0][6].name{
+                                indexHoleColumn = 1
+                                indexHoleRow = 0
+                            }
+                            
                         }else{
                             addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
                             counterHand -= 1
@@ -350,6 +376,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                     }
                 }
             }
+            updateLabel(label: currentBeanInHandLabel, input: counterHand)
         }
     }
     
