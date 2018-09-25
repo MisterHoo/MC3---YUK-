@@ -13,19 +13,26 @@ import ARKit
 class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
     //var view score
-    @IBOutlet weak var viewScore: UIView!
+    
+    //@IBOutlet weak var viewScore: UIView!
     
     //var layouting
     @IBOutlet weak var backButtonOutlet: UIButton!
-    @IBOutlet weak var lockButtonOutlet: UIButton!
+    //@IBOutlet weak var lockButtonOutlet: UIButton!
     
     //var ARKit & SceneKit
     @IBOutlet weak var sceneView: ARSCNView!
     
-    @IBOutlet weak var currentPlayerLabel: UILabel!
+    //@IBOutlet weak var currentPlayerLabel: UILabel!
+    
     @IBOutlet weak var scoreBLabel: UILabel!
     @IBOutlet weak var scoreALabel: UILabel!
     @IBOutlet weak var currentBeanInHandLabel: UILabel!
+    
+    //player now
+    @IBOutlet weak var currPlayer: UIImageView!
+    @IBOutlet weak var nextPlayer: UIImageView!
+    
     
     
     var worldMap : ARWorldMap!
@@ -69,25 +76,25 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     }
     
     
-    @IBAction func lockButtonAction(_ sender: UIButton)
-    {
-        if lockButtonOutlet.currentImage == UIImage(named: "Unlocked")
-        {
-            lockButtonOutlet.setImage(UIImage(named: "Locked"), for: .normal)
-        }else{
-            lockButtonOutlet.setImage(UIImage(named: "Unlocked"), for: .normal)
-        }
-    }
+//    @IBAction func lockButtonAction(_ sender: UIButton)
+//    {
+//        if lockButtonOutlet.currentImage == UIImage(named: "Unlocked")
+//        {
+//            lockButtonOutlet.setImage(UIImage(named: "Locked"), for: .normal)
+//        }else{
+//            lockButtonOutlet.setImage(UIImage(named: "Unlocked"), for: .normal)
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewScore.layer.cornerRadius = 5
-        viewScore.layer.masksToBounds = true
+//        viewScore.layer.cornerRadius = 5
+//        viewScore.layer.masksToBounds = true
         
         multiPeer = (UIApplication.shared.delegate as! AppDelegate).multiPeer
 
-        lockButtonOutlet.setImage(UIImage(named: "Unlocked"), for: .normal)
+//        lockButtonOutlet.setImage(UIImage(named: "Unlocked"), for: .normal)
         //delegate sceneView
         sceneView.delegate = self
         
@@ -103,7 +110,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         lightNode.light = sceneLight
         lightNode.position = SCNVector3(0, 10, 2)
         
-        updateLabel(label: currentPlayerLabel, input: currentPlayer)
+//        updateLabel(label: currentPlayerLabel, input: currentPlayer)
         updateLabel(label: scoreALabel, input: 0)
         updateLabel(label: scoreBLabel, input: 0)
         updateLabel(label: currentBeanInHandLabel, input: 0)
@@ -328,10 +335,12 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                                     
                                     if currentPlayer == 1{
                                         currentPlayer = 2
-                                        updateLabel(label: currentPlayerLabel, input: currentPlayer)
+//                                        updateLabel(label: currentPlayerLabel, input: currentPlayer)
+                                        currPlayer.image = UIImage(named: "Slice 2")
                                     }else{
                                         currentPlayer = 1
-                                        updateLabel(label: currentPlayerLabel, input: currentPlayer)
+//                                        updateLabel(label: currentPlayerLabel, input: currentPlayer)
+                                        currPlayer.image = UIImage(named: "P2")
                                     }
                                 }
                             }
@@ -359,10 +368,12 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                                     counterHand -= 1
                                     if currentPlayer == 1{
                                         currentPlayer = 2
-                                        updateLabel(label: currentPlayerLabel, input: currentPlayer)
+//                                        updateLabel(label: currentPlayerLabel, input: currentPlayer)
+                                        currPlayer.image = UIImage(named: "P2")
                                     }else{
                                         currentPlayer = 1
-                                        updateLabel(label: currentPlayerLabel, input: currentPlayer)
+//                                        updateLabel(label: currentPlayerLabel, input: currentPlayer)
+                                        currPlayer.image = UIImage(named: "Slice 2")
                                 }
                             }
                         }
