@@ -110,21 +110,28 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         lightNode.light = sceneLight
         lightNode.position = SCNVector3(0, 10, 2)
         
+<<<<<<< HEAD
 //        updateLabel(label: currentPlayerLabel, input: currentPlayer)
+=======
+        sceneView.scene.rootNode.addChildNode(lightNode)
+        
+        //init label
+        updateLabel(label: currentPlayerLabel, input: currentPlayer)
+>>>>>>> da995deed26d9bd75e130321de986ef570c3f127
         updateLabel(label: scoreALabel, input: 0)
         updateLabel(label: scoreBLabel, input: 0)
         updateLabel(label: currentBeanInHandLabel, input: 0)
         
-        sceneView.scene.rootNode.addChildNode(lightNode)
         
-        
-//        var option = SCNDebugOptions.showPhysicsShapes
+        //debugOptions
+//        var option = SCNDebugOptions.showFeaturePoints
 //        sceneView.debugOptions = option
 
-        
+        //configure Tap Gesture
+        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(self.tapped(tapRecognizer:)))
+        sceneView.addGestureRecognizer(tapGesture)
         // Do any additional setup after loading the view.
-        
-
+    
 
     }
     func writeWorldMap(_ worldMap: ARWorldMap, to url: URL) throws {
@@ -172,7 +179,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         var node : SCNNode?
         
         if let planeAnchor = anchor as? ARPlaneAnchor{
-            if anchors.count == 0 && boardFlag == false{
+            if boardFlag == false{
                 node = SCNNode()
                 
                 
@@ -255,6 +262,9 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         material.diffuse.contentsTransform = SCNMatrix4MakeScale(Float(self.planeGeometry.width), Float(self.planeGeometry.height), 1)
     }
     
+<<<<<<< HEAD
+
+=======
     func updateLabel(label : UILabel, input : Int){
         label.text = String(input)
     }
@@ -263,6 +273,8 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
         let location = touch?.location(in: sceneView)
+        
+        print(location)
         
         //when board hasn't delploy
         if boardFlag == false {
@@ -501,27 +513,9 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             }
         }
     }
+>>>>>>> 5037edb7295ba5095c429afe79fa0a65d1787852
     
     
-    func addKacang(parentNode : SCNNode){
-        let kacang = KacangObject()
-        kacang.loadModel()
-        kacang.position = SCNVector3Make(0, 0, 0)
-        
-        parentNode.addChildNode(kacang)
-    }
-    
-    func chooseHoleToGetBean (location : CGPoint) -> SCNNode?{
-        //SCNHitTestOption -> coba diubah" dipelajari
-        //[.boundingBox : true]
-        let hitTestOptions : [SCNHitTestOption : Any] = [.categoryBitMask : 3]
-        let hitResults = sceneView.hitTest(location, options: hitTestOptions)
-        
-        return hitResults.lazy.compactMap { result in
-            guard let node = result.node.parent as? SCNNode else {return nil}
-            return node
-        }.first
-    }
     
     func addNodeAtLocation (location : CGPoint){
         guard anchors.count > 0 else{
@@ -533,9 +527,10 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         
         if hitResults.count > 0 && boardFlag == false{
             
+            let start = Date()
+            
             let result = hitResults.first!
             let newLocation = SCNVector3Make(result.worldTransform.columns.3.x,result.worldTransform.columns.3.y,result.worldTransform.columns.3.z)
-            
             
             
             //adding object
@@ -545,10 +540,13 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             
             gameBoard.loadModel()
             gameBoard.position = newLocation
-            
+            print(gameBoard.position)
+<<<<<<< HEAD
+=======
             
             
           
+>>>>>>> 5037edb7295ba5095c429afe79fa0a65d1787852
             //let gamePhysicsShape = SCNPhysicsShape(node: gameNode, options: SCNPhysicsShape.Option.type)
             
             
@@ -564,7 +562,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                         
                         kacang.position = SCNVector3Make(0, Float(k) * 0.01, 0)
 
-                        print(kacang.position)
+                        //print(kacang.position)
                         //gameNode.addChildNode(kacang)
                         gameBoard.holeBox[i][j].addChildNode(kacang)
                         
@@ -579,15 +577,20 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             for i in 0...1{
                 for j in 0...6{
                     let index = gameBoard.holeBox[i][j].childNodes
-                    print(index.count)
+                    //print(index.count)
                     for child in gameBoard.holeBox[i][j].childNodes{
-                        print(child.name)
-                        print(child.position)
+<<<<<<< HEAD
+                        //print(child.name)
+=======
+                       // print(child.name)
+>>>>>>> 5037edb7295ba5095c429afe79fa0a65d1787852
+                        //print(child.position)
                     }
                 }
             }
             
             sceneView.scene.rootNode.addChildNode(gameBoard)
+            
           
 
 
@@ -629,6 +632,9 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             let planeNode = sceneView.scene.rootNode.childNode(withName: "planeNode", recursively: true)
             planeNode?.removeFromParentNode()
             
+            let end = Date()
+            
+            print(end.timeIntervalSince(start))
             
         }
         
