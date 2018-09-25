@@ -117,8 +117,8 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
 //        sceneView.debugOptions = option
 
         //configure Tap Gesture
-//        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(self.tapped(tapRecognizer:)))
-//        sceneView.addGestureRecognizer(tapGesture)
+        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(self.tapped(tapRecognizer:)))
+        sceneView.addGestureRecognizer(tapGesture)
         // Do any additional setup after loading the view.
     
 
@@ -265,9 +265,10 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         
         if hitResults.count > 0 && boardFlag == false{
             
+            let start = Date()
+            
             let result = hitResults.first!
             let newLocation = SCNVector3Make(result.worldTransform.columns.3.x,result.worldTransform.columns.3.y,result.worldTransform.columns.3.z)
-            
             
             
             //adding object
@@ -316,7 +317,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                 }
             }
             
-            let anchor = anchors.first
+            sceneView.scene.rootNode.addChildNode(gameBoard)
             
           
 
@@ -359,6 +360,9 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             let planeNode = sceneView.scene.rootNode.childNode(withName: "planeNode", recursively: true)
             planeNode?.removeFromParentNode()
             
+            let end = Date()
+            
+            print(end.timeIntervalSince(start))
             
         }
         
