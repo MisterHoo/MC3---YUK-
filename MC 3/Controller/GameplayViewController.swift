@@ -257,6 +257,8 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         let touch = touches.first
         let location = touch?.location(in: sceneView)
         
+        print(location)
+        
         //when board hasn't delploy
         if boardFlag == false {
             addNodeAtLocation(location: location!)
@@ -534,7 +536,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             
             gameBoard.loadModel()
             gameBoard.position = newLocation
-            
+            print(gameBoard.position)
             
             
           
@@ -553,7 +555,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                         
                         kacang.position = SCNVector3Make(0, Float(k) * 0.01, 0)
 
-                        print(kacang.position)
+                        //print(kacang.position)
                         //gameNode.addChildNode(kacang)
                         gameBoard.holeBox[i][j].addChildNode(kacang)
                         
@@ -568,10 +570,10 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             for i in 0...1{
                 for j in 0...6{
                     let index = gameBoard.holeBox[i][j].childNodes
-                    print(index.count)
+                    //print(index.count)
                     for child in gameBoard.holeBox[i][j].childNodes{
-                        print(child.name)
-                        print(child.position)
+                       // print(child.name)
+                        //print(child.position)
                     }
                 }
             }
