@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6646260621523AC3000A9A84 /* GameplayVC + Gameplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6646260521523AC3000A9A84 /* GameplayVC + Gameplay.swift */; };
 		668399172133B6F800BDBC13 /* MPCHandeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668399162133B6F800BDBC13 /* MPCHandeler.swift */; };
 		6697A7972122E73200DA0814 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6697A7952122E73200DA0814 /* Main.storyboard */; };
 		6697A7992123D30B00DA0814 /* GameplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6697A7982123D30B00DA0814 /* GameplayViewController.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6646260521523AC3000A9A84 /* GameplayVC + Gameplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameplayVC + Gameplay.swift"; sourceTree = "<group>"; };
 		668399162133B6F800BDBC13 /* MPCHandeler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCHandeler.swift; sourceTree = "<group>"; };
 		6697A7962122E73200DA0814 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6697A7982123D30B00DA0814 /* GameplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameplayViewController.swift; path = "MC 3/Controller/GameplayViewController.swift"; sourceTree = SOURCE_ROOT; };
@@ -132,6 +134,7 @@
 				6697DB022122B32500E3EF32 /* ViewController.swift */,
 				66CB45B7212E9E0500A183AE /* GameManager.swift */,
 				6697A7982123D30B00DA0814 /* GameplayViewController.swift */,
+				6646260521523AC3000A9A84 /* GameplayVC + Gameplay.swift */,
 				CFD305B12123EE7A008B820B /* LobbyViewController.swift */,
 				6697DB002122B32500E3EF32 /* AppDelegate.swift */,
 			);
@@ -345,6 +348,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6646260621523AC3000A9A84 /* GameplayVC + Gameplay.swift in Sources */,
 				CDDA749C212AAC8A00A6B003 /* MultiPeerHandeler.swift in Sources */,
 				66CB45B8212E9E0500A183AE /* GameManager.swift in Sources */,
 				6697DB032122B32500E3EF32 /* ViewController.swift in Sources */,
@@ -532,14 +536,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DK7HPF3UVL;
+				DEVELOPMENT_TEAM = 3ZHR6JDHY4;
 				INFOPLIST_FILE = "MC 3/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "mrhoo.MC-3";
+				PRODUCT_BUNDLE_IDENTIFIER = mrhoo.YUK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -551,14 +555,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DK7HPF3UVL;
+				DEVELOPMENT_TEAM = 3ZHR6JDHY4;
 				INFOPLIST_FILE = "MC 3/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "mrhoo.MC-3";
+				PRODUCT_BUNDLE_IDENTIFIER = mrhoo.YUK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
