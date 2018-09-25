@@ -465,10 +465,10 @@ extension GameplayViewController {
     func changePlayer (){
         if currentPlayer == 1{
             currentPlayer = 2
-            updateLabel(label: currentPlayerLabel, input: currentPlayer)
+            //updateLabel(label: currentPlayerLabel, input: currentPlayer)
         }else{
             currentPlayer = 1
-            updateLabel(label: currentPlayerLabel, input: currentPlayer)
+            //updateLabel(label: currentPlayerLabel, input: currentPlayer)
         }
         highlightZeroInHand()
         turnPlayer.play()
