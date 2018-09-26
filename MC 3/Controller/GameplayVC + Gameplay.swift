@@ -101,16 +101,16 @@ extension GameplayViewController {
                                 heptic(style: .medium)
                                 takeBeanToHand(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], currentPlayer:     currentPlayer)
                                 indexHoleRow += 1
-                                if selectedHole!.name == gameBoard.holeBox[currentPlayer-1][6].name{
-                                    print("pernah masuk yang pertama")
+                                if indexHoleRow == 7{
                                     indexHoleRow = 0
                                     if currentPlayer == 1{
                                         indexHoleColumn = 1
+                                        updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.goalPostBoxA)
                                     }else {
                                         indexHoleColumn = 0
+                                        updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.goalPostBoxB)
                                     }
                                 }
-                                updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
                             }else{
                                 //Kosong, ganti Player
                                 addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
@@ -402,9 +402,7 @@ extension GameplayViewController {
     }
     
     func freeWillPick(parentNode : SCNNode, currentPlayer : Int){
-        for i in 0...6{
-            clearHighlight(parentNode: gameBoard.holeBox[currentPlayer-1][i])
-        }
+        var flag = false
         
         for j in 0...6{
             if parentNode.name == gameBoard.holeBox[currentPlayer-1][j].name{
@@ -413,14 +411,24 @@ extension GameplayViewController {
                 takeBeanToHand(parentNode: parentNode, currentPlayer: currentPlayer)
                 heptic(style: .heavy)
                 
-                if(indexHoleRow == 7){
-                    if indexHoleColumn == 0{
-                        updateNextHighlight(beforeNode: parentNode, nextNode: gameBoard.goalPostBoxA)
-                    }else if indexHoleColumn == 1{
-                        updateNextHighlight(beforeNode: parentNode, nextNode: gameBoard.goalPostBoxB)
+                flag = true
+                
+                if flag == true{
+                    for i in 0...6{
+                        clearHighlight(parentNode: gameBoard.holeBox[currentPlayer-1][i])
                     }
-                }else{
-                    updateNextHighlight(beforeNode: parentNode, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
+                    
+                    if(indexHoleRow == 7){
+                        if indexHoleColumn == 0{
+                            updateNextHighlight(beforeNode: parentNode, nextNode: gameBoard.goalPostBoxA)
+                        }else if indexHoleColumn == 1{
+                            updateNextHighlight(beforeNode: parentNode, nextNode: gameBoard.goalPostBoxB)
+                        }
+                    }else{
+                        updateNextHighlight(beforeNode: parentNode, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
+                    }
+                    
+                    break
                 }
             }
         }
