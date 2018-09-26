@@ -138,7 +138,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         
         
         //debugOptions
-//        var option = SCNDebugOptions.showFeaturePoints
+//        var option = SCNDebugOptions.showPhysicsShapes
 //        sceneView.debugOptions = option
 
         //configure Tap Gesture
