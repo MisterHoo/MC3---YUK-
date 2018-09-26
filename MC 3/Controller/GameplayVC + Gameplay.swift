@@ -170,6 +170,7 @@ extension GameplayViewController {
                     }
                 }else if currentPlayer == 2{
                     //player 2 turn
+                    switchPlayer()
                     if  indexHoleRow == 7 && indexHoleColumn == 1{
                         if selectedHole!.name == gameBoard.goalPostBoxB.name{
                             //jatuh di goalPost kita
