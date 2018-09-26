@@ -33,6 +33,8 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var currPlayer: UIImageView!
     @IBOutlet weak var nextPlayer: UIImageView!
     
+    @IBOutlet weak var player1: UIView!
+    @IBOutlet weak var player2: UIView!
     
     
     var worldMap : ARWorldMap!
