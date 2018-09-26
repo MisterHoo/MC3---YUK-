@@ -36,6 +36,9 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var player1: UIView!
     @IBOutlet weak var player2: UIView!
     
+    var currentPlayerPoss: CGPoint!
+    var nextPlayerPoss: CGPoint!
+    
     
     var worldMap : ARWorldMap!
     var worldMapData : Data!
@@ -93,6 +96,11 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("load")
+        print(player2.center)
+        print(player1.center)
+        currentPlayerPoss = player1.center
+        nextPlayerPoss = player2.center
         
 //        viewScore.layer.cornerRadius = 5
 //        viewScore.layer.masksToBounds = true

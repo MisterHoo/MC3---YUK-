@@ -15,12 +15,17 @@ extension GameplayViewController {
     
     func switchPlayer(){
         
-        
         if currentPlayer == 2 {
-            UIView.animate(withDuration: 2.0){
-                self.player1.center.x += 100
-                self.player2.center.x -= 100
+            let duration: Double = 1.0
+            UIView.animate(withDuration: duration){
+                self.player1.center = self.nextPlayerPoss
+                self.player2.center = self.currentPlayerPoss
             }
+        }else {
+            let duration: Double = 1.0
+            UIView.animate(withDuration: duration){
+                self.player1.center = self.currentPlayerPoss
+                self.player2.center = self.nextPlayerPoss
         }
     }
 }
