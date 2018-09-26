@@ -17,7 +17,7 @@ extension GameplayViewController {
     @objc func tapped (tapRecognizer : UITapGestureRecognizer){
         let location = tapRecognizer.location(in: sceneView)
         
-        print(location)
+        //print(location)
         //when board hasn't delploy
         if boardFlag == false {
             addNodeAtLocation(location: location)
@@ -39,7 +39,7 @@ extension GameplayViewController {
                 //ditangan kosong ambil terserah
                 freeWillPick(parentNode: selectedHole!, currentPlayer: currentPlayer)
                 if currentPlayer != enemyPlayer{
-                    print("masuk")
+                    //print("masuk")
                     curPlayerTime = 0
                     enemyPlayer = currentPlayer
                 }
@@ -62,11 +62,11 @@ extension GameplayViewController {
                                 takeBeanToHand(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], currentPlayer: currentPlayer)
                                 indexHoleRow += 1
                                 //temporary
-                                if(indexHoleRow == 7){
-                                    if indexHoleColumn == 1{
+                                if indexHoleRow == 7{
+                                    if indexHoleColumn == 0{
+                                        updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.goalPostBoxA)
+                                    }else if indexHoleColumn == 1{
                                         updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.goalPostBoxB)
-                                    }else if indexHoleColumn == 0{
-                                        updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.holeBox[1][0])
                                     }
                                 }else{
                                     updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
@@ -101,28 +101,28 @@ extension GameplayViewController {
                                 heptic(style: .medium)
                                 takeBeanToHand(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], currentPlayer:     currentPlayer)
                                 indexHoleRow += 1
+                                
                                 if indexHoleRow == 7{
                                     indexHoleRow = 0
-                                    if currentPlayer == 1{
+                                    if indexHoleColumn == 0{
                                         indexHoleColumn = 1
-                                        updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.goalPostBoxA)
-                                    }else {
+                                    }else if indexHoleColumn == 1{
                                         indexHoleColumn = 0
-                                        updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.goalPostBoxB)
                                     }
                                 }
+                                updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
                             }else{
                                 //Kosong, ganti Player
                                 addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
                                 heptic(style: .medium)
-                                changePlayer()
                                 clearHighlight(parentNode: selectedHole!)
+                                changePlayer()
+                                
                             }
                         }
                     }else if indexHoleRow == 7{
                         //next target lubang pertama tempat kita
                         if selectedHole!.name == gameBoard.holeBox[currentPlayer-1][0].name{
-                            print("pernah masuk yang kedua")
                             addKacang(parentNode: gameBoard.holeBox[currentPlayer-1][0])
                             heptic(style: .medium)
                             takeBeanToHand(parentNode: gameBoard.holeBox[currentPlayer-1][0], currentPlayer:currentPlayer)
@@ -196,6 +196,7 @@ extension GameplayViewController {
                             addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
                             heptic(style: .medium)
                             indexHoleRow += 1
+                            
                             if(indexHoleRow == 7){
                                 if indexHoleColumn == 1{
                                     updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.goalPostBoxB)
@@ -211,7 +212,7 @@ extension GameplayViewController {
             }
             }
             updateLabel(label: currentBeanInHandLabel, input: counterHand)
-            print("\(indexHoleColumn),\(indexHoleRow)")
+            //print("\(indexHoleColumn),\(indexHoleRow)")
         }
     }
     
@@ -411,7 +412,9 @@ extension GameplayViewController {
                 takeBeanToHand(parentNode: parentNode, currentPlayer: currentPlayer)
                 heptic(style: .heavy)
                 
-                flag = true
+                if counterHand != 0{
+                    flag = true
+                }
                 
                 if flag == true{
                     for i in 0...6{
@@ -456,6 +459,7 @@ extension GameplayViewController {
         }else {
             putSeed.play()
         }
+        
     }
     
     func chooseHoleToGetBean (location : CGPoint) -> SCNNode?{
@@ -478,6 +482,7 @@ extension GameplayViewController {
             currentPlayer = 1
             //updateLabel(label: currentPlayerLabel, input: currentPlayer)
         }
+        print(currentPlayer)
         highlightZeroInHand()
         turnPlayer.play()
     }
@@ -534,6 +539,7 @@ extension GameplayViewController {
         }else{
             clearHighlight(parentNode: beforeNode)
             nextNode.childNode(withName: "Highlight", recursively: false)?.isHidden = false
+            print(nextNode.name)
         }
     }
     
@@ -543,7 +549,9 @@ extension GameplayViewController {
     
     func highlightZeroInHand(){
         for i in 0...6{
-            gameBoard.holeBox[currentPlayer-1][i].childNode(withName: "Highlight", recursively: false)?.isHidden = false
+            if gameBoard.holeBox[currentPlayer-1][i].childNodes.count != 7{
+                gameBoard.holeBox[currentPlayer-1][i].childNode(withName: "Highlight", recursively: false)?.isHidden = false
+            }
         }
     }
     
