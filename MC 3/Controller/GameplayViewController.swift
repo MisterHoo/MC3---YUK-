@@ -299,8 +299,6 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                     for k in 1...7{
                         let kacang = KacangObject()
                         kacang.loadModel()
-                        //kacang.position = SCNVector3Make(gameBoard.position.x + gameBoard.holeNode[i][j].position.x, gameBoard.position.y + gameBoard.holeNode[i][j].position.y + Float(k) * 0.01, gameBoard.position.z + gameBoard.holeNode[i][j].position.z)
-                        
                         kacang.position = SCNVector3Make(0, Float(k) * 0.01, 0)
 
                         //print(kacang.position)
@@ -309,22 +307,14 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                         
                         //sceneView.scene.rootNode.addChildNode(kacang)
                     }
-                   
+                    gameBoard.holeBox[i][j].childNode(withName: "Highlight", recursively: false)?.isHidden = true
 //                    gameNode.addChildNode(gameBoard.holeNode[i][j])
 //                    gameNode.addChildNode(gameBoard.holeBox[i][j])
                 }
             }
             
-            for i in 0...1{
-                for j in 0...6{
-                    let index = gameBoard.holeBox[i][j].childNodes
-                    //print(index.count)
-                    for child in gameBoard.holeBox[i][j].childNodes{
-
-                        //print(child.position)
-                    }
-                }
-            }
+            gameBoard.goalPostBoxA.childNode(withName: "Highlight", recursively: false)?.isHidden = true
+            gameBoard.goalPostBoxB.childNode(withName: "Highlight", recursively: false)?.isHidden = true
             
             sceneView.scene.rootNode.addChildNode(gameBoard)
             
