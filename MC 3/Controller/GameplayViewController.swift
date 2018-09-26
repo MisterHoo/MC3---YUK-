@@ -36,6 +36,9 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var player1: UIView!
     @IBOutlet weak var player2: UIView!
     
+    
+    @IBOutlet weak var changePlayerNotif: UIImageView!
+    
     var currentPlayerPoss: CGPoint!
     var nextPlayerPoss: CGPoint!
     
