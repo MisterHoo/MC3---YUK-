@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.15" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -287,7 +286,7 @@
                                     <constraint firstAttribute="height" constant="55" id="WRa-7t-OdY"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="gSM-pw-MQO" userLabel="CurrentPlayer">
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="gSM-pw-MQO" userLabel="Player1">
                                 <rect key="frame" x="279" y="44" width="80" height="110"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Slice 2" translatesAutoresizingMaskIntoConstraints="NO" id="d0t-ua-QsP">
@@ -316,10 +315,10 @@
                                 <rect key="frame" x="279" y="135" width="80" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <view contentMode="scaleAspectFit" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cog-Kn-YI7" userLabel="CurrentPlayer">
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="cog-Kn-YI7" userLabel="Player2">
                                 <rect key="frame" x="16" y="668" width="80" height="110"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="P2 " translatesAutoresizingMaskIntoConstraints="NO" id="88v-cR-2mw">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="P2 " translatesAutoresizingMaskIntoConstraints="NO" id="88v-cR-2mw">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="110"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="110" id="OT1-0a-AlK"/>
@@ -351,6 +350,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="cog-Kn-YI7" firstAttribute="bottom" secondItem="FOD-Le-I73" secondAttribute="bottom" id="6f1-Hr-2zV"/>
                             <constraint firstItem="F4c-IF-UuU" firstAttribute="top" secondItem="E5i-0k-DhP" secondAttribute="top" id="AW6-6A-rkw"/>
                             <constraint firstItem="rEy-G5-UVk" firstAttribute="top" secondItem="FOD-Le-I73" secondAttribute="top" id="HnQ-KU-Uza"/>
                             <constraint firstItem="rEy-G5-UVk" firstAttribute="leading" secondItem="FOD-Le-I73" secondAttribute="leading" constant="16" id="Jqd-MV-lNE"/>
@@ -361,6 +361,7 @@
                             <constraint firstItem="cog-Kn-YI7" firstAttribute="leading" secondItem="rEy-G5-UVk" secondAttribute="leading" id="akV-e6-tPk"/>
                             <constraint firstItem="gSM-pw-MQO" firstAttribute="trailing" secondItem="E5i-0k-DhP" secondAttribute="trailingMargin" id="e6O-tN-fKR"/>
                             <constraint firstItem="gSM-pw-MQO" firstAttribute="top" secondItem="FOD-Le-I73" secondAttribute="top" id="gVl-px-JJC"/>
+                            <constraint firstItem="FOD-Le-I73" firstAttribute="trailing" secondItem="cog-Kn-YI7" secondAttribute="trailing" constant="279" id="gZQ-Yg-udA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FOD-Le-I73"/>
                     </view>
@@ -369,6 +370,8 @@
                         <outlet property="currPlayer" destination="d0t-ua-QsP" id="KEd-AT-0pH"/>
                         <outlet property="currentBeanInHandLabel" destination="cjh-ky-9z7" id="55p-17-Bk9"/>
                         <outlet property="nextPlayer" destination="88v-cR-2mw" id="rmf-5a-XOl"/>
+                        <outlet property="player1" destination="gSM-pw-MQO" id="9LU-1U-5NS"/>
+                        <outlet property="player2" destination="cog-Kn-YI7" id="gOs-Kx-1Hr"/>
                         <outlet property="sceneView" destination="F4c-IF-UuU" id="LFD-vX-JWq"/>
                         <outlet property="scoreALabel" destination="l7z-Wt-oK1" id="Xa8-oa-sOA"/>
                         <outlet property="scoreBLabel" destination="bCX-Rq-kBX" id="Vi2-rr-NJe"/>
@@ -386,12 +389,12 @@
         <image name="MainButton" width="562" height="385"/>
         <image name="P2 " width="800" height="1100"/>
         <image name="Sisa" width="800" height="650"/>
-        <image name="Slice 2" width="266" height="366"/>
+        <image name="Slice 2" width="800" height="1100"/>
         <image name="TombolIkutBatal" width="1000" height="486"/>
         <image name="TombolKembali" width="1135" height="712"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jSL-cw-N1a"/>
+        <segue reference="8Xt-dR-TY0"/>
         <segue reference="EUE-q9-ch9"/>
     </inferredMetricsTieBreakers>
 </document>
