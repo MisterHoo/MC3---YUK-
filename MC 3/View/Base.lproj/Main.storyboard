@@ -17,93 +17,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="bI0-do-zpe">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Main Menu Congklak" translatesAutoresizingMaskIntoConstraints="NO" id="bI0-do-zpe">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wlz-qq-iNF">
-                                <rect key="frame" x="28.333333333333343" y="94" width="318.33333333333326" height="557"/>
-                            </scrollView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Tsi-RL-6Xk">
-                                <rect key="frame" x="168" y="614" width="39" height="37"/>
-                            </pageControl>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mZe-sZ-sbW">
-                                <rect key="frame" x="27.666666666666657" y="54" width="318.33333333333337" height="30"/>
-                                <color key="backgroundColor" red="0.85445748730000004" green="0.85445748730000004" blue="0.85445748730000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-HeavyItalic" family="Avenir Next" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
-                            </textField>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="cT8-Pg-Uqr">
-                                <rect key="frame" x="50" y="681" width="275" height="77"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oqZ-0U-emi">
-                                        <rect key="frame" x="0.0" y="0.0" width="120" height="77"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-HeavyItalic" family="Avenir Next" pointSize="27"/>
-                                        <size key="titleShadowOffset" width="1" height="2"/>
-                                        <state key="normal" backgroundImage="IkutButton">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="ikutButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nOV-sY-Zgl"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hK9-DC-3r8">
-                                        <rect key="frame" x="155" y="0.0" width="120" height="77"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-HeavyItalic" family="Avenir Next" pointSize="28"/>
-                                        <size key="titleShadowOffset" width="1" height="2"/>
-                                        <state key="normal" backgroundImage="MainButton">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="mainButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S41-pG-3s6"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z2r-yE-Yf4">
+                                <rect key="frame" x="124" y="549" width="127" height="78"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="Button Main Congklak"/>
+                                <connections>
+                                    <action selector="mainButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="V9W-yM-vV4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.96470588235294119" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mZe-sZ-sbW" secondAttribute="trailing" constant="29" id="0em-cx-2cV"/>
                             <constraint firstAttribute="bottom" secondItem="bI0-do-zpe" secondAttribute="bottom" id="5zG-ul-9ej"/>
-                            <constraint firstItem="wlz-qq-iNF" firstAttribute="width" secondItem="mZe-sZ-sbW" secondAttribute="width" id="BaI-AO-jzb"/>
-                            <constraint firstItem="Tsi-RL-6Xk" firstAttribute="bottom" secondItem="wlz-qq-iNF" secondAttribute="bottom" id="Dkm-ox-EFs"/>
                             <constraint firstItem="bI0-do-zpe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Gt0-eb-VwU"/>
-                            <constraint firstItem="Tsi-RL-6Xk" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="ObX-sw-gNe"/>
-                            <constraint firstItem="wlz-qq-iNF" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Osq-FW-G2T"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="cT8-Pg-Uqr" secondAttribute="bottom" constant="20" id="PGH-pc-9Ec"/>
-                            <constraint firstItem="cT8-Pg-Uqr" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="QzS-BH-Wla"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="wlz-qq-iNF" secondAttribute="bottom" constant="127" id="U6z-MG-rYT"/>
-                            <constraint firstItem="cT8-Pg-Uqr" firstAttribute="top" secondItem="wlz-qq-iNF" secondAttribute="bottom" constant="30" id="VXA-Ka-4Ya"/>
-                            <constraint firstItem="mZe-sZ-sbW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="aRw-Zw-wvO"/>
                             <constraint firstAttribute="trailing" secondItem="bI0-do-zpe" secondAttribute="trailing" id="dKD-yd-IjV"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="leading" secondItem="cT8-Pg-Uqr" secondAttribute="leading" constant="-50" id="eL0-zz-jRN">
-                                <variation key="heightClass=regular-widthClass=regular" constant="-250"/>
-                            </constraint>
                             <constraint firstAttribute="top" secondItem="bI0-do-zpe" secondAttribute="top" id="exc-yC-TNB"/>
-                            <constraint firstItem="cT8-Pg-Uqr" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-50" id="jfH-Eb-jGM">
-                                <variation key="heightClass=regular-widthClass=regular" constant="-250"/>
-                            </constraint>
-                            <constraint firstItem="mZe-sZ-sbW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="27.5" id="pA6-WG-h0s"/>
-                            <constraint firstItem="wlz-qq-iNF" firstAttribute="top" secondItem="mZe-sZ-sbW" secondAttribute="bottom" constant="10" id="xx0-Op-R1u"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="ikutButtonOutlet" destination="oqZ-0U-emi" id="M6D-5s-6kb"/>
-                        <outlet property="mainButtonOutlet" destination="hK9-DC-3r8" id="dOj-5h-mEq"/>
-                        <outlet property="menuSlider" destination="Tsi-RL-6Xk" id="GBj-Hj-ema"/>
-                        <outlet property="pageControl" destination="Tsi-RL-6Xk" id="8Ua-ns-Ggc"/>
-                        <outlet property="scrollView" destination="wlz-qq-iNF" id="O10-PA-0Yg"/>
-                        <outlet property="usernameTextField" destination="mZe-sZ-sbW" id="rJU-qO-Neg"/>
-                        <segue destination="aCb-XS-yaH" kind="show" identifier="menuToLobby" id="n5h-yG-11E"/>
-                        <segue destination="oHS-1f-FFs" kind="show" identifier="menuToGame" id="8Xt-dR-TY0"/>
+                        <segue destination="oHS-1f-FFs" kind="show" identifier="menuToGame" id="jtD-Xf-w9m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="108" y="179.46026986506749"/>
+            <point key="canvasLocation" x="108" y="178.81773399014779"/>
         </scene>
         <!--Lobby View Controller-->
         <scene sceneID="gxk-T3-vV6">
@@ -240,7 +181,6 @@
                         <outlet property="ikutButtonOutlet" destination="KZh-dZ-vXe" id="tp2-i2-tLr"/>
                         <outlet property="menuCollectionView" destination="pfS-Mj-ISO" id="Pyt-aJ-54O"/>
                         <outlet property="titleLabel" destination="NhH-qA-KL8" id="mce-Z7-kgR"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="lobbyToMenu" id="hYt-uy-QJZ"/>
                         <segue destination="oHS-1f-FFs" kind="show" identifier="lobbyToGame" id="jSL-cw-N1a"/>
                     </connections>
                 </viewController>
@@ -293,7 +233,7 @@
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="gSM-pw-MQO" userLabel="Player1">
                                 <rect key="frame" x="279" y="44" width="80" height="110"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Slice 2" translatesAutoresizingMaskIntoConstraints="NO" id="d0t-ua-QsP">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="P1 Poin" translatesAutoresizingMaskIntoConstraints="NO" id="d0t-ua-QsP">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="110"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="2Dx-9j-PrP"/>
@@ -334,7 +274,7 @@
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="cog-Kn-YI7" userLabel="Player2">
                                 <rect key="frame" x="16" y="668" width="80" height="110"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="P2 " translatesAutoresizingMaskIntoConstraints="NO" id="88v-cR-2mw">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="P2 Poin" translatesAutoresizingMaskIntoConstraints="NO" id="88v-cR-2mw">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="110"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="110" id="OT1-0a-AlK"/>
@@ -403,7 +343,7 @@
                         <outlet property="scoreALabel" destination="l7z-Wt-oK1" id="Xa8-oa-sOA"/>
                         <outlet property="scoreBLabel" destination="bCX-Rq-kBX" id="Vi2-rr-NJe"/>
                         <outlet property="statusLabel" destination="DYC-mO-0JL" id="e41-lq-RbF"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="gameToMenu" id="EUE-q9-ch9"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="gameToMenu" id="lH0-yP-MAx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R4J-X9-M1p" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -413,17 +353,16 @@
     </scenes>
     <resources>
         <image name="Background" width="375" height="812"/>
+        <image name="Button Main Congklak" width="485" height="300"/>
         <image name="GiliranP1" width="3230" height="680"/>
-        <image name="IkutButton" width="562" height="385"/>
         <image name="LogoX" width="600" height="600"/>
-        <image name="MainButton" width="562" height="385"/>
-        <image name="P2 " width="800" height="1100"/>
+        <image name="Main Menu Congklak" width="1500" height="3248"/>
+        <image name="P1 Poin" width="80" height="110"/>
+        <image name="P2 Poin" width="80" height="110"/>
         <image name="Sisa" width="800" height="650"/>
-        <image name="Slice 2" width="800" height="1100"/>
         <image name="TombolIkutBatal" width="1000" height="486"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jSL-cw-N1a"/>
-        <segue reference="EUE-q9-ch9"/>
+        <segue reference="jtD-Xf-w9m"/>
     </inferredMetricsTieBreakers>
 </document>
