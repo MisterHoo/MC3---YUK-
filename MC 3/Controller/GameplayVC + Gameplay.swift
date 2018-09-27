@@ -321,7 +321,7 @@ extension GameplayViewController {
     }
     
     func changePlayer (){
-        curPlayerTime == 0
+        curPlayerTime = 0
         if currentPlayer == 1{
             currentPlayer = 2
             //updateLabel(label: currentPlayerLabel, input: currentPlayer)

@@ -290,9 +290,8 @@
                                     <constraint firstAttribute="height" constant="55" id="WRa-7t-OdY"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gSM-pw-MQO" userLabel="Player1">
+                            <view contentMode="scaleAspectFit" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gSM-pw-MQO" userLabel="Player1">
                                 <rect key="frame" x="279" y="44" width="80" height="110"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Slice 2" translatesAutoresizingMaskIntoConstraints="NO" id="d0t-ua-QsP">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="110"/>
@@ -309,6 +308,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="d0t-ua-QsP" secondAttribute="trailing" id="iOh-1x-DuO"/>
+                                    <constraint firstItem="d0t-ua-QsP" firstAttribute="top" secondItem="gSM-pw-MQO" secondAttribute="top" id="qSc-55-dCw"/>
+                                </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Sisa" translatesAutoresizingMaskIntoConstraints="NO" id="X26-tF-veo">
                                 <rect key="frame" x="279" y="135" width="80" height="65"/>
@@ -321,9 +324,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cog-Kn-YI7" userLabel="Player2">
+                            <view contentMode="scaleAspectFit" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cog-Kn-YI7" userLabel="Player2">
                                 <rect key="frame" x="16" y="668" width="80" height="110"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="P2 " translatesAutoresizingMaskIntoConstraints="NO" id="88v-cR-2mw">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="110"/>
@@ -340,6 +342,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="88v-cR-2mw" firstAttribute="leading" secondItem="cog-Kn-YI7" secondAttribute="leading" id="sdA-NV-dt5"/>
+                                    <constraint firstAttribute="bottom" secondItem="88v-cR-2mw" secondAttribute="bottom" id="tN8-Fq-1sy"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
