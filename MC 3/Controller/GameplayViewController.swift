@@ -16,6 +16,9 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
     //@IBOutlet weak var viewScore: UIView!
     
+    //var status label
+    @IBOutlet weak var statusLabel: UILabel!
+    
     //var layouting
     @IBOutlet weak var backButtonOutlet: UIButton!
     //@IBOutlet weak var lockButtonOutlet: UIButton!
@@ -86,7 +89,6 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         
     }
     
-    
 //    @IBAction func lockButtonAction(_ sender: UIButton)
 //    {
 //        if lockButtonOutlet.currentImage == UIImage(named: "Unlocked")
@@ -104,6 +106,9 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         print(player1.center)
         currentPlayerPoss = player1.center
         nextPlayerPoss = player2.center
+        
+        statusLabel.layer.masksToBounds = true
+        statusLabel.layer.cornerRadius = 8
         
 //        viewScore.layer.cornerRadius = 5
 //        viewScore.layer.masksToBounds = true
@@ -155,7 +160,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        AppUtility.lockOrientation(.all)
+//        AppUtility.lockOrientation(.all)
         
 //        if multiPeer.session.connectedPeers.count != nil {
 //            print(multiPeer.session.connectedPeers.count)
