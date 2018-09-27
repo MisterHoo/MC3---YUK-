@@ -83,10 +83,27 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
     @IBAction func backButtonAction(_ sender: UIButton)
     {
+        createAlert(title: "Keluar dari game", message: "Anda yakin?")
         
-        performSegue(withIdentifier: "gameToMenu", sender: self)
         multiPeer.mcAdvertiserAssistant = nil
         
+    }
+    
+    func createAlert (title : String, message : String) {
+        let alert = UIAlertController (title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        
+        // Alert Button
+        alert.addAction(UIAlertAction(title: "Ya", style: UIAlertActionStyle.default, handler: { (action) in alert.dismiss(animated: true, completion: nil)
+            
+            self.performSegue(withIdentifier: "gameToMenu", sender: self)
+
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Batal", style: UIAlertActionStyle.cancel, handler: { (action) in alert.dismiss(animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    
     }
     
 //    @IBAction func lockButtonAction(_ sender: UIButton)
