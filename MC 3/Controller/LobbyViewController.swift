@@ -35,7 +35,7 @@ class LobbyViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        AppUtility.lockOrientation(.portrait)
+//        AppUtility.lockOrientation(.portrait)
         // Or to rotate and lock
         // AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
         

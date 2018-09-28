@@ -110,66 +110,66 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
         }
         //multiPeer.setupPeerId()
         multiPeer.setupPeerId()
-        usernameTextField.delegate = self
+//        usernameTextField.delegate = self
         
         imageArray = [UIImage(named: "AssetCongklak"),UIImage(named: "AssetGundu"),UIImage(named: "AssetGasing")] as! [UIImage]
         
-        print(scrollView.frame.width)
-        print(scrollView.frame.height)
-        
-        for i in 0..<imageArray.count
-        {
-            let imageView = UIImageView()
-            imageView.image = imageArray[i]
-            let xPosition = self.scrollView.frame.width * CGFloat(i)
-            print("\(xPosition)")
-            imageView.frame = CGRect(x: xPosition, y: 0, width: self.scrollView.bounds.width, height: self.scrollView.bounds.height)
-            imageView.contentMode = .scaleAspectFit
-            
-            imageView.translatesAutoresizingMaskIntoConstraints = true
-
-            scrollView.contentSize.width = scrollView.frame.width * CGFloat(i + 1)
-            
-            scrollView.addSubview(imageView)
-        }
-        self.scrollView.delegate = self
-       
-    }
+//        print(scrollView.frame.width)
+//        print(scrollView.frame.height)
+//
+//        for i in 0..<imageArray.count
+//        {
+//            let imageView = UIImageView()
+//            imageView.image = imageArray[i]
+//            let xPosition = self.scrollView.frame.width * CGFloat(i)
+//            print("\(xPosition)")
+//            imageView.frame = CGRect(x: xPosition, y: 0, width: self.scrollView.bounds.width, height: self.scrollView.bounds.height)
+//            imageView.contentMode = .scaleAspectFit
+//
+//            imageView.translatesAutoresizingMaskIntoConstraints = true
+//
+//            scrollView.contentSize.width = scrollView.frame.width * CGFloat(i + 1)
+//
+//            scrollView.addSubview(imageView)
+//        }
+//        self.scrollView.delegate = self
+//
+//    }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView)
-    {
-        let pageNumber = scrollView.contentOffset.x / scrollView.frame.size.width
-        pageControl.currentPage = Int(pageNumber)
-    }
-    
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView)
-    {
-        
-    }
-    
-    
+//    func scrollViewDidScroll(_ scrollView: UIScrollView)
+//    {
+//        let pageNumber = scrollView.contentOffset.x / scrollView.frame.size.width
+//        pageControl.currentPage = Int(pageNumber)
+//    }
+//
+//    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView)
+//    {
+//
+//    }
     
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        usernameTextField.resignFirstResponder()
-    }
     
-    override func viewDidAppear(_ animated: Bool) {
+    
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        usernameTextField.resignFirstResponder()
+//    }
+    
+        func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        AppUtility.lockOrientation(.portrait)
+//        AppUtility.lockOrientation(.portrait)
         // Or to rotate and lock
         // AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+        func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         // Don't forget to reset when view is being removed
     }
     
-    override func didReceiveMemoryWarning() {
+        func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 }
-
+}

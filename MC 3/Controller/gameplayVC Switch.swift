@@ -16,27 +16,37 @@ extension GameplayViewController {
     func switchPlayer(){
         if currentPlayer == 2 {
             changePlayerNotif.image = UIImage(named: "GilliranP2")
-            let duration: Double = 1.0
+            view.addSubview(changePlayerNotif)
+            let opacAnimation = opacityAnimation(startingOpacity: 0, endingOpacity: 1, Duration: 1)
+            changePlayerNotif.layer.add(opacAnimation, forKey: "opacity")
+            let duration: Double = 0
             UIView.animate(withDuration: duration){
-                self.changePlayerNotif.alpha = 1.0
                 self.player1.center = self.nextPlayerPoss
                 self.player2.center = self.currentPlayerPoss
             }
-            UIView.animate(withDuration: 1.0){
-                self.changePlayerNotif.alpha = 0
-            }
         }else {
             changePlayerNotif.image = UIImage(named: "GilliranP1")
-            let duration: Double = 1.0
+            view.addSubview(changePlayerNotif)
+            let opacAnimation = opacityAnimation(startingOpacity: 0, endingOpacity: 1, Duration: 1)
+            changePlayerNotif.layer.add(opacAnimation, forKey: "opacity")
+            let duration: Double = 0
             UIView.animate(withDuration: duration){
-                self.changePlayerNotif.alpha = 1.0
                 self.player1.center = self.currentPlayerPoss
                 self.player2.center = self.nextPlayerPoss
             }
-            UIView.animate(withDuration: 1.0){
-                self.changePlayerNotif.alpha = 0
-            }
         }
+        
+    }
+    func opacityAnimation(startingOpacity: CGFloat, endingOpacity: CGFloat, Duration: Double) -> CABasicAnimation
+    {
+        let opacAnim = CABasicAnimation(keyPath: "opacity")
+        opacAnim.fromValue = startingOpacity
+        opacAnim.toValue = endingOpacity
+        opacAnim.duration = Duration
+        opacAnim.autoreverses = true
+        opacAnim.repeatCount = Float.infinity
+        
+        return opacAnim
     }
 }
 

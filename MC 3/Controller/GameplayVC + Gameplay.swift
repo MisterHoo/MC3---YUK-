@@ -295,7 +295,9 @@ extension GameplayViewController {
     
     func changePlayer (){
         curPlayerTime = 0
-        switchPlayer()
+        DispatchQueue.main.async {
+            self.switchPlayer()
+        }
         if currentPlayer == 1{
             currentPlayer = 2
             //updateLabel(label: currentPlayerLabel, input: currentPlayer)

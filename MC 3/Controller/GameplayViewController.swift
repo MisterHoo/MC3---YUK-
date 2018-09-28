@@ -81,10 +81,31 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     @IBAction func backButtonAction(_ sender: UIButton)
     {
         
-        performSegue(withIdentifier: "gameToMenu", sender: self)
+        createAlert(title: "Keluar dari game", message: "Anda yakin?")
+        
         multiPeer.mcAdvertiserAssistant = nil
         
     }
+    
+    func createAlert (title : String, message : String) {
+        let alert = UIAlertController (title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        
+        // Alert Button
+        alert.addAction(UIAlertAction(title: "Ya", style: UIAlertActionStyle.default, handler: { (action) in alert.dismiss(animated: true, completion: nil)
+            
+            self.performSegue(withIdentifier: "gameToMenu", sender: self)
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Batal", style: UIAlertActionStyle.cancel, handler: { (action) in alert.dismiss(animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    
+    
+    
 //    @IBAction func lockButtonAction(_ sender: UIButton)
 //    {
 //        if lockButtonOutlet.currentImage == UIImage(named: "Unlocked")
@@ -153,7 +174,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        AppUtility.lockOrientation(.all)
+        //AppUtility.lockOrientation(.all)
         
 //        if multiPeer.session.connectedPeers.count != nil {
 //            print(multiPeer.session.connectedPeers.count)
