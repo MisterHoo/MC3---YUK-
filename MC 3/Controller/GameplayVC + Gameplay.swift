@@ -26,7 +26,7 @@ extension GameplayViewController {
             //when board already deployed
             let selectedHole = chooseHoleToGetBean(location: location)
             
-            if (selectedHole != nil && isGameOver == false){
+            if (selectedHole != nil && isGameOver == false && isPaused == false){
                 if counterHand == 0 {
                     //ditangan kosong ambil terserah
                     freeWillPick(parentNode: selectedHole!, currentPlayer: currentPlayer)
@@ -483,6 +483,7 @@ extension GameplayViewController {
         let hapticFeedback = UINotificationFeedbackGenerator()
         hapticFeedback.notificationOccurred(.success)
         isGameOver = false
+        isPaused = false
         highlightZeroInHand()
         setAudioPutSeed()
         setAudioTurnChange()

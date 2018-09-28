@@ -78,9 +78,13 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     var enemyPlayer : Int = 1
     var curPlayerTime : Int = 0
     var isGameOver : Bool = false
+    var isPaused : Bool = false
     
     var turnPlayer = AVAudioPlayer()
     var putSeed = AVAudioPlayer()
+    
+    var timer = Timer()
+    let animateTime: Double = 2
     
     @IBAction func backButtonAction(_ sender: UIButton)
     {
