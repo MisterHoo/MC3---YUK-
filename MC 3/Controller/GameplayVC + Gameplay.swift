@@ -323,6 +323,10 @@ extension GameplayViewController {
         label.text = String(input)
     }
     
+    func updateStringLabel(label : UILabel, input : String){
+        label.text = input
+    }
+    
     func addToGoalPost(selectedHole : SCNNode){
         if currentPlayer == 1 && selectedHole.name == gameBoard.goalPostBoxA.name{
             //Goal Post player 1
@@ -469,12 +473,19 @@ extension GameplayViewController {
     
             if counterA > counterB{
                 //Player 1 Win
-                
+                DispatchQueue.main.async {
+                    self.updateStringLabel(label: self.statusLabel, input: "Player 1 Win")
+                }
             }else if counterB > counterA{
                 //Player 2 Win
-                
+                DispatchQueue.main.async {
+                    self.updateStringLabel(label: self.statusLabel, input: "Player 2 Win")
+                }
             }else{
                 //Draw
+                DispatchQueue.main.async {
+                    self.updateStringLabel(label: self.statusLabel, input: "Draw")
+                }
             }
         }
     }
