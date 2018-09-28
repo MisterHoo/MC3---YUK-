@@ -12,6 +12,7 @@ import ARKit
 
 class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
+     // Test for Mr HOO
     //var view score
     
     //@IBOutlet weak var viewScore: UIView!
