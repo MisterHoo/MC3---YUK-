@@ -12,13 +12,14 @@ import SceneKit
 import AVFoundation
 
 extension GameplayViewController {
-    
-    func switchPlayer(){
+        func switchPlayer(){
         if currentPlayer == 2 {
             changePlayerNotif.image = UIImage(named: "GiliranP2")
             view.addSubview(changePlayerNotif)
-            let opacAnimation = opacityAnimation(startingOpacity: 0, endingOpacity: 1, Duration: 2)
+            let opacAnimation = opacityAnimation(startingOpacity: 0.1, endingOpacity: 1, Duration: animateTime)
             changePlayerNotif.layer.add(opacAnimation, forKey: "opacity")
+            opacTime()
+           
             let duration: Double = 0
             UIView.animate(withDuration: duration){
                 self.player1.center = self.nextPlayerPoss
@@ -27,9 +28,10 @@ extension GameplayViewController {
         }else {
             changePlayerNotif.image = UIImage(named: "GiliranP1")
             view.addSubview(changePlayerNotif)
-            let opacAnimation = opacityAnimation(startingOpacity: 0, endingOpacity: 1, Duration: 2)
+            let opacAnimation = opacityAnimation(startingOpacity: 0.1, endingOpacity: 1, Duration: animateTime)
             changePlayerNotif.layer.add(opacAnimation, forKey: "opacity")
-            //changePlayerNotif.isopaque
+            opacTime()
+            
             let duration: Double = 0
             UIView.animate(withDuration: duration){
                 self.player1.center = self.currentPlayerPoss
@@ -37,6 +39,13 @@ extension GameplayViewController {
             }
         }
         
+    }
+    func opacTime(){
+        isPaused = true
+        timer = Timer.scheduledTimer(timeInterval: (animateTime*2), target: self, selector: #selector(GameplayViewController.opacTimeF), userInfo: nil, repeats: false)
+    }
+    @objc func opacTimeF(){
+        isPaused = false
     }
     
     func opacityAnimation(startingOpacity: CGFloat, endingOpacity: CGFloat, Duration: Double) -> CABasicAnimation
