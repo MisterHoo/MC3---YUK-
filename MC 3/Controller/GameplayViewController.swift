@@ -82,6 +82,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
     var turnPlayer = AVAudioPlayer()
     var putSeed = AVAudioPlayer()
+    var getSeed = AVAudioPlayer()
     
     @IBAction func backButtonAction(_ sender: UIButton)
     {
@@ -156,13 +157,17 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         
         //init label
         //updateLabel(label: currentPlayerLabel, input: currentPlayer)
-        updateLabel(label: scoreALabel, input: 0)
-        updateLabel(label: scoreBLabel, input: 0)
-        updateLabel(label: currentBeanInHandLabel, input: 0)
+        DispatchQueue.main.async {
+            self.updateLabel(label: self.scoreALabel, input: 0)
+            self.updateLabel(label: self.scoreBLabel, input: 0)
+            self.updateLabel(label: self.currentBeanInHandLabel, input: 0)
+            self.updateStringLabel(label: self.statusLabel, input: "Cari dan deteksi bidang datar untuk meletakkan plane")
+        }
+       
         
         
         //debugOptions
-//        var option = SCNDebugOptions.showPhysicsShapes
+//        var option = SCNDebugOptions.showWorldOrigin
 //        sceneView.debugOptions = option
 
         //configure Tap Gesture
@@ -217,7 +222,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         var node : SCNNode?
         
         if let planeAnchor = anchor as? ARPlaneAnchor{
-            if boardFlag == false{
+            if boardFlag == false && anchors.isEmpty{
                 node = SCNNode()
                 
                 
@@ -262,7 +267,10 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             if anchors.contains(planeAnchor){
                 
                 if node.childNodes.count > 0 && boardFlag == false{
-                    
+                    DispatchQueue.main.async {
+                        //papan plane sudah ada
+                        self.updateStringLabel(label: self.statusLabel, input: "Ketuk plane untuk meletakkan papan congklak")
+                    }
                     let planeNode = node.childNodes.first!
                     planeNode.position = SCNVector3(planeAnchor.center.x, 0, planeAnchor.center.z)
                     
@@ -349,6 +357,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             gameBoard.goalPostBoxB.childNode(withName: "Highlight", recursively: false)?.isHidden = true
             
             sceneView.scene.rootNode.addChildNode(gameBoard)
+            initGame()
            
             //convert World Map to Data
             getCurrentWorldMapData { (data, error) in

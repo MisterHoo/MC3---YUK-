@@ -21,11 +21,9 @@ extension GameplayViewController {
         //when board hasn't delploy
         if boardFlag == false {
             addNodeAtLocation(location: location)
-            initGame()
         }else{
             //when board already deployed
             let selectedHole = chooseHoleToGetBean(location: location)
-            
             if (selectedHole != nil && isGameOver == false){
                 if counterHand == 0 {
                     //ditangan kosong ambil terserah
@@ -68,7 +66,7 @@ extension GameplayViewController {
                                             tembak(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], indexEnemyColumn: enemyHoleColumn, curPlayer: currentPlayer)
                                         }
                                         clearHighlight(parentNode: selectedHole!)
-                                        changePlayer()
+                                        changePlayer(isFromTembak: true)
                                     }
                                 }
                             }
@@ -96,7 +94,7 @@ extension GameplayViewController {
                                     //Kosong, ganti Player
                                     addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], style: .light)
                                     clearHighlight(parentNode: selectedHole!)
-                                    changePlayer()
+                                    changePlayer(isFromTembak: false)
                                 }
                             }
                         }else if indexHoleRow == 7{
@@ -199,7 +197,7 @@ extension GameplayViewController {
                 counterA += 1
             }
             DispatchQueue.main.async {
-                 self.updateLabel(label: self.scoreALabel, input: self.counterA)
+                self.updateLabel(label: self.scoreALabel, input: self.counterA)
             }
         }else if curPlayer == 2{
             while counterHand != 0 {
@@ -209,6 +207,11 @@ extension GameplayViewController {
             DispatchQueue.main.async {
                 self.updateLabel(label: self.scoreBLabel, input: self.counterB)
             }
+        }
+        
+        DispatchQueue.main.async {
+            self.updateStringLabel(label: self.statusLabel, input: "Berhasil Tembak")
+            let timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.tungguGantiLabel), userInfo: nil, repeats: false)
         }
     }
     
@@ -255,7 +258,9 @@ extension GameplayViewController {
                     }else{
                         updateNextHighlight(beforeNode: parentNode, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
                     }
-                    
+                    DispatchQueue.main.async {
+                        self.updateStringLabel(label: self.statusLabel, input: "Biji berhasil diambil!\nLetakkan biji satu persatu sesuai urutan")
+                    }
                     break
                 }
             }
@@ -263,6 +268,7 @@ extension GameplayViewController {
     }
     
     func takeBeanToHand(parentNode : SCNNode, currentPlayer : Int){
+        getSeed.play()
         for child in parentNode.childNodes{
             //print(child.name)
             if child.name == nil{
@@ -275,6 +281,9 @@ extension GameplayViewController {
     
     func addKacang(parentNode : SCNNode, style : UIImpactFeedbackStyle){
         let kacang = KacangObject()
+        DispatchQueue.main.async {
+            self.updateStringLabel(label: self.statusLabel, input: "Letakkan biji satu persatu sesuai urutan")
+        }
         heptic(style: style)
         kacang.loadModel()
         kacang.position = SCNVector3Make(0, 0, 0)
@@ -285,6 +294,7 @@ extension GameplayViewController {
         }else {
             putSeed.play()
         }
+        
         
     }
     
@@ -300,11 +310,16 @@ extension GameplayViewController {
         }.first
     }
     
-    func changePlayer (){
+    func changePlayer (isFromTembak : Bool){
         curPlayerTime = 0
+      
         DispatchQueue.main.async {
             self.switchPlayer()
+            if isFromTembak == false{
+                self.updateStringLabel(label: self.statusLabel, input: "Giliran P\(self.currentPlayer)\nAmbil biji di lubang yang sudah ditandai")
+            }
         }
+
         
         checkGameOver()
         if currentPlayer == 1{
@@ -421,6 +436,15 @@ extension GameplayViewController {
         }
     }
     
+    func setAudioGetSeed(){
+        let musicFile = Bundle.main.path(forResource: "ambilBiji", ofType: ".mp3")
+        do{
+            try getSeed = AVAudioPlayer(contentsOf: URL(fileURLWithPath: musicFile!))
+        }catch {
+            print("audio error")
+        }
+    }
+    
     func checkOneSideEmpty() -> Bool{
         var counterPlayerA : Int = 0
         var counterPlayerB : Int = 0
@@ -470,21 +494,14 @@ extension GameplayViewController {
         if checkOneSideEmpty() == true{
             //make game cannot be played
             isGameOver = true
-    
-            if counterA > counterB{
-                //Player 1 Win
+            
+            if counterA != counterB{
                 DispatchQueue.main.async {
-                    self.updateStringLabel(label: self.statusLabel, input: "Player 1 Win")
-                }
-            }else if counterB > counterA{
-                //Player 2 Win
-                DispatchQueue.main.async {
-                    self.updateStringLabel(label: self.statusLabel, input: "Player 2 Win")
+                    self.updateStringLabel(label: self.statusLabel, input: "P\(self.currentPlayer) Menang")
                 }
             }else{
-                //Draw
                 DispatchQueue.main.async {
-                    self.updateStringLabel(label: self.statusLabel, input: "Draw")
+                    self.updateStringLabel(label: self.statusLabel, input: "Seri!")
                 }
             }
         }
@@ -494,8 +511,17 @@ extension GameplayViewController {
         let hapticFeedback = UINotificationFeedbackGenerator()
         hapticFeedback.notificationOccurred(.success)
         isGameOver = false
-        highlightZeroInHand()
         setAudioPutSeed()
         setAudioTurnChange()
+        setAudioGetSeed()
+        highlightZeroInHand()
+        DispatchQueue.main.async {
+            self.updateStringLabel(label: self.statusLabel, input: "Papan Congklak muncul!")
+            let timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.tungguGantiLabel), userInfo: nil, repeats: false)
+        }
+    }
+    
+    @objc func tungguGantiLabel(){
+        updateStringLabel(label: statusLabel, input: "Giliran P\(currentPlayer)\nAmbil biji di lubang yang sudah ditandai")
     }
 }
