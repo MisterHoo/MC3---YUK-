@@ -56,6 +56,7 @@ extension GameplayViewController {
                                 }else{
                                     // TEMBAKKK
                                     if curPlayerTime > 8 {
+                                        print(curPlayerTime)
                                         addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], style: .light)
                                         var enemyHoleColumn : Int = 0
                                         if indexHoleColumn == 1 {
@@ -181,7 +182,9 @@ extension GameplayViewController {
                     }
                 }
             }
-            updateLabel(label: currentBeanInHandLabel, input: counterHand)
+            DispatchQueue.main.async {
+                self.updateLabel(label: self.currentBeanInHandLabel, input: self.counterHand)
+            }
             print("\(counterHand),\(indexHoleColumn)|\(indexHoleRow)")
         }
     }
@@ -195,13 +198,17 @@ extension GameplayViewController {
                 addKacang(parentNode: gameBoard.goalPostBoxA, style: .heavy)
                 counterA += 1
             }
-            updateLabel(label: scoreALabel, input: counterA)
+            DispatchQueue.main.async {
+                 self.updateLabel(label: self.scoreALabel, input: self.counterA)
+            }
         }else if curPlayer == 2{
             while counterHand != 0 {
                 addKacang(parentNode: gameBoard.goalPostBoxB, style: .heavy)
                 counterB += 1
             }
-            updateLabel(label: scoreBLabel, input: counterB)
+            DispatchQueue.main.async {
+                self.updateLabel(label: self.scoreBLabel, input: self.counterB)
+            }
         }
     }
     
@@ -298,6 +305,8 @@ extension GameplayViewController {
         DispatchQueue.main.async {
             self.switchPlayer()
         }
+        
+        checkGameOver()
         if currentPlayer == 1{
             currentPlayer = 2
             //updateLabel(label: currentPlayerLabel, input: currentPlayer)
@@ -319,16 +328,22 @@ extension GameplayViewController {
             //Goal Post player 1
             addKacang(parentNode: gameBoard.goalPostBoxA, style: .heavy )
             counterA += 1
-            updateLabel(label: scoreALabel, input: counterA)
             clearHighlight(parentNode: selectedHole)
             highlightZeroInHand()
+            DispatchQueue.main.async {
+                self.updateLabel(label: self.scoreALabel, input: self.counterA)
+            }
+            
         }else if currentPlayer == 2 && selectedHole.name == gameBoard.goalPostBoxB.name{
             //Goal Post Player 2
             addKacang(parentNode: gameBoard.goalPostBoxB, style: .heavy )
             counterB += 1
-            updateLabel(label: scoreBLabel, input: counterB)
             clearHighlight(parentNode: selectedHole)
             highlightZeroInHand()
+            DispatchQueue.main.async {
+                self.updateLabel(label: self.scoreBLabel, input: self.counterB)
+            }
+            
         }
     }
     
@@ -337,7 +352,10 @@ extension GameplayViewController {
         indexHoleColumn = 1
         indexHoleRow = 0
         counterA += 1
-        updateLabel(label: scoreALabel, input: counterA)
+        DispatchQueue.main.async {
+            self.updateLabel(label: self.scoreALabel, input: self.counterA)
+        }
+        
     }
     
     func addToGoalPostB(parentNode : SCNNode){
@@ -345,7 +363,9 @@ extension GameplayViewController {
         indexHoleColumn = 0
         indexHoleRow = 0
         counterB += 1
-        updateLabel(label: scoreBLabel, input: counterB)
+        DispatchQueue.main.async {
+            self.updateLabel(label: self.scoreBLabel, input: self.counterB)
+        }
     }
     
     func heptic(style : UIImpactFeedbackStyle){
@@ -419,10 +439,9 @@ extension GameplayViewController {
                 addKacang(parentNode: gameBoard.goalPostBoxB, style: .heavy)
                 counterB += 1
             }
-            updateLabel(label: scoreBLabel, input: counterB)
-            
-            
-            
+            DispatchQueue.main.async {
+                self.updateLabel(label: self.scoreBLabel, input: self.counterB)
+            }
             return true
         }else if counterPlayerB == 7 {
             
@@ -434,8 +453,9 @@ extension GameplayViewController {
                 addKacang(parentNode: gameBoard.goalPostBoxA, style: .heavy)
                 counterA += 1
             }
-            updateLabel(label: scoreALabel, input: counterA)
-            
+            DispatchQueue.main.async {
+                self.updateLabel(label: self.scoreALabel, input: self.counterA)
+            }
             return true
         }else{
             return false

@@ -16,6 +16,10 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
     //@IBOutlet weak var viewScore: UIView!
     
+    //var status label
+    
+    @IBOutlet weak var statusLabel: UILabel!
+    
     //var layouting
     @IBOutlet weak var backButtonOutlet: UIButton!
     //@IBOutlet weak var lockButtonOutlet: UIButton!
