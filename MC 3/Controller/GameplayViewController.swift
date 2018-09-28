@@ -17,6 +17,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     //@IBOutlet weak var viewScore: UIView!
     
     //var status label
+    
     @IBOutlet weak var statusLabel: UILabel!
     
     //var layouting
@@ -44,7 +45,6 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
     var currentPlayerPoss: CGPoint!
     var nextPlayerPoss: CGPoint!
-    
     
     var worldMap : ARWorldMap!
     var worldMapData : Data!
@@ -77,12 +77,14 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     var currentPlayer : Int = 1
     var enemyPlayer : Int = 1
     var curPlayerTime : Int = 0
+    var isGameOver : Bool = false
     
     var turnPlayer = AVAudioPlayer()
     var putSeed = AVAudioPlayer()
     
     @IBAction func backButtonAction(_ sender: UIButton)
     {
+        
         createAlert(title: "Keluar dari game", message: "Anda yakin?")
         
         multiPeer.mcAdvertiserAssistant = nil
@@ -96,15 +98,17 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         alert.addAction(UIAlertAction(title: "Ya", style: UIAlertActionStyle.default, handler: { (action) in alert.dismiss(animated: true, completion: nil)
             
             self.performSegue(withIdentifier: "gameToMenu", sender: self)
-
+            
         }))
         
         alert.addAction(UIAlertAction(title: "Batal", style: UIAlertActionStyle.cancel, handler: { (action) in alert.dismiss(animated: true, completion: nil)
         }))
         
         self.present(alert, animated: true, completion: nil)
-    
+        
     }
+    
+    
     
 //    @IBAction func lockButtonAction(_ sender: UIButton)
 //    {
@@ -123,9 +127,6 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         print(player1.center)
         currentPlayerPoss = player1.center
         nextPlayerPoss = player2.center
-        
-        statusLabel.layer.masksToBounds = true
-        statusLabel.layer.cornerRadius = 8
         
 //        viewScore.layer.cornerRadius = 5
 //        viewScore.layer.masksToBounds = true
@@ -177,7 +178,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        AppUtility.lockOrientation(.all)
+        //AppUtility.lockOrientation(.all)
         
 //        if multiPeer.session.connectedPeers.count != nil {
 //            print(multiPeer.session.connectedPeers.count)
@@ -233,8 +234,6 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                 if planeAnchor.extent.z >= 0.3{
                     height = 0.3
                 }
-                
-                
                 planeGeometry = SCNPlane(width: width, height: height)
                 
                 planeGeometry.firstMaterial?.diffuse.contents = UIColor.white.withAlphaComponent(0.4)
@@ -281,8 +280,6 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                         if planeAnchor.extent.z >= 0.5{
                             height = 0.5
                         }
-                        
-                        
                         plane.width = width
                         plane.height = height
                         updateMaterial()
@@ -328,7 +325,6 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             
             //Kacang
             
-            
             for i in 0...1{
                 for j in 0...6{
                     for k in 1...7{
@@ -352,33 +348,6 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             gameBoard.goalPostBoxB.childNode(withName: "Highlight", recursively: false)?.isHidden = true
             
             sceneView.scene.rootNode.addChildNode(gameBoard)
-            
-          
-
-
-//            gameNode.addChildNode(gameBoard.goalPostBoxA)
-//            gameNode.addChildNode(gameBoard.goalPostBoxB)
-//
-//            gameNode.addChildNode(gameBoard.goalPostHoleA)
-//            gameNode.addChildNode(gameBoard.goalPostHoleB)
-            
-//
-//            for holeBoxColl in gameBoard.holeBox{
-//                for holeNode in holeBoxColl{
-//                    for i in 1...7{
-//                        let kacang = KacangObject()
-//                        kacang.loadModel()
-//                        kacang.position = SCNVector3Make(gameBoard.position.x + holeNode.position.x, gameBoard.position.y + holeNode.position.y, gameBoard.position.z + holeNode.position.z)
-//
-//                        //holeNode.addChildNode(kacang)
-//                        gameNode.addChildNode(kacang)
-//
-//                    }
-//                }
-//            }
-//            gameNode.addChildNode(gameBoard)
-//            sceneView.scene.rootNode.addChildNode(gameNode)
-            
            
             //convert World Map to Data
             getCurrentWorldMapData { (data, error) in
