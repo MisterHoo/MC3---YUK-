@@ -411,7 +411,6 @@ extension GameplayViewController {
     }
     
     func highlightZeroInHand(){
-        checkGameOver()
         if isGameOver == true {
             for i in 0...6{
                 if gameBoard.holeBox[currentPlayer-1][i].childNodes.count != 7{
@@ -419,6 +418,7 @@ extension GameplayViewController {
                 }
             }
         }
+        checkGameOver()
     }
     
     func setAudioTurnChange(){
