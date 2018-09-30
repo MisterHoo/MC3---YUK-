@@ -68,6 +68,10 @@ extension GameplayViewController {
                                         }
                                         clearHighlight(parentNode: selectedHole!)
                                         changePlayer(isFromTembak: true)
+                                    }else{
+                                        addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], style: .light)
+                                        clearHighlight(parentNode: selectedHole!)
+                                        changePlayer(isFromTembak: false)
                                     }
                                 }
                             }
@@ -320,7 +324,6 @@ extension GameplayViewController {
                 self.updateStringLabel(label: self.statusLabel, input: "Giliran P\(self.currentPlayer)\nAmbil biji di lubang yang sudah ditandai")
             }
         }
-        checkGameOver()
         if currentPlayer == 1{
             currentPlayer = 2
             //updateLabel(label: currentPlayerLabel, input: currentPlayer)
@@ -408,9 +411,12 @@ extension GameplayViewController {
     }
     
     func highlightZeroInHand(){
-        for i in 0...6{
-            if gameBoard.holeBox[currentPlayer-1][i].childNodes.count != 7{
-                gameBoard.holeBox[currentPlayer-1][i].childNode(withName: "Highlight", recursively: false)?.isHidden = false
+        checkGameOver()
+        if isGameOver == true {
+            for i in 0...6{
+                if gameBoard.holeBox[currentPlayer-1][i].childNodes.count != 7{
+                    gameBoard.holeBox[currentPlayer-1][i].childNode(withName: "Highlight", recursively: false)?.isHidden = false
+                }
             }
         }
     }
