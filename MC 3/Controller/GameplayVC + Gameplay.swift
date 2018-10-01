@@ -411,14 +411,14 @@ extension GameplayViewController {
     }
     
     func highlightZeroInHand(){
-        if isGameOver == true {
+        checkGameOver()
+        if isGameOver == false {
             for i in 0...6{
                 if gameBoard.holeBox[currentPlayer-1][i].childNodes.count != 7{
                     gameBoard.holeBox[currentPlayer-1][i].childNode(withName: "Highlight", recursively: false)?.isHidden = false
                 }
             }
         }
-        checkGameOver()
     }
     
     func setAudioTurnChange(){
