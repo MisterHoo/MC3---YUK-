@@ -64,9 +64,9 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
     var multiPeer : MPCHandeler!
     
-    let gameNode = SCNNode()
-    let gameBoard = GameBoard()
-    
+    var gameNode = SCNNode()
+    var gameBoard = GameBoard()
+    var gameAnchor : ARAnchor!
     
     var counterHand : Int = 0
     var counterA : Int = 0
@@ -224,19 +224,17 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         var node : SCNNode?
-        
+
         if let planeAnchor = anchor as? ARPlaneAnchor{
             if boardFlag == false && anchors.isEmpty{
                 node = SCNNode()
-                
-                
+
                 var width : CGFloat = 0
                 var height : CGFloat = 0
-                
+
                 width = CGFloat(planeAnchor.extent.x)
                 height = CGFloat(planeAnchor.extent.z)
-    
-                
+
                 //validate width & height
                 if planeAnchor.extent.x >= 0.5{
                     width = 0.5
@@ -245,31 +243,31 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                     height = 0.3
                 }
                 planeGeometry = SCNPlane(width: width, height: height)
-                
+
                 planeGeometry.firstMaterial?.diffuse.contents = UIColor.white.withAlphaComponent(0.4)
-            
+
                 let planeNode = SCNNode(geometry: planeGeometry)
-                
+
                 planeNode.position = SCNVector3(planeAnchor.center.x, 0, planeAnchor.center.z)
                 planeNode.transform = SCNMatrix4MakeRotation(-Float.pi / 2,1,0,0)
-            
+
                 updateMaterial()
-                
+
                 planeNode.name = "planeNode"
-            
+
                 node?.addChildNode(planeNode)
                 anchors.append(planeAnchor)
             }
         }
         return node
     }
-    
+
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        
+        print("keupdate")
         if let planeAnchor = anchor as? ARPlaneAnchor {
-            
+
             if anchors.contains(planeAnchor){
-                
+
                 if node.childNodes.count > 0 && boardFlag == false{
                     DispatchQueue.main.async {
                         //papan plane sudah ada
@@ -277,15 +275,15 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                     }
                     let planeNode = node.childNodes.first!
                     planeNode.position = SCNVector3(planeAnchor.center.x, 0, planeAnchor.center.z)
-                    
+
                     if let plane = planeNode.geometry as? SCNPlane {
-                        
+
                         var width : CGFloat = 0
                         var height : CGFloat = 0
-                        
+
                         width = CGFloat(planeAnchor.extent.x)
                         height = CGFloat(planeAnchor.extent.z)
-                        
+
                         //validate width & height
                         if planeAnchor.extent.x >= 0.3{
                             width = 0.3
@@ -301,18 +299,49 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             }
         }
     }
-    
-    
+
+
+
     func updateMaterial(){
         let material = self.planeGeometry.materials.first!
         material.diffuse.contentsTransform = SCNMatrix4MakeScale(Float(self.planeGeometry.width), Float(self.planeGeometry.height), 1)
     }
     
-    func addNodeAtLocation (location : CGPoint){
-        guard anchors.count > 0 else{
-            print("anchors are not created yet")
-            return
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        print("masuk")
+        print(anchor.name)
+        if let name = anchor.name, name.hasPrefix("congklak"){
+            print("masuk if")
+            let tempGameBoard = GameBoard()
+            tempGameBoard.name = "gameboard"
+            node.addChildNode(tempGameBoard)
+            gameNode = node
+            gameBoard = gameNode.childNode(withName: "gameboard", recursively: false) as! GameBoard
+            gameAnchor = anchor
+            
+            print(gameNode)
+            print(gameBoard)
+            print(gameAnchor)
+            
+            print(sceneView.anchor(for: gameBoard))
+            print(sceneView.anchor(for: gameNode))
+            print(sceneView.node(for: gameAnchor))
+            
+            let newPosition = SCNVector3(gameAnchor.transform.columns.3.x, gameAnchor.transform.columns.3.y, gameAnchor.transform.columns.3.z)
+            
+            DispatchQueue.main.async {
+                self.gameBoard.loadModel()
+                self.gameBoard.position = newPosition
+                self.initModel()
+            }
         }
+    }
+
+    func addNodeAtLocation (location : CGPoint){
+//        guard anchors.count > 0 else{
+//            print("anchors are not created yet")
+//            return
+//        }
         
         let hitResults = sceneView.hitTest(location, types: .existingPlaneUsingExtent)
         
@@ -323,66 +352,112 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             let result = hitResults.first!
             let newLocation = SCNVector3Make(result.worldTransform.columns.3.x,result.worldTransform.columns.3.y,result.worldTransform.columns.3.z)
             
-            
+            let anchor = ARAnchor(name: "congklak", transform: result.worldTransform)
+            sceneView.session.add(anchor: anchor)
             //adding object
             
             
             //Papan
             
-            gameBoard.loadModel()
-            gameBoard.position = newLocation
-            print(gameBoard.position)
+//            gameBoard.loadModel()
+//            gameBoard.position = newLocation
+//
+//            print(sceneView.anchor(for: gameBoard))
+//
+//            //let gamePhysicsShape = SCNPhysicsShape(node: gameNode, options: SCNPhysicsShape.Option.type)
+//
+//
+//            //Kacang
+//
+//            for i in 0...1{
+//                for j in 0...6{
+//                    for k in 1...7{
+//                        let kacang = KacangObject()
+//                        kacang.loadModel()
+//                        kacang.position = SCNVector3Make(0, Float(k) * 0.01, 0)
+//
+//                        //print(kacang.position)
+//                        //gameNode.addChildNode(kacang)
+//                        gameBoard.holeBox[i][j].addChildNode(kacang)
+//
+//                        //sceneView.scene.rootNode.addChildNode(kacang)
+//                    }
+//                    gameBoard.holeBox[i][j].childNode(withName: "Highlight", recursively: false)?.isHidden = true
+////                    gameNode.addChildNode(gameBoard.holeNode[i][j])
+////                    gameNode.addChildNode(gameBoard.holeBox[i][j])
+//                }
+//            }
+//
+//            gameBoard.goalPostBoxA.childNode(withName: "Highlight", recursively: false)?.isHidden = true
+//            gameBoard.goalPostBoxB.childNode(withName: "Highlight", recursively: false)?.isHidden = true
+//
+//            sceneView.scene.rootNode.addChildNode(gameBoard)
+//            initGame()
+//
+//            //convert World Map to Data
+//            getCurrentWorldMapData { (data, error) in
+//                self.worldMapData = data
+//                self.sendWorldMapData(self.worldMapData)
+//            }
+//
+//            //validate no more board should place
+//            boardFlag = true
+//
+//            //remove plane
+//
+//            let planeNode = sceneView.scene.rootNode.childNode(withName: "planeNode", recursively: true)
+//            planeNode?.removeFromParentNode()
+//
+//            let end = Date()
+//
+//            print(end.timeIntervalSince(start))
 
-            //let gamePhysicsShape = SCNPhysicsShape(node: gameNode, options: SCNPhysicsShape.Option.type)
-            
-            
-            //Kacang
-            
-            for i in 0...1{
-                for j in 0...6{
-                    for k in 1...7{
-                        let kacang = KacangObject()
-                        kacang.loadModel()
-                        kacang.position = SCNVector3Make(0, Float(k) * 0.01, 0)
-
-                        //print(kacang.position)
-                        //gameNode.addChildNode(kacang)
-                        gameBoard.holeBox[i][j].addChildNode(kacang)
-                        
-                        //sceneView.scene.rootNode.addChildNode(kacang)
-                    }
-                    gameBoard.holeBox[i][j].childNode(withName: "Highlight", recursively: false)?.isHidden = true
-//                    gameNode.addChildNode(gameBoard.holeNode[i][j])
-//                    gameNode.addChildNode(gameBoard.holeBox[i][j])
-                }
-            }
-            
-            gameBoard.goalPostBoxA.childNode(withName: "Highlight", recursively: false)?.isHidden = true
-            gameBoard.goalPostBoxB.childNode(withName: "Highlight", recursively: false)?.isHidden = true
-            
-            sceneView.scene.rootNode.addChildNode(gameBoard)
-            initGame()
-           
-            //convert World Map to Data
-            getCurrentWorldMapData { (data, error) in
-                self.worldMapData = data
-                self.sendWorldMapData(self.worldMapData)
-            }
-            
-            //validate no more board should place
-            boardFlag = true
-            
-            //remove plane
-             
-            let planeNode = sceneView.scene.rootNode.childNode(withName: "planeNode", recursively: true)
-            planeNode?.removeFromParentNode()
-            
-            let end = Date()
-            
-            print(end.timeIntervalSince(start))
-            
         }
         
+    }
+    
+    func initModel(){
+        //Kacang
+        
+        for i in 0...1{
+            for j in 0...6{
+                for k in 1...7{
+                    let kacang = KacangObject()
+                    kacang.loadModel()
+                    kacang.position = SCNVector3Make(0, Float(k) * 0.01, 0)
+                    
+                    //print(kacang.position)
+                    //gameNode.addChildNode(kacang)
+                    gameBoard.holeBox[i][j].addChildNode(kacang)
+                    
+                    //sceneView.scene.rootNode.addChildNode(kacang)
+                }
+                gameBoard.holeBox[i][j].childNode(withName: "Highlight", recursively: false)?.isHidden = true
+                //                    gameNode.addChildNode(gameBoard.holeNode[i][j])
+                //                    gameNode.addChildNode(gameBoard.holeBox[i][j])
+            }
+        }
+        
+        gameBoard.goalPostBoxA.childNode(withName: "Highlight", recursively: false)?.isHidden = true
+        gameBoard.goalPostBoxB.childNode(withName: "Highlight", recursively: false)?.isHidden = true
+        
+        sceneView.scene.rootNode.addChildNode(gameBoard)
+        initGame()
+        
+//        //convert World Map to Data
+//        getCurrentWorldMapData { (data, error) in
+//            self.worldMapData = data
+//            self.sendWorldMapData(self.worldMapData)
+//        }
+        
+        //validate no more board should place
+        boardFlag = true
+        
+        //remove plane
+        
+//        let planeNode = sceneView.scene.rootNode.childNode(withName: "planeNode", recursively: true)
+//        planeNode?.removeFromParentNode()
+
     }
     
     // MARK: - send world Map
