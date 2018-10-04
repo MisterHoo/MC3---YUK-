@@ -8,8 +8,6 @@
 
 import MultipeerConnectivity
 
-
-
 class MPCHandeler: NSObject, MCSessionDelegate,MCBrowserViewControllerDelegate, MCAdvertiserAssistantDelegate {
     
     let viewController = ViewController()
@@ -73,7 +71,7 @@ class MPCHandeler: NSObject, MCSessionDelegate,MCBrowserViewControllerDelegate, 
     }
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         gamePlayViewController.loadWorldMap(from: data)
-        //receivedData = data
+        receivedData = data
         let userInfo = ["data":data, "peerID":peerID] as [String : Any]
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: MyClass2.myNotification, object: nil, userInfo: userInfo)
