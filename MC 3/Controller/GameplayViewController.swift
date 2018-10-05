@@ -171,7 +171,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         
         
         //debugOptions
-//        var option = SCNDebugOptions.showWorldOrigin
+//        var option = SCNDebugOptions.showPhysicsShapes
 //        sceneView.debugOptions = option
 
         //configure Tap Gesture
@@ -225,10 +225,10 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         var node : SCNNode?
 
-        if let planeAnchor = anchor as? ARPlaneAnchor{
+        if let planeAnchor = anchor as? ARPlaneAnchor, anchor.name == nil{
             if boardFlag == false && anchors.isEmpty{
                 node = SCNNode()
-
+                
                 var width : CGFloat = 0
                 var height : CGFloat = 0
 
@@ -252,20 +252,33 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                 planeNode.transform = SCNMatrix4MakeRotation(-Float.pi / 2,1,0,0)
 
                 updateMaterial()
-
+                
+                node?.name = "titikPlane"
                 planeNode.name = "planeNode"
 
                 node?.addChildNode(planeNode)
                 anchors.append(planeAnchor)
+                
+                //print(sceneView.node(for: ))
+                //print(sceneView.anchor(for: planeNode))
+
+                DispatchQueue.main.async {
+                    //papan plane sudah ada
+                    self.updateStringLabel(label: self.statusLabel, input: "Ketuk plane untuk meletakkan papan congklak")
+                }
+
+//                gameNode = node!
+//                gameAnchor = planeAnchor
             }
+        }else if anchor.name == "congklak"{
+            node = gameBoard
         }
         return node
     }
 
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        print("keupdate")
-        if let planeAnchor = anchor as? ARPlaneAnchor {
 
+        if let planeAnchor = anchor as? ARPlaneAnchor, anchor.name == nil{
             if anchors.contains(planeAnchor){
 
                 if node.childNodes.count > 0 && boardFlag == false{
@@ -300,8 +313,6 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         }
     }
 
-
-
     func updateMaterial(){
         let material = self.planeGeometry.materials.first!
         material.diffuse.contentsTransform = SCNMatrix4MakeScale(Float(self.planeGeometry.width), Float(self.planeGeometry.height), 1)
@@ -309,29 +320,25 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         print("masuk")
-        print(anchor.name)
         if let name = anchor.name, name.hasPrefix("congklak"){
-            print("masuk if")
-            let tempGameBoard = GameBoard()
-            tempGameBoard.name = "gameboard"
-            node.addChildNode(tempGameBoard)
-            gameNode = node
-            gameBoard = gameNode.childNode(withName: "gameboard", recursively: false) as! GameBoard
+//            print("masuk if")
+//            let tempGameBoard = GameBoard()
+//            tempGameBoard.name = "gameboard"
+//            node.addChildNode(tempGameBoard)
+//            gameNode = node
+//            gameBoard = gameNode.childNode(withName: "gameboard", recursively: false) as! GameBoard
             gameAnchor = anchor
-            
-            print(gameNode)
+
             print(gameBoard)
             print(gameAnchor)
-            
             print(sceneView.anchor(for: gameBoard))
-            print(sceneView.anchor(for: gameNode))
             print(sceneView.node(for: gameAnchor))
-            
+
             let newPosition = SCNVector3(gameAnchor.transform.columns.3.x, gameAnchor.transform.columns.3.y, gameAnchor.transform.columns.3.z)
+            gameBoard.position = newPosition
             
             DispatchQueue.main.async {
                 self.gameBoard.loadModel()
-                self.gameBoard.position = newPosition
                 self.initModel()
             }
         }
@@ -347,23 +354,33 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         
         if hitResults.count > 0 && boardFlag == false{
             
-            let start = Date()
-            
             let result = hitResults.first!
-            let newLocation = SCNVector3Make(result.worldTransform.columns.3.x,result.worldTransform.columns.3.y,result.worldTransform.columns.3.z)
+//            let newLocation = SCNVector3Make(result.worldTransform.columns.3.x,result.worldTransform.columns.3.y,result.worldTransform.columns.3.z)
             
             let anchor = ARAnchor(name: "congklak", transform: result.worldTransform)
             sceneView.session.add(anchor: anchor)
+            print("nambah anchor")
             //adding object
             
-            
+//            let tempGameBoard = GameBoard()
+//            tempGameBoard.name = "gameboard"
+//            gameNode.addChildNode(tempGameBoard)
+//
+//            let newPosition = SCNVector3Make(gameAnchor.transform.columns.3.x,gameAnchor.transform.columns.3.y,gameAnchor.transform.columns.3.z)
+//
+//            gameBoard = gameNode.childNode(withName: "gameboard", recursively: false) as! GameBoard
+//
+//
             //Papan
+//            DispatchQueue.main.async {
+//                self.gameBoard.position = newPosition
+//                self.gameBoard.loadModel()
+//                self.initModel()
+//            }
             
-//            gameBoard.loadModel()
-//            gameBoard.position = newLocation
-//
+
 //            print(sceneView.anchor(for: gameBoard))
-//
+
 //            //let gamePhysicsShape = SCNPhysicsShape(node: gameNode, options: SCNPhysicsShape.Option.type)
 //
 //
@@ -441,7 +458,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         gameBoard.goalPostBoxA.childNode(withName: "Highlight", recursively: false)?.isHidden = true
         gameBoard.goalPostBoxB.childNode(withName: "Highlight", recursively: false)?.isHidden = true
         
-        sceneView.scene.rootNode.addChildNode(gameBoard)
+        sceneView.scene.rootNode.addChildNode(gameNode)
         initGame()
         
 //        //convert World Map to Data
@@ -455,8 +472,8 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         
         //remove plane
         
-//        let planeNode = sceneView.scene.rootNode.childNode(withName: "planeNode", recursively: true)
-//        planeNode?.removeFromParentNode()
+        let planeNode = sceneView.scene.rootNode.childNode(withName: "titikPlane", recursively: false)
+        planeNode?.removeFromParentNode()
 
     }
     
