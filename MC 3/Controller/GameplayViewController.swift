@@ -9,10 +9,11 @@
 import UIKit
 import SceneKit
 import ARKit
+import MultipeerConnectivity
 
 class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
-     // Test for Mr HOO
+    // Test for Mr HOO
     //var view score
     
     //@IBOutlet weak var viewScore: UIView!
@@ -88,6 +89,9 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     var timer = Timer()
     let animateTime: Double = 2
     
+    @IBOutlet weak var blackBackground: UIImageView!
+    @IBOutlet weak var giliranPlayer: UILabel!
+    
     @IBAction func backButtonAction(_ sender: UIButton)
     {
         
@@ -116,15 +120,15 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
     
     
-//    @IBAction func lockButtonAction(_ sender: UIButton)
-//    {
-//        if lockButtonOutlet.currentImage == UIImage(named: "Unlocked")
-//        {
-//            lockButtonOutlet.setImage(UIImage(named: "Locked"), for: .normal)
-//        }else{
-//            lockButtonOutlet.setImage(UIImage(named: "Unlocked"), for: .normal)
-//        }
-//    }
+    //    @IBAction func lockButtonAction(_ sender: UIButton)
+    //    {
+    //        if lockButtonOutlet.currentImage == UIImage(named: "Unlocked")
+    //        {
+    //            lockButtonOutlet.setImage(UIImage(named: "Locked"), for: .normal)
+    //        }else{
+    //            lockButtonOutlet.setImage(UIImage(named: "Unlocked"), for: .normal)
+    //        }
+    //    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,12 +138,12 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         currentPlayerPoss = player1.center
         nextPlayerPoss = player2.center
         
-//        viewScore.layer.cornerRadius = 5
-//        viewScore.layer.masksToBounds = true
+        //        viewScore.layer.cornerRadius = 5
+        //        viewScore.layer.masksToBounds = true
         
         multiPeer = (UIApplication.shared.delegate as! AppDelegate).multiPeer
-
-//        lockButtonOutlet.setImage(UIImage(named: "Unlocked"), for: .normal)
+        
+        //        lockButtonOutlet.setImage(UIImage(named: "Unlocked"), for: .normal)
         //delegate sceneView
         sceneView.delegate = self
         
@@ -155,8 +159,8 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         lightNode.light = sceneLight
         lightNode.position = SCNVector3(0, 10, 2)
         
-
-//        updateLabel(label: currentPlayerLabel, input: currentPlayer)
+        
+        //        updateLabel(label: currentPlayerLabel, input: currentPlayer)
         sceneView.scene.rootNode.addChildNode(lightNode)
         
         //init label
@@ -167,19 +171,19 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             self.updateLabel(label: self.currentBeanInHandLabel, input: 0)
             self.updateStringLabel(label: self.statusLabel, input: "Cari dan deteksi bidang datar untuk meletakkan plane")
         }
-       
+        
         
         
         //debugOptions
-//        var option = SCNDebugOptions.showPhysicsShapes
-//        sceneView.debugOptions = option
-
+        //        var option = SCNDebugOptions.showPhysicsShapes
+        //        sceneView.debugOptions = option
+        
         //configure Tap Gesture
         let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(self.tapped(tapRecognizer:)))
         sceneView.addGestureRecognizer(tapGesture)
         // Do any additional setup after loading the view.
-    
-
+        
+        
     }
     func writeWorldMap(_ worldMap: ARWorldMap, to url: URL) throws {
         let data = try NSKeyedArchiver.archivedData(withRootObject: worldMap, requiringSecureCoding: true)
@@ -190,13 +194,13 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         
         //AppUtility.lockOrientation(.all)
         
-//        if multiPeer.session.connectedPeers.count != nil {
-//            print(multiPeer.session.connectedPeers.count)
-//        }
+        //        if multiPeer.session.connectedPeers.count != nil {
+        //            print(multiPeer.session.connectedPeers.count)
+        //        }
         
-//        let configuration = ARWorldTrackingConfiguration()
-//        configuration.planeDetection = .horizontal
-//        configuration.isLightEstimationEnabled = true
+        //        let configuration = ARWorldTrackingConfiguration()
+        //        configuration.planeDetection = .horizontal
+        //        configuration.isLightEstimationEnabled = true
         
         if isServer == true{
             let configuration = ARWorldTrackingConfiguration()
@@ -208,12 +212,12 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             print("bukan Server")
             print(multiPeer.receivedData)
             loadWorldMap(from: multiPeer.receivedData)
-
+            
             //print(worldMap)
             print(multiPeer.session)
             //print("bukan Server")
-//            configuration.initialWorldMap = worldMap
-//            sceneView.session.run(configuration)
+            //            configuration.initialWorldMap = worldMap
+            //            sceneView.session.run(configuration)
         }
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -224,17 +228,17 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         var node : SCNNode?
-
+        
         if let planeAnchor = anchor as? ARPlaneAnchor, anchor.name == nil{
             if boardFlag == false && anchors.isEmpty{
                 node = SCNNode()
                 
                 var width : CGFloat = 0
                 var height : CGFloat = 0
-
+                
                 width = CGFloat(planeAnchor.extent.x)
                 height = CGFloat(planeAnchor.extent.z)
-
+                
                 //validate width & height
                 if planeAnchor.extent.x >= 0.5{
                     width = 0.5
@@ -243,44 +247,44 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                     height = 0.3
                 }
                 planeGeometry = SCNPlane(width: width, height: height)
-
+                
                 planeGeometry.firstMaterial?.diffuse.contents = UIColor.white.withAlphaComponent(0.4)
-
+                
                 let planeNode = SCNNode(geometry: planeGeometry)
-
+                
                 planeNode.position = SCNVector3(planeAnchor.center.x, 0, planeAnchor.center.z)
                 planeNode.transform = SCNMatrix4MakeRotation(-Float.pi / 2,1,0,0)
-
+                
                 updateMaterial()
                 
                 node?.name = "titikPlane"
                 planeNode.name = "planeNode"
-
+                
                 node?.addChildNode(planeNode)
                 anchors.append(planeAnchor)
                 
                 //print(sceneView.node(for: ))
                 //print(sceneView.anchor(for: planeNode))
-
+                
                 DispatchQueue.main.async {
                     //papan plane sudah ada
                     self.updateStringLabel(label: self.statusLabel, input: "Ketuk plane untuk meletakkan papan congklak")
                 }
-
-//                gameNode = node!
-//                gameAnchor = planeAnchor
+                
+                //                gameNode = node!
+                //                gameAnchor = planeAnchor
             }
         }else if anchor.name == "congklak"{
             node = gameBoard
         }
         return node
     }
-
+    
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-
+        
         if let planeAnchor = anchor as? ARPlaneAnchor, anchor.name == nil{
             if anchors.contains(planeAnchor){
-
+                
                 if node.childNodes.count > 0 && boardFlag == false{
                     DispatchQueue.main.async {
                         //papan plane sudah ada
@@ -288,15 +292,15 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
                     }
                     let planeNode = node.childNodes.first!
                     planeNode.position = SCNVector3(planeAnchor.center.x, 0, planeAnchor.center.z)
-
+                    
                     if let plane = planeNode.geometry as? SCNPlane {
-
+                        
                         var width : CGFloat = 0
                         var height : CGFloat = 0
-
+                        
                         width = CGFloat(planeAnchor.extent.x)
                         height = CGFloat(planeAnchor.extent.z)
-
+                        
                         //validate width & height
                         if planeAnchor.extent.x >= 0.3{
                             width = 0.3
@@ -312,7 +316,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             }
         }
     }
-
+    
     func updateMaterial(){
         let material = self.planeGeometry.materials.first!
         material.diffuse.contentsTransform = SCNMatrix4MakeScale(Float(self.planeGeometry.width), Float(self.planeGeometry.height), 1)
@@ -321,19 +325,19 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         print("masuk")
         if let name = anchor.name, name.hasPrefix("congklak"){
-//            print("masuk if")
-//            let tempGameBoard = GameBoard()
-//            tempGameBoard.name = "gameboard"
-//            node.addChildNode(tempGameBoard)
-//            gameNode = node
-//            gameBoard = gameNode.childNode(withName: "gameboard", recursively: false) as! GameBoard
+            //            print("masuk if")
+            //            let tempGameBoard = GameBoard()
+            //            tempGameBoard.name = "gameboard"
+            //            node.addChildNode(tempGameBoard)
+            //            gameNode = node
+            //            gameBoard = gameNode.childNode(withName: "gameboard", recursively: false) as! GameBoard
             gameAnchor = anchor
-
+            
             print(gameBoard)
             print(gameAnchor)
             print(sceneView.anchor(for: gameBoard))
             print(sceneView.node(for: gameAnchor))
-
+            
             let newPosition = SCNVector3(gameAnchor.transform.columns.3.x, gameAnchor.transform.columns.3.y, gameAnchor.transform.columns.3.z)
             gameBoard.position = newPosition
             
@@ -343,92 +347,97 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             }
         }
     }
-
+    
     func addNodeAtLocation (location : CGPoint){
-//        guard anchors.count > 0 else{
-//            print("anchors are not created yet")
-//            return
-//        }
+        //        guard anchors.count > 0 else{
+        //            print("anchors are not created yet")
+        //            return
+        //        }
         
         let hitResults = sceneView.hitTest(location, types: .existingPlaneUsingExtent)
         
         if hitResults.count > 0 && boardFlag == false{
             
             let result = hitResults.first!
-//            let newLocation = SCNVector3Make(result.worldTransform.columns.3.x,result.worldTransform.columns.3.y,result.worldTransform.columns.3.z)
+            //            let newLocation = SCNVector3Make(result.worldTransform.columns.3.x,result.worldTransform.columns.3.y,result.worldTransform.columns.3.z)
             
             let anchor = ARAnchor(name: "congklak", transform: result.worldTransform)
             sceneView.session.add(anchor: anchor)
             print("nambah anchor")
+            
+            getCurrentWorldMapData { (data, error) in
+                self.worldMapData = data
+                self.sendWorldMapData(self.worldMapData)
+            }
             //adding object
             
-//            let tempGameBoard = GameBoard()
-//            tempGameBoard.name = "gameboard"
-//            gameNode.addChildNode(tempGameBoard)
-//
-//            let newPosition = SCNVector3Make(gameAnchor.transform.columns.3.x,gameAnchor.transform.columns.3.y,gameAnchor.transform.columns.3.z)
-//
-//            gameBoard = gameNode.childNode(withName: "gameboard", recursively: false) as! GameBoard
-//
-//
+            //            let tempGameBoard = GameBoard()
+            //            tempGameBoard.name = "gameboard"
+            //            gameNode.addChildNode(tempGameBoard)
+            //
+            //            let newPosition = SCNVector3Make(gameAnchor.transform.columns.3.x,gameAnchor.transform.columns.3.y,gameAnchor.transform.columns.3.z)
+            //
+            //            gameBoard = gameNode.childNode(withName: "gameboard", recursively: false) as! GameBoard
+            //
+            //
             //Papan
-//            DispatchQueue.main.async {
-//                self.gameBoard.position = newPosition
-//                self.gameBoard.loadModel()
-//                self.initModel()
-//            }
+            //            DispatchQueue.main.async {
+            //                self.gameBoard.position = newPosition
+            //                self.gameBoard.loadModel()
+            //                self.initModel()
+            //            }
             
-
-//            print(sceneView.anchor(for: gameBoard))
-
-//            //let gamePhysicsShape = SCNPhysicsShape(node: gameNode, options: SCNPhysicsShape.Option.type)
-//
-//
-//            //Kacang
-//
-//            for i in 0...1{
-//                for j in 0...6{
-//                    for k in 1...7{
-//                        let kacang = KacangObject()
-//                        kacang.loadModel()
-//                        kacang.position = SCNVector3Make(0, Float(k) * 0.01, 0)
-//
-//                        //print(kacang.position)
-//                        //gameNode.addChildNode(kacang)
-//                        gameBoard.holeBox[i][j].addChildNode(kacang)
-//
-//                        //sceneView.scene.rootNode.addChildNode(kacang)
-//                    }
-//                    gameBoard.holeBox[i][j].childNode(withName: "Highlight", recursively: false)?.isHidden = true
-////                    gameNode.addChildNode(gameBoard.holeNode[i][j])
-////                    gameNode.addChildNode(gameBoard.holeBox[i][j])
-//                }
-//            }
-//
-//            gameBoard.goalPostBoxA.childNode(withName: "Highlight", recursively: false)?.isHidden = true
-//            gameBoard.goalPostBoxB.childNode(withName: "Highlight", recursively: false)?.isHidden = true
-//
-//            sceneView.scene.rootNode.addChildNode(gameBoard)
-//            initGame()
-//
-//            //convert World Map to Data
-//            getCurrentWorldMapData { (data, error) in
-//                self.worldMapData = data
-//                self.sendWorldMapData(self.worldMapData)
-//            }
-//
-//            //validate no more board should place
-//            boardFlag = true
-//
-//            //remove plane
-//
-//            let planeNode = sceneView.scene.rootNode.childNode(withName: "planeNode", recursively: true)
-//            planeNode?.removeFromParentNode()
-//
-//            let end = Date()
-//
-//            print(end.timeIntervalSince(start))
-
+            
+            //            print(sceneView.anchor(for: gameBoard))
+            
+            //            //let gamePhysicsShape = SCNPhysicsShape(node: gameNode, options: SCNPhysicsShape.Option.type)
+            //
+            //
+            //            //Kacang
+            //
+            //            for i in 0...1{
+            //                for j in 0...6{
+            //                    for k in 1...7{
+            //                        let kacang = KacangObject()
+            //                        kacang.loadModel()
+            //                        kacang.position = SCNVector3Make(0, Float(k) * 0.01, 0)
+            //
+            //                        //print(kacang.position)
+            //                        //gameNode.addChildNode(kacang)
+            //                        gameBoard.holeBox[i][j].addChildNode(kacang)
+            //
+            //                        //sceneView.scene.rootNode.addChildNode(kacang)
+            //                    }
+            //                    gameBoard.holeBox[i][j].childNode(withName: "Highlight", recursively: false)?.isHidden = true
+            ////                    gameNode.addChildNode(gameBoard.holeNode[i][j])
+            ////                    gameNode.addChildNode(gameBoard.holeBox[i][j])
+            //                }
+            //            }
+            //
+            //            gameBoard.goalPostBoxA.childNode(withName: "Highlight", recursively: false)?.isHidden = true
+            //            gameBoard.goalPostBoxB.childNode(withName: "Highlight", recursively: false)?.isHidden = true
+            //
+            //            sceneView.scene.rootNode.addChildNode(gameBoard)
+            //            initGame()
+            //
+            //            //convert World Map to Data
+            //            getCurrentWorldMapData { (data, error) in
+            //                self.worldMapData = data
+            //                self.sendWorldMapData(self.worldMapData)
+            //            }
+            //
+            //            //validate no more board should place
+            //            boardFlag = true
+            //
+            //            //remove plane
+            //
+            //            let planeNode = sceneView.scene.rootNode.childNode(withName: "planeNode", recursively: true)
+            //            planeNode?.removeFromParentNode()
+            //
+            //            let end = Date()
+            //
+            //            print(end.timeIntervalSince(start))
+            
         }
         
     }
@@ -461,11 +470,11 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         sceneView.scene.rootNode.addChildNode(gameNode)
         initGame()
         
-//        //convert World Map to Data
-//        getCurrentWorldMapData { (data, error) in
-//            self.worldMapData = data
-//            self.sendWorldMapData(self.worldMapData)
-//        }
+        //        //convert World Map to Data
+        //        getCurrentWorldMapData { (data, error) in
+        //            self.worldMapData = data
+        //            self.sendWorldMapData(self.worldMapData)
+        //        }
         
         //validate no more board should place
         boardFlag = true
@@ -474,19 +483,19 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         
         let planeNode = sceneView.scene.rootNode.childNode(withName: "titikPlane", recursively: false)
         planeNode?.removeFromParentNode()
-
+        
     }
     
     // MARK: - send world Map
     func sendWorldMapData(_ worldData : Data!){
         if multiPeer.session.connectedPeers.count > 0 {
-//            if let worldData = DataManager.loadData(worldData.){
-//                do {
-//                    try multiPeer.mcSession.send(worldData, toPeers: multiPeer.mcSession.connectedPeers, with: .reliable)
-//                }catch {
-//                    fatalError("could not send world data")
-//                }
-//            }
+            //            if let worldData = DataManager.loadData(worldData.){
+            //                do {
+            //                    try multiPeer.mcSession.send(worldData, toPeers: multiPeer.mcSession.connectedPeers, with: .reliable)
+            //                }catch {
+            //                    fatalError("could not send world data")
+            //                }
+            //            }
             do{
                 try multiPeer.session.send(worldData, toPeers: multiPeer.session.connectedPeers, with: .reliable)
             }catch{
@@ -498,17 +507,17 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     func loadWorldMap(from archivedData: Data) {
         do {
             let uncompressedData = try archivedData.decompressed()
-//            guard let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: uncompressedData) else {
-//                DispatchQueue.main.async {
-//                    print("error unarchived map")
-//                }
-//                return
-//            }
-//
-//            DispatchQueue.main.async {
-//                self.worldMap = worldMap
-//                print(self.worldMap)
-//            }
+            //            guard let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: uncompressedData) else {
+            //                DispatchQueue.main.async {
+            //                    print("error unarchived map")
+            //                }
+            //                return
+            //            }
+            //
+            //            DispatchQueue.main.async {
+            //                self.worldMap = worldMap
+            //                print(self.worldMap)
+            //            }
             if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: uncompressedData) {
                 // Run the session with the received world map.
                 let configuration = ARWorldTrackingConfiguration()
@@ -577,15 +586,15 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     }
     
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
