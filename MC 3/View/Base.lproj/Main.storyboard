@@ -33,6 +33,16 @@
                                     <action selector="mainButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IjC-n5-1vX"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEJ-vR-ek0">
+                                <rect key="frame" x="124" y="635" width="127" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="MPC">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="ikutButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bUs-sO-co2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.96470588235294119" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -205,6 +215,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <gestureRecognizers/>
                             </arscnView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="su1-MA-bI5" userLabel="giliran">
+                                <rect key="frame" x="-50" y="396" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView userInteractionEnabled="NO" alpha="0.0" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GiliranP1" translatesAutoresizingMaskIntoConstraints="NO" id="zxL-ve-3cK">
                                 <rect key="frame" x="0.0" y="347" width="375" height="128"/>
                                 <constraints>
@@ -212,8 +229,14 @@
                                     <constraint firstAttribute="width" constant="375" id="PLY-C2-g4E"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rEy-G5-UVk">
-                                <rect key="frame" x="16" y="44" width="255" height="55"/>
+
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EwH-Fp-YF1">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rEy-G5-UVk">
+                                <rect key="frame" x="16" y="44" width="375" height="55"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uG4-n3-o5t">
                                         <rect key="frame" x="60" y="0.0" width="50" height="50"/>
@@ -317,9 +340,11 @@
                     </view>
                     <connections>
                         <outlet property="backButtonOutlet" destination="hru-EZ-2aQ" id="elZ-kN-AXE"/>
+                        <outlet property="blackBackground" destination="EwH-Fp-YF1" id="vCu-7J-qgh"/>
                         <outlet property="changePlayerNotif" destination="zxL-ve-3cK" id="ebx-Jb-DQI"/>
                         <outlet property="currPlayer" destination="d0t-ua-QsP" id="KEd-AT-0pH"/>
                         <outlet property="currentBeanInHandLabel" destination="cjh-ky-9z7" id="55p-17-Bk9"/>
+                        <outlet property="giliranPlayer" destination="su1-MA-bI5" id="d5k-0Z-GZ9"/>
                         <outlet property="nextPlayer" destination="88v-cR-2mw" id="rmf-5a-XOl"/>
                         <outlet property="player1" destination="gSM-pw-MQO" id="di6-Dc-adv"/>
                         <outlet property="player2" destination="cog-Kn-YI7" id="UNQ-Lo-pYx"/>
@@ -327,7 +352,6 @@
                         <outlet property="scoreALabel" destination="l7z-Wt-oK1" id="Xa8-oa-sOA"/>
                         <outlet property="scoreBLabel" destination="bCX-Rq-kBX" id="Vi2-rr-NJe"/>
                         <outlet property="statusLabel" destination="DYC-mO-0JL" id="aLt-V9-L3A"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="gameToMenu" id="lH0-yP-MAx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R4J-X9-M1p" userLabel="First Responder" sceneMemberID="firstResponder"/>
