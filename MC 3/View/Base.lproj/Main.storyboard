@@ -326,11 +326,11 @@
                     </view>
                     <connections>
                         <outlet property="backButtonOutlet" destination="hru-EZ-2aQ" id="elZ-kN-AXE"/>
-                        <outlet property="blackBackground" destination="EwH-Fp-YF1" id="4oh-Cj-pJQ"/>
+                        <outlet property="blackBackground" destination="EwH-Fp-YF1" id="vCu-7J-qgh"/>
                         <outlet property="changePlayerNotif" destination="zxL-ve-3cK" id="ebx-Jb-DQI"/>
                         <outlet property="currPlayer" destination="d0t-ua-QsP" id="KEd-AT-0pH"/>
                         <outlet property="currentBeanInHandLabel" destination="cjh-ky-9z7" id="55p-17-Bk9"/>
-                        <outlet property="giliranPlayer" destination="su1-MA-bI5" id="DbC-UB-c1L"/>
+                        <outlet property="giliranPlayer" destination="su1-MA-bI5" id="d5k-0Z-GZ9"/>
                         <outlet property="nextPlayer" destination="88v-cR-2mw" id="rmf-5a-XOl"/>
                         <outlet property="player1" destination="gSM-pw-MQO" id="di6-Dc-adv"/>
                         <outlet property="player2" destination="cog-Kn-YI7" id="UNQ-Lo-pYx"/>

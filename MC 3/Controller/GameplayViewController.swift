@@ -9,6 +9,7 @@
 import UIKit
 import SceneKit
 import ARKit
+import MultipeerConnectivity
 
 class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
@@ -87,6 +88,9 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
     var timer = Timer()
     let animateTime: Double = 2
+    
+    @IBOutlet weak var blackBackground: UIImageView!
+    @IBOutlet weak var giliranPlayer: UILabel!
     
     @IBAction func backButtonAction(_ sender: UIButton)
     {
