@@ -107,7 +107,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         // Alert Button
         alert.addAction(UIAlertAction(title: "Ya", style: UIAlertActionStyle.default, handler: { (action) in alert.dismiss(animated: true, completion: nil)
             
-            self.performSegue(withIdentifier: "gameToMenu", sender: self)
+            self.dismiss(animated: false, completion: nil)
             
         }))
         
