@@ -115,17 +115,6 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     }
     
     
-    
-//    @IBAction func lockButtonAction(_ sender: UIButton)
-//    {
-//        if lockButtonOutlet.currentImage == UIImage(named: "Unlocked")
-//        {
-//            lockButtonOutlet.setImage(UIImage(named: "Locked"), for: .normal)
-//        }else{
-//            lockButtonOutlet.setImage(UIImage(named: "Unlocked"), for: .normal)
-//        }
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("load")
