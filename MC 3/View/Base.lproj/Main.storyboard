@@ -28,6 +28,16 @@
                                     <action selector="mainButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IjC-n5-1vX"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEJ-vR-ek0">
+                                <rect key="frame" x="124" y="635" width="127" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="MPC">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="ikutButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bUs-sO-co2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.96470588235294119" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -316,11 +326,11 @@
                     </view>
                     <connections>
                         <outlet property="backButtonOutlet" destination="hru-EZ-2aQ" id="elZ-kN-AXE"/>
-                        <outlet property="blackBackground" destination="EwH-Fp-YF1" id="S8c-H3-Nxl"/>
+                        <outlet property="blackBackground" destination="EwH-Fp-YF1" id="4oh-Cj-pJQ"/>
                         <outlet property="changePlayerNotif" destination="zxL-ve-3cK" id="ebx-Jb-DQI"/>
                         <outlet property="currPlayer" destination="d0t-ua-QsP" id="KEd-AT-0pH"/>
                         <outlet property="currentBeanInHandLabel" destination="cjh-ky-9z7" id="55p-17-Bk9"/>
-                        <outlet property="giliranPlayer" destination="su1-MA-bI5" id="S4b-Sw-2K0"/>
+                        <outlet property="giliranPlayer" destination="su1-MA-bI5" id="DbC-UB-c1L"/>
                         <outlet property="nextPlayer" destination="88v-cR-2mw" id="rmf-5a-XOl"/>
                         <outlet property="player1" destination="gSM-pw-MQO" id="di6-Dc-adv"/>
                         <outlet property="player2" destination="cog-Kn-YI7" id="UNQ-Lo-pYx"/>

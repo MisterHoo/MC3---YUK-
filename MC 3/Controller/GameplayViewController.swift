@@ -9,6 +9,7 @@
 import UIKit
 import SceneKit
 import ARKit
+import MultipeerConnectivity
 
 class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
@@ -87,6 +88,9 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
     var timer = Timer()
     let animateTime: Double = 2
+    @IBOutlet weak var giliranPlayer: UILabel!
+    @IBOutlet weak var blackBackground: UIImageView!
+    
     
     @IBAction func backButtonAction(_ sender: UIButton)
     {
@@ -113,18 +117,6 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         self.present(alert, animated: true, completion: nil)
         
     }
-    
-    
-    
-//    @IBAction func lockButtonAction(_ sender: UIButton)
-//    {
-//        if lockButtonOutlet.currentImage == UIImage(named: "Unlocked")
-//        {
-//            lockButtonOutlet.setImage(UIImage(named: "Locked"), for: .normal)
-//        }else{
-//            lockButtonOutlet.setImage(UIImage(named: "Unlocked"), for: .normal)
-//        }
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -222,93 +214,94 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.pause()
     }
     
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        var node : SCNNode?
-
-        if let planeAnchor = anchor as? ARPlaneAnchor{
-            if boardFlag == false && anchors.isEmpty{
-                node = SCNNode()
-
-                var width : CGFloat = 0
-                var height : CGFloat = 0
-
-                width = CGFloat(planeAnchor.extent.x)
-                height = CGFloat(planeAnchor.extent.z)
-
-                //validate width & height
-                if planeAnchor.extent.x >= 0.5{
-                    width = 0.5
-                }
-                if planeAnchor.extent.z >= 0.3{
-                    height = 0.3
-                }
-                planeGeometry = SCNPlane(width: width, height: height)
-
-                planeGeometry.firstMaterial?.diffuse.contents = UIColor.white.withAlphaComponent(0.4)
-
-                let planeNode = SCNNode(geometry: planeGeometry)
-
-                planeNode.position = SCNVector3(planeAnchor.center.x, 0, planeAnchor.center.z)
-                planeNode.transform = SCNMatrix4MakeRotation(-Float.pi / 2,1,0,0)
-
-                updateMaterial()
-
-                planeNode.name = "planeNode"
-
-                node?.addChildNode(planeNode)
-                anchors.append(planeAnchor)
-            }
-        }
-        return node
-    }
-
-    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        print("keupdate")
-        if let planeAnchor = anchor as? ARPlaneAnchor {
-
-            if anchors.contains(planeAnchor){
-
-                if node.childNodes.count > 0 && boardFlag == false{
-                    DispatchQueue.main.async {
-                        //papan plane sudah ada
-                        self.updateStringLabel(label: self.statusLabel, input: "Ketuk plane untuk meletakkan papan congklak")
-                    }
-                    let planeNode = node.childNodes.first!
-                    planeNode.position = SCNVector3(planeAnchor.center.x, 0, planeAnchor.center.z)
-
-                    if let plane = planeNode.geometry as? SCNPlane {
-
-                        var width : CGFloat = 0
-                        var height : CGFloat = 0
-
-                        width = CGFloat(planeAnchor.extent.x)
-                        height = CGFloat(planeAnchor.extent.z)
-
-                        //validate width & height
-                        if planeAnchor.extent.x >= 0.3{
-                            width = 0.3
-                        }
-                        if planeAnchor.extent.z >= 0.5{
-                            height = 0.5
-                        }
-                        plane.width = width
-                        plane.height = height
-                        updateMaterial()
-                    }
-                }
-            }
-        }
-    }
-
-
-
-    func updateMaterial(){
-        let material = self.planeGeometry.materials.first!
-        material.diffuse.contentsTransform = SCNMatrix4MakeScale(Float(self.planeGeometry.width), Float(self.planeGeometry.height), 1)
-    }
+//    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+//        var node : SCNNode?
+//
+//        if let planeAnchor = anchor as? ARPlaneAnchor{
+//            if boardFlag == false && anchors.isEmpty{
+//                node = SCNNode()
+//
+//                var width : CGFloat = 0
+//                var height : CGFloat = 0
+//
+//                width = CGFloat(planeAnchor.extent.x)
+//                height = CGFloat(planeAnchor.extent.z)
+//
+//                //validate width & height
+//                if planeAnchor.extent.x >= 0.5{
+//                    width = 0.5
+//                }
+//                if planeAnchor.extent.z >= 0.3{
+//                    height = 0.3
+//                }
+//                planeGeometry = SCNPlane(width: width, height: height)
+//
+//                planeGeometry.firstMaterial?.diffuse.contents = UIColor.white.withAlphaComponent(0.4)
+//
+//                let planeNode = SCNNode(geometry: planeGeometry)
+//
+//                planeNode.position = SCNVector3(planeAnchor.center.x, 0, planeAnchor.center.z)
+//                planeNode.transform = SCNMatrix4MakeRotation(-Float.pi / 2,1,0,0)
+//
+//                updateMaterial()
+//
+//                planeNode.name = "planeNode"
+//
+//                node?.addChildNode(planeNode)
+//                anchors.append(planeAnchor)
+//            }
+//        }
+//        return node
+//    }
+//
+//    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+//        print("keupdate")
+//        if let planeAnchor = anchor as? ARPlaneAnchor {
+//
+//            if anchors.contains(planeAnchor){
+//
+//                if node.childNodes.count > 0 && boardFlag == false{
+//                    DispatchQueue.main.async {
+//                        //papan plane sudah ada
+//                        self.updateStringLabel(label: self.statusLabel, input: "Ketuk plane untuk meletakkan papan congklak")
+//                    }
+//                    let planeNode = node.childNodes.first!
+//                    planeNode.position = SCNVector3(planeAnchor.center.x, 0, planeAnchor.center.z)
+//
+//                    if let plane = planeNode.geometry as? SCNPlane {
+//
+//                        var width : CGFloat = 0
+//                        var height : CGFloat = 0
+//
+//                        width = CGFloat(planeAnchor.extent.x)
+//                        height = CGFloat(planeAnchor.extent.z)
+//
+//                        //validate width & height
+//                        if planeAnchor.extent.x >= 0.3{
+//                            width = 0.3
+//                        }
+//                        if planeAnchor.extent.z >= 0.5{
+//                            height = 0.5
+//                        }
+//                        plane.width = width
+//                        plane.height = height
+//                        updateMaterial()
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//
+//
+//    func updateMaterial(){
+//        let material = self.planeGeometry.materials.first!
+//        material.diffuse.contentsTransform = SCNMatrix4MakeScale(Float(self.planeGeometry.width), Float(self.planeGeometry.height), 1)
+//    }
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         print("masuk")
+        print(anchor)
         print(anchor.name)
         if let name = anchor.name, name.hasPrefix("congklak"){
             print("masuk if")
@@ -354,6 +347,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             
             let anchor = ARAnchor(name: "congklak", transform: result.worldTransform)
             sceneView.session.add(anchor: anchor)
+            print(anchor.name)
             //adding object
             
             
@@ -411,7 +405,10 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
 //            let end = Date()
 //
 //            print(end.timeIntervalSince(start))
-
+            getCurrentWorldMapData { (data, error) in
+                self.worldMapData = data
+                self.sendWorldMapData(self.worldMapData)
+            }
         }
         
     }
@@ -444,12 +441,6 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         sceneView.scene.rootNode.addChildNode(gameBoard)
         initGame()
         
-//        //convert World Map to Data
-//        getCurrentWorldMapData { (data, error) in
-//            self.worldMapData = data
-//            self.sendWorldMapData(self.worldMapData)
-//        }
-        
         //validate no more board should place
         boardFlag = true
         
@@ -463,13 +454,6 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     // MARK: - send world Map
     func sendWorldMapData(_ worldData : Data!){
         if multiPeer.session.connectedPeers.count > 0 {
-//            if let worldData = DataManager.loadData(worldData.){
-//                do {
-//                    try multiPeer.mcSession.send(worldData, toPeers: multiPeer.mcSession.connectedPeers, with: .reliable)
-//                }catch {
-//                    fatalError("could not send world data")
-//                }
-//            }
             do{
                 try multiPeer.session.send(worldData, toPeers: multiPeer.session.connectedPeers, with: .reliable)
             }catch{
@@ -481,23 +465,14 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     func loadWorldMap(from archivedData: Data) {
         do {
             let uncompressedData = try archivedData.decompressed()
-//            guard let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: uncompressedData) else {
-//                DispatchQueue.main.async {
-//                    print("error unarchived map")
-//                }
-//                return
-//            }
-//
-//            DispatchQueue.main.async {
-//                self.worldMap = worldMap
-//                print(self.worldMap)
-//            }
             if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: uncompressedData) {
                 // Run the session with the received world map.
                 let configuration = ARWorldTrackingConfiguration()
                 configuration.planeDetection = .horizontal
                 configuration.initialWorldMap = worldMap
                 sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+                print("ini world map")
+                print(worldMap)
             }
             else
                 if let anchor = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARAnchor.self, from: uncompressedData) {
@@ -529,7 +504,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             }
         }
     }
-    
+    // -- MARK get worldmap
     func getCurrentWorldMapData(_ closure: @escaping (Data?, Error?) -> Void) {
         // When loading a map, send the loaded map and not the current extended map
         if let worldMap = worldMap {
@@ -545,7 +520,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             }
         }
     }
-    
+    // compress world map
     func compressWorldMap(map: ARWorldMap, _ closure: @escaping (Data?, Error?) -> Void){
         DispatchQueue.global().async {
             do {

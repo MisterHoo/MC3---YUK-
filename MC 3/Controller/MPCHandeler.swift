@@ -70,7 +70,7 @@ class MPCHandeler: NSObject, MCSessionDelegate,MCBrowserViewControllerDelegate, 
         }
     }
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        gamePlayViewController.loadWorldMap(from: data)
+        //gamePlayViewController.loadWorldMap(from: data)
         receivedData = data
         let userInfo = ["data":data, "peerID":peerID] as [String : Any]
         DispatchQueue.main.async {
