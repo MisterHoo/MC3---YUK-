@@ -81,7 +81,6 @@
 		66E943A7215A55FA001773E2 /* Tembak-Ambil.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "Tembak-Ambil.aiff"; sourceTree = "<group>"; };
 		CD3C2403215B9CF100BE6C52 /* gameplayVC Switch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "gameplayVC Switch.swift"; sourceTree = "<group>"; };
 		CDDA749B212AAC8900A6B003 /* MultiPeerHandeler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiPeerHandeler.swift; sourceTree = "<group>"; };
-		CF116F2821674C21002C69C3 /* Yuanti.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; name = Yuanti.ttc; path = ../../../../../../Downloads/Yuanti.ttc; sourceTree = "<group>"; };
 		CF8A8F27212BE15000FFFFE5 /* LockOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockOrientation.swift; sourceTree = "<group>"; };
 		CFCC5923212A9B6D0036C6B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "MC 3/Support/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
 		CFCC5924212A9B6D0036C6B2 /* ModelAsset.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; name = ModelAsset.scnassets; path = "MC 3/Support/ModelAsset.scnassets"; sourceTree = SOURCE_ROOT; };
@@ -221,7 +220,6 @@
 		CFCC5922212A9B4C0036C6B2 /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				CF116F2821674C21002C69C3 /* Yuanti.ttc */,
 				66E943A5215A55FA001773E2 /* Put Seed.aiff */,
 				66E943A7215A55FA001773E2 /* Tembak-Ambil.aiff */,
 				66E943A6215A55FA001773E2 /* Turn Change.wav */,
@@ -558,7 +556,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DK7HPF3UVL;
+				DEVELOPMENT_TEAM = 3ZHR6JDHY4;
 				INFOPLIST_FILE = "MC 3/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -577,7 +575,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DK7HPF3UVL;
+				DEVELOPMENT_TEAM = 3ZHR6JDHY4;
 				INFOPLIST_FILE = "MC 3/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
