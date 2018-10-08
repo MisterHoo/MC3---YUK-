@@ -11,7 +11,7 @@ import SceneKit
 import ARKit
 import MultipeerConnectivity
 
-class GameplayViewController: UIViewController, ARSCNViewDelegate {
+class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserViewControllerDelegate {
     
     // Test for Mr HOO
     //var view score
@@ -348,6 +348,24 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
+    @IBAction func multiplayer(_ sender: Any) {
+        multiPeer.sessionBrowser()
+        multiPeer.mcBrowser.delegate = self
+        present(multiPeer.mcBrowser, animated: false)
+    }
+    @IBAction func sendWorldMap(_ sender: Any) {
+        getCurrentWorldMapData { (data, error) in
+            self.worldMapData = data
+            self.sendWorldMapData(self.worldMapData)
+        }
+    }
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: false, completion: nil)
+    }
+    
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: false, completion: nil)
+    }
     func addNodeAtLocation (location : CGPoint){
         //        guard anchors.count > 0 else{
         //            print("anchors are not created yet")
@@ -365,10 +383,10 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
             sceneView.session.add(anchor: anchor)
             print("nambah anchor")
             
-            getCurrentWorldMapData { (data, error) in
-                self.worldMapData = data
-                self.sendWorldMapData(self.worldMapData)
-            }
+//            getCurrentWorldMapData { (data, error) in
+//                self.worldMapData = data
+//                self.sendWorldMapData(self.worldMapData)
+//            }
             //adding object
             
             //            let tempGameBoard = GameBoard()

@@ -401,7 +401,13 @@ extension GameplayViewController {
             highlightZeroInHand()
         }else{
             clearHighlight(parentNode: beforeNode)
-            nextNode.childNode(withName: "Highlight", recursively: false)?.isHidden = false
+            let highlight = nextNode.childNode(withName: "Highlight", recursively: false)
+            highlight?.isHidden = false
+            if currentPlayer == 1{
+                highlight?.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
+            }else if currentPlayer == 2{
+                highlight?.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+            }
             print(nextNode.name)
         }
     }
@@ -415,7 +421,13 @@ extension GameplayViewController {
         if isGameOver == false {
             for i in 0...6{
                 if gameBoard.holeBox[currentPlayer-1][i].childNodes.count != 7{
-                    gameBoard.holeBox[currentPlayer-1][i].childNode(withName: "Highlight", recursively: false)?.isHidden = false
+                    let highlight = gameBoard.holeBox[currentPlayer-1][i].childNode(withName: "Highlight", recursively: false)
+                    highlight?.isHidden = false
+                    if currentPlayer == 1{
+                        highlight?.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
+                    }else if currentPlayer == 2{
+                        highlight?.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+                    }
                 }
             }
         }
