@@ -405,7 +405,7 @@ extension GameplayViewController {
             let highlight = nextNode.childNode(withName: "Highlight", recursively: false)
             highlight?.isHidden = false
             if currentPlayer == 1{
-                highlight?.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
+                highlight?.geometry?.firstMaterial?.diffuse.contents = UIColor(red: 90/255, green: 140/255, blue: 255/255, alpha: 1)
             }else if currentPlayer == 2{
                 highlight?.geometry?.firstMaterial?.diffuse.contents = UIColor.red
             }
@@ -425,7 +425,7 @@ extension GameplayViewController {
                     let highlight = gameBoard.holeBox[currentPlayer-1][i].childNode(withName: "Highlight", recursively: false)
                     highlight?.isHidden = false
                     if currentPlayer == 1{
-                        highlight?.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
+                        highlight?.geometry?.firstMaterial?.diffuse.contents = UIColor(red: 90/255, green: 140/255, blue: 255/255, alpha: 1)
                     }else if currentPlayer == 2{
                         highlight?.geometry?.firstMaterial?.diffuse.contents = UIColor.red
                     }
