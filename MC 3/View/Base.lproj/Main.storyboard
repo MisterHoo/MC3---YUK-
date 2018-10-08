@@ -229,7 +229,6 @@
                                     <constraint firstAttribute="width" constant="375" id="PLY-C2-g4E"/>
                                 </constraints>
                             </imageView>
-
                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EwH-Fp-YF1">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -238,22 +237,27 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rEy-G5-UVk">
                                 <rect key="frame" x="16" y="44" width="375" height="55"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uG4-n3-o5t">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uG4-n3-o5t">
                                         <rect key="frame" x="60" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" backgroundImage="sound"/>
+                                        <state key="normal" image="sound"/>
+                                        <connections>
+                                            <action selector="audioButton:" destination="oHS-1f-FFs" eventType="touchUpInside" id="IYO-jX-elJ"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DBF-Cm-HfC">
+                                    <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DBF-Cm-HfC">
                                         <rect key="frame" x="120" y="0.0" width="135" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" backgroundImage="help"/>
+                                        <state key="normal" image="help"/>
+                                        <connections>
+                                            <action selector="bantuanButton:" destination="oHS-1f-FFs" eventType="touchUpInside" id="NYM-A7-uq8"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hru-EZ-2aQ">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hru-EZ-2aQ">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-HeavyItalic" family="Avenir Next" pointSize="12"/>
                                         <size key="titleShadowOffset" width="1" height="1"/>
-                                        <state key="normal" backgroundImage="quit">
+                                        <state key="normal" image="quit">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -303,7 +307,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCX-Rq-kBX">
-                                        <rect key="frame" x="0.0" y="70" width="80" height="30"/>
+                                        <rect key="frame" x="0.0" y="69" width="80" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="STYuanti-SC-Bold" family="Yuanti SC" pointSize="28"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -316,7 +320,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&quot;Status Label&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DYC-mO-0JL">
-                                <rect key="frame" x="23" y="107" width="240" height="109"/>
+                                <rect key="frame" x="28" y="106" width="230" height="109"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="STYuanti-SC-Bold" family="Yuanti SC" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -339,6 +343,7 @@
                         <viewLayoutGuide key="safeArea" id="FOD-Le-I73"/>
                     </view>
                     <connections>
+                        <outlet property="audioOutlet" destination="uG4-n3-o5t" id="0Ao-Os-wrM"/>
                         <outlet property="backButtonOutlet" destination="hru-EZ-2aQ" id="elZ-kN-AXE"/>
                         <outlet property="blackBackground" destination="EwH-Fp-YF1" id="vCu-7J-qgh"/>
                         <outlet property="changePlayerNotif" destination="zxL-ve-3cK" id="ebx-Jb-DQI"/>
@@ -351,6 +356,7 @@
                         <outlet property="sceneView" destination="F4c-IF-UuU" id="LFD-vX-JWq"/>
                         <outlet property="scoreALabel" destination="l7z-Wt-oK1" id="Xa8-oa-sOA"/>
                         <outlet property="scoreBLabel" destination="bCX-Rq-kBX" id="Vi2-rr-NJe"/>
+                        <outlet property="statusBackground" destination="Rtl-E3-WFT" id="7kS-mC-ghh"/>
                         <outlet property="statusLabel" destination="DYC-mO-0JL" id="aLt-V9-L3A"/>
                     </connections>
                 </viewController>

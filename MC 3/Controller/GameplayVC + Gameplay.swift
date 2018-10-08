@@ -521,9 +521,12 @@ extension GameplayViewController {
         hapticFeedback.notificationOccurred(.success)
         isGameOver = false
         isPaused = false
+        isAudioInited = true
         highlightZeroInHand()
+        audioOutlet.isEnabled = true
         
         DispatchQueue.main.async {
+            self.audioOutlet.setImage(UIImage(named: "sound"), for: .normal)
             self.updateStringLabel(label: self.statusLabel, input: "Papan Congklak muncul!")
             let timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.tungguGantiLabel), userInfo: nil, repeats: false)
         }

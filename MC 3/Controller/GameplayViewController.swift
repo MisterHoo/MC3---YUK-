@@ -10,6 +10,7 @@ import UIKit
 import SceneKit
 import ARKit
 import MultipeerConnectivity
+import AVFoundation
 
 class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
@@ -18,8 +19,12 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     
     //@IBOutlet weak var viewScore: UIView!
     
-    //var status label
+    // var outlet audio
+    @IBOutlet weak var audioOutlet: UIButton!
     
+    // var status label
+    
+    @IBOutlet weak var statusBackground: UIImageView!
     @IBOutlet weak var statusLabel: UILabel!
     
     //var layouting
@@ -85,6 +90,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
     var turnPlayer = AVAudioPlayer()
     var putSeed = AVAudioPlayer()
     var getSeed = AVAudioPlayer()
+    var isAudioInited : Bool = false
     
     var timer = Timer()
     let animateTime: Double = 2
@@ -118,7 +124,41 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         
     }
     
-
+    @IBAction func bantuanButton(_ sender: Any) {
+        if statusLabel.isHidden == true && statusBackground.isHidden == true {
+            DispatchQueue.main.async {
+                self.statusLabel.isHidden = false
+                self.statusBackground.isHidden = false
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.statusBackground.isHidden = true
+                self.statusLabel.isHidden = true
+            }
+            
+        }
+    }
+    
+    @IBAction func audioButton(_ sender: Any) {
+        print(audioOutlet.image(for: .normal))
+        if audioOutlet.image(for: .normal) == UIImage(named: "sound") && isAudioInited == true{
+            DispatchQueue.main.async {
+                self.audioOutlet.setImage(UIImage(named: "mute"), for: .normal)
+            }
+            turnPlayer.volume = 0
+            getSeed.volume = 0
+            putSeed.volume = 0
+        } else if isAudioInited == true{
+            DispatchQueue.main.async {
+                self.audioOutlet.setImage(UIImage(named: "sound"), for: .normal)
+            }
+            turnPlayer.volume = 1
+            getSeed.volume = 1
+            putSeed.volume = 1
+        }
+    }
+    
+    
     
     //    @IBAction func lockButtonAction(_ sender: UIButton)
     //    {
@@ -160,8 +200,15 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate {
         lightNode.position = SCNVector3(0, 10, 2)
         
         
-        //        updateLabel(label: currentPlayerLabel, input: currentPlayer)
+        // updateLabel(label: currentPlayerLabel, input: currentPlayer)
         sceneView.scene.rootNode.addChildNode(lightNode)
+        
+        //set Audio Button
+        isAudioInited = false
+        audioOutlet.isEnabled = false
+        DispatchQueue.main.async {
+            self.audioOutlet.setImage(UIImage(named: "unavailable sound"), for: .disabled)
+        }
         
         //init label
         //updateLabel(label: currentPlayerLabel, input: currentPlayer)
