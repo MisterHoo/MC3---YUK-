@@ -518,10 +518,12 @@ extension GameplayViewController {
     
             if counterA > counterB{
                 DispatchQueue.main.async {
+                    self.animationMenang(curPlayer: 1)
                     self.updateStringLabel(label: self.statusLabel, input: "P1 Menang")
                 }
             }else if counterB > counterA{
                 DispatchQueue.main.async {
+                    self.animationMenang(curPlayer: 2)
                     self.updateStringLabel(label: self.statusLabel, input: "P2 Menang")
                 }
             }else{

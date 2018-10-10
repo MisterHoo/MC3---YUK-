@@ -46,11 +46,11 @@ extension GameplayViewController {
             //tambahin view
             view.addSubview(changePlayerNotif)
             view.addSubview(changePlayerNotifText)
-            
+        
             //set alpha to zero
             changePlayerNotif.alpha = 0
-            
-//            timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(stepOne), userInfo: nil, repeats: false)
+        
+//           timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(stepOne), userInfo: nil, repeats: false)
             stepOne()
 
     }
@@ -96,7 +96,30 @@ extension GameplayViewController {
     }
     
     func animationMenang(curPlayer : Int){
+        if curPlayer == 1{
+            print("player 1 menang")
+            menangNotif.image = UIImage(named: "P1 Menang")
+            print(menangNotif.image)
+        }else if curPlayer == 2 {
+            print("player 2 menang")
+            menangNotif.image = UIImage(named: "P2 Menang")
+        }
+        menangNotif.center = CGPoint.init(x: (self.screenWidth/2), y: (self.screenHeight/2)) //set BG to center
         
+        //set alpha 0
+        menangNotif.alpha = 0
+        
+        view.addSubview(menangNotif)
+        
+        //start animation
+        menangStepOne()
+    }
+    
+    func menangStepOne(){
+        UIView.animate(withDuration: 0.75) {
+            self.isPaused = true
+            self.menangNotif.alpha = 1
+        }
     }
 }
 

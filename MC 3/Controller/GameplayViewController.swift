@@ -50,6 +50,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     
     @IBOutlet weak var changePlayerNotif: UIImageView!
     @IBOutlet weak var changePlayerNotifText: UIImageView!
+    @IBOutlet weak var menangNotif: UIImageView!
     
     var currentPlayerPoss: CGPoint!
     var nextPlayerPoss: CGPoint!
@@ -178,6 +179,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         print(player1.center)
         currentPlayerPoss = player1.center
         nextPlayerPoss = player2.center
+        
         
         //        viewScore.layer.cornerRadius = 5
         //        viewScore.layer.masksToBounds = true

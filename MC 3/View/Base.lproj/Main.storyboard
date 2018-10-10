@@ -333,11 +333,20 @@
                                     <constraint firstAttribute="height" constant="68" id="agn-r8-m8i"/>
                                 </constraints>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zIm-Hh-cA4">
+                                <rect key="frame" x="-14" y="323.66666666666669" width="403" height="175"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="403" id="82q-Be-QOi"/>
+                                    <constraint firstAttribute="height" constant="175" id="qlU-4U-oRn"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="zIm-Hh-cA4" firstAttribute="centerX" secondItem="FOD-Le-I73" secondAttribute="centerX" id="3oV-ja-kF3"/>
                             <constraint firstItem="F4c-IF-UuU" firstAttribute="top" secondItem="E5i-0k-DhP" secondAttribute="top" id="AW6-6A-rkw"/>
+                            <constraint firstItem="zIm-Hh-cA4" firstAttribute="centerY" secondItem="FOD-Le-I73" secondAttribute="centerY" id="Bba-ow-6Em"/>
                             <constraint firstItem="rEy-G5-UVk" firstAttribute="top" secondItem="FOD-Le-I73" secondAttribute="top" id="HnQ-KU-Uza"/>
                             <constraint firstItem="rEy-G5-UVk" firstAttribute="leading" secondItem="FOD-Le-I73" secondAttribute="leading" constant="16" id="Jqd-MV-lNE"/>
                             <constraint firstItem="3I9-db-rbW" firstAttribute="centerX" secondItem="FOD-Le-I73" secondAttribute="centerX" id="KtH-Py-kbw"/>
@@ -360,6 +369,7 @@
                         <outlet property="currPlayer" destination="d0t-ua-QsP" id="KEd-AT-0pH"/>
                         <outlet property="currentBeanInHandLabel" destination="cjh-ky-9z7" id="55p-17-Bk9"/>
                         <outlet property="giliranPlayer" destination="su1-MA-bI5" id="d5k-0Z-GZ9"/>
+                        <outlet property="menangNotif" destination="zIm-Hh-cA4" id="deq-gC-UOW"/>
                         <outlet property="nextPlayer" destination="88v-cR-2mw" id="rmf-5a-XOl"/>
                         <outlet property="player1" destination="gSM-pw-MQO" id="di6-Dc-adv"/>
                         <outlet property="player2" destination="cog-Kn-YI7" id="UNQ-Lo-pYx"/>
