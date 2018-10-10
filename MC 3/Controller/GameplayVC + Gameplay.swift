@@ -325,6 +325,7 @@ extension GameplayViewController {
                 self.updateStringLabel(label: self.statusLabel, input: "Giliran P\(self.currentPlayer)\nAmbil biji di lubang yang sudah ditandai")
             }
         }
+        
         if currentPlayer == 1{
             currentPlayer = 2
             //updateLabel(label: currentPlayerLabel, input: currentPlayer)
@@ -515,9 +516,13 @@ extension GameplayViewController {
             //make game cannot be played
             isGameOver = true
     
-            if counterA != counterB{
+            if counterA > counterB{
                 DispatchQueue.main.async {
-                    self.updateStringLabel(label: self.statusLabel, input: "P\(self.currentPlayer) Menang")
+                    self.updateStringLabel(label: self.statusLabel, input: "P1 Menang")
+                }
+            }else if counterB > counterA{
+                DispatchQueue.main.async {
+                    self.updateStringLabel(label: self.statusLabel, input: "P2 Menang")
                 }
             }else{
                 //Draw

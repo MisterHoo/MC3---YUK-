@@ -49,6 +49,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     
     
     @IBOutlet weak var changePlayerNotif: UIImageView!
+    @IBOutlet weak var changePlayerNotifText: UIImageView!
     
     var currentPlayerPoss: CGPoint!
     var nextPlayerPoss: CGPoint!
