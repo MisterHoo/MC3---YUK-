@@ -19,6 +19,8 @@ extension GameplayViewController {
     
     //uk text 167x35
     //uk bg 375x68
+    //currentPlayerPoss == posisi P1
+    //nextPlayerPoss == posisi P2
     
     func switchPlayer(){
         
@@ -29,6 +31,8 @@ extension GameplayViewController {
             print("masuk 1")
             changePlayerNotif.image = UIImage(named: "Giliran P2 BG")
             changePlayerNotifText.image = UIImage(named: "Giliran P2 Tulisan")
+            player1.center = nextPlayerPoss
+            player2.center = currentPlayerPoss
             
         }else if currentPlayer == 1{
             //ganti dari player 2 ke player 1
@@ -37,6 +41,8 @@ extension GameplayViewController {
             print("masuk 2")
             changePlayerNotif.image = UIImage(named: "Giliran P1 BG")
             changePlayerNotifText.image = UIImage(named: "Giliran P1 Tulisan")
+            player1.center = currentPlayerPoss
+            player2.center = nextPlayerPoss
         }
             //set Position
             changePlayerNotif.center = CGPoint.init(x: (self.screenWidth/2), y: (self.screenHeight/2)) //set BG to center
