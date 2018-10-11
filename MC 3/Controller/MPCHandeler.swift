@@ -24,6 +24,38 @@ class MPCHandeler: NSObject, MCSessionDelegate,MCBrowserViewControllerDelegate, 
     //private let reciveDataHandler: (Data, MCPeerID) -> Void
     var gamePlayViewController = GameplayViewController()
     
+    private var serviceBrowser: MCNearbyServiceBrowser!
+    private var serviceAdvertiser: MCNearbyServiceAdvertiser!
+    private let receivedDataHandler: (Data, MCPeerID) -> Void
+    /// - Tag: MultipeerSetup
+    init(receivedDataHandler: @escaping (Data, MCPeerID) -> Void ) {
+        self.receivedDataHandler = receivedDataHandler
+        
+        super.init()
+        
+        session = MCSession(peer: myPeerId, securityIdentity: nil, encryptionPreference: .required)
+        session.delegate = self
+        
+        mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: MPCHandeler.serviceType, discoveryInfo: nil, session: session)
+        mcAdvertiserAssistant.delegate = self
+        mcAdvertiserAssistant.start()
+        
+//        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: MPCHandeler.serviceType)
+//        serviceAdvertiser.delegate = self
+//        serviceAdvertiser.startAdvertisingPeer()
+        
+//        serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: MPCHandeler.serviceType)
+//        serviceBrowser.delegate = self
+//        serviceBrowser.startBrowsingForPeers()
+    }
+    func sendToAllPeers(_ data: Data) {
+        do {
+            try session.send(data, toPeers: session.connectedPeers, with: .reliable)
+        } catch {
+            print("error sending data to peers: \(error.localizedDescription)")
+        }
+    }
+
     
     func setupPeerId(){
         session = MCSession(peer: myPeerId, securityIdentity: nil, encryptionPreference: .none)
@@ -71,11 +103,13 @@ class MPCHandeler: NSObject, MCSessionDelegate,MCBrowserViewControllerDelegate, 
     }
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         //gamePlayViewController.loadWorldMap(from: data)
-        receivedData = data
-        let userInfo = ["data":data, "peerID":peerID] as [String : Any]
-        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: MyClass2.myNotification, object: nil, userInfo: userInfo)
-        }
+        receivedDataHandler(data, peerID)
+        
+//        receivedData = data
+//        let userInfo = ["data":data, "peerID":peerID] as [String : Any]
+//        DispatchQueue.main.async {
+//            NotificationCenter.default.post(name: MyClass2.myNotification, object: nil, userInfo: userInfo)
+//        }
     }
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL, withError error: Error?) {
         // code
@@ -125,6 +159,20 @@ class MPCHandeler: NSObject, MCSessionDelegate,MCBrowserViewControllerDelegate, 
     }
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        
+    }
+}
+
+extension MPCHandeler : MCNearbyServiceAdvertiserDelegate {
+    
+}
+
+extension MPCHandeler : MCNearbyServiceBrowserDelegate {
+    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
+        browser.invitePeer(peerID, to: session, withContext: nil, timeout: 10)
+    }
+    
+    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
         
     }
     

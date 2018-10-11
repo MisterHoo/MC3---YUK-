@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var multiPeer = MPCHandeler()
+    //var multiPeer = MPCHandeler()
 
     
     /// set orientations you want to be allowed in this property by default

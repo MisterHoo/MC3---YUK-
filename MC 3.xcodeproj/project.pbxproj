@@ -28,6 +28,7 @@
 		66E943A9215A55FA001773E2 /* Turn Change.wav in Resources */ = {isa = PBXBuildFile; fileRef = 66E943A6215A55FA001773E2 /* Turn Change.wav */; };
 		66E943AA215A55FA001773E2 /* Tembak-Ambil.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 66E943A7215A55FA001773E2 /* Tembak-Ambil.aiff */; };
 		CD3C2404215B9CF100BE6C52 /* gameplayVC Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C2403215B9CF100BE6C52 /* gameplayVC Switch.swift */; };
+		CD9EE326216C97840051552F /* ObjectToSend.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9EE325216C97840051552F /* ObjectToSend.swift */; };
 		CDDA749C212AAC8A00A6B003 /* MultiPeerHandeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA749B212AAC8900A6B003 /* MultiPeerHandeler.swift */; };
 		CF8A8F28212BE15000FFFFE5 /* LockOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8A8F27212BE15000FFFFE5 /* LockOrientation.swift */; };
 		CFCC5925212A9B6D0036C6B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFCC5923212A9B6D0036C6B2 /* Assets.xcassets */; };
@@ -80,6 +81,7 @@
 		66E943A6215A55FA001773E2 /* Turn Change.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Turn Change.wav"; sourceTree = "<group>"; };
 		66E943A7215A55FA001773E2 /* Tembak-Ambil.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "Tembak-Ambil.aiff"; sourceTree = "<group>"; };
 		CD3C2403215B9CF100BE6C52 /* gameplayVC Switch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "gameplayVC Switch.swift"; sourceTree = "<group>"; };
+		CD9EE325216C97840051552F /* ObjectToSend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectToSend.swift; sourceTree = "<group>"; };
 		CDDA749B212AAC8900A6B003 /* MultiPeerHandeler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiPeerHandeler.swift; sourceTree = "<group>"; };
 		CF8A8F27212BE15000FFFFE5 /* LockOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockOrientation.swift; sourceTree = "<group>"; };
 		CFCC5923212A9B6D0036C6B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "MC 3/Support/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
@@ -143,6 +145,7 @@
 				66CB45C121300EA100A183AE /* WorldMapItem.swift */,
 				6697DB022122B32500E3EF32 /* ViewController.swift */,
 				66CB45B7212E9E0500A183AE /* GameManager.swift */,
+				CD9EE325216C97840051552F /* ObjectToSend.swift */,
 				6697A7982123D30B00DA0814 /* GameplayViewController.swift */,
 				6646260521523AC3000A9A84 /* GameplayVC + Gameplay.swift */,
 				CD3C2403215B9CF100BE6C52 /* gameplayVC Switch.swift */,
@@ -368,6 +371,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6646260621523AC3000A9A84 /* GameplayVC + Gameplay.swift in Sources */,
+				CD9EE326216C97840051552F /* ObjectToSend.swift in Sources */,
 				CDDA749C212AAC8A00A6B003 /* MultiPeerHandeler.swift in Sources */,
 				66CB45B8212E9E0500A183AE /* GameManager.swift in Sources */,
 				6697DB032122B32500E3EF32 /* ViewController.swift in Sources */,

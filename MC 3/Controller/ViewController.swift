@@ -60,7 +60,7 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     }
     
     @IBAction func mainButtonAction(_ sender: UIButton) {
-        multiPeer.hosting()
+        //multiPeer.hosting()
         isServer = true
         performSegue(withIdentifier: "menuToGame", sender: self)
     }
@@ -102,14 +102,14 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        multiPeer = (UIApplication.shared.delegate as! AppDelegate).multiPeer
+        //multiPeer = (UIApplication.shared.delegate as! AppDelegate).multiPeer
         
         if let username = UserDefaults.standard.value(forKey: "Username") as? String{
             usernameTextField.text = username
             //multiPeer.namaPlayer = username
         }
         //multiPeer.setupPeerId()
-        multiPeer.setupPeerId()
+        //multiPeer.setupPeerId()
 //        usernameTextField.delegate = self
         
         imageArray = [UIImage(named: "AssetCongklak"),UIImage(named: "AssetGundu"),UIImage(named: "AssetGasing")] as! [UIImage]

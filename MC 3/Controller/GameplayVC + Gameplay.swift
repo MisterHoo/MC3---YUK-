@@ -23,172 +23,180 @@ extension GameplayViewController {
             addNodeAtLocation(location: location)
         }else{
             //when board already deployed
+            print("curPlayer : \(currentPlayer),thisPlayer : \(thisPlayer)")
             let selectedHole = chooseHoleToGetBean(location: location)
-            
             if (selectedHole != nil && isGameOver == false && isPaused == false){
-                if counterHand == 0 {
-                    //ditangan kosong ambil terserah
-                    freeWillPick(parentNode: selectedHole!, currentPlayer: currentPlayer)
-                }else if counterHand == 1{
-                    //last Biji in Hand
-                    curPlayerTime += 1
-                    if indexHoleColumn == currentPlayer - 1{//ditempat dia sendiri
-                        if indexHoleRow == 7{
-                            addToGoalPost(selectedHole: selectedHole!)//add di Goal Post
-                        }else if indexHoleRow < 7{
-                            if selectedHole!.name == gameBoard.holeBox[indexHoleColumn][indexHoleRow].name {
-                                if checkIfEmpty(parentNode: selectedHole!) == false{
-                                    //jatuh di tempat sendiri, gak kosong
-                                    addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], style: .light)
-                                    takeBeanToHand(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], currentPlayer: currentPlayer)
-                                    indexHoleRow += 1
-                                    //temporary
-                                    if indexHoleRow == 7{
-                                        if indexHoleColumn == 0{
-                                            updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.goalPostBoxA)
-                                        }else if indexHoleColumn == 1{
-                                            updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.goalPostBoxB)
-                                        }
-                                    }else{
-                                        updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
-                                    }
-                                }else{
-                                    // TEMBAKKK
-                                    if curPlayerTime > 8 {
-                                        print(curPlayerTime)
-                                        addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], style: .light)
-                                        var enemyHoleColumn : Int = 0
-                                        if indexHoleColumn == 1 {
-                                            enemyHoleColumn = 0
-                                        }else{
-                                            enemyHoleColumn = 1
-                                        }
-                                        if checkIfEmpty(parentNode: gameBoard.holeBox[enemyHoleColumn][6-indexHoleRow]) == false{
-                                            tembak(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], indexEnemyColumn: enemyHoleColumn, curPlayer: currentPlayer)
-                                        }
-                                        clearHighlight(parentNode: selectedHole!)
-                                        changePlayer(isFromTembak: true)
-                                    }else{
-                                        addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], style: .light)
-                                        clearHighlight(parentNode: selectedHole!)
-                                        changePlayer(isFromTembak: false)
-                                    }
+                if currentPlayer == thisPlayer{
+                    sendSelectedHole(parentNode: selectedHole!)
+                    validateSelectedHole(selectedHole: selectedHole!)
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self.updateLabel(label: self.currentBeanInHandLabel, input: self.counterHand)
+            }
+            //print("\(counterHand),\(indexHoleColumn)|\(indexHoleRow)")
+        }
+    }
+    
+    func validateSelectedHole(selectedHole : SCNNode){
+        if counterHand == 0 {
+            //ditangan kosong ambil terserah
+            freeWillPick(parentNode: selectedHole, currentPlayer: currentPlayer)
+        }else if counterHand == 1{
+            //last Biji in Hand
+            curPlayerTime += 1
+            if indexHoleColumn == currentPlayer - 1{//ditempat dia sendiri
+                if indexHoleRow == 7{
+                    addToGoalPost(selectedHole: selectedHole)//add di Goal Post
+                }else if indexHoleRow < 7{
+                    if selectedHole.name == gameBoard.holeBox[indexHoleColumn][indexHoleRow].name {
+                        if checkIfEmpty(parentNode: selectedHole) == false{
+                            //jatuh di tempat sendiri, gak kosong
+                            addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], style: .light)
+                            takeBeanToHand(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], currentPlayer: currentPlayer)
+                            indexHoleRow += 1
+                            //temporary
+                            if indexHoleRow == 7{
+                                if indexHoleColumn == 0{
+                                    updateNextHighlight(beforeNode: selectedHole, nextNode: gameBoard.goalPostBoxA)
+                                }else if indexHoleColumn == 1{
+                                    updateNextHighlight(beforeNode: selectedHole, nextNode: gameBoard.goalPostBoxB)
                                 }
+                            }else{
+                                updateNextHighlight(beforeNode: selectedHole, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
                             }
-                        }
-                    }else{
-                        //jatuh di tempat musuh
-                        if indexHoleRow < 7{
-                            if selectedHole!.name == gameBoard.holeBox[indexHoleColumn][indexHoleRow].name{
-                                if checkIfEmpty(parentNode: selectedHole!) == false{
-                                    //gak Kosong, ambil punya musuh
-                                    addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], style: .light)
-                                    takeBeanToHand(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], currentPlayer:     currentPlayer)
-                                    indexHoleRow += 1
-                                
-                                    if indexHoleRow == 7{
-                                        indexHoleRow = 0
-                                        if indexHoleColumn == 0{
-                                            indexHoleColumn = 1
-                                        }else if indexHoleColumn == 1{
-                                            indexHoleColumn = 0
-                                        }
-                                    }
-                                    updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
+                        }else{
+                            // TEMBAKKK
+                            if curPlayerTime > 8 {
+                                print(curPlayerTime)
+                                addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], style: .light)
+                                var enemyHoleColumn : Int = 0
+                                if indexHoleColumn == 1 {
+                                    enemyHoleColumn = 0
                                 }else{
-                                    //Kosong, ganti Player
-                                    addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], style: .light)
-                                    clearHighlight(parentNode: selectedHole!)
-                                    changePlayer(isFromTembak: false)
+                                    enemyHoleColumn = 1
                                 }
-                            }
-                        }else if indexHoleRow == 7{
-                            //next target lubang pertama tempat kita
-                            if selectedHole!.name == gameBoard.holeBox[currentPlayer-1][0].name{
-                                addKacang(parentNode: gameBoard.holeBox[currentPlayer-1][0], style: .light)
-                                takeBeanToHand(parentNode: gameBoard.holeBox[currentPlayer-1][0], currentPlayer:currentPlayer)
-                                indexHoleRow = 0
-                                indexHoleRow += 1
-                                indexHoleColumn = currentPlayer-1
-                                updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
-                            }
-                        }
-                    }
-                }else{
-                    curPlayerTime += 1
-                    if currentPlayer == 1{
-                        //player 1 turn
-                        if indexHoleRow == 7 && indexHoleColumn == 0{
-                            if  selectedHole!.name == gameBoard.goalPostBoxA.name {
-                                //jatuh di goalPost kita
-                                addToGoalPostA(parentNode: gameBoard.goalPostBoxA)
-                                updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
-                            }
-                        }else if indexHoleRow == 7 && indexHoleColumn == 1{
-                            if selectedHole!.name == gameBoard.holeBox[0][0].name{
-                                //berada di hole terakhir sbelum goalPost musuh, nextTarget ke hole kita (skip goalPost musuh)
-                                addKacang(parentNode: gameBoard.holeBox[0][0], style: .light)
-                                indexHoleColumn = 0
-                                indexHoleRow = 1
-                                updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
-                            }
-                        }else if indexHoleRow < 7 {
-                            if  selectedHole!.name == gameBoard.holeBox[indexHoleColumn][indexHoleRow].name {
-                                //default Run
-                                addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], style : .light)
-                                indexHoleRow += 1
-                                if(indexHoleRow == 7){
-                                    if indexHoleColumn == 0{
-                                        updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.goalPostBoxA)
-                                    }else if indexHoleColumn == 1{
-                                        updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.holeBox[0][0])
-                                    }
-                                }else{
-                                    updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
+                                if checkIfEmpty(parentNode: gameBoard.holeBox[enemyHoleColumn][6-indexHoleRow]) == false{
+                                    tembak(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], indexEnemyColumn: enemyHoleColumn, curPlayer: currentPlayer)
                                 }
-                            }
-                        }
-                    }else if currentPlayer == 2{
-                        //player 2 turn
-                   
-                        if  indexHoleRow == 7 && indexHoleColumn == 1{
-                            if selectedHole!.name == gameBoard.goalPostBoxB.name{
-                                //jatuh di goalPost kita
-                                addToGoalPostB(parentNode: gameBoard.goalPostBoxB)
-                                updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
-                            }
-                        }else if indexHoleColumn == 0 && indexHoleRow == 7{
-                            if  selectedHole!.name == gameBoard.holeBox[1][0].name{
-                                //berada di hole terakhir sbelum goalPost musuh, nextTarget hole kita (skip goalPost musuh)
-                                addKacang(parentNode: gameBoard.holeBox[1][0], style: .light)
-                                indexHoleColumn = 1
-                                indexHoleRow = 1
-                                updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
-                            }
-                        }else if indexHoleRow < 7{
-                            if selectedHole!.name == gameBoard.holeBox[indexHoleColumn][indexHoleRow].name{
-                                //default Run
-                                addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow],style: .light)
-                                indexHoleRow += 1
-                            
-                                if(indexHoleRow == 7){
-                                    if indexHoleColumn == 1{
-                                        updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.goalPostBoxB)
-                                    }else if indexHoleColumn == 0{
-                                        updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.holeBox[1][0])
-                                    }
-                                }else{
-                                    updateNextHighlight(beforeNode: selectedHole!, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
-                                }
+                                clearHighlight(parentNode: selectedHole)
+                                changePlayer(isFromTembak: true)
+                            }else{
+                                addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], style: .light)
+                                clearHighlight(parentNode: selectedHole)
+                                changePlayer(isFromTembak: false)
                             }
                         }
                     }
                 }
+            }else{
+                //jatuh di tempat musuh
+                if indexHoleRow < 7{
+                    if selectedHole.name == gameBoard.holeBox[indexHoleColumn][indexHoleRow].name{
+                        if checkIfEmpty(parentNode: selectedHole) == false{
+                            //gak Kosong, ambil punya musuh
+                            addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], style: .light)
+                            takeBeanToHand(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], currentPlayer:     currentPlayer)
+                            indexHoleRow += 1
+                            
+                            if indexHoleRow == 7{
+                                indexHoleRow = 0
+                                if indexHoleColumn == 0{
+                                    indexHoleColumn = 1
+                                }else if indexHoleColumn == 1{
+                                    indexHoleColumn = 0
+                                }
+                            }
+                            updateNextHighlight(beforeNode: selectedHole, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
+                        }else{
+                            //Kosong, ganti Player
+                            addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], style: .light)
+                            clearHighlight(parentNode: selectedHole)
+                            changePlayer(isFromTembak: false)
+                        }
+                    }
+                }else if indexHoleRow == 7{
+                    //next target lubang pertama tempat kita
+                    if selectedHole.name == gameBoard.holeBox[currentPlayer-1][0].name{
+                        addKacang(parentNode: gameBoard.holeBox[currentPlayer-1][0], style: .light)
+                        takeBeanToHand(parentNode: gameBoard.holeBox[currentPlayer-1][0], currentPlayer:currentPlayer)
+                        indexHoleRow = 0
+                        indexHoleRow += 1
+                        indexHoleColumn = currentPlayer-1
+                        updateNextHighlight(beforeNode: selectedHole, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
+                    }
+                }
             }
-            DispatchQueue.main.async {
-                self.updateLabel(label: self.currentBeanInHandLabel, input: self.counterHand)
+        }else{
+            curPlayerTime += 1
+            if currentPlayer == 1{
+                //player 1 turn
+                if indexHoleRow == 7 && indexHoleColumn == 0{
+                    if  selectedHole.name == gameBoard.goalPostBoxA.name {
+                        //jatuh di goalPost kita
+                        addToGoalPostA(parentNode: gameBoard.goalPostBoxA)
+                        updateNextHighlight(beforeNode: selectedHole, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
+                    }
+                }else if indexHoleRow == 7 && indexHoleColumn == 1{
+                    if selectedHole.name == gameBoard.holeBox[0][0].name{
+                        //berada di hole terakhir sbelum goalPost musuh, nextTarget ke hole kita (skip goalPost musuh)
+                        addKacang(parentNode: gameBoard.holeBox[0][0], style: .light)
+                        indexHoleColumn = 0
+                        indexHoleRow = 1
+                        updateNextHighlight(beforeNode: selectedHole, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
+                    }
+                }else if indexHoleRow < 7 {
+                    if  selectedHole.name == gameBoard.holeBox[indexHoleColumn][indexHoleRow].name {
+                        //default Run
+                        addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow], style : .light)
+                        indexHoleRow += 1
+                        if(indexHoleRow == 7){
+                            if indexHoleColumn == 0{
+                                updateNextHighlight(beforeNode: selectedHole, nextNode: gameBoard.goalPostBoxA)
+                            }else if indexHoleColumn == 1{
+                                updateNextHighlight(beforeNode: selectedHole, nextNode: gameBoard.holeBox[0][0])
+                            }
+                        }else{
+                            updateNextHighlight(beforeNode: selectedHole, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
+                        }
+                    }
+                }
+            }else if currentPlayer == 2{
+                //player 2 turn
+                
+                if  indexHoleRow == 7 && indexHoleColumn == 1{
+                    if selectedHole.name == gameBoard.goalPostBoxB.name{
+                        //jatuh di goalPost kita
+                        addToGoalPostB(parentNode: gameBoard.goalPostBoxB)
+                        updateNextHighlight(beforeNode: selectedHole, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
+                    }
+                }else if indexHoleColumn == 0 && indexHoleRow == 7{
+                    if  selectedHole.name == gameBoard.holeBox[1][0].name{
+                        //berada di hole terakhir sbelum goalPost musuh, nextTarget hole kita (skip goalPost musuh)
+                        addKacang(parentNode: gameBoard.holeBox[1][0], style: .light)
+                        indexHoleColumn = 1
+                        indexHoleRow = 1
+                        updateNextHighlight(beforeNode: selectedHole, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
+                    }
+                }else if indexHoleRow < 7{
+                    if selectedHole.name == gameBoard.holeBox[indexHoleColumn][indexHoleRow].name{
+                        //default Run
+                        addKacang(parentNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow],style: .light)
+                        indexHoleRow += 1
+                        
+                        if(indexHoleRow == 7){
+                            if indexHoleColumn == 1{
+                                updateNextHighlight(beforeNode: selectedHole, nextNode: gameBoard.goalPostBoxB)
+                            }else if indexHoleColumn == 0{
+                                updateNextHighlight(beforeNode: selectedHole, nextNode: gameBoard.holeBox[1][0])
+                            }
+                        }else{
+                            updateNextHighlight(beforeNode: selectedHole, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
+                        }
+                    }
+                }
             }
-            print("\(counterHand),\(indexHoleColumn)|\(indexHoleRow)")
         }
     }
     
@@ -272,7 +280,7 @@ extension GameplayViewController {
     }
     
     func takeBeanToHand(parentNode : SCNNode, currentPlayer : Int){
-        getSeed.play()
+        self.getSeed.play()
         for child in parentNode.childNodes{
             //print(child.name)
             if child.name == nil{
@@ -282,7 +290,7 @@ extension GameplayViewController {
         }
     }
     
-    
+    // MARK: tambah kacang
     func addKacang(parentNode : SCNNode, style : UIImpactFeedbackStyle){
         let kacang = KacangObject()
         heptic(style: style)
@@ -301,13 +309,106 @@ extension GameplayViewController {
             putSeed.play()
         }
         
+
+//        var newPerson = [NamaLubang]()
+//
+//        //add some values into custom class.
+//        newPerson.append(NamaLubang(name: nama, age: 45))
+//        let newPerson = NamaLubang(name: nama, age: 0)
+//
+//
+//
+//        //store you class object into NSUserDefaults.
+//        let personData = NSKeyedArchiver.archivedData(withRootObject: newPerson)
+//        UserDefaults().set(personData, forKey: "personData")
+        
+//        multipeerSession.sendToAllPeers(personData)
+//
+//        let willSendObject = NamaLubang(name: nama)
+//        do {
+//            let data = try? NSKeyedArchiver.archivedData(withRootObject: willSendObject, requiringSecureCoding: true)
+//        } catch {
+//            print("error archived Data")
+//        }
+        
+//        guard let data = try? NSKeyedArchiver.archivedData(withRootObject: nodeKacang, requiringSecureCoding: true)
+//            else { fatalError("can't encode node") }
+//
+    }
+    
+    // MARK: send Selected Hole to MultiPeer
+    func sendSelectedHole(parentNode : SCNNode){
+        guard let nama = parentNode.name else {
+            return print("fail to get name")
+        }
+        
+        print(nama)
+        let messengaDic = ["lubang" : nama , "player" : String(currentPlayer)]
+        
+        guard let messageData = try? JSONSerialization.data(withJSONObject: messengaDic, options: JSONSerialization.WritingOptions.prettyPrinted)
+            else {fatalError("cant encode node")}
+        multipeerSession.sendToAllPeers(messageData)
+        print("data ini sudah dikirim \(messageData)")
+    }
+    
+    // MARK: received Data add Kacang to selected Hole
+    func receiveSelectedHole(namaLubang: String){
+        print(namaLubang)
+        if namaLubang == gameBoard.goalPostBoxA.name{
+            validateSelectedHole(selectedHole: gameBoard.goalPostBoxA)
+        }else if namaLubang == gameBoard.goalPostBoxB.name{
+            validateSelectedHole(selectedHole: gameBoard.goalPostBoxB)
+        }else{
+            for i in 0...1{
+                for j in 0...6{
+                    if namaLubang == gameBoard.holeBox[i][j].name{
+                        validateSelectedHole(selectedHole: gameBoard.holeBox[i][j])
+                        break
+                    }
+                }
+            }
+        }
+        
+//        switch namaLubang {
+//        case "holeBox1.1":
+//            addKacang(parentNode: gameBoard.holeBox[1][1], style: .light)
+//        case "holeBox1.2":
+//            addKacang(parentNode: gameBoard.holeBox[1][2], style: .light)
+//        case "holeBox1.3":
+//            addKacang(parentNode: gameBoard.holeBox[1][3], style: .light)
+//        case "holeBox1.4":
+//            addKacang(parentNode: gameBoard.holeBox[1][4], style: .light)
+//        case "holeBox1.5":
+//            addKacang(parentNode: gameBoard.holeBox[1][5], style: .light)
+//        case "holeBox1.6":
+//            addKacang(parentNode: gameBoard.holeBox[1][6], style: .light)
+//        case "holeBox1.7":
+//            addKacang(parentNode: gameBoard.holeBox[1][7], style: .light)
+//        case "holeBox2.1":
+//            addKacang(parentNode: gameBoard.holeBox[2][1], style: .light)
+//        case "holeBox2.2":
+//            addKacang(parentNode: gameBoard.holeBox[2][2], style: .light)
+//        case "holeBox2.3":
+//            addKacang(parentNode: gameBoard.holeBox[2][3], style: .light)
+//        case "holeBox2.4":
+//            addKacang(parentNode: gameBoard.holeBox[2][4], style: .light)
+//        case "holeBox2.5":
+//            addKacang(parentNode: gameBoard.holeBox[2][5], style: .light)
+//        case "holeBox2.6":
+//            addKacang(parentNode: gameBoard.holeBox[2][6], style: .light)
+//        case "holeBox2.7":
+//            addKacang(parentNode: gameBoard.holeBox[2][7], style: .light)
+//
+//        default:
+//            return
+//        }
     }
     
     func chooseHoleToGetBean (location : CGPoint) -> SCNNode?{
         //SCNHitTestOption -> coba diubah" dipelajari
         //[.boundingBox : true]
         let hitTestOptions : [SCNHitTestOption : Any] = [.categoryBitMask : 3]
-        let hitResults = sceneView.hitTest(location, options: hitTestOptions)
+        let hitResults = sceneView!.hitTest(location, options: hitTestOptions)
         
         return hitResults.lazy.compactMap { result in
             guard let node = result.node.parent as? SCNNode? else {return nil}
@@ -355,7 +456,6 @@ extension GameplayViewController {
             DispatchQueue.main.async {
                 self.updateLabel(label: self.scoreALabel, input: self.counterA)
             }
-            
         }else if currentPlayer == 2 && selectedHole.name == gameBoard.goalPostBoxB.name{
             //Goal Post Player 2
             addKacang(parentNode: gameBoard.goalPostBoxB, style: .heavy )
@@ -365,7 +465,6 @@ extension GameplayViewController {
             DispatchQueue.main.async {
                 self.updateLabel(label: self.scoreBLabel, input: self.counterB)
             }
-            
         }
     }
     
@@ -393,7 +492,9 @@ extension GameplayViewController {
     func heptic(style : UIImpactFeedbackStyle){
         let hepticFeedback = UIImpactFeedbackGenerator(style: style)
         hepticFeedback.prepare()
-        hepticFeedback.impactOccurred()
+        DispatchQueue.main.async {
+            hepticFeedback.impactOccurred()
+        }
     }
     
     func updateNextHighlight(beforeNode : SCNNode, nextNode : SCNNode){
@@ -463,13 +564,10 @@ extension GameplayViewController {
                 counterPlayerB += 1
             }
         }
-        
         if counterPlayerA == 7{
-            
             for index in 0...6{
                 takeBeanToHand(parentNode: gameBoard.holeBox[1][index], currentPlayer: 2)
             }
-            
             while counterHand != 0 {
                 addKacang(parentNode: gameBoard.goalPostBoxB, style: .heavy)
                 counterB += 1
@@ -479,11 +577,9 @@ extension GameplayViewController {
             }
             return true
         }else if counterPlayerB == 7 {
-            
             for index in 0...6{
                 takeBeanToHand(parentNode: gameBoard.holeBox[0][index], currentPlayer: 1)
             }
-            
             while counterHand != 0 {
                 addKacang(parentNode: gameBoard.goalPostBoxA, style: .heavy)
                 counterA += 1
@@ -522,16 +618,20 @@ extension GameplayViewController {
         isPaused = false
         highlightZeroInHand()
         
-        DispatchQueue.main.async {
-            self.updateStringLabel(label: self.statusLabel, input: "Papan Congklak muncul!")
-            let timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.tungguGantiLabel), userInfo: nil, repeats: false)
-        }
-        setAudioPutSeed()
-        setAudioAmbilBiji()
-        setAudioTurnChange()
+//        DispatchQueue.global(qos: .default).async {
+            DispatchQueue.main.async {
+                self.updateStringLabel(label: self.statusLabel, input: "Papan Congklak muncul!")
+                let timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.tungguGantiLabel), userInfo: nil, repeats: false)
+            }
+//        }
+        self.setAudioPutSeed()
+        self.setAudioAmbilBiji()
+        self.setAudioTurnChange()
     }
     
     @objc func tungguGantiLabel(){
-        updateStringLabel(label: statusLabel, input: "Giliran P\(currentPlayer)\nAmbil biji di lubang yang sudah ditandai")
+        DispatchQueue.main.async {
+            self.updateStringLabel(label: self.statusLabel, input: "Giliran P\(self.currentPlayer)\nAmbil biji di lubang yang sudah ditandai")
+        }
     }
 }
