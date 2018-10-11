@@ -14,6 +14,7 @@ import AVFoundation
 extension GameplayViewController {
     
     
+    
     @objc func tapped (tapRecognizer : UITapGestureRecognizer){
         let location = tapRecognizer.location(in: sceneView)
         
@@ -425,6 +426,7 @@ extension GameplayViewController {
                 self.updateStringLabel(label: self.statusLabel, input: "Giliran P\(self.currentPlayer)\nAmbil biji di lubang yang sudah ditandai")
             }
         }
+        
         if currentPlayer == 1{
             currentPlayer = 2
             //updateLabel(label: currentPlayerLabel, input: currentPlayer)
@@ -502,7 +504,13 @@ extension GameplayViewController {
             highlightZeroInHand()
         }else{
             clearHighlight(parentNode: beforeNode)
-            nextNode.childNode(withName: "Highlight", recursively: false)?.isHidden = false
+            let highlight = nextNode.childNode(withName: "Highlight", recursively: false)
+            highlight?.isHidden = false
+            if currentPlayer == 1{
+                highlight?.geometry?.firstMaterial?.diffuse.contents = UIColor(red: 90/255, green: 140/255, blue: 255/255, alpha: 1)
+            }else if currentPlayer == 2{
+                highlight?.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+            }
             print(nextNode.name)
         }
     }
@@ -516,7 +524,13 @@ extension GameplayViewController {
         if isGameOver == false {
             for i in 0...6{
                 if gameBoard.holeBox[currentPlayer-1][i].childNodes.count != 7{
-                    gameBoard.holeBox[currentPlayer-1][i].childNode(withName: "Highlight", recursively: false)?.isHidden = false
+                    let highlight = gameBoard.holeBox[currentPlayer-1][i].childNode(withName: "Highlight", recursively: false)
+                    highlight?.isHidden = false
+                    if currentPlayer == 1{
+                        highlight?.geometry?.firstMaterial?.diffuse.contents = UIColor(red: 90/255, green: 140/255, blue: 255/255, alpha: 1)
+                    }else if currentPlayer == 2{
+                        highlight?.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+                    }
                 }
             }
         }
@@ -598,9 +612,15 @@ extension GameplayViewController {
             //make game cannot be played
             isGameOver = true
     
-            if counterA != counterB{
+            if counterA > counterB{
                 DispatchQueue.main.async {
-                    self.updateStringLabel(label: self.statusLabel, input: "P\(self.currentPlayer) Menang")
+                    self.animationMenang(curPlayer: 1)
+                    self.updateStringLabel(label: self.statusLabel, input: "P1 Menang")
+                }
+            }else if counterB > counterA{
+                DispatchQueue.main.async {
+                    self.animationMenang(curPlayer: 2)
+                    self.updateStringLabel(label: self.statusLabel, input: "P2 Menang")
                 }
             }else{
                 //Draw
@@ -616,17 +636,18 @@ extension GameplayViewController {
         hapticFeedback.notificationOccurred(.success)
         isGameOver = false
         isPaused = false
+        isAudioInited = true
         highlightZeroInHand()
+        audioOutlet.isEnabled = true
         
-//        DispatchQueue.global(qos: .default).async {
-            DispatchQueue.main.async {
-                self.updateStringLabel(label: self.statusLabel, input: "Papan Congklak muncul!")
-                let timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.tungguGantiLabel), userInfo: nil, repeats: false)
-            }
-//        }
-        self.setAudioPutSeed()
-        self.setAudioAmbilBiji()
-        self.setAudioTurnChange()
+        DispatchQueue.main.async {
+            self.audioOutlet.setImage(UIImage(named: "sound"), for: .normal)
+            self.updateStringLabel(label: self.statusLabel, input: "Papan Congklak muncul!")
+            let timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.tungguGantiLabel), userInfo: nil, repeats: false)
+        }
+        setAudioPutSeed()
+        setAudioAmbilBiji()
+        setAudioTurnChange()
     }
     
     @objc func tungguGantiLabel(){

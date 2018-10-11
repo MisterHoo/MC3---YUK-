@@ -10,6 +10,7 @@ import UIKit
 import SceneKit
 import ARKit
 import MultipeerConnectivity
+import AVFoundation
 
 class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserViewControllerDelegate {
     
@@ -18,8 +19,12 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     
     //@IBOutlet weak var viewScore: UIView!
     
-    //var status label
+    // var outlet audio
+    @IBOutlet weak var audioOutlet: UIButton!
     
+    // var status label
+    
+    @IBOutlet weak var statusBackground: UIImageView!
     @IBOutlet weak var statusLabel: UILabel!
     
     //var layouting
@@ -44,6 +49,8 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     
     
     @IBOutlet weak var changePlayerNotif: UIImageView!
+    @IBOutlet weak var changePlayerNotifText: UIImageView!
+    @IBOutlet weak var menangNotif: UIImageView!
     
     var currentPlayerPoss: CGPoint!
     var nextPlayerPoss: CGPoint!
@@ -87,6 +94,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     var turnPlayer = AVAudioPlayer()
     var putSeed = AVAudioPlayer()
     var getSeed = AVAudioPlayer()
+    var isAudioInited : Bool = false
     
     var timer = Timer()
     let animateTime: Double = 2
@@ -109,7 +117,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         // Alert Button
         alert.addAction(UIAlertAction(title: "Ya", style: UIAlertActionStyle.default, handler: { (action) in alert.dismiss(animated: true, completion: nil)
             
-            self.performSegue(withIdentifier: "gameToMenu", sender: self)
+            self.dismiss(animated: false, completion: nil)
             
         }))
         
@@ -118,6 +126,40 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         
         self.present(alert, animated: true, completion: nil)
         
+    }
+    
+    @IBAction func bantuanButton(_ sender: Any) {
+        if statusLabel.isHidden == true && statusBackground.isHidden == true {
+            DispatchQueue.main.async {
+                self.statusLabel.isHidden = false
+                self.statusBackground.isHidden = false
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.statusBackground.isHidden = true
+                self.statusLabel.isHidden = true
+            }
+            
+        }
+    }
+    
+    @IBAction func audioButton(_ sender: Any) {
+        print(audioOutlet.image(for: .normal))
+        if audioOutlet.image(for: .normal) == UIImage(named: "sound") && isAudioInited == true{
+            DispatchQueue.main.async {
+                self.audioOutlet.setImage(UIImage(named: "mute"), for: .normal)
+            }
+            turnPlayer.volume = 0
+            getSeed.volume = 0
+            putSeed.volume = 0
+        } else if isAudioInited == true{
+            DispatchQueue.main.async {
+                self.audioOutlet.setImage(UIImage(named: "sound"), for: .normal)
+            }
+            turnPlayer.volume = 1
+            getSeed.volume = 1
+            putSeed.volume = 1
+        }
     }
     
     
@@ -140,7 +182,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         nextPlayerPoss = player2.center
         thisPlayer = 1
         
-        multipeerSession = MPCHandeler(receivedDataHandler: receivedData)
+        
         //        viewScore.layer.cornerRadius = 5
         //        viewScore.layer.masksToBounds = true
         
@@ -163,8 +205,15 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         lightNode.position = SCNVector3(0, 10, 2)
         
         
-        //        updateLabel(label: currentPlayerLabel, input: currentPlayer)
+        // updateLabel(label: currentPlayerLabel, input: currentPlayer)
         sceneView.scene.rootNode.addChildNode(lightNode)
+        
+        //set Audio Button
+        isAudioInited = false
+        audioOutlet.isEnabled = false
+        DispatchQueue.main.async {
+            self.audioOutlet.setImage(UIImage(named: "unavailable sound"), for: .disabled)
+        }
         
         //init label
         //updateLabel(label: currentPlayerLabel, input: currentPlayer)
@@ -378,6 +427,24 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         dismiss(animated: false, completion: nil)
     }
     
+    @IBAction func multiplayer(_ sender: Any) {
+        multiPeer.sessionBrowser()
+        multiPeer.mcBrowser.delegate = self
+        present(multiPeer.mcBrowser, animated: false)
+    }
+    @IBAction func sendWorldMap(_ sender: Any) {
+        getCurrentWorldMapData { (data, error) in
+            self.worldMapData = data
+            self.sendWorldMapData(self.worldMapData)
+        }
+    }
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: false, completion: nil)
+    }
+    
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: false, completion: nil)
+    }
     func addNodeAtLocation (location : CGPoint){
         guard anchors.count > 0 else{
             print("anchors are not created yet")

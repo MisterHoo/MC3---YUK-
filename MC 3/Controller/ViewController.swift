@@ -112,7 +112,7 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
         //multiPeer.setupPeerId()
 //        usernameTextField.delegate = self
         
-        imageArray = [UIImage(named: "AssetCongklak"),UIImage(named: "AssetGundu"),UIImage(named: "AssetGasing")] as! [UIImage]
+//        imageArray = [UIImage(named: "AssetCongklak"),UIImage(named: "AssetGundu"),UIImage(named: "AssetGasing")] as! [UIImage]
         
 //        print(scrollView.frame.width)
 //        print(scrollView.frame.height)
