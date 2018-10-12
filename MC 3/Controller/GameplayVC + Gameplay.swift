@@ -369,40 +369,6 @@ extension GameplayViewController {
                 }
             }
         }
-        
-//        switch namaLubang {
-//        case "holeBox1.1":
-//            addKacang(parentNode: gameBoard.holeBox[1][1], style: .light)
-//        case "holeBox1.2":
-//            addKacang(parentNode: gameBoard.holeBox[1][2], style: .light)
-//        case "holeBox1.3":
-//            addKacang(parentNode: gameBoard.holeBox[1][3], style: .light)
-//        case "holeBox1.4":
-//            addKacang(parentNode: gameBoard.holeBox[1][4], style: .light)
-//        case "holeBox1.5":
-//            addKacang(parentNode: gameBoard.holeBox[1][5], style: .light)
-//        case "holeBox1.6":
-//            addKacang(parentNode: gameBoard.holeBox[1][6], style: .light)
-//        case "holeBox1.7":
-//            addKacang(parentNode: gameBoard.holeBox[1][7], style: .light)
-//        case "holeBox2.1":
-//            addKacang(parentNode: gameBoard.holeBox[2][1], style: .light)
-//        case "holeBox2.2":
-//            addKacang(parentNode: gameBoard.holeBox[2][2], style: .light)
-//        case "holeBox2.3":
-//            addKacang(parentNode: gameBoard.holeBox[2][3], style: .light)
-//        case "holeBox2.4":
-//            addKacang(parentNode: gameBoard.holeBox[2][4], style: .light)
-//        case "holeBox2.5":
-//            addKacang(parentNode: gameBoard.holeBox[2][5], style: .light)
-//        case "holeBox2.6":
-//            addKacang(parentNode: gameBoard.holeBox[2][6], style: .light)
-//        case "holeBox2.7":
-//            addKacang(parentNode: gameBoard.holeBox[2][7], style: .light)
-//
-//        default:
-//            return
-//        }
     }
     
     func chooseHoleToGetBean (location : CGPoint) -> SCNNode?{

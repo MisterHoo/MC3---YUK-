@@ -319,7 +319,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-<<<<<<< HEAD
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YC3-47-I2j">
                                 <rect key="frame" x="104" y="722" width="98" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -336,7 +335,6 @@
                                     <action selector="sendWorldMap:" destination="oHS-1f-FFs" eventType="touchUpInside" id="t1w-z2-AJ9"/>
                                 </connections>
                             </button>
-=======
                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3I9-db-rbW">
                                 <rect key="frame" x="104" y="393.66666666666669" width="167" height="35"/>
                                 <constraints>
@@ -358,7 +356,6 @@
                                     <constraint firstAttribute="height" constant="175" id="qlU-4U-oRn"/>
                                 </constraints>
                             </imageView>
->>>>>>> 7b6215816f00da15f5efd477c582723e2675f14b
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>

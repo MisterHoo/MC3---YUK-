@@ -107,7 +107,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         
         createAlert(title: "Keluar dari game", message: "Anda yakin?")
         
-        multiPeer.mcAdvertiserAssistant = nil
+        multipeerSession.mcAdvertiserAssistant = nil
         
     }
     
@@ -182,7 +182,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         nextPlayerPoss = player2.center
         thisPlayer = 1
         
-        
+        multipeerSession = MPCHandeler(receivedDataHandler: receivedData)
         //        viewScore.layer.cornerRadius = 5
         //        viewScore.layer.masksToBounds = true
         
@@ -402,22 +402,22 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
 //        }
     }
 // mutliplayer
-    @IBAction func multiplayer(_ sender: Any) {
-       
-        multipeerSession.sessionBrowser()
-        multipeerSession.mcBrowser.delegate = self
-        present(multipeerSession.mcBrowser, animated: false)
-    }
-    
-    @IBAction func sendWorldMap(_ sender: Any) {
-        sceneView.session.getCurrentWorldMap { worldMap, error in
-            guard let map = worldMap
-                else { print("Error: \(error!.localizedDescription)"); return }
-            guard let data = try? NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
-                else { fatalError("can't encode map") }
-            self.multipeerSession.sendToAllPeers(data)
-        }
-    }
+//    @IBAction func multiplayer(_ sender: Any) {
+//       
+//        multipeerSession.sessionBrowser()
+//        multipeerSession.mcBrowser.delegate = self
+//        present(multipeerSession.mcBrowser, animated: false)
+//    }
+//    
+//    @IBAction func sendWorldMap(_ sender: Any) {
+//        sceneView.session.getCurrentWorldMap { worldMap, error in
+//            guard let map = worldMap
+//                else { print("Error: \(error!.localizedDescription)"); return }
+//            guard let data = try? NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
+//                else { fatalError("can't encode map") }
+//            self.multipeerSession.sendToAllPeers(data)
+//        }
+//    }
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         thisPlayer = 2
         dismiss(animated: false, completion: nil)
@@ -428,22 +428,19 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     }
     
     @IBAction func multiplayer(_ sender: Any) {
-        multiPeer.sessionBrowser()
-        multiPeer.mcBrowser.delegate = self
-        present(multiPeer.mcBrowser, animated: false)
+        multipeerSession.sessionBrowser()
+        multipeerSession.mcBrowser.delegate = self
+        present(multipeerSession.mcBrowser, animated: false)
+
     }
     @IBAction func sendWorldMap(_ sender: Any) {
-        getCurrentWorldMapData { (data, error) in
-            self.worldMapData = data
-            self.sendWorldMapData(self.worldMapData)
+        sceneView.session.getCurrentWorldMap { worldMap, error in
+            guard let map = worldMap
+                else { print("Error: \(error!.localizedDescription)"); return }
+            guard let data = try? NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
+                else { fatalError("can't encode map") }
+            self.multipeerSession.sendToAllPeers(data)
         }
-    }
-    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-        dismiss(animated: false, completion: nil)
-    }
-    
-    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-        dismiss(animated: false, completion: nil)
     }
     func addNodeAtLocation (location : CGPoint){
         guard anchors.count > 0 else{
@@ -578,9 +575,9 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     
     // MARK: - send world Map
     func sendWorldMapData(_ worldData : Data!){
-        if multiPeer.session.connectedPeers.count > 0 {
+        if multipeerSession.session.connectedPeers.count > 0 {
             do{
-                try multiPeer.session.send(worldData, toPeers: multiPeer.session.connectedPeers, with: .reliable)
+                try multipeerSession.session.send(worldData, toPeers: multipeerSession.session.connectedPeers, with: .reliable)
             }catch{
                 fatalError("could not send world data")
             }
@@ -596,6 +593,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
                 configuration.planeDetection = .horizontal
                 configuration.initialWorldMap = worldMap
                 sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+                
                 print("ini dapet world map")
             }
 //                if let anchor = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARAnchor.self, from: data) {
