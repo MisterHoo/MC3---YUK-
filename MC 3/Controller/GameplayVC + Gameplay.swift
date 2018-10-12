@@ -27,8 +27,12 @@ extension GameplayViewController {
             print("curPlayer : \(currentPlayer),thisPlayer : \(thisPlayer)")
             let selectedHole = chooseHoleToGetBean(location: location)
             if (selectedHole != nil && isGameOver == false && isPaused == false){
-                if currentPlayer == thisPlayer{
-                    sendSelectedHole(parentNode: selectedHole!)
+                if isMultipeer == true{
+                    if currentPlayer == thisPlayer{
+                        sendSelectedHole(parentNode: selectedHole!)
+                        validateSelectedHole(selectedHole: selectedHole!)
+                    }
+                }else{
                     validateSelectedHole(selectedHole: selectedHole!)
                 }
             }

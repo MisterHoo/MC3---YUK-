@@ -67,6 +67,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     var gameManager : gameManager!
     
     var isServer : Bool = false
+    var isMultipeer : Bool = false
     
     var worldMapItems:[WorldMapItem]!
     
@@ -428,12 +429,14 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     }
     
     @IBAction func multiplayer(_ sender: Any) {
+        //connect Button
         multipeerSession.sessionBrowser()
         multipeerSession.mcBrowser.delegate = self
         present(multipeerSession.mcBrowser, animated: false)
 
     }
     @IBAction func sendWorldMap(_ sender: Any) {
+        //send Button
         sceneView.session.getCurrentWorldMap { worldMap, error in
             guard let map = worldMap
                 else { print("Error: \(error!.localizedDescription)"); return }

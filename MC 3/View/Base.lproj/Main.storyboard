@@ -24,6 +24,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Main Menu Congklak - ungu" translatesAutoresizingMaskIntoConstraints="NO" id="bI0-do-zpe">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <color key="backgroundColor" red="0.25664669275283813" green="0.027481455355882645" blue="0.43924239277839661" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Main Menu Icon" translatesAutoresizingMaskIntoConstraints="NO" id="eki-sI-6Sz">
                                 <rect key="frame" x="61" y="138" width="253" height="447"/>
@@ -57,11 +58,17 @@
                                 <rect key="frame" x="-118" y="489" width="118" height="73"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="satu perangkat"/>
+                                <connections>
+                                    <action selector="singleDeviceSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5I1-uB-JDN"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kws-fG-ZhV">
                                 <rect key="frame" x="375" y="489" width="118" height="73"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="dua perangkat"/>
+                                <connections>
+                                    <action selector="dualDeviceSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YeL-5B-L6K"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r1Y-K6-r7Z">
                                 <rect key="frame" x="-70" y="60" width="70" height="44"/>
@@ -72,7 +79,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="backgroundColor" red="1" green="0.8980392157" blue="0.96078431369999995" alpha="0.28026005990000002" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="bI0-do-zpe" secondAttribute="bottom" id="5zG-ul-9ej"/>
                             <constraint firstItem="bI0-do-zpe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Gt0-eb-VwU"/>

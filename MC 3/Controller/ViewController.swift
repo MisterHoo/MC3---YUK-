@@ -21,12 +21,6 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     @IBOutlet weak var buttonDualDevice: UIButton!
     @IBOutlet weak var buttonMain: UIButton!
     @IBOutlet weak var backButton: UIButton!
-    
-    
-    
-    var imageArray = [UIImage]()
-    
-
 
     @IBOutlet weak var menuSlider: UIPageControl!
     @IBOutlet weak var usernameTextField: UITextField!
@@ -35,6 +29,7 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     
     var multiPeer : MPCHandeler!
     var isServer : Bool = false
+    var isMultipeer : Bool = false
     
     @IBAction func ikutButtonAction(_ sender: UIButton) {
         //performSegue(withIdentifier: "menuToLobby", sender: self)
@@ -55,6 +50,24 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     @IBAction func backButtonAction(_ sender: Any) {
         DispatchQueue.main.async {
             self.outAnimateSelectionDevice()
+        }
+    }
+    
+    
+    @IBAction func singleDeviceSelected(_ sender: Any) {
+        
+        isMultipeer = false
+        isServer = true
+        DispatchQueue.main.async {
+            self.selectedSingleDevice()
+        }
+    }
+    
+    @IBAction func dualDeviceSelected(_ sender: Any) {
+        isMultipeer = true
+        isServer = true
+        DispatchQueue.main.async {
+            self.selectedDualDevice()
         }
     }
     
@@ -99,6 +112,7 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
         let destination = segue.destination as? GameplayViewController
         
         destination?.isServer = isServer
+        destination?.isMultipeer = isMultipeer
     }
     
     public class MyClass {
@@ -109,23 +123,53 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
         static let myNotification = Notification.Name("MPC_DidRecieveDataNotification")
     }
 
+    func addGradientViewBelow(){
+        let layer = CAGradientLayer()
+        layer.frame = view.bounds
+        layer.colors = [UIColor(red: 65/255, green: 7/255, blue: 112/255, alpha: 1).cgColor, UIColor.black.cgColor]
+        layer.startPoint = CGPoint(x: 0.5, y: 0)
+        layer.endPoint = CGPoint(x: 0.5, y: 1)
+        layer.zPosition = -1
+        view.layer.addSublayer(layer)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(moveToGameVC), name: NSNotification.Name(rawValue: "MPC_DidRecieveDataNotification"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(moveToGameVC), name: NSNotification.Name(rawValue: "MPC_DidChangeStateNotification"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(moveToGameVC), name: NSNotification.Name(rawValue: "MPC_DidRecieveDataNotification"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(moveToGameVC), name: NSNotification.Name(rawValue: "MPC_DidChangeStateNotification"), object: nil)
+        DispatchQueue.main.async {
+            self.initPosition()
+            self.didLoadAnimate()
+        }
+        
+        
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func initPosition(){
+        bgRed.frame = CGRect.init(x: 375, y: 0, width: 375, height: 812)
+        bgBlue.frame = CGRect.init(x: -375, y: 0, width: 375, height: 812)
+        iconSingleDevice.frame = CGRect.init(x: -105, y: 260, width: 90, height: 203)
+        iconDualDevice.frame = CGRect.init(x: 388, y: 260, width: 92, height: 203)
+        buttonSingleDevice.frame = CGRect.init(x: -118, y: 489, width: 118, height: 73)
+        buttonDualDevice.frame = CGRect.init(x: 375, y: 489, width: 118, height: 73)
+        backButton.frame = CGRect.init(x: -70, y: 60, width: 70, height: 44)
+        
+        bgPurple.frame = CGRect.init(x: 0, y: 0, width: 375, height: 812)
+        mainMenuIcon.frame = CGRect.init(x: 61, y: 138, width: 253, height: 447)
+        buttonMain.frame = CGRect.init(x: 124, y: 570, width: 127, height: 78)
         
         buttonMain.isEnabled = true
         backButton.isEnabled = false
         buttonSingleDevice.isEnabled = false
         buttonDualDevice.isEnabled = false
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         DispatchQueue.main.async {
-            self.didLoadAnimate()
+            self.addGradientViewBelow()
         }
         
         //multiPeer = (UIApplication.shared.delegate as! AppDelegate).multiPeer
@@ -213,6 +257,77 @@ extension ViewController{
     //buttondualdevice x : 375 -> 222, y : 489, center x : 128, width : 118, height : 73
     //backButton x : -70 -> 22, y : 60, width : 70, height : 44
     
+    //bgPurple x : 0 -> 28 , y : 0 -> 61 , width : 375 -> 318, height : 812 -> 690
+    //mainMenuIcon x : 61 -> 78 , y : 138 -> 178, width : 253 -> 218, height : 447 -> 384
+    //buttonMain x : 124 -> 142 , y : 570 -> 567 , width : 127 -> 91, height : 78 -> 56
+    
+    func selectedDualDevice(){
+        bgRed.frame = CGRect.init(x: 187, y: 0, width: 375, height: 812)
+        bgBlue.frame = CGRect.init(x: -188, y: 0, width: 375, height: 812)
+        iconSingleDevice.frame = CGRect.init(x: 48, y: 260, width: 92, height: 203)
+        iconDualDevice.frame = CGRect.init(x: 235, y: 260, width: 92, height: 203)
+        buttonSingleDevice.frame = CGRect.init(x: 35, y: 489, width: 118, height: 73)
+        buttonDualDevice.frame = CGRect.init(x: 222, y: 489, width: 118, height: 73)
+        backButton.frame = CGRect.init(x: 22, y: 60, width: 70, height: 44)
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            //back out
+            self.backButton.frame = CGRect.init(x: -70, y: 60, width: 70, height: 44)
+            
+            //blue out
+            self.bgBlue.frame = CGRect.init(x: -375, y: 0, width: 375, height: 812)
+            self.iconSingleDevice.frame = CGRect.init(x: -105, y: 260, width: 92, height: 203)
+            self.buttonSingleDevice.frame = CGRect.init(x: -118, y: 489, width: 118, height: 73)
+            
+            //red in
+            self.bgRed.frame = CGRect.init(x: 0, y: 0, width: 375, height: 812)
+            self.iconDualDevice.frame = CGRect.init(x: 141, y: 260, width: 92, height: 203)
+            self.buttonDualDevice.frame = CGRect.init(x: 128, y: 489, width: 118, height: 73)
+            
+           
+            
+        }) { (true) in
+            UIView.animate(withDuration: 2.0, animations: {
+                self.bgBlue.frame = CGRect.init(x: -376, y: 0, width: 375, height: 812)
+            }, completion: { (true) in
+                self.performSegue(withIdentifier: "menuToGame", sender: self)
+            })
+        }
+    }
+    
+    
+    func selectedSingleDevice(){
+        bgRed.frame = CGRect.init(x: 187, y: 0, width: 375, height: 812)
+        bgBlue.frame = CGRect.init(x: -188, y: 0, width: 375, height: 812)
+        iconSingleDevice.frame = CGRect.init(x: 48, y: 260, width: 92, height: 203)
+        iconDualDevice.frame = CGRect.init(x: 235, y: 260, width: 92, height: 203)
+        buttonSingleDevice.frame = CGRect.init(x: 35, y: 489, width: 118, height: 73)
+        buttonDualDevice.frame = CGRect.init(x: 222, y: 489, width: 118, height: 73)
+        backButton.frame = CGRect.init(x: 22, y: 60, width: 70, height: 44)
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            //back out
+            self.backButton.frame = CGRect.init(x: -70, y: 60, width: 70, height: 44)
+            
+            //red out
+            self.bgRed.frame = CGRect.init(x: 375, y: 0, width: 375, height: 812)
+            self.iconDualDevice.frame = CGRect.init(x: 388, y: 260, width: 92, height: 203)
+            self.buttonDualDevice.frame = CGRect.init(x: 375, y: 489, width: 118, height: 73)
+            
+            //blue in
+            self.bgBlue.frame = CGRect.init(x: 0, y: 0, width: 375, height: 812)
+            self.iconSingleDevice.frame = CGRect.init(x: 141, y: 260, width: 92, height: 203)
+            self.buttonSingleDevice.frame = CGRect.init(x: 128, y: 489, width: 118, height: 73)
+        }) { (true) in
+            UIView.animate(withDuration: 2.0, animations: {
+                self.bgRed.frame = CGRect.init(x: 376, y: 0, width: 375, height: 812)
+            }, completion: { (true) in
+                self.performSegue(withIdentifier: "menuToGame", sender: self)
+            })
+        }
+    }
+    
+    
     func inAnimateSelectionDevice(){
         //init Position
         bgRed.frame = CGRect.init(x: 375, y: 0, width: 375, height: 812)
@@ -223,11 +338,15 @@ extension ViewController{
         buttonDualDevice.frame = CGRect.init(x: 375, y: 489, width: 118, height: 73)
         backButton.frame = CGRect.init(x: -70, y: 60, width: 70, height: 44)
         
+        bgPurple.frame = CGRect.init(x: 0, y: 0, width: 375, height: 812)
+        mainMenuIcon.frame = CGRect.init(x: 61, y: 138, width: 253, height: 447)
+        buttonMain.frame = CGRect.init(x: 124, y: 570, width: 127, height: 78)
+        
         
 //        bgRed.alpha = 0
 //        bgBlue.alpha = 0
         
-        buttonMain.isEnabled = false
+        
         backButton.isEnabled = true
         buttonDualDevice.isEnabled = true
         buttonSingleDevice.isEnabled = true
@@ -235,6 +354,13 @@ extension ViewController{
         UIView.animate(withDuration: 0.5, animations: {
             self.bgRed.frame = CGRect.init(x: 187, y: 0, width: 375, height: 812)
             self.bgBlue.frame = CGRect.init(x: -188, y: 0, width: 375, height: 812)
+            
+            self.bgPurple.frame = CGRect.init(x: 28, y: 61, width: 318, height: 690)
+            self.mainMenuIcon.frame = CGRect.init(x: 78, y: 178, width: 218, height: 384)
+            self.buttonMain.frame = CGRect.init(x: 142, y: 567, width: 91, height: 56)
+            self.bgPurple.alpha = 0.5
+            self.mainMenuIcon.alpha = 0.5
+            self.buttonMain.alpha = 0.5
 //            self.bgRed.alpha = 1
 //            self.bgBlue.alpha = 1
         }) { (true) in
@@ -244,6 +370,8 @@ extension ViewController{
                 self.buttonSingleDevice.frame = CGRect.init(x: 35, y: 489, width: 118, height: 73)
                 self.buttonDualDevice.frame = CGRect.init(x: 222, y: 489, width: 118, height: 73)
                 self.backButton.frame = CGRect.init(x: 22, y: 60, width: 70, height: 44)
+                
+                self.buttonMain.isEnabled = false
             })
         }
     }
@@ -256,12 +384,20 @@ extension ViewController{
         bgRed.frame = CGRect.init(x: 187, y: 0, width: 375, height: 812)
         bgBlue.frame = CGRect.init(x: -188, y: 0, width: 375, height: 812)
         backButton.frame = CGRect.init(x: 22, y: 60, width: 70, height: 44)
+        
+        bgPurple.frame = CGRect.init(x: 28, y: 61, width: 318, height: 690)
+        mainMenuIcon.frame = CGRect.init(x: 78, y: 178, width: 218, height: 384)
+        buttonMain.frame = CGRect.init(x: 142, y: 567, width: 91, height: 56)
+        
+        bgPurple.alpha = 0.75
+        mainMenuIcon.alpha = 0.75
+        buttonMain.alpha = 0.75
+        
 //        bgRed.alpha = 1
 //        bgBlue.alpha = 1
 //
        
         buttonMain.isEnabled = true
-        
         
         UIView.animate(withDuration: 0.5, animations: {
             self.iconSingleDevice.frame = CGRect.init(x: -105, y: 260, width: 90, height: 203)
@@ -275,6 +411,16 @@ extension ViewController{
                 self.bgBlue.frame = CGRect.init(x: -375, y: 0, width: 375, height: 812)
 //                self.bgRed.alpha = 0
 //                self.bgBlue.alpha = 0
+                
+                self.bgPurple.frame = CGRect.init(x: 0, y: 0, width: 375, height: 812)
+                self.mainMenuIcon.frame = CGRect.init(x: 61, y: 138, width: 253, height: 447)
+                self.buttonMain.frame = CGRect.init(x: 124, y: 570, width: 127, height: 78)
+                
+                self.bgPurple.alpha = 1
+                self.mainMenuIcon.alpha = 1
+                self.buttonMain.alpha = 1
+                
+                self.buttonMain.isEnabled = true
                 self.backButton.isEnabled = false
                 self.buttonSingleDevice.isEnabled = false
                 self.buttonDualDevice.isEnabled = false
@@ -285,6 +431,7 @@ extension ViewController{
     func didLoadAnimate(){
         buttonMain.alpha = 0
         mainMenuIcon.alpha = 0
+        bgPurple.alpha = 1
         
         UIView.animate(withDuration: 0.5, animations: {
             self.buttonMain.alpha = 1
@@ -296,6 +443,6 @@ extension ViewController{
         }
         
     }
-    
+   
     
 }
