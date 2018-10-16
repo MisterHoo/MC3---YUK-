@@ -99,7 +99,6 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
             self.visualEffectOutlet.effect = nil
         }) { (succes: Bool) in
             self.CreditView.removeFromSuperview()
-            self.visualEffectOutlet.isHidden = true
         }
     }
     @IBAction func creditButton(_ sender: Any) {
@@ -107,6 +106,7 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     }
     @IBAction func dismisButton(_ sender: Any) {
         animateOut()
+        self.visualEffectOutlet.isHidden = true
     }
     
     
