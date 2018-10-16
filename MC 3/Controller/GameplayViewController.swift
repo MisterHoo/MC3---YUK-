@@ -374,6 +374,7 @@ func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor:
     }
 }
 func sendMapFromUserDefault(){
+    print("send world map")
     sceneView.session.getCurrentWorldMap { worldMap, error in
         guard let map = worldMap
             else { print("Error: \(error!.localizedDescription)"); return }

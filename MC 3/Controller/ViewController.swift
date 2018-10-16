@@ -11,6 +11,8 @@ import MultipeerConnectivity
 
 class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControllerDelegate, UIScrollViewDelegate {
     
+    @IBOutlet var CreditView: UIView!
+    @IBOutlet weak var visualEffectOutlet: UIVisualEffectView!
     @IBOutlet weak var mainMenuIcon: UIImageView!
     @IBOutlet weak var bgPurple: UIImageView!
     @IBOutlet weak var bgRed: UIImageView!
@@ -30,7 +32,7 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     var multiPeer : MPCHandeler!
     var isServer : Bool = false
     var isMultipeer : Bool = false
-    
+    var effect:UIVisualEffect!
     @IBAction func ikutButtonAction(_ sender: UIButton) {
         //performSegue(withIdentifier: "menuToLobby", sender: self)
         multiPeer.sessionBrowser()
@@ -69,6 +71,35 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
         DispatchQueue.main.async {
             self.selectedDualDevice()
         }
+    }
+    func animateIn(){
+        visualEffectOutlet.isHidden = false
+        self.view.addSubview(CreditView)
+        CreditView.center = self.view.center
+        
+        CreditView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        CreditView.alpha = 0
+        UIView.animate(withDuration: 0.4) {
+            self.visualEffectOutlet.effect = self.effect
+            self.CreditView.alpha = 1
+            self.CreditView.transform = CGAffineTransform.identity
+        }
+    }
+    func animateOut(){
+        UIView.animate(withDuration: 0.3, animations: {
+            self.CreditView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            self.CreditView.alpha = 0
+            self.visualEffectOutlet.effect = nil
+        }) { (succes: Bool) in
+            self.CreditView.removeFromSuperview()
+            self.visualEffectOutlet.isHidden = true
+        }
+    }
+    @IBAction func creditButton(_ sender: Any) {
+        animateIn()
+    }
+    @IBAction func dismisButton(_ sender: Any) {
+        animateOut()
     }
     
     
@@ -167,7 +198,9 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        effect = visualEffectOutlet.effect
+        visualEffectOutlet.effect = nil
+        visualEffectOutlet.isHidden = true
         DispatchQueue.main.async {
             self.addGradientViewBelow()
         }
