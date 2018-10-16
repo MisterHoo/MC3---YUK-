@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.15" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.9"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -439,6 +439,9 @@
                                 <rect key="frame" x="251" y="46" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="holewithnumber"/>
+                                <connections>
+                                    <action selector="showIndicatorBean:" destination="oHS-1f-FFs" eventType="touchUpInside" id="Pdo-L4-vi7"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DBF-Cm-HfC">
                                 <rect key="frame" x="309" y="46" width="50" height="50"/>
@@ -473,7 +476,9 @@
                         <outlet property="changePlayerNotifText" destination="3I9-db-rbW" id="1PI-LK-2mB"/>
                         <outlet property="currPlayer" destination="d0t-ua-QsP" id="KEd-AT-0pH"/>
                         <outlet property="currentBeanInHandLabel" destination="cjh-ky-9z7" id="55p-17-Bk9"/>
+                        <outlet property="gabungOutlet" destination="YC3-47-I2j" id="QRL-Zz-c1k"/>
                         <outlet property="giliranPlayer" destination="su1-MA-bI5" id="d5k-0Z-GZ9"/>
+                        <outlet property="indicatorBeanOutlet" destination="PP7-6h-T7X" id="2cS-Ot-Cx3"/>
                         <outlet property="menangNotif" destination="zIm-Hh-cA4" id="deq-gC-UOW"/>
                         <outlet property="nextPlayer" destination="88v-cR-2mw" id="rmf-5a-XOl"/>
                         <outlet property="player1" destination="gSM-pw-MQO" id="di6-Dc-adv"/>

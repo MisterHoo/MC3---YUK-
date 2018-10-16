@@ -632,8 +632,10 @@ extension GameplayViewController {
         isAudioInited = true
         highlightZeroInHand()
         audioOutlet.isEnabled = true
+        indicatorBeanOutlet.isEnabled = true
         
         DispatchQueue.main.async {
+            self.indicatorBeanOutlet.setImage(UIImage(named: "holenonumber"), for: .normal)
             self.audioOutlet.setImage(UIImage(named: "sound"), for: .normal)
             self.updateStringLabel(label: self.statusLabel, input: "Papan Congklak muncul!")
             let timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.tungguGantiLabel), userInfo: nil, repeats: false)
@@ -655,8 +657,12 @@ extension GameplayViewController {
     func hideIndicatorBean(){
         for i in 0...1{
             for j in 0...6{
-                if let txtNode = gameBoard.holeBox[i][j].childNode(withName: "SumBeanNode", recursively: false){
-                    txtNode.isHidden = true
+                if boardFlag == true{
+                    if let txtNode = gameBoard.holeBox[i][j].childNode(withName: "SumBeanNode", recursively: false){
+                        DispatchQueue.main.async {
+                            txtNode.isHidden = true
+                        }
+                    }
                 }
             }
         }
@@ -665,26 +671,36 @@ extension GameplayViewController {
     func showIndicatorBean(){
         for i in 0...1{
             for j in 0...6{
-                if let txtNode = gameBoard.holeBox[i][j].childNode(withName: "SumBeanNode", recursively: false){
-                    txtNode.isHidden = false
+                if boardFlag == true{
+                    if let txtNode = gameBoard.holeBox[i][j].childNode(withName: "SumBeanNode", recursively: false){
+                        DispatchQueue.main.async {
+                            txtNode.isHidden = false
+                        }
+                    }
                 }
             }
         }
     }
 
     func updateIndicatorBean(){
-        for i in 0...1{
-            for j in 0...6{
-                var counterBean = 0
-                for child in gameBoard.holeBox[i][j].childNodes{
-                    if child.name == nil{
-                        counterBean += 1
-                    }
-                    let txtNode = gameBoard.holeBox[i][j].childNode(withName: "SumBeanNode", recursively: false)
-                    if i == 0{
-                        txtNode!.geometry = createSCNTextforNumberBean(value: counterBean, color: UIColor(red: 90/255, green: 140/255, blue: 255/255, alpha: 1))
-                    }else{
-                        txtNode!.geometry = createSCNTextforNumberBean(value: counterBean, color: UIColor.red)
+        DispatchQueue.global(qos: .userInitiated).async {
+            for i in 0...1{
+                for j in 0...6{
+                    var counterBean = 0
+                    for child in self.gameBoard.holeBox[i][j].childNodes{
+                        if child.name == nil{
+                            counterBean += 1
+                        }
+                        let txtNode = self.gameBoard.holeBox[i][j].childNode(withName: "SumBeanNode", recursively: false)
+                        if i == 0{
+                            DispatchQueue.main.async {
+                                txtNode!.geometry = self.createSCNTextforNumberBean(value: counterBean, color: UIColor(red: 90/255, green: 140/255, blue: 255/255, alpha: 1))
+                            }
+                        }else{
+                            DispatchQueue.main.async {
+                                txtNode!.geometry = self.createSCNTextforNumberBean(value: counterBean, color: UIColor.red)
+                            }
+                        }
                     }
                 }
             }
@@ -692,24 +708,31 @@ extension GameplayViewController {
     }
     
     func updateIndicatorGoalPost(){
-        var counterBean = 0
-        for child in gameBoard.goalPostBoxA.childNodes{
-            if child.name == nil{
-                counterBean += 1
-            }
-        }
-        let txtNodeA = gameBoard.goalPostBoxA.childNode(withName: "SumBeanNode", recursively: false)
-        txtNodeA?.geometry = createSCNTextforNumberBean(value: counterBean, color: UIColor(red: 90/255, green: 140/255, blue: 255/255, alpha: 1))
         
-        counterBean = 0
-        for child in gameBoard.goalPostBoxB.childNodes{
-            if child.name == nil{
-                counterBean += 1
+        DispatchQueue.global(qos: .userInitiated).async {
+            var counterBean = 0
+            for child in self.gameBoard.goalPostBoxA.childNodes{
+                if child.name == nil{
+                    counterBean += 1
+                }
             }
+            let txtNodeA = self.gameBoard.goalPostBoxA.childNode(withName: "SumBeanNode", recursively: false)
+            DispatchQueue.main.async {
+                  txtNodeA?.geometry = self.createSCNTextforNumberBean(value: counterBean, color: UIColor(red: 90/255, green: 140/255, blue: 255/255, alpha: 1))
+            }
+          
+            counterBean = 0
+            for child in self.gameBoard.goalPostBoxB.childNodes{
+                if child.name == nil{
+                    counterBean += 1
+                }
+            }
+            let txtNodeB = self.gameBoard.goalPostBoxB.childNode(withName: "SumBeanNode", recursively: false)
+            DispatchQueue.main.async {
+                txtNodeB?.geometry = self.createSCNTextforNumberBean(value: counterBean, color: UIColor.red)
+            }
+            
         }
-        let txtNodeB = gameBoard.goalPostBoxB.childNode(withName: "SumBeanNode", recursively: false)
-        txtNodeB?.geometry = createSCNTextforNumberBean(value: counterBean, color: UIColor.red)
-        
     }
     
     func createSCNTextforNumberBean(value : Int, color : UIColor) -> SCNText{
@@ -727,33 +750,41 @@ extension GameplayViewController {
     }
     
     func createIndicatorGoalPost(){
-        var counterBean = 0
-        for child in gameBoard.goalPostBoxA.childNodes{
-            if child.name == nil{
-                counterBean += 1
+        DispatchQueue.global(qos: .userInitiated).async {
+            var counterBean = 0
+            for child in self.gameBoard.goalPostBoxA.childNodes{
+                if child.name == nil{
+                    counterBean += 1
+                }
+            }
+            let txtNodeA = SCNNode()
+            txtNodeA.geometry = self.createSCNTextforNumberBean(value: counterBean, color: UIColor(red: 90/255, green: 140/255, blue: 255/255, alpha: 1))
+            txtNodeA.position = SCNVector3(0.02,0.01,-0.05)
+            txtNodeA.eulerAngles = SCNVector3(67.5,135.05,0)
+            txtNodeA.name = "SumBeanNode"
+            txtNodeA.scale = SCNVector3(0.01, 0.01, 0.01)
+            
+            DispatchQueue.main.async {
+                self.gameBoard.goalPostBoxA.addChildNode(txtNodeA)
+            }
+            
+            counterBean = 0
+            for child in self.gameBoard.goalPostBoxB.childNodes{
+                if child.name == nil{
+                    counterBean += 1
+                }
+            }
+            let txtNodeB = SCNNode()
+            txtNodeB.geometry = self.createSCNTextforNumberBean(value: counterBean, color: UIColor.red)
+            txtNodeB.position = SCNVector3(-0.015,0.01,0.05 )
+            txtNodeB.eulerAngles = SCNVector3(67.5,0,0)
+            txtNodeB.name = "SumBeanNode"
+            txtNodeB.scale = SCNVector3(0.01, 0.01, 0.01)
+            
+            DispatchQueue.main.async {
+                self.gameBoard.goalPostBoxB.addChildNode(txtNodeB)
             }
         }
-        let txtNodeA = SCNNode()
-        txtNodeA.geometry = createSCNTextforNumberBean(value: counterBean, color: UIColor(red: 90/255, green: 140/255, blue: 255/255, alpha: 1))
-        txtNodeA.position = SCNVector3(0.02,0.01,-0.05)
-        txtNodeA.eulerAngles = SCNVector3(67.5,135.05,0)
-        txtNodeA.name = "SumBeanNode"
-        txtNodeA.scale = SCNVector3(0.01, 0.01, 0.01)
-        gameBoard.goalPostBoxA.addChildNode(txtNodeA)
-        
-        counterBean = 0
-        for child in gameBoard.goalPostBoxB.childNodes{
-            if child.name == nil{
-                counterBean += 1
-            }
-        }
-        let txtNodeB = SCNNode()
-        txtNodeB.geometry = createSCNTextforNumberBean(value: counterBean, color: UIColor.red)
-        txtNodeB.position = SCNVector3(-0.015,0.01,0.05 )
-        txtNodeB.eulerAngles = SCNVector3(67.5,0,0)
-        txtNodeB.name = "SumBeanNode"
-        txtNodeB.scale = SCNVector3(0.01, 0.01, 0.01)
-        gameBoard.goalPostBoxB.addChildNode(txtNodeB)
     }
     
     func createIndicatorBean(){
@@ -798,5 +829,4 @@ extension GameplayViewController {
             }
         }
     }
-    
 }

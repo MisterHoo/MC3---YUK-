@@ -21,6 +21,8 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     
     // var outlet audio
     @IBOutlet weak var audioOutlet: UIButton!
+    @IBOutlet weak var indicatorBeanOutlet: UIButton!
+    @IBOutlet weak var gabungOutlet: UIButton!
     
     // var status label
     
@@ -137,18 +139,30 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         
     }
     
+    @IBAction func showIndicatorBean(_ sender: Any) {
+        if indicatorBeanOutlet.image(for: .normal) == UIImage(named: "holewithnumber") && boardFlag == true{
+            DispatchQueue.main.async {
+                self.indicatorBeanOutlet.setImage(UIImage(named: "holenonumber"), for: .normal)
+                self.showIndicatorBean()
+            }
+        }else if indicatorBeanOutlet.image(for: .normal) == UIImage(named: "holenonumber") && boardFlag == true{
+            DispatchQueue.main.async {
+                self.indicatorBeanOutlet.setImage(UIImage(named: "holewithnumber"), for: .normal)
+                self.hideIndicatorBean()
+            }
+        }
+    }
+    
     @IBAction func bantuanButton(_ sender: Any) {
         if statusLabel.isHidden == true && statusBackground.isHidden == true{
             //show Bantuan
             DispatchQueue.main.async {
-                self.showIndicatorBean()
                 self.statusLabel.isHidden = false
                 self.statusBackground.isHidden = false
             }
         } else {
             //Hide Bantuan
             DispatchQueue.main.async {
-                self.hideIndicatorBean()
                 self.statusBackground.isHidden = true
                 self.statusLabel.isHidden = true
             }
@@ -229,6 +243,19 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         audioOutlet.isEnabled = false
         DispatchQueue.main.async {
             self.audioOutlet.setImage(UIImage(named: "unavailable sound"), for: .disabled)
+        }
+        
+        if isMultipeer == false{
+            DispatchQueue.main.async {
+                self.gabungOutlet.isEnabled = false
+                self.gabungOutlet.isHidden = true
+            }
+        }
+        
+        //set indicator Button
+        indicatorBeanOutlet.isEnabled = false
+        DispatchQueue.main.async {
+            self.indicatorBeanOutlet.setImage(UIImage(named: "holewithnumberinactive"), for: .disabled)
         }
         
         //init label
@@ -444,6 +471,9 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
 //    }
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         thisPlayer = 2
+        DispatchQueue.main.async {
+            self.gabungOutlet.isHidden = true
+        }
         dismiss(animated: false, completion: nil)
     }
     
@@ -612,53 +642,52 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
 //        }
 //    }
 
-    private func fetchArchivedWorldMap(from url: URL, _ closure: @escaping (Data?, Error?) -> Void) {
-        DispatchQueue.global().async {
-            do {
-                _ = url.startAccessingSecurityScopedResource()
-                defer { url.stopAccessingSecurityScopedResource() }
-                let data = try Data(contentsOf: url)
-                closure(data, nil)
-                
-            } catch {
-                DispatchQueue.main.async {
-                    print("error")
-                }
-                closure(nil, error)
-            }
-        }
-    }
-    
-    func getCurrentWorldMapData(_ closure: @escaping (Data?, Error?) -> Void) {
-        // When loading a map, send the loaded map and not the current extended map
-        if let worldMap = worldMap {
-            compressWorldMap(map: worldMap, closure)
-            return
-        } else {
-            sceneView.session.getCurrentWorldMap { map, error in
-                if let error = error {
-                    closure(nil, error)
-                }
-                guard let map = map else {return }
-                self.compressWorldMap(map: map, closure)
-            }
-        }
-    }
-    
-    func compressWorldMap(map: ARWorldMap, _ closure: @escaping (Data?, Error?) -> Void){
-        DispatchQueue.global().async {
-            do {
-                let data = try NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
-                let compressData = data.compressed()
-                closure(compressData,nil)
-            } catch {
-                print("error")
-                closure(nil, error)
-            }
-        }
-    }
+//    private func fetchArchivedWorldMap(from url: URL, _ closure: @escaping (Data?, Error?) -> Void) {
+//        DispatchQueue.global().async {
+//            do {
+//                _ = url.startAccessingSecurityScopedResource()
+//                defer { url.stopAccessingSecurityScopedResource() }
+//                let data = try Data(contentsOf: url)
+//                closure(data, nil)
+//
+//            } catch {
+//                DispatchQueue.main.async {
+//                    print("error")
+//                }
+//                closure(nil, error)
+//            }
+//        }
+//    }
+//
+//    func getCurrentWorldMapData(_ closure: @escaping (Data?, Error?) -> Void) {
+//        // When loading a map, send the loaded map and not the current extended map
+//        if let worldMap = worldMap {
+//            compressWorldMap(map: worldMap, closure)
+//            return
+//        } else {
+//            sceneView.session.getCurrentWorldMap { map, error in
+//                if let error = error {
+//                    closure(nil, error)
+//                }
+//                guard let map = map else {return }
+//                self.compressWorldMap(map: map, closure)
+//            }
+//        }
+//    }
+//
+//    func compressWorldMap(map: ARWorldMap, _ closure: @escaping (Data?, Error?) -> Void){
+//        DispatchQueue.global().async {
+//            do {
+//                let data = try NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
+//                let compressData = data.compressed()
+//                closure(compressData,nil)
+//            } catch {
+//                print("error")
+//                closure(nil, error)
+//            }
+//        }
+//    }
 }
-    
 extension GameplayViewController: MPCHandelerDelegate{
     func terserahLu() {
         sendMapFromUserDefault()

@@ -91,11 +91,8 @@ class MPCHandeler: NSObject, MCSessionDelegate,MCBrowserViewControllerDelegate, 
         switch state {
         case MCSessionState.connected:
             print("Connected: \(peerID.displayName)")
-            DispatchQueue.global().async{
-//                self.gamePlayViewController.sendMapFromUserDefault()
-                self.mpcHandelerDelgate?.terserahLu()
-            }
-           
+            mpcHandelerDelgate?.terserahLu()
+            
         case MCSessionState.connecting:
             print("Connecting: \(peerID.displayName)")
             
