@@ -40,9 +40,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ABt-EB-j4D">
-                                <rect key="frame" x="289" y="60" width="70" height="44"/>
+                                <rect key="frame" x="269" y="60" width="90" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="credit"/>
+                                <state key="normal" image="tentang"/>
                                 <connections>
                                     <action selector="creditButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zzi-wD-f16"/>
                                 </connections>
@@ -505,7 +505,6 @@
         <image name="Sisa" width="320" height="320"/>
         <image name="TombolIkutBatal" width="1000" height="486"/>
         <image name="bantuan textfield" width="1051" height="440"/>
-        <image name="credit" width="277" height="175"/>
         <image name="credit BG" width="1412" height="1944"/>
         <image name="dua perangkat" width="470" height="290"/>
         <image name="help" width="240" height="240"/>
@@ -515,6 +514,7 @@
         <image name="quit" width="240" height="240"/>
         <image name="satu perangkat" width="470" height="290"/>
         <image name="sound" width="240" height="240"/>
+        <image name="tentang" width="360" height="175"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jtD-Xf-w9m"/>
