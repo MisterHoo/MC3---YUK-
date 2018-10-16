@@ -82,6 +82,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r1Y-K6-r7Z">
                                 <rect key="frame" x="-90" y="60" width="90" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <state key="normal" image="Kembali"/>
                                 <connections>
                                     <action selector="backButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M1v-q5-VRy"/>
