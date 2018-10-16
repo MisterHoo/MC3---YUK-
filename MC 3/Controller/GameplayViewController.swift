@@ -105,6 +105,10 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     @IBOutlet weak var blackBackground: UIImageView!
     @IBOutlet weak var giliranPlayer: UILabel!
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+    
     @IBAction func backButtonAction(_ sender: UIButton)
     {
         
@@ -179,6 +183,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         print(player2.center)
         print(player1.center)
         currentPlayerPoss = player1.center
@@ -281,7 +286,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         
         sceneView.session.pause()
     }
-    
+  
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         var node : SCNNode?
         
