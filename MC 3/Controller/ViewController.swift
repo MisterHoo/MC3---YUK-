@@ -34,6 +34,7 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     var isMultipeer : Bool = false
     var widthScreen = UIScreen.main.bounds.width
     var heightScreen = UIScreen.main.bounds.height
+    var effect:UIVisualEffect!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
