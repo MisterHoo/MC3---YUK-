@@ -91,7 +91,7 @@ class MPCHandeler: NSObject, MCSessionDelegate,MCBrowserViewControllerDelegate, 
         switch state {
         case MCSessionState.connected:
             print("Connected: \(peerID.displayName)")
-            mpcHandelerDelgate?.terserahLu()
+            //mpcHandelerDelgate?.terserahLu()
             
         case MCSessionState.connecting:
             print("Connecting: \(peerID.displayName)")
