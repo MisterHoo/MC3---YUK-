@@ -7,7 +7,9 @@
 //
 
 import MultipeerConnectivity
-
+protocol MPCHandelerDelegate {
+    func terserahLu()
+}
 class MPCHandeler: NSObject, MCSessionDelegate,MCBrowserViewControllerDelegate, MCAdvertiserAssistantDelegate {
     
     let viewController = ViewController()
@@ -21,6 +23,7 @@ class MPCHandeler: NSObject, MCSessionDelegate,MCBrowserViewControllerDelegate, 
     
     var receivedData : Data!
     
+    var mpcHandelerDelgate: MPCHandelerDelegate?
     //private let reciveDataHandler: (Data, MCPeerID) -> Void
     var gamePlayViewController = GameplayViewController()
     
@@ -88,6 +91,10 @@ class MPCHandeler: NSObject, MCSessionDelegate,MCBrowserViewControllerDelegate, 
         switch state {
         case MCSessionState.connected:
             print("Connected: \(peerID.displayName)")
+            DispatchQueue.global().async{
+//                self.gamePlayViewController.sendMapFromUserDefault()
+                self.mpcHandelerDelgate?.terserahLu()
+            }
            
         case MCSessionState.connecting:
             print("Connecting: \(peerID.displayName)")
@@ -149,7 +156,7 @@ class MPCHandeler: NSObject, MCSessionDelegate,MCBrowserViewControllerDelegate, 
     }
     */
     
-    func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID, certificateHandler: @escaping (Bool) -> Void) {
+    func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID, certificateHandler: @escaping (Bool) -> Void){
         certificateHandler(true)
     }
         

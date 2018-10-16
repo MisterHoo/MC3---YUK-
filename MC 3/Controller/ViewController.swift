@@ -33,6 +33,10 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     var widthScreen = UIScreen.main.bounds.width
     var heightScreen = UIScreen.main.bounds.height
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     @IBAction func ikutButtonAction(_ sender: UIButton) {
         //performSegue(withIdentifier: "menuToLobby", sender: self)
         multiPeer.sessionBrowser()
@@ -165,7 +169,6 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
         buttonSingleDevice.isEnabled = false
         buttonDualDevice.isEnabled = false
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
