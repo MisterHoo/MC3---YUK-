@@ -108,7 +108,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     
     @IBOutlet weak var blackBackground: UIImageView!
     @IBOutlet weak var giliranPlayer: UILabel!
-    @IBOutlet weak var sendButtonOutlet: UIButton!
+
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
@@ -456,8 +456,6 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
             self.gameBoard.position = newPosition
             
             DispatchQueue.main.async {
-                self.sendButtonOutlet.isEnabled = true
-                self.sendButtonOutlet.isHidden = false
                 self.sendMapFromUserDefault()
                 self.gameBoard.loadModel()
                 self.initModel()
