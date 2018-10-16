@@ -138,13 +138,17 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     }
     
     @IBAction func bantuanButton(_ sender: Any) {
-        if statusLabel.isHidden == true && statusBackground.isHidden == true {
+        if statusLabel.isHidden == true && statusBackground.isHidden == true{
+            //show Bantuan
             DispatchQueue.main.async {
+                self.showIndicatorBean()
                 self.statusLabel.isHidden = false
                 self.statusBackground.isHidden = false
             }
         } else {
+            //Hide Bantuan
             DispatchQueue.main.async {
+                self.hideIndicatorBean()
                 self.statusBackground.isHidden = true
                 self.statusLabel.isHidden = true
             }

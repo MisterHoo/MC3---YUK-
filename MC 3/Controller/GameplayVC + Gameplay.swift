@@ -276,7 +276,7 @@ extension GameplayViewController {
                         updateNextHighlight(beforeNode: parentNode, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
                     }
                     DispatchQueue.main.async {
-                        self.destroyBeanSCNText()
+                        //self.destroyIndicatorBean()
                         self.updateStringLabel(label: self.statusLabel, input: "Biji berhasil diambil!\nLetakkan biji satu persatu sesuai urutan")
                     }
                     break
@@ -286,6 +286,10 @@ extension GameplayViewController {
     }
     
     func takeBeanToHand(parentNode : SCNNode, currentPlayer : Int){
+        DispatchQueue.main.async {
+            self.updateIndicatorBean()
+        }
+        
         self.getSeed.play()
         for child in parentNode.childNodes{
             //print(child.name)
@@ -302,6 +306,7 @@ extension GameplayViewController {
         heptic(style: style)
         
         DispatchQueue.main.async {
+
             self.updateStringLabel(label: self.statusLabel, input: "Letakkan biji satu persatu sesuai urutan")
         }
         
@@ -392,6 +397,7 @@ extension GameplayViewController {
         curPlayerTime = 0
         
         DispatchQueue.main.async {
+            self.updateIndicatorBean()
             self.switchPlayer()
             if isFromTembak == false{
                 self.updateStringLabel(label: self.statusLabel, input: "Giliran P\(self.currentPlayer)\nAmbil biji di lubang yang sudah ditandai")
@@ -473,6 +479,10 @@ extension GameplayViewController {
     }
     
     func updateNextHighlight(beforeNode : SCNNode, nextNode : SCNNode){
+        DispatchQueue.main.async {
+            self.updateIndicatorBean()
+        }
+        
         if counterHand == 0{
             DispatchQueue.main.async {
                 self.highlightZeroInHand()
@@ -495,11 +505,11 @@ extension GameplayViewController {
     }
     
     func highlightZeroInHand(){
-        calculateBeaninHand()
         checkGameOver()
         if isGameOver == false {
             for i in 0...6{
-                if gameBoard.holeBox[currentPlayer-1][i].childNodes.count != 7{
+                //clearHighlight(parentNode: gameBoard.holeBox[currentPlayer-1][i])
+                if gameBoard.holeBox[currentPlayer-1][i].childNodes.count != 8{
                     let highlight = gameBoard.holeBox[currentPlayer-1][i].childNode(withName: "Highlight", recursively: false)
                     highlight?.isHidden = false
                     if currentPlayer == 1{
@@ -547,10 +557,10 @@ extension GameplayViewController {
         var counterPlayerA : Int = 0
         var counterPlayerB : Int = 0
         for i in 0...6{
-            if gameBoard.holeBox[0][i].childNodes.count == 7{
+            if gameBoard.holeBox[0][i].childNodes.count == 8{
                 counterPlayerA += 1
             }
-            if gameBoard.holeBox[1][i].childNodes.count == 7{
+            if gameBoard.holeBox[1][i].childNodes.count == 8{
                 counterPlayerB += 1
             }
         }
@@ -620,7 +630,7 @@ extension GameplayViewController {
             self.audioOutlet.setImage(UIImage(named: "sound"), for: .normal)
             self.updateStringLabel(label: self.statusLabel, input: "Papan Congklak muncul!")
             let timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.tungguGantiLabel), userInfo: nil, repeats: false)
-            self.calculateBeaninHand()
+            self.createIndicatorBean()
             self.switchPlayer()
         }
         setAudioPutSeed()
@@ -631,6 +641,43 @@ extension GameplayViewController {
     @objc func tungguGantiLabel(){
         DispatchQueue.main.async {
             self.updateStringLabel(label: self.statusLabel, input: "Giliran P\(self.currentPlayer)\nAmbil biji di lubang yang sudah ditandai")
+        }
+    }
+    
+    func hideIndicatorBean(){
+        for i in 0...1{
+            for j in 0...6{
+                let txtNode = gameBoard.holeBox[i][j].childNode(withName: "SumBeanNode", recursively: false)
+                txtNode?.isHidden = true
+            }
+        }
+    }
+    
+    func showIndicatorBean(){
+        for i in 0...1{
+            for j in 0...6{
+                let txtNode = gameBoard.holeBox[i][j].childNode(withName: "SumBeanNode", recursively: false)
+                txtNode?.isHidden = false
+            }
+        }
+    }
+
+    func updateIndicatorBean(){
+        for i in 0...1{
+            for j in 0...6{
+                var counterBean = 0
+                for child in gameBoard.holeBox[i][j].childNodes{
+                    if child.name == nil{
+                        counterBean += 1
+                    }
+                    let txtNode = gameBoard.holeBox[i][j].childNode(withName: "SumBeanNode", recursively: false)
+                    if i == 0{
+                        txtNode!.geometry = createSCNTextforNumberBean(value: counterBean, color: UIColor(red: 90/255, green: 140/255, blue: 255/255, alpha: 1))
+                    }else{
+                        txtNode!.geometry = createSCNTextforNumberBean(value: counterBean, color: UIColor.red)
+                    }
+                }
+            }
         }
     }
     
@@ -648,7 +695,7 @@ extension GameplayViewController {
         return txtNote
     }
     
-    func calculateBeaninHand(){
+    func createIndicatorBean(){
         //let beanView = UIView()
         
         for i in 0...1{
@@ -679,7 +726,7 @@ extension GameplayViewController {
         }
     }
     
-    func destroyBeanSCNText(){
+    func destroyIndicatorBean(){
         for i in 0...1{
             for j in 0...6{
                 for child in gameBoard.holeBox[i][j].childNodes{
