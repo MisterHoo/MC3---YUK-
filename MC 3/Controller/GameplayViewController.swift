@@ -12,7 +12,7 @@ import ARKit
 import MultipeerConnectivity
 import AVFoundation
 
-class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserViewControllerDelegate {
+class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserViewControllerDelegate{
     
     // Test for Mr HOO
     //var view score
@@ -54,7 +54,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     
     var currentPlayerPoss: CGPoint!
     var nextPlayerPoss: CGPoint!
-    
+
     var worldMap : ARWorldMap!
     var worldMapData : Data!
     
@@ -91,6 +91,8 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     var curPlayerTime : Int = 0
     var isGameOver : Bool = false
     var isPaused : Bool = false
+    
+    var numberBeanNode : [SCNNode] = []
     
     var turnPlayer = AVAudioPlayer()
     var putSeed = AVAudioPlayer()
@@ -192,6 +194,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         //        lockButtonOutlet.setImage(UIImage(named: "Unlocked"), for: .normal)
         //delegate sceneView
         sceneView.delegate = self
+        sceneView.session.delegate = self
         
         let scene = SCNScene()
         sceneView.scene = scene
@@ -328,6 +331,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
                 //                gameAnchor = planeAnchor
             }
         }else if anchor.name == "congklak"{
+            gameBoard.name = "papan"
             node = gameBoard
         }
         return node
@@ -378,20 +382,8 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         print("masuk")
         if let name = anchor.name, name.hasPrefix("congklak"){
-            //            print("masuk if")
-            //            let tempGameBoard = GameBoard()
-            //            tempGameBoard.name = "gameboard"
-            //            node.addChildNode(tempGameBoard)
-            //            gameNode = node
-            //            gameBoard = gameNode.childNode(withName: "gameboard", recursively: false) as! GameBoard
-//            DispatchQueue.global(qos: .background).async {
                 self.gameAnchor = anchor
-                
-//                print(gameBoard)
-//                print(gameAnchor)
-//                print(sceneView.anchor(for: gameBoard))
-//                print(sceneView.node(for: gameAnchor))
-                
+                print(node.name)
                 let newPosition = SCNVector3(self.gameAnchor.transform.columns.3.x, self.gameAnchor.transform.columns.3.y, self.gameAnchor.transform.columns.3.z)
                 self.gameBoard.position = newPosition
                 
@@ -402,6 +394,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
             }
 //        }
     }
+
 // mutliplayer
 //    @IBAction func multiplayer(_ sender: Any) {
 //       
@@ -573,6 +566,8 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         
         let planeNode = sceneView.scene.rootNode.childNode(withName: "titikPlane", recursively: false)
         planeNode?.removeFromParentNode()
+       
+        
         
     }
     
@@ -703,9 +698,6 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
             }
         }
     }
-    
-    
-    
     /*
      // MARK: - Navigation
      
@@ -716,4 +708,22 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
      }
      */
     
+}
+
+extension GameplayViewController : ARSessionDelegate{
+//    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+//        for i in 0...1{
+//            for j in 0...6{
+//                if gameAnchor != nil{
+//                    guard let textNode = gameBoard.holeBox[i][j].childNode(withName: "SumBeanNode", recursively: false) else {
+//                        return
+//                    }
+//                    textNode.look(at: (sceneView.pointOfView?.position)!)
+//                }else{
+//                    break
+//                }
+//            }
+//        }
+//    }
+
 }

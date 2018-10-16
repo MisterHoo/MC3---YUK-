@@ -57,7 +57,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M4Y-Lv-MLx">
                                 <rect key="frame" x="-118" y="489" width="118" height="73"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="satu perangkat"/>
+                                <state key="normal" image="satu perangkat"/>
                                 <connections>
                                     <action selector="singleDeviceSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5I1-uB-JDN"/>
                                 </connections>
@@ -65,15 +65,15 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kws-fG-ZhV">
                                 <rect key="frame" x="375" y="489" width="118" height="73"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="dua perangkat"/>
+                                <state key="normal" image="dua perangkat"/>
                                 <connections>
                                     <action selector="dualDeviceSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YeL-5B-L6K"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r1Y-K6-r7Z">
-                                <rect key="frame" x="-70" y="60" width="70" height="44"/>
+                                <rect key="frame" x="-90" y="60" width="90" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="Back"/>
+                                <state key="normal" image="Kembali"/>
                                 <connections>
                                     <action selector="backButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M1v-q5-VRy"/>
                                 </connections>
@@ -449,10 +449,10 @@
     <resources>
         <image name="BG Duo" width="1500" height="3248"/>
         <image name="BG Solo" width="1500" height="3248"/>
-        <image name="Back" width="277" height="175"/>
         <image name="Background" width="375" height="812"/>
         <image name="Button Main Congklak" width="470" height="290"/>
         <image name="GiliranP1" width="1500" height="272"/>
+        <image name="Kembali" width="360" height="175"/>
         <image name="Main Menu Congklak - ungu" width="1500" height="3248"/>
         <image name="Main Menu Icon" width="1016" height="1785"/>
         <image name="P1 Poin" width="320" height="440"/>
