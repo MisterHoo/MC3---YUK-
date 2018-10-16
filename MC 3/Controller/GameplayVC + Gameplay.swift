@@ -621,6 +621,7 @@ extension GameplayViewController {
             self.updateStringLabel(label: self.statusLabel, input: "Papan Congklak muncul!")
             let timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.tungguGantiLabel), userInfo: nil, repeats: false)
             self.calculateBeaninHand()
+            self.switchPlayer()
         }
         setAudioPutSeed()
         setAudioAmbilBiji()
@@ -633,13 +634,13 @@ extension GameplayViewController {
         }
     }
     
-    func createSCNTextforNumberBean(value : Int) -> SCNText{
+    func createSCNTextforNumberBean(value : Int, color : UIColor) -> SCNText{
         var txtNote = SCNText()
         txtNote.string = String(value)
         txtNote.font = UIFont.systemFont(ofSize: 3)
         //txtNote.font = UIFont.init(name: "Yuanti SC", size: 255)
         txtNote.extrusionDepth = 0.2
-        txtNote.materials.first?.diffuse.contents = UIColor.white.withAlphaComponent(0.6)
+        txtNote.materials.first?.diffuse.contents = color.withAlphaComponent(0.6)
         //txtNote.containerFrame = CGRect(x: 0, y: 0.05, width: 200, height: 200)
         txtNote.isWrapped = true
         txtNote.alignmentMode = kCAAlignmentCenter
@@ -658,12 +659,15 @@ extension GameplayViewController {
                         counterBean += 1
                     }
                 }
-                let txtNode = SCNNode(geometry: createSCNTextforNumberBean(value: counterBean))
+                let txtNode = SCNNode()
                 if i == 0{
-                    txtNode.position = SCNVector3(-0.05, 0.015, -0.005)
+                    //txtNode.position = SCNVector3(-0.05, 0.015, -0.005) kalau p2 gak pake -
+                    txtNode.geometry = createSCNTextforNumberBean(value: counterBean, color: UIColor(red: 90/255, green: 140/255, blue: 255/255, alpha: 1))
+                    txtNode.position = SCNVector3(-0.025,0.015,-0.01)
                     txtNode.eulerAngles = SCNVector3(0,67.5,67.5)
                 }else{
-                    txtNode.position = SCNVector3(0.05, 0.015, 0.005)
+                    txtNode.geometry = createSCNTextforNumberBean(value: counterBean, color: UIColor.red)
+                    txtNode.position = SCNVector3(0.025,0.015,0.01)
                     txtNode.eulerAngles = SCNVector3(0,-67.5,-67.5)
                 }
                 
