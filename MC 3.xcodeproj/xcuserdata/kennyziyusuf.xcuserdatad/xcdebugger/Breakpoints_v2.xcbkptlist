@@ -10,45 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MC 3/Controller/GameplayViewController.swift"
-            timestampString = "561304382.211822"
+            timestampString = "561389868.45295"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "378"
-            endingLineNumber = "378"
-            landmarkName = "unknown"
-            landmarkType = "0">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MC_3.GameplayViewController.sendMapFromUserDefault() -&gt; ()"
-                  moduleName = "MC 3"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kennyziyusuf/Desktop/YUK!/MC%203/Controller/GameplayViewController.swift"
-                  timestampString = "561297580.271803"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "376"
-                  endingLineNumber = "376"
-                  offsetFromSymbolStart = "32">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.ARWorldMap&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in MC_3.GameplayViewController.sendMapFromUserDefault() -&gt; ()"
-                  moduleName = "MC 3"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kennyziyusuf/Desktop/YUK!/MC%203/Controller/GameplayViewController.swift"
-                  timestampString = "561297580.273778"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "377"
-                  endingLineNumber = "377"
-                  offsetFromSymbolStart = "48">
-               </Location>
-            </Locations>
+            startingLineNumber = "341"
+            endingLineNumber = "341"
+            landmarkName = "renderer(_:nodeFor:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -58,29 +26,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MC 3/Controller/GameplayViewController.swift"
-            timestampString = "561304382.211887"
+            timestampString = "561389868.45341"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "337"
-            endingLineNumber = "337"
-            landmarkName = "unknown"
-            landmarkType = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MC 3/Controller/GameplayViewController.swift"
-            timestampString = "561304382.211931"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "335"
-            endingLineNumber = "335"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "339"
+            endingLineNumber = "339"
+            landmarkName = "renderer(_:nodeFor:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
