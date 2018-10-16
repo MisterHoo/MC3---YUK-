@@ -13,7 +13,6 @@ import MultipeerConnectivity
 import AVFoundation
 
 class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserViewControllerDelegate{
-class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserViewControllerDelegate {
     
     // Test for Mr HOO
     //var view score
@@ -340,89 +339,88 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
                 //                gameAnchor = planeAnchor
     
             }
-    }else if anchor.name == "congklak"{
-    node = gameBoard
+        }else if anchor.name == "congklak"{
+            node = gameBoard
+        }
+        return node
     }
-    return node
-}
-
-func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
     
-    if let planeAnchor = anchor as? ARPlaneAnchor, anchor.name == nil{
-        if anchors.contains(planeAnchor){
-            
-            if node.childNodes.count > 0 && boardFlag == false{
-                DispatchQueue.main.async {
-                    //papan plane sudah ada
-                    self.updateStringLabel(label: self.statusLabel, input: "Ketuk plane untuk meletakkan papan congklak")
-                }
-                let planeNode = node.childNodes.first!
-                planeNode.position = SCNVector3(planeAnchor.center.x, 0, planeAnchor.center.z)
+    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+        
+        if let planeAnchor = anchor as? ARPlaneAnchor, anchor.name == nil{
+            if anchors.contains(planeAnchor){
                 
-                if let plane = planeNode.geometry as? SCNPlane {
-                    
-                    var width : CGFloat = 0
-                    var height : CGFloat = 0
-                    
-                    width = CGFloat(planeAnchor.extent.x)
-                    height = CGFloat(planeAnchor.extent.z)
-                    
-                    //validate width & height
-                    if planeAnchor.extent.x >= 0.3{
-                        width = 0.3
+                if node.childNodes.count > 0 && boardFlag == false{
+                    DispatchQueue.main.async {
+                        //papan plane sudah ada
+                        self.updateStringLabel(label: self.statusLabel, input: "Ketuk plane untuk meletakkan papan congklak")
                     }
-                    if planeAnchor.extent.z >= 0.5{
-                        height = 0.5
+                    let planeNode = node.childNodes.first!
+                    planeNode.position = SCNVector3(planeAnchor.center.x, 0, planeAnchor.center.z)
+                    
+                    if let plane = planeNode.geometry as? SCNPlane {
+                        
+                        var width : CGFloat = 0
+                        var height : CGFloat = 0
+                        
+                        width = CGFloat(planeAnchor.extent.x)
+                        height = CGFloat(planeAnchor.extent.z)
+                        
+                        //validate width & height
+                        if planeAnchor.extent.x >= 0.3{
+                            width = 0.3
+                        }
+                        if planeAnchor.extent.z >= 0.5{
+                            height = 0.5
+                        }
+                        plane.width = width
+                        plane.height = height
+                        updateMaterial()
                     }
-                    plane.width = width
-                    plane.height = height
-                    updateMaterial()
                 }
             }
         }
     }
-}
-func sendMapFromUserDefault(){
-    sceneView.session.getCurrentWorldMap { worldMap, error in
-        guard let map = worldMap
-            else { print("Error: \(error!.localizedDescription)"); return }
-        guard let data = try? NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
-            else { fatalError("can't encode map") }
-        self.multipeerSession.sendToAllPeers(data)
-    }
-}
-func updateMaterial(){
-    let material = self.planeGeometry.materials.first!
-    material.diffuse.contentsTransform = SCNMatrix4MakeScale(Float(self.planeGeometry.width), Float(self.planeGeometry.height), 1)
-}
-
-func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-    print("masuk")
-    if let name = anchor.name, name.hasPrefix("congklak"){
-        //            print("masuk if")
-        //            let tempGameBoard = GameBoard()
-        //            tempGameBoard.name = "gameboard"
-        //            node.addChildNode(tempGameBoard)
-        //            gameNode = node
-        //            gameBoard = gameNode.childNode(withName: "gameboard", recursively: false) as! GameBoard
-        //            DispatchQueue.global(qos: .background).async {
-        self.gameAnchor = anchor
-        
-        //                print(gameBoard)
-        //                print(gameAnchor)
-        //                print(sceneView.anchor(for: gameBoard))
-        //                print(sceneView.node(for: gameAnchor))
-        
-        let newPosition = SCNVector3(self.gameAnchor.transform.columns.3.x, self.gameAnchor.transform.columns.3.y, self.gameAnchor.transform.columns.3.z)
-        self.gameBoard.position = newPosition
-        
-        DispatchQueue.main.async {
-            self.gameBoard.loadModel()
-            self.initModel()
+    func sendMapFromUserDefault(){
+        sceneView.session.getCurrentWorldMap { worldMap, error in
+            guard let map = worldMap
+                else { print("Error: \(error!.localizedDescription)"); return }
+            guard let data = try? NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
+                else { fatalError("can't encode map") }
+            self.multipeerSession.sendToAllPeers(data)
         }
     }
-    //        }
-}
+    func updateMaterial(){
+        let material = self.planeGeometry.materials.first!
+        material.diffuse.contentsTransform = SCNMatrix4MakeScale(Float(self.planeGeometry.width), Float(self.planeGeometry.height), 1)
+    }
+
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        print("masuk")
+        if let name = anchor.name, name.hasPrefix("congklak"){
+            //            print("masuk if")
+            //            let tempGameBoard = GameBoard()
+            //            tempGameBoard.name = "gameboard"
+            //            node.addChildNode(tempGameBoard)
+            //            gameNode = node
+            //            gameBoard = gameNode.childNode(withName: "gameboard", recursively: false) as! GameBoard
+            //            DispatchQueue.global(qos: .background).async {
+            self.gameAnchor = anchor
+            
+            //                print(gameBoard)
+            //                print(gameAnchor)
+            //                print(sceneView.anchor(for: gameBoard))
+            //                print(sceneView.node(for: gameAnchor))
+            
+            let newPosition = SCNVector3(self.gameAnchor.transform.columns.3.x, self.gameAnchor.transform.columns.3.y, self.gameAnchor.transform.columns.3.z)
+            self.gameBoard.position = newPosition
+            
+            DispatchQueue.main.async {
+                self.gameBoard.loadModel()
+                self.initModel()
+            }
+        }
+    }
 // mutliplayer
 //    @IBAction func multiplayer(_ sender: Any) {
 //       
@@ -440,220 +438,151 @@ func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: AR
 //            self.multipeerSession.sendToAllPeers(data)
 //        }
 //    }
-func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-    thisPlayer = 2
-    dismiss(animated: false, completion: nil)
-}
-
-func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-    dismiss(animated: false, completion: nil)
-}
-
-@IBAction func multiplayer(_ sender: Any) {
-    //connect Button
-    multipeerSession.sessionBrowser()
-    multipeerSession.mcBrowser.delegate = self
-    present(multipeerSession.mcBrowser, animated: false)
-    
-}
-@IBAction func sendWorldMap(_ sender: Any) {
-    //send Button
-    sceneView.session.getCurrentWorldMap { worldMap, error in
-        guard let map = worldMap
-            else { print("Error: \(error!.localizedDescription)"); return }
-        guard let data = try? NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
-            else { fatalError("can't encode map") }
-        self.multipeerSession.sendToAllPeers(data)
-    }
-}
-func addNodeAtLocation (location : CGPoint){
-    guard anchors.count > 0 else{
-        print("anchors are not created yet")
-        return
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        thisPlayer = 2
+        dismiss(animated: false, completion: nil)
     }
     
-    let hitResults = sceneView.hitTest(location, types: .existingPlaneUsingExtent)
-    
-    if hitResults.count > 0 && boardFlag == false{
-        
-        let result = hitResults.first!
-        //            let newLocation = SCNVector3Make(result.worldTransform.columns.3.x,result.worldTransform.columns.3.y,result.worldTransform.columns.3.z)
-        
-        let anchor = ARAnchor(name: "congklak", transform: result.worldTransform)
-        sceneView.session.add(anchor: anchor)
-        print("nambah anchor")
-        
-        //            getCurrentWorldMapData { (data, error) in
-        //                self.worldMapData = data
-        //                self.sendWorldMapData(self.worldMapData)
-        //            }
-        //adding object
-        
-        //            let tempGameBoard = GameBoard()
-        //            tempGameBoard.name = "gameboard"
-        //            gameNode.addChildNode(tempGameBoard)
-        //
-        //            let newPosition = SCNVector3Make(gameAnchor.transform.columns.3.x,gameAnchor.transform.columns.3.y,gameAnchor.transform.columns.3.z)
-        //
-        //            gameBoard = gameNode.childNode(withName: "gameboard", recursively: false) as! GameBoard
-        //
-        //
-        //Papan
-        //            DispatchQueue.main.async {
-        //                self.gameBoard.position = newPosition
-        //                self.gameBoard.loadModel()
-        //                self.initModel()
-        //            }
-        
-        
-        //            print(sceneView.anchor(for: gameBoard))
-        
-        //            //let gamePhysicsShape = SCNPhysicsShape(node: gameNode, options: SCNPhysicsShape.Option.type)
-        //
-        //
-        //            //Kacang
-        //
-        //            for i in 0...1{
-        //                for j in 0...6{
-        //                    for k in 1...7{
-        //                        let kacang = KacangObject()
-        //                        kacang.loadModel()
-        //                        kacang.position = SCNVector3Make(0, Float(k) * 0.01, 0)
-        //
-        //                        //print(kacang.position)
-        //                        //gameNode.addChildNode(kacang)
-        //                        gameBoard.holeBox[i][j].addChildNode(kacang)
-        //
-        //                        //sceneView.scene.rootNode.addChildNode(kacang)
-        //                    }
-        //                    gameBoard.holeBox[i][j].childNode(withName: "Highlight", recursively: false)?.isHidden = true
-        ////                    gameNode.addChildNode(gameBoard.holeNode[i][j])
-        ////                    gameNode.addChildNode(gameBoard.holeBox[i][j])
-        //                }
-        //            }
-        //
-        //            gameBoard.goalPostBoxA.childNode(withName: "Highlight", recursively: false)?.isHidden = true
-        //            gameBoard.goalPostBoxB.childNode(withName: "Highlight", recursively: false)?.isHidden = true
-        //
-        //            sceneView.scene.rootNode.addChildNode(gameBoard)
-        //            initGame()
-        //
-        //            //validate no more board should place
-        //            boardFlag = true
-        //
-        //            //remove plane
-        //
-        //            let planeNode = sceneView.scene.rootNode.childNode(withName: "planeNode", recursively: true)
-        //            planeNode?.removeFromParentNode()
-        //
-        //            let end = Date()
-        //
-        //            print(end.timeIntervalSince(start))
-        
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: false, completion: nil)
     }
     
-}
-
-func initModel(){
-    //Kacang
-    
-    for i in 0...1{
-        for j in 0...6{
-            for k in 1...7{
-                //                    DispatchQueue.global().async {
-                let kacang = KacangObject()
-                kacang.loadModel()
-                kacang.position = SCNVector3Make(0, Float(k) * 0.01, 0)
-                
-                //print(kacang.position)
-                //gameNode.addChildNode(kacang)
-                self.gameBoard.holeBox[i][j].addChildNode(kacang)
-                
-                //sceneView.scene.rootNode.addChildNode(kacang)
-                //                    }
-            }
-            DispatchQueue.global().async {
-                self.gameBoard.holeBox[i][j].childNode(withName: "Highlight", recursively: false)?.isHidden = true
-                //                    gameNode.addChildNode(gameBoard.holeNode[i][j])
-                //                    gameNode.addChildNode(gameBoard.holeBox[i][j])
-            }
+    @IBAction func multiplayer(_ sender: Any) {
+        //connect Button
+        multipeerSession.sessionBrowser()
+        multipeerSession.mcBrowser.delegate = self
+        present(multipeerSession.mcBrowser, animated: false)
+        
+    }
+    @IBAction func sendWorldMap(_ sender: Any) {
+        //send Button
+        sceneView.session.getCurrentWorldMap { worldMap, error in
+            guard let map = worldMap
+                else { print("Error: \(error!.localizedDescription)"); return }
+            guard let data = try? NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
+                else { fatalError("can't encode map") }
+            self.multipeerSession.sendToAllPeers(data)
         }
     }
-    
-    gameBoard.goalPostBoxA.childNode(withName: "Highlight", recursively: false)?.isHidden = true
-    gameBoard.goalPostBoxB.childNode(withName: "Highlight", recursively: false)?.isHidden = true
-    
-    gameBoard.name = "gameboard"
-    sceneView.scene.rootNode.addChildNode(gameBoard)
-    initGame()
-    
-    //validate no more board should place
-    boardFlag = true
-    
-    //remove plane
-    
-    let planeNode = sceneView.scene.rootNode.childNode(withName: "titikPlane", recursively: false)
-    planeNode?.removeFromParentNode()
-    
-}
+    func addNodeAtLocation (location : CGPoint){
+        guard anchors.count > 0 else{
+            print("anchors are not created yet")
+            return
+        }
+        
+        let hitResults = sceneView.hitTest(location, types: .existingPlaneUsingExtent)
+        
+        if hitResults.count > 0 && boardFlag == false{
+            
+            let result = hitResults.first!
+            let anchor = ARAnchor(name: "congklak", transform: result.worldTransform)
+            sceneView.session.add(anchor: anchor)
+            print("nambah anchor")
+            
+        }
+        
+    }
+
+    func initModel(){
+        //Kacang
+        
+        for i in 0...1{
+            for j in 0...6{
+                for k in 1...7{
+                    //                    DispatchQueue.global().async {
+                    let kacang = KacangObject()
+                    kacang.loadModel()
+                    kacang.position = SCNVector3Make(0, Float(k) * 0.01, 0)
+                    
+                    //print(kacang.position)
+                    //gameNode.addChildNode(kacang)
+                    self.gameBoard.holeBox[i][j].addChildNode(kacang)
+                    
+                    //sceneView.scene.rootNode.addChildNode(kacang)
+                    //                    }
+                }
+                DispatchQueue.global().async {
+                    self.gameBoard.holeBox[i][j].childNode(withName: "Highlight", recursively: false)?.isHidden = true
+                    //                    gameNode.addChildNode(gameBoard.holeNode[i][j])
+                    //                    gameNode.addChildNode(gameBoard.holeBox[i][j])
+                }
+            }
+        }
+        
+        gameBoard.goalPostBoxA.childNode(withName: "Highlight", recursively: false)?.isHidden = true
+        gameBoard.goalPostBoxB.childNode(withName: "Highlight", recursively: false)?.isHidden = true
+        
+        gameBoard.name = "gameboard"
+        sceneView.scene.rootNode.addChildNode(gameBoard)
+        initGame()
+        
+        //validate no more board should place
+        boardFlag = true
+        
+        //remove plane
+        
+        let planeNode = sceneView.scene.rootNode.childNode(withName: "titikPlane", recursively: false)
+        planeNode?.removeFromParentNode()
+        
+    }
 
 // MARK: - send world Map
-func sendWorldMapData(_ worldData : Data!){
-    if multipeerSession.session.connectedPeers.count > 0 {
-        do{
-            try multipeerSession.session.send(worldData, toPeers: multipeerSession.session.connectedPeers, with: .reliable)
-        }catch{
-            fatalError("could not send world data")
-        }
-    }else{print("not connected to any device")}
-}
+    func sendWorldMapData(_ worldData : Data!){
+        if multipeerSession.session.connectedPeers.count > 0 {
+            do{
+                try multipeerSession.session.send(worldData, toPeers: multipeerSession.session.connectedPeers, with: .reliable)
+            }catch{
+                fatalError("could not send world data")
+            }
+        }else{print("not connected to any device")}
+    }
 // mengolah data
-func receivedData(_ data: Data, from peer: MCPeerID) {
-    do {
-        print(data)
-        if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data) {
-            // Run the session with the received world map.
-            let configuration = ARWorldTrackingConfiguration()
-            configuration.planeDetection = .horizontal
-            configuration.initialWorldMap = worldMap
-            sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
-            
-            print("ini dapet world map")
+    func receivedData(_ data: Data, from peer: MCPeerID) {
+        do {
+            print(data)
+            if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data) {
+                // Run the session with the received world map.
+                let configuration = ARWorldTrackingConfiguration()
+                configuration.planeDetection = .horizontal
+                configuration.initialWorldMap = worldMap
+                sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+                
+                print("ini dapet world map")
+            }
+                //                if let anchor = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARAnchor.self, from: data) {
+                //                    // Add anchor to the session, ARSCNView delegate adds visible content.
+                //                    sceneView.session.add(anchor: anchor)
+                //                    print("ini dapet anchor")
+                //                }
+            else {
+                print("unknown data recieved from \(peer)")
+            }
+        } catch {
+            print("can't decode dataWorldMap recieved from \(peer)")
         }
-            //                if let anchor = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARAnchor.self, from: data) {
-            //                    // Add anchor to the session, ARSCNView delegate adds visible content.
-            //                    sceneView.session.add(anchor: anchor)
-            //                    print("ini dapet anchor")
-            //                }
-        else {
-            print("unknown data recieved from \(peer)")
+        do {
+            let recivedData = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as! NSDictionary
+            print(recivedData)
+            let lubang:String! = recivedData.object(forKey: "lubang") as! String
+            let playerSekarang:String! = recivedData.object(forKey: "player") as! String
+            let curPlayer : Int = Int(playerSekarang)!
+            print("lubang yang terpilih \(lubang!)")
+            print("current player \(curPlayer)")
+            let currLubang:String = lubang!
+            receiveSelectedHole(namaLubang: currLubang)
+        } catch  {
+            print("data ga bisa diolah")
         }
-    } catch {
-        print("can't decode dataWorldMap recieved from \(peer)")
+        
+        //        if let loadedData = UserDefaults().data(forKey: "name") {
+        //            if let loadedPerson = NSKeyedUnarchiver.unarchiveObject(with: data) as? NamaLubang {
+        //                print(loadedPerson)
+        //                loadedPerson
+        //                print("\(loadedPerson.name!)")
+        //                print("kacang berhasil deterima")
+        //            }
+        //        }
     }
-    do {
-        let recivedData = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as! NSDictionary
-        print(recivedData)
-        let lubang:String! = recivedData.object(forKey: "lubang") as! String
-        let playerSekarang:String! = recivedData.object(forKey: "player") as! String
-        let curPlayer : Int = Int(playerSekarang)!
-        print("lubang yang terpilih \(lubang!)")
-        print("current player \(curPlayer)")
-        let currLubang:String = lubang!
-        receiveSelectedHole(namaLubang: currLubang)
-    } catch  {
-        print("data ga bisa diolah")
-    }
-    
-    //        if let loadedData = UserDefaults().data(forKey: "name") {
-    //            if let loadedPerson = NSKeyedUnarchiver.unarchiveObject(with: data) as? NamaLubang {
-    //                print(loadedPerson)
-    //                loadedPerson
-    //                print("\(loadedPerson.name!)")
-    //                print("kacang berhasil deterima")
-    //            }
-    //        }
-}
 
 //    func loadWorldMap(from archivedData: Data) {
 //        do {
@@ -679,70 +608,57 @@ func receivedData(_ data: Data, from peer: MCPeerID) {
 //        }
 //    }
 
-private func fetchArchivedWorldMap(from url: URL, _ closure: @escaping (Data?, Error?) -> Void) {
-    DispatchQueue.global().async {
-        do {
-            _ = url.startAccessingSecurityScopedResource()
-            defer { url.stopAccessingSecurityScopedResource() }
-            let data = try Data(contentsOf: url)
-            closure(data, nil)
-            
-        } catch {
-            DispatchQueue.main.async {
-                print("error")
-            }
-            closure(nil, error)
-        }
-    }
-}
-
-func getCurrentWorldMapData(_ closure: @escaping (Data?, Error?) -> Void) {
-    // When loading a map, send the loaded map and not the current extended map
-    if let worldMap = worldMap {
-        compressWorldMap(map: worldMap, closure)
-        return
-    } else {
-        sceneView.session.getCurrentWorldMap { map, error in
-            if let error = error {
+    private func fetchArchivedWorldMap(from url: URL, _ closure: @escaping (Data?, Error?) -> Void) {
+        DispatchQueue.global().async {
+            do {
+                _ = url.startAccessingSecurityScopedResource()
+                defer { url.stopAccessingSecurityScopedResource() }
+                let data = try Data(contentsOf: url)
+                closure(data, nil)
+                
+            } catch {
+                DispatchQueue.main.async {
+                    print("error")
+                }
                 closure(nil, error)
             }
-            guard let map = map else {return }
-            self.compressWorldMap(map: map, closure)
+        }
+    }
+    
+    func getCurrentWorldMapData(_ closure: @escaping (Data?, Error?) -> Void) {
+        // When loading a map, send the loaded map and not the current extended map
+        if let worldMap = worldMap {
+            compressWorldMap(map: worldMap, closure)
+            return
+        } else {
+            sceneView.session.getCurrentWorldMap { map, error in
+                if let error = error {
+                    closure(nil, error)
+                }
+                guard let map = map else {return }
+                self.compressWorldMap(map: map, closure)
+            }
+        }
+    }
+    
+    func compressWorldMap(map: ARWorldMap, _ closure: @escaping (Data?, Error?) -> Void){
+        DispatchQueue.global().async {
+            do {
+                let data = try NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
+                let compressData = data.compressed()
+                closure(compressData,nil)
+            } catch {
+                print("error")
+                closure(nil, error)
+            }
         }
     }
 }
-
-func compressWorldMap(map: ARWorldMap, _ closure: @escaping (Data?, Error?) -> Void){
-    DispatchQueue.global().async {
-        do {
-            let data = try NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
-            let compressData = data.compressed()
-            closure(compressData,nil)
-        } catch {
-            print("error")
-            closure(nil, error)
-        }
-    }
-}
-
-
-
-/*
- // MARK: - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
- // Get the new view controller using segue.destination.
- // Pass the selected object to the new view controller.
- }
- */
-
-}
+    
 extension GameplayViewController: MPCHandelerDelegate{
     func terserahLu() {
         sendMapFromUserDefault()
     }
-    
 }
 
 extension GameplayViewController : ARSessionDelegate{

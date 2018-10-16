@@ -660,10 +660,10 @@ extension GameplayViewController {
                 }
                 let txtNode = SCNNode(geometry: createSCNTextforNumberBean(value: counterBean))
                 if i == 0{
-                    txtNode.position = SCNVector3(-0.05, 0.035, -0.005)
+                    txtNode.position = SCNVector3(-0.05, 0.015, -0.005)
                     txtNode.eulerAngles = SCNVector3(0,67.5,67.5)
                 }else{
-                    txtNode.position = SCNVector3(0.05, 0.035, 0.005)
+                    txtNode.position = SCNVector3(0.05, 0.015, 0.005)
                     txtNode.eulerAngles = SCNVector3(0,-67.5,-67.5)
                 }
                 
