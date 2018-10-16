@@ -276,6 +276,7 @@ extension GameplayViewController {
                         updateNextHighlight(beforeNode: parentNode, nextNode: gameBoard.holeBox[indexHoleColumn][indexHoleRow])
                     }
                     DispatchQueue.main.async {
+                        self.destroyBeanSCNText()
                         self.updateStringLabel(label: self.statusLabel, input: "Biji berhasil diambil!\nLetakkan biji satu persatu sesuai urutan")
                     }
                     break
@@ -405,7 +406,9 @@ extension GameplayViewController {
             //updateLabel(label: currentPlayerLabel, input: currentPlayer)
         }
         print(currentPlayer)
-        highlightZeroInHand()
+        DispatchQueue.main.async {
+            self.highlightZeroInHand()
+        }
         turnPlayer.play()
     }
 
@@ -423,18 +426,18 @@ extension GameplayViewController {
             //Goal Post player 1
             addKacang(parentNode: gameBoard.goalPostBoxA, style: .heavy )
             counterA += 1
-            clearHighlight(parentNode: selectedHole)
-            highlightZeroInHand()
             DispatchQueue.main.async {
+                self.clearHighlight(parentNode: selectedHole)
+                self.highlightZeroInHand()
                 self.updateLabel(label: self.scoreALabel, input: self.counterA)
             }
         }else if currentPlayer == 2 && selectedHole.name == gameBoard.goalPostBoxB.name{
             //Goal Post Player 2
             addKacang(parentNode: gameBoard.goalPostBoxB, style: .heavy )
             counterB += 1
-            clearHighlight(parentNode: selectedHole)
-            highlightZeroInHand()
             DispatchQueue.main.async {
+                self.clearHighlight(parentNode: selectedHole)
+                self.highlightZeroInHand()
                 self.updateLabel(label: self.scoreBLabel, input: self.counterB)
             }
         }
@@ -471,7 +474,9 @@ extension GameplayViewController {
     
     func updateNextHighlight(beforeNode : SCNNode, nextNode : SCNNode){
         if counterHand == 0{
-            highlightZeroInHand()
+            DispatchQueue.main.async {
+                self.highlightZeroInHand()
+            }
         }else{
             clearHighlight(parentNode: beforeNode)
             let highlight = nextNode.childNode(withName: "Highlight", recursively: false)
@@ -490,6 +495,7 @@ extension GameplayViewController {
     }
     
     func highlightZeroInHand(){
+        calculateBeaninHand()
         checkGameOver()
         if isGameOver == false {
             for i in 0...6{
@@ -614,6 +620,8 @@ extension GameplayViewController {
             self.audioOutlet.setImage(UIImage(named: "sound"), for: .normal)
             self.updateStringLabel(label: self.statusLabel, input: "Papan Congklak muncul!")
             let timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.tungguGantiLabel), userInfo: nil, repeats: false)
+            self.calculateBeaninHand()
+            self.switchPlayer()
         }
         setAudioPutSeed()
         setAudioAmbilBiji()
@@ -625,4 +633,62 @@ extension GameplayViewController {
             self.updateStringLabel(label: self.statusLabel, input: "Giliran P\(self.currentPlayer)\nAmbil biji di lubang yang sudah ditandai")
         }
     }
+    
+    func createSCNTextforNumberBean(value : Int, color : UIColor) -> SCNText{
+        var txtNote = SCNText()
+        txtNote.string = String(value)
+        txtNote.font = UIFont.systemFont(ofSize: 3)
+        //txtNote.font = UIFont.init(name: "Yuanti SC", size: 255)
+        txtNote.extrusionDepth = 0.2
+        txtNote.materials.first?.diffuse.contents = color.withAlphaComponent(0.6)
+        //txtNote.containerFrame = CGRect(x: 0, y: 0.05, width: 200, height: 200)
+        txtNote.isWrapped = true
+        txtNote.alignmentMode = kCAAlignmentCenter
+        
+        return txtNote
+    }
+    
+    func calculateBeaninHand(){
+        //let beanView = UIView()
+        
+        for i in 0...1{
+            for j in 0...6{
+                var counterBean = 0
+                for child in gameBoard.holeBox[i][j].childNodes{
+                    if child.name == nil{
+                        counterBean += 1
+                    }
+                }
+                let txtNode = SCNNode()
+                if i == 0{
+                    //txtNode.position = SCNVector3(-0.05, 0.015, -0.005) kalau p2 gak pake -
+                    txtNode.geometry = createSCNTextforNumberBean(value: counterBean, color: UIColor(red: 90/255, green: 140/255, blue: 255/255, alpha: 1))
+                    txtNode.position = SCNVector3(-0.025,0.015,-0.01)
+                    txtNode.eulerAngles = SCNVector3(0,67.5,67.5)
+                }else{
+                    txtNode.geometry = createSCNTextforNumberBean(value: counterBean, color: UIColor.red)
+                    txtNode.position = SCNVector3(0.025,0.015,0.01)
+                    txtNode.eulerAngles = SCNVector3(0,-67.5,-67.5)
+                }
+                
+                txtNode.name = "SumBeanNode"
+                txtNode.scale = SCNVector3(0.01, 0.01, 0.01)
+                //txtNode.look(at: (sceneView.pointOfView?.position)!)
+                gameBoard.holeBox[i][j].addChildNode(txtNode)
+            }
+        }
+    }
+    
+    func destroyBeanSCNText(){
+        for i in 0...1{
+            for j in 0...6{
+                for child in gameBoard.holeBox[i][j].childNodes{
+                    if child.name == "SumBeanNode"{
+                        child.removeFromParentNode()
+                    }
+                }
+            }
+        }
+    }
+    
 }
