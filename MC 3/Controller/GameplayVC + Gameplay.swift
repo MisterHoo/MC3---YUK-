@@ -734,9 +734,9 @@ extension GameplayViewController {
             }
         }
         let txtNodeA = SCNNode()
-        txtNodeA.geometry = createSCNTextforNumberBean(value: 35, color: UIColor(red: 90/255, green: 140/255, blue: 255/255, alpha: 1))
-        txtNodeA.position = SCNVector3(0,0.015,0)
-        txtNodeA.eulerAngles = SCNVector3(67.5,135,0)
+        txtNodeA.geometry = createSCNTextforNumberBean(value: counterBean, color: UIColor(red: 90/255, green: 140/255, blue: 255/255, alpha: 1))
+        txtNodeA.position = SCNVector3(0.02,0.01,-0.05)
+        txtNodeA.eulerAngles = SCNVector3(67.5,135.05,0)
         txtNodeA.name = "SumBeanNode"
         txtNodeA.scale = SCNVector3(0.01, 0.01, 0.01)
         gameBoard.goalPostBoxA.addChildNode(txtNodeA)
@@ -748,8 +748,8 @@ extension GameplayViewController {
             }
         }
         let txtNodeB = SCNNode()
-        txtNodeB.geometry = createSCNTextforNumberBean(value: 35, color: UIColor.red)
-        txtNodeB.position = SCNVector3(0,0.015,0)
+        txtNodeB.geometry = createSCNTextforNumberBean(value: counterBean, color: UIColor.red)
+        txtNodeB.position = SCNVector3(-0.015,0.01,0.05 )
         txtNodeB.eulerAngles = SCNVector3(67.5,0,0)
         txtNodeB.name = "SumBeanNode"
         txtNodeB.scale = SCNVector3(0.01, 0.01, 0.01)
@@ -771,11 +771,11 @@ extension GameplayViewController {
                 if i == 0{
                     //txtNode.position = SCNVector3(-0.05, 0.015, -0.005) kalau p2 gak pake -
                     txtNode.geometry = createSCNTextforNumberBean(value: counterBean, color: UIColor(red: 90/255, green: 140/255, blue: 255/255, alpha: 1))
-                    txtNode.position = SCNVector3(-0.05,0.015,-0.01)
+                    txtNode.position = SCNVector3(-0.05,0.01,-0.01)
                     txtNode.eulerAngles = SCNVector3(0,67.5,67.5)
                 }else{
                     txtNode.geometry = createSCNTextforNumberBean(value: counterBean, color: UIColor.red)
-                    txtNode.position = SCNVector3(0.05,0.015,0.01)
+                    txtNode.position = SCNVector3(0.05,0.01,0.01)
                     txtNode.eulerAngles = SCNVector3(0,-67.5,-67.5)
                 }
                 
