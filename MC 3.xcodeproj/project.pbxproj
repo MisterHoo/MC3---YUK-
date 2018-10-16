@@ -28,6 +28,7 @@
 		66E943A9215A55FA001773E2 /* Turn Change.wav in Resources */ = {isa = PBXBuildFile; fileRef = 66E943A6215A55FA001773E2 /* Turn Change.wav */; };
 		66E943AA215A55FA001773E2 /* Tembak-Ambil.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 66E943A7215A55FA001773E2 /* Tembak-Ambil.aiff */; };
 		CD3C2404215B9CF100BE6C52 /* gameplayVC Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C2403215B9CF100BE6C52 /* gameplayVC Switch.swift */; };
+		CD4489B3217607E300950A25 /* Yuanti.ttc in Resources */ = {isa = PBXBuildFile; fileRef = CDD24289217601D40029EDA1 /* Yuanti.ttc */; };
 		CD9EE326216C97840051552F /* ObjectToSend.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9EE325216C97840051552F /* ObjectToSend.swift */; };
 		CDDA749C212AAC8A00A6B003 /* MultiPeerHandeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA749B212AAC8900A6B003 /* MultiPeerHandeler.swift */; };
 		CF8A8F28212BE15000FFFFE5 /* LockOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8A8F27212BE15000FFFFE5 /* LockOrientation.swift */; };
@@ -82,6 +83,7 @@
 		66E943A7215A55FA001773E2 /* Tembak-Ambil.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "Tembak-Ambil.aiff"; sourceTree = "<group>"; };
 		CD3C2403215B9CF100BE6C52 /* gameplayVC Switch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "gameplayVC Switch.swift"; sourceTree = "<group>"; };
 		CD9EE325216C97840051552F /* ObjectToSend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectToSend.swift; sourceTree = "<group>"; };
+		CDD24289217601D40029EDA1 /* Yuanti.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; name = Yuanti.ttc; path = ../../../../Downloads/Yuanti.ttc; sourceTree = "<group>"; };
 		CDDA749B212AAC8900A6B003 /* MultiPeerHandeler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiPeerHandeler.swift; sourceTree = "<group>"; };
 		CF8A8F27212BE15000FFFFE5 /* LockOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockOrientation.swift; sourceTree = "<group>"; };
 		CFCC5923212A9B6D0036C6B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "MC 3/Support/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
@@ -223,6 +225,7 @@
 		CFCC5922212A9B4C0036C6B2 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				CDD24289217601D40029EDA1 /* Yuanti.ttc */,
 				66E943A5215A55FA001773E2 /* Put Seed.aiff */,
 				66E943A7215A55FA001773E2 /* Tembak-Ambil.aiff */,
 				66E943A6215A55FA001773E2 /* Turn Change.wav */,
@@ -338,6 +341,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD4489B3217607E300950A25 /* Yuanti.ttc in Resources */,
 				66E943A8215A55FA001773E2 /* Put Seed.aiff in Resources */,
 				6697A7972122E73200DA0814 /* Main.storyboard in Resources */,
 				CFCC5925212A9B6D0036C6B2 /* Assets.xcassets in Resources */,
@@ -560,7 +564,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DK7HPF3UVL;
+				DEVELOPMENT_TEAM = ZP5Y9ZPS3B;
 				INFOPLIST_FILE = "MC 3/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -579,7 +583,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DK7HPF3UVL;
+				DEVELOPMENT_TEAM = ZP5Y9ZPS3B;
 				INFOPLIST_FILE = "MC 3/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (

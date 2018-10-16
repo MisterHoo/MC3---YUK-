@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.15" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <array key="Yuanti.ttc">
             <string>STYuanti-SC-Bold</string>
+            <string>STYuanti-SC-Regular</string>
         </array>
     </customFonts>
     <scenes>
@@ -42,7 +43,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ABt-EB-j4D">
                                 <rect key="frame" x="269" y="60" width="90" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="tentang"/>
+                                <state key="normal" title="Button" image="tentang"/>
                                 <connections>
                                     <action selector="creditButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zzi-wD-f16"/>
                                 </connections>
@@ -131,27 +132,144 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <view contentMode="scaleToFill" id="POP-Ub-Tda" userLabel="Credit View">
-                    <rect key="frame" x="0.0" y="0.0" width="376" height="540"/>
+                    <rect key="frame" x="0.0" y="0.0" width="376" height="660"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="credit BG" translatesAutoresizingMaskIntoConstraints="NO" id="eWk-6E-tce">
-                            <rect key="frame" x="16" y="0.0" width="344" height="506"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="credit BG" translatesAutoresizingMaskIntoConstraints="NO" id="eWk-6E-tce">
+                            <rect key="frame" x="16" y="0.0" width="344" height="626"/>
                         </imageView>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ili-bo-HIy">
-                            <rect key="frame" x="72" y="63" width="233" height="390"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" contentInsetAdjustmentBehavior="scrollableAxes" translatesAutoresizingMaskIntoConstraints="NO" id="TYp-9x-lt7">
+                            <rect key="frame" x="68" y="72" width="240" height="501"/>
                             <subviews>
-                                <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Lww-EK-pY3">
-                                    <rect key="frame" x="96" y="353" width="40" height="37"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </pageControl>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aoG-So-GWM">
+                                    <rect key="frame" x="0.0" y="0.0" width="720" height="501"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="CONGKLAK AR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJH-4g-3Uk">
+                                            <rect key="frame" x="13.333333333333329" y="43.666666666666671" width="213.66666666666669" height="42"/>
+                                            <fontDescription key="fontDescription" name="STYuanti-SC-Bold" family="Yuanti SC" pointSize="30"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVq-Oz-lNE">
+                                            <rect key="frame" x="360" y="250" width="42" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="DIPRODUKSI OLEH YUK!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pgv-Zz-nQq">
+                                            <rect key="frame" x="16" y="93.666666666666657" width="208.33333333333334" height="26"/>
+                                            <fontDescription key="fontDescription" name="STYuanti-SC-Bold" family="Yuanti SC" pointSize="18"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Produser" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hdz-dd-5IW">
+                                            <rect key="frame" x="83.333333333333343" y="136.66666666666666" width="73.333333333333343" height="26"/>
+                                            <fontDescription key="fontDescription" name="STYuanti-SC-Bold" family="Yuanti SC" pointSize="18"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Rhesa Febrin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PnS-wT-1dh">
+                                            <rect key="frame" x="69.666666666666657" y="168.66666666666666" width="100.66666666666666" height="24"/>
+                                            <fontDescription key="fontDescription" name="STYuanti-SC-Regular" family="Yuanti SC" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Teknikal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yui-eg-QiU">
+                                            <rect key="frame" x="87.666666666666657" y="217.66666666666669" width="65" height="25.333333333333343"/>
+                                            <fontDescription key="fontDescription" name="STYuanti-SC-Bold" family="Yuanti SC" pointSize="18"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Yoshua Hoo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RjZ-SP-wrP">
+                                            <rect key="frame" x="74" y="248" width="92" height="24"/>
+                                            <fontDescription key="fontDescription" name="STYuanti-SC-Regular" family="Yuanti SC" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Kennyzi Yusuf" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K1S-sW-Oti">
+                                            <rect key="frame" x="66.666666666666657" y="280" width="107" height="24"/>
+                                            <fontDescription key="fontDescription" name="STYuanti-SC-Regular" family="Yuanti SC" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" ambiguous="YES" text="Desainer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eU4-RI-7By">
+                                            <rect key="frame" x="86.666666666666657" y="328" width="67" height="24"/>
+                                            <fontDescription key="fontDescription" name="STYuanti-SC-Bold" family="Yuanti SC" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Kevin Elbert" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1cx-mR-hZB">
+                                            <rect key="frame" x="74.333333333333343" y="354" width="91.333333333333343" height="24"/>
+                                            <fontDescription key="fontDescription" name="STYuanti-SC-Regular" family="Yuanti SC" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Kelvin Bun" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Y5-9A-3Pe">
+                                            <rect key="frame" x="79.333333333333343" y="386" width="81.333333333333343" height="24"/>
+                                            <fontDescription key="fontDescription" name="STYuanti-SC-Regular" family="Yuanti SC" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="https://yukgamestudio.wixsite.com/congklakar" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msT-II-QNC">
+                                            <rect key="frame" x="15.666666666666671" y="454" width="209" height="14"/>
+                                            <fontDescription key="fontDescription" name="STYuanti-SC-Regular" family="Yuanti SC" pointSize="10"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Ver 1.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k06-MG-NYv">
+                                            <rect key="frame" x="83.333333333333343" y="426" width="73.333333333333343" height="28"/>
+                                            <fontDescription key="fontDescription" name="STYuanti-SC-Bold" family="Yuanti SC" pointSize="20"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="aJH-4g-3Uk" firstAttribute="top" secondItem="aoG-So-GWM" secondAttribute="top" constant="43.666666666666671" id="1HN-te-vB8"/>
+                                        <constraint firstItem="Yui-eg-QiU" firstAttribute="top" secondItem="PnS-wT-1dh" secondAttribute="bottom" constant="25" id="2sv-3L-Mnk"/>
+                                        <constraint firstItem="Pgv-Zz-nQq" firstAttribute="top" secondItem="aJH-4g-3Uk" secondAttribute="bottom" constant="8" id="4MR-4V-Ado"/>
+                                        <constraint firstAttribute="width" constant="720" id="GqJ-Ew-Tba"/>
+                                        <constraint firstItem="k06-MG-NYv" firstAttribute="top" secondItem="5Y5-9A-3Pe" secondAttribute="bottom" constant="16" id="T5G-Yz-uS0"/>
+                                        <constraint firstItem="PnS-wT-1dh" firstAttribute="top" secondItem="Hdz-dd-5IW" secondAttribute="bottom" constant="6" id="a0u-Ol-ljX"/>
+                                        <constraint firstItem="K1S-sW-Oti" firstAttribute="top" secondItem="RjZ-SP-wrP" secondAttribute="bottom" constant="8" id="bdG-UF-xkp"/>
+                                        <constraint firstItem="Hdz-dd-5IW" firstAttribute="top" secondItem="Pgv-Zz-nQq" secondAttribute="bottom" constant="17" id="eZ0-JI-ZJb"/>
+                                        <constraint firstItem="RjZ-SP-wrP" firstAttribute="top" secondItem="Yui-eg-QiU" secondAttribute="bottom" constant="5" id="lpz-AT-IRd"/>
+                                        <constraint firstItem="msT-II-QNC" firstAttribute="top" secondItem="k06-MG-NYv" secondAttribute="bottom" id="pdg-WN-T6W"/>
+                                        <constraint firstItem="eU4-RI-7By" firstAttribute="top" secondItem="K1S-sW-Oti" secondAttribute="bottom" constant="24" id="r0w-hO-8nX"/>
+                                        <constraint firstItem="1cx-mR-hZB" firstAttribute="top" secondItem="eU4-RI-7By" secondAttribute="bottom" constant="2" id="tHV-v5-Dfv"/>
+                                        <constraint firstItem="5Y5-9A-3Pe" firstAttribute="top" secondItem="1cx-mR-hZB" secondAttribute="bottom" constant="8" id="vXM-gO-YBK"/>
+                                        <constraint firstAttribute="bottom" secondItem="msT-II-QNC" secondAttribute="bottom" constant="33" id="zoF-AI-jdx"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </view>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v0P-sh-JF0">
-                            <rect key="frame" x="153" y="493" width="70" height="34"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <constraints>
+                                <constraint firstItem="aJH-4g-3Uk" firstAttribute="centerX" secondItem="TYp-9x-lt7" secondAttribute="centerX" id="4XI-RZ-fie"/>
+                                <constraint firstItem="RjZ-SP-wrP" firstAttribute="centerX" secondItem="TYp-9x-lt7" secondAttribute="centerX" id="4cW-IR-EAT"/>
+                                <constraint firstItem="aoG-So-GWM" firstAttribute="leading" secondItem="TYp-9x-lt7" secondAttribute="leading" id="9Z6-Wy-Kil"/>
+                                <constraint firstAttribute="trailing" secondItem="aoG-So-GWM" secondAttribute="trailing" id="9cx-qO-5eS"/>
+                                <constraint firstItem="5Y5-9A-3Pe" firstAttribute="centerX" secondItem="TYp-9x-lt7" secondAttribute="centerX" id="BAO-VK-Zt6"/>
+                                <constraint firstItem="k06-MG-NYv" firstAttribute="centerX" secondItem="TYp-9x-lt7" secondAttribute="centerX" id="Bym-dH-Nm9"/>
+                                <constraint firstItem="1cx-mR-hZB" firstAttribute="centerX" secondItem="TYp-9x-lt7" secondAttribute="centerX" id="CSw-cd-LuI"/>
+                                <constraint firstItem="PnS-wT-1dh" firstAttribute="centerX" secondItem="TYp-9x-lt7" secondAttribute="centerX" id="HOE-oC-GgV"/>
+                                <constraint firstItem="Hdz-dd-5IW" firstAttribute="centerX" secondItem="TYp-9x-lt7" secondAttribute="centerX" id="Oie-6I-X80"/>
+                                <constraint firstItem="K1S-sW-Oti" firstAttribute="centerX" secondItem="TYp-9x-lt7" secondAttribute="centerX" id="Q5q-oL-zmT"/>
+                                <constraint firstItem="Pgv-Zz-nQq" firstAttribute="centerX" secondItem="TYp-9x-lt7" secondAttribute="centerX" id="e3R-1a-Y8x"/>
+                                <constraint firstItem="aoG-So-GWM" firstAttribute="centerY" secondItem="TYp-9x-lt7" secondAttribute="centerY" id="gUa-Fa-Q0k"/>
+                                <constraint firstItem="Yui-eg-QiU" firstAttribute="centerX" secondItem="TYp-9x-lt7" secondAttribute="centerX" id="gsl-Jy-vaV"/>
+                                <constraint firstAttribute="bottom" secondItem="aoG-So-GWM" secondAttribute="bottom" id="qlt-Hs-vs9"/>
+                                <constraint firstItem="aoG-So-GWM" firstAttribute="top" secondItem="TYp-9x-lt7" secondAttribute="top" id="t9o-5D-0eF"/>
+                                <constraint firstItem="eU4-RI-7By" firstAttribute="centerX" secondItem="TYp-9x-lt7" secondAttribute="centerX" id="tzc-zl-OgI"/>
+                                <constraint firstItem="msT-II-QNC" firstAttribute="centerX" secondItem="TYp-9x-lt7" secondAttribute="centerX" id="vMJ-Yi-cNX"/>
+                            </constraints>
+                        </scrollView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v0P-sh-JF0">
+                            <rect key="frame" x="148" y="595" width="80" height="42"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="42" id="Mqm-wh-sJc"/>
+                                <constraint firstAttribute="width" constant="80" id="kKW-AY-8HI"/>
+                            </constraints>
                             <state key="normal" image="Kembali"/>
                             <connections>
                                 <action selector="dismisButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nzv-1K-Vw4"/>
@@ -159,6 +277,19 @@
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="eWk-6E-tce" firstAttribute="bottom" secondItem="0Eo-Td-PVV" secondAttribute="bottom" id="0YI-8i-rOB"/>
+                        <constraint firstItem="eWk-6E-tce" firstAttribute="top" secondItem="POP-Ub-Tda" secondAttribute="top" id="4wD-nR-cKm"/>
+                        <constraint firstItem="eWk-6E-tce" firstAttribute="centerX" secondItem="0Eo-Td-PVV" secondAttribute="centerX" id="AjR-JM-ayh"/>
+                        <constraint firstItem="v0P-sh-JF0" firstAttribute="centerX" secondItem="0Eo-Td-PVV" secondAttribute="centerX" id="BcF-Hf-N5f"/>
+                        <constraint firstItem="TYp-9x-lt7" firstAttribute="centerX" secondItem="POP-Ub-Tda" secondAttribute="centerX" id="P5h-58-auT"/>
+                        <constraint firstItem="TYp-9x-lt7" firstAttribute="centerX" secondItem="eWk-6E-tce" secondAttribute="centerX" id="PRe-JV-dVi"/>
+                        <constraint firstItem="TYp-9x-lt7" firstAttribute="leading" secondItem="0Eo-Td-PVV" secondAttribute="leading" constant="68" id="QyP-Ut-LHy"/>
+                        <constraint firstItem="eWk-6E-tce" firstAttribute="leading" secondItem="POP-Ub-Tda" secondAttribute="leadingMargin" id="Tj7-wY-RuZ"/>
+                        <constraint firstItem="TYp-9x-lt7" firstAttribute="top" secondItem="0Eo-Td-PVV" secondAttribute="top" constant="28" id="dPf-HW-TrK"/>
+                        <constraint firstItem="v0P-sh-JF0" firstAttribute="top" secondItem="0Eo-Td-PVV" secondAttribute="bottom" constant="-31" id="h8p-5t-NxM"/>
+                        <constraint firstAttribute="bottom" secondItem="TYp-9x-lt7" secondAttribute="bottom" constant="87" id="pNS-gN-nox"/>
+                    </constraints>
                     <viewLayoutGuide key="safeArea" id="0Eo-Td-PVV"/>
                 </view>
             </objects>
@@ -304,7 +435,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="De7-pd-G3o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="903" y="-639"/>
+            <point key="canvasLocation" x="1638" y="-759"/>
         </scene>
         <!--Gameplay View Controller-->
         <scene sceneID="2uv-AX-PwS">
@@ -420,12 +551,20 @@
                                     <action selector="audioButton:" destination="oHS-1f-FFs" eventType="touchUpInside" id="IYO-jX-elJ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YC3-47-I2j">
-                                <rect key="frame" x="135" y="46" width="105" height="50"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DBF-Cm-HfC">
+                                <rect key="frame" x="309" y="46" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="connect" image="Gabung"/>
+                                <state key="normal" image="help"/>
                                 <connections>
-                                    <action selector="multiplayer:" destination="oHS-1f-FFs" eventType="touchUpInside" id="MhW-HU-5GE"/>
+                                    <action selector="bantuanButton:" destination="oHS-1f-FFs" eventType="touchUpInside" id="NYM-A7-uq8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Sd-Xr-52h">
+                                <rect key="frame" x="138" y="695" width="98" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="send"/>
+                                <connections>
+                                    <action selector="sendWorldMap:" destination="oHS-1f-FFs" eventType="touchUpInside" id="t1w-z2-AJ9"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjh-ky-9z7">
@@ -435,20 +574,17 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PP7-6h-T7X">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a7y-1o-CBi">
                                 <rect key="frame" x="251" y="46" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="holewithnumber"/>
-                                <connections>
-                                    <action selector="showIndicatorBean:" destination="oHS-1f-FFs" eventType="touchUpInside" id="Pdo-L4-vi7"/>
-                                </connections>
+                                <state key="normal" image="holewithnumber"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DBF-Cm-HfC">
-                                <rect key="frame" x="309" y="46" width="50" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YC3-47-I2j">
+                                <rect key="frame" x="135" y="46" width="105" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="help"/>
+                                <state key="normal" title="connect" image="Gabung"/>
                                 <connections>
-                                    <action selector="bantuanButton:" destination="oHS-1f-FFs" eventType="touchUpInside" id="NYM-A7-uq8"/>
+                                    <action selector="multiplayer:" destination="oHS-1f-FFs" eventType="touchUpInside" id="MhW-HU-5GE"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -476,9 +612,7 @@
                         <outlet property="changePlayerNotifText" destination="3I9-db-rbW" id="1PI-LK-2mB"/>
                         <outlet property="currPlayer" destination="d0t-ua-QsP" id="KEd-AT-0pH"/>
                         <outlet property="currentBeanInHandLabel" destination="cjh-ky-9z7" id="55p-17-Bk9"/>
-                        <outlet property="gabungOutlet" destination="YC3-47-I2j" id="QRL-Zz-c1k"/>
                         <outlet property="giliranPlayer" destination="su1-MA-bI5" id="d5k-0Z-GZ9"/>
-                        <outlet property="indicatorBeanOutlet" destination="PP7-6h-T7X" id="2cS-Ot-Cx3"/>
                         <outlet property="menangNotif" destination="zIm-Hh-cA4" id="deq-gC-UOW"/>
                         <outlet property="nextPlayer" destination="88v-cR-2mw" id="rmf-5a-XOl"/>
                         <outlet property="player1" destination="gSM-pw-MQO" id="di6-Dc-adv"/>
