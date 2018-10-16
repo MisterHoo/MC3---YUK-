@@ -205,8 +205,6 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        sendButtonOutlet.isEnabled = false
-        sendButtonOutlet.isHidden = true
         
         print(player2.center)
         print(player1.center)
