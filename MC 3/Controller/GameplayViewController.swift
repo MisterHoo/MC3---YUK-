@@ -108,6 +108,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     
     @IBOutlet weak var blackBackground: UIImageView!
     @IBOutlet weak var giliranPlayer: UILabel!
+
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
@@ -203,6 +204,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         print(player2.center)
         print(player1.center)
@@ -413,13 +415,18 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         }
     }
     func sendMapFromUserDefault(){
-        sceneView.session.getCurrentWorldMap { worldMap, error in
-            guard let map = worldMap
-                else { print("Error: \(error!.localizedDescription)"); return }
-            guard let data = try? NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
-                else { fatalError("can't encode map") }
-            self.multipeerSession.sendToAllPeers(data)
+        if thisPlayer == 1 {
+            sceneView.session.getCurrentWorldMap { worldMap, error in
+                guard let map = worldMap
+                    else { print("Error: \(error!.localizedDescription)"); return }
+                guard let data = try? NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
+                    else { fatalError("can't encode map") }
+                self.multipeerSession.sendToAllPeers(data)
+            }
+        }else {
+            print("bukan player 1")
         }
+       
     }
     func updateMaterial(){
         let material = self.planeGeometry.materials.first!
@@ -447,6 +454,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
             self.gameBoard.position = newPosition
             
             DispatchQueue.main.async {
+                self.sendMapFromUserDefault()
                 self.gameBoard.loadModel()
                 self.initModel()
             }
@@ -488,16 +496,16 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         present(multipeerSession.mcBrowser, animated: false)
         
     }
-    @IBAction func sendWorldMap(_ sender: Any) {
-        //send Button
-        sceneView.session.getCurrentWorldMap { worldMap, error in
-            guard let map = worldMap
-                else { print("Error: \(error!.localizedDescription)"); return }
-            guard let data = try? NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
-                else { fatalError("can't encode map") }
-            self.multipeerSession.sendToAllPeers(data)
-        }
-    }
+//    @IBAction func sendWorldMap(_ sender: Any) {
+//        //send Button
+//        sceneView.session.getCurrentWorldMap { worldMap, error in
+//            guard let map = worldMap
+//                else { print("Error: \(error!.localizedDescription)"); return }
+//            guard let data = try? NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
+//                else { fatalError("can't encode map") }
+//            self.multipeerSession.sendToAllPeers(data)
+//        }
+//    }
     func addNodeAtLocation (location : CGPoint){
         guard anchors.count > 0 else{
             print("anchors are not created yet")
