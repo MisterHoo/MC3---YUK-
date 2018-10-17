@@ -92,6 +92,16 @@ class MPCHandeler: NSObject, MCSessionDelegate,MCBrowserViewControllerDelegate, 
         case MCSessionState.connected:
             print("Connected: \(peerID.displayName)")
             //mpcHandelerDelgate?.terserahLu()
+//            if session.connectedPeers.count >= 1{
+//                print("peer ada lebih dari 1")
+//                do{
+//                    guard let worldMapDataUser = try UserDefaults.standard.data(forKey: "World Map Data")
+//                    else {
+//                            fatalError("map tidak ada")
+//                    }
+//                    sendToAllPeers(worldMapDataUser)
+//                }
+//            }
             
         case MCSessionState.connecting:
             print("Connecting: \(peerID.displayName)")
