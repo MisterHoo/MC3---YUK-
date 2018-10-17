@@ -8,7 +8,7 @@
 
 import MultipeerConnectivity
 protocol MPCHandelerDelegate {
-    func terserahLu()
+    func showThisPlayer()
 }
 class MPCHandeler: NSObject, MCSessionDelegate,MCBrowserViewControllerDelegate, MCAdvertiserAssistantDelegate {
     
@@ -91,7 +91,7 @@ class MPCHandeler: NSObject, MCSessionDelegate,MCBrowserViewControllerDelegate, 
         switch state {
         case MCSessionState.connected:
             print("Connected: \(peerID.displayName)")
-            //mpcHandelerDelgate?.terserahLu()
+            mpcHandelerDelgate?.showThisPlayer()
             
         case MCSessionState.connecting:
             print("Connecting: \(peerID.displayName)")

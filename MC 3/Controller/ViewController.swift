@@ -199,6 +199,7 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
         
         buttonMain.isEnabled = true
         backButton.isEnabled = false
+        tentangButton.isEnabled = true
         buttonSingleDevice.isEnabled = false
         buttonDualDevice.isEnabled = false
     }
