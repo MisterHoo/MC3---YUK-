@@ -493,6 +493,9 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         thisPlayer = 2
         DispatchQueue.main.async {
+            
+            let timer = Timer(timeInterval: 3.0, target: self, selector: #selector(self.showThisPlayerLabel), userInfo: nil, repeats: false)
+            self.updateStringLabel(label: self.statusLabel, input: "")
             self.gabungOutlet.isHidden = true
         }
         dismiss(animated: false, completion: nil)
@@ -710,9 +713,19 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
 //    }
 }
 extension GameplayViewController: MPCHandelerDelegate{
-    func terserahLu() {
-        sendMapFromUserDefault()
+    func showThisPlayer() {
+        DispatchQueue.main.async {
+            
+            let timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.showThisPlayerLabel), userInfo: nil, repeats: false)
+            self.updateStringLabel(label: self.statusLabel, input: "")
+            self.gabungOutlet.isHidden = true
+        }
     }
+    
+    @objc func showThisPlayerLabel(){
+        updateStringLabel(label: statusLabel, input: "Anda P\(thisPlayer)")
+    }
+    
 }
 
 extension GameplayViewController : ARSessionDelegate{
