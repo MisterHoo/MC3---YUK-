@@ -217,6 +217,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
                 self.gabungOutlet.isEnabled = true
             }
         }
+
         
         print(player2.center)
         print(player1.center)
@@ -432,6 +433,15 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
             }
         }
     }
+    func saveWorldMapToUserDefault(){
+        sceneView.session.getCurrentWorldMap { worldMap, error in
+            guard let map = worldMap
+                else { print("Error: \(error!.localizedDescription)"); return }
+            guard let data = try? NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
+                else { fatalError("can't encode map") }
+            UserDefaults.standard.set(data, forKey: "World Map Data")
+        }
+    }
     func sendMapFromUserDefault(){
         if thisPlayer == 1 {
             sceneView.session.getCurrentWorldMap { worldMap, error in
@@ -471,6 +481,11 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
             let newPosition = SCNVector3(self.gameAnchor.transform.columns.3.x, self.gameAnchor.transform.columns.3.y, self.gameAnchor.transform.columns.3.z)
             self.gameBoard.position = newPosition
             
+//            if multipeerSession.session.connectedPeers.count < 1 {
+//                saveWorldMapToUserDefault()
+//            }else{
+//                sendMapFromUserDefault()
+//            }
             DispatchQueue.main.async {
                 self.sendMapFromUserDefault()
                 self.gameBoard.loadModel()
