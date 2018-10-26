@@ -54,6 +54,11 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     @IBOutlet weak var changePlayerNotifText: UIImageView!
     @IBOutlet weak var menangNotif: UIImageView!
     
+    //Constraint
+    
+    @IBOutlet weak var changePlayerNotifTextTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var changePlayerNotifTextLeadingConstraint: NSLayoutConstraint!
+    
     var currentPlayerPoss: CGPoint!
     var nextPlayerPoss: CGPoint!
 
@@ -205,12 +210,21 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if isMultipeer == true{
+            DispatchQueue.main.async {
+                
+                self.gabungOutlet.isHidden = false
+                self.gabungOutlet.isEnabled = true
+            }
+        }
         
         print(player2.center)
         print(player1.center)
         currentPlayerPoss = player1.center
         nextPlayerPoss = player2.center
         thisPlayer = 1
+        
+        //view.alpha = 0.5
         
         multipeerSession = MPCHandeler(receivedDataHandler: receivedData)
         multipeerSession.mpcHandelerDelgate = self
@@ -316,6 +330,10 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
             //            configuration.initialWorldMap = worldMap
             //            sceneView.session.run(configuration)
         }
+        
+//        UIView.animate(withDuration: 0.5) {
+//            self.view.alpha = 1
+//        }
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -345,7 +363,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
                 }
                 planeGeometry = SCNPlane(width: width, height: height)
                 
-                planeGeometry.firstMaterial?.diffuse.contents = UIColor.white.withAlphaComponent(0.4)
+                planeGeometry.firstMaterial?.diffuse.contents = UIColor.white.withAlphaComponent(0.8)
                 
                 let planeNode = SCNNode(geometry: planeGeometry)
                 

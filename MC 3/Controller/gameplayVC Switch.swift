@@ -44,53 +44,74 @@ extension GameplayViewController {
             player1.center = currentPlayerPoss
             player2.center = nextPlayerPoss
         }
-            //set Position
-            changePlayerNotif.center = CGPoint.init(x: (self.screenWidth/2), y: (self.screenHeight/2)) //set BG to center
-            changePlayerNotifText.center = CGPoint.init(x: -(self.changePlayerNotifText.bounds.width/2), y: self.screenHeight/2)
-            changePlayerNotifText.alpha = 1
+        //set Position
+//        changePlayerNotif.center = CGPoint.init(x: (self.screenWidth/2), y: (self.screenHeight/2)) //set BG to center
+//        changePlayerNotifText.center = CGPoint.init(x: -(self.changePlayerNotifText.bounds.width/2), y: self.screenHeight/2)
+        changePlayerNotifText.alpha = 1
         
-            //tambahin view
-            view.addSubview(changePlayerNotif)
-            view.addSubview(changePlayerNotifText)
+        //tambahin view
+        view.addSubview(changePlayerNotif)
+        view.addSubview(changePlayerNotifText)
         
-            //set alpha to zero
-            changePlayerNotif.alpha = 0
+        //set alpha to zero
+        changePlayerNotif.alpha = 0
         
+        //Init Constraint
+        changePlayerNotifTextLeadingConstraint.constant = -screenWidth
+        changePlayerNotifTextTrailingConstraint.constant = screenWidth
+        self.view.layoutIfNeeded()
+        
+        let horizontal = self.traitCollection.horizontalSizeClass
+        let vertical = self.traitCollection.verticalSizeClass
+        
+        if horizontal == UIUserInterfaceSizeClass.regular && vertical == UIUserInterfaceSizeClass.regular{
+            stepOne(widthText: 334)
+        }else{
+            stepOne(widthText: 167)
+        }
+    
 //           timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(stepOne), userInfo: nil, repeats: false)
-            stepOne()
+        
 
     }
     
-    func stepOne(){
+    func stepOne(widthText : CGFloat){
         //show background
         //move text from left to mid
         UIView.animate(withDuration: 0.5, animations: {
             self.isPaused = true
             print("step 1 masuk")
             self.changePlayerNotif.alpha = 1
-            self.changePlayerNotifText.center = CGPoint.init(x: (self.screenWidth/2), y: (self.screenHeight/2))
+            //self.changePlayerNotifText.center = CGPoint.init(x: (self.screenWidth/2), y: (self.screenHeight/2))
+            self.changePlayerNotifTextTrailingConstraint.constant = self.screenWidth/2 - widthText/2
+            self.changePlayerNotifTextLeadingConstraint.constant = self.screenWidth/2 - widthText/2
+            self.view.layoutIfNeeded()
         }) { (true) in
-            self.stepTwo()
+            self.stepTwo(widthText: widthText)
         }
     }
     
-    func stepTwo(){
+    func stepTwo(widthText : CGFloat){
         //hold for 2 seconds
         UIView.animate(withDuration: 2.0, animations: {
             print("step 2 masuk")
-            self.changePlayerNotifText.center = CGPoint.init(x: (self.screenWidth/2), y: (self.screenHeight/2))
+            self.changePlayerNotifTextTrailingConstraint.constant = self.screenWidth/2 - widthText/2 - 1
+            self.changePlayerNotifTextLeadingConstraint.constant = self.screenWidth/2 - widthText/2 + 1
+            self.view.layoutIfNeeded()
         }) { (true) in
             self.stepThree()
         }
     }
     
-    func stepThree(){
+    @objc func stepThree(){
         //hide background
         //move text from mid to right
         UIView.animate(withDuration: 0.5, animations: {
             print("step 3 masuk")
             self.changePlayerNotif.alpha = 0
-            self.changePlayerNotifText.center = CGPoint.init(x: (self.screenWidth + self.screenWidth/2), y: (self.screenHeight/2))
+            self.changePlayerNotifTextLeadingConstraint.constant = self.screenWidth
+            self.changePlayerNotifTextTrailingConstraint.constant = -self.screenWidth
+            self.view.layoutIfNeeded()
         }) { (true) in
             self.changePlayerNotifText.alpha = 0
             self.isPaused = false
@@ -110,7 +131,6 @@ extension GameplayViewController {
             print("player 2 menang")
             menangNotif.image = UIImage(named: "P2 Menang")
         }
-        menangNotif.center = CGPoint.init(x: (self.screenWidth/2), y: (self.screenHeight/2)) //set BG to center
         
         //set alpha 0
         menangNotif.alpha = 0

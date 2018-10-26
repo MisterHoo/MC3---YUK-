@@ -17,12 +17,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Splash Screen Congklak" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b1g-TI-zpl">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Splash Screen Congklak" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b1g-TI-zpl">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <variation key="heightClass=regular-widthClass=regular" image="Splash Screen Ipad"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="b1g-TI-zpl" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailing" id="Ezy-uh-Llt"/>
+                            <constraint firstAttribute="top" secondItem="b1g-TI-zpl" secondAttribute="top" id="Nzr-On-8qN"/>
+                            <constraint firstItem="b1g-TI-zpl" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="ZC0-Ll-VyU"/>
+                            <constraint firstItem="b1g-TI-zpl" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="yjI-Qf-QV2"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -33,5 +39,6 @@
     </scenes>
     <resources>
         <image name="Splash Screen Congklak" width="1500" height="3248"/>
+        <image name="Splash Screen Ipad" width="4096" height="5464"/>
     </resources>
 </document>

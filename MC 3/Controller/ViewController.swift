@@ -25,11 +25,43 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var tentangButton: UIButton!
     
-    @IBOutlet weak var menuSlider: UIPageControl!
-    @IBOutlet weak var usernameTextField: UITextField!
-    @IBOutlet weak var ikutButtonOutlet: UIButton!
-    @IBOutlet weak var mainButtonOutlet: UIButton!
+    //Constraint
     
+    //BG Purple, Icon, Main Button
+    
+    @IBOutlet weak var bgPurpleLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bgPurpleTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bgPurpleTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bgPurpleBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var mainIconTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var mainIconBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var mainButtonBottomConstraint: NSLayoutConstraint!
+    
+    
+    //BG red & Blue
+    @IBOutlet weak var bgRedLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bgRedTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bgBlueTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bgBlueLeadingConstraint: NSLayoutConstraint!
+    
+    //View containt icon device and button
+    @IBOutlet weak var viewHelperSingleLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var viewHelperDualTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var viewHelperDualLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var viewHelperSingleTrailingConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var viewHelperSingleTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var viewHelperSingleBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var viewHelperDualTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var viewHelperDualBottomConstraint: NSLayoutConstraint!
+    
+    //Button Back & Tentang
+    @IBOutlet weak var backButtonLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tentangButtonTrailingConstraint: NSLayoutConstraint!
+    
+    //variable that used
     var multiPeer : MPCHandeler!
     var isServer : Bool = false
     var isMultipeer : Bool = false
@@ -102,6 +134,7 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
             self.CreditView.removeFromSuperview()
         }
     }
+    
     @IBAction func creditButton(_ sender: Any) {
         animateIn()
     }
@@ -139,14 +172,14 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     
     //VC
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        
-        UserDefaults.standard.set(usernameTextField.text, forKey: "Username")
-        
-        return true
-    }
-    
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//
+//        UserDefaults.standard.set(usernameTextField.text, forKey: "Username")
+//
+//        return true
+//    }
+//
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination as? GameplayViewController
         
@@ -180,22 +213,55 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
             self.initPosition()
             self.didLoadAnimate()
         }
-        
-        
     }
-    
+
     func initPosition(){
-        bgRed.frame = CGRect.init(x: 375, y: 0, width: 375, height: 812)
-        bgBlue.frame = CGRect.init(x: -375, y: 0, width: 375, height: 812)
-        iconSingleDevice.frame = CGRect.init(x: -105, y: 260, width: 90, height: 203)
-        iconDualDevice.frame = CGRect.init(x: 388, y: 260, width: 92, height: 203)
-        buttonSingleDevice.frame = CGRect.init(x: -118, y: 489, width: 118, height: 73)
-        buttonDualDevice.frame = CGRect.init(x: 375, y: 489, width: 118, height: 73)
-        backButton.frame = CGRect.init(x: -70, y: 60, width: 70, height: 44)
+//        bgRed.frame = CGRect.init(x: 375, y: 0, width: 375, height: 812)
+//        bgBlue.frame = CGRect.init(x: -375, y: 0, width: 375, height: 812)
+//        iconSingleDevice.frame = CGRect.init(x: -105, y: 260, width: 90, height: 203)
+//        iconDualDevice.frame = CGRect.init(x: 388, y: 260, width: 92, height: 203)
+//        buttonSingleDevice.frame = CGRect.init(x: -118, y: 489, width: 118, height: 73)
+//        buttonDualDevice.frame = CGRect.init(x: 375, y: 489, width: 118, height: 73)
+//        backButton.frame = CGRect.init(x: -70, y: 60, width: 70, height: 44)
+//
+//        bgPurple.frame = CGRect.init(x: 0, y: 0, width: 375, height: 812)
+//        mainMenuIcon.frame = CGRect.init(x: 61, y: 138, width: 253, height: 447)
+//        buttonMain.frame = CGRect.init(x: 124, y: 570, width: 127, height: 78)
+//
         
-        bgPurple.frame = CGRect.init(x: 0, y: 0, width: 375, height: 812)
-        mainMenuIcon.frame = CGRect.init(x: 61, y: 138, width: 253, height: 447)
-        buttonMain.frame = CGRect.init(x: 124, y: 570, width: 127, height: 78)
+        bgPurpleLeadingConstraint.constant = 0
+        bgPurpleTopConstraint.constant = 0
+        bgPurpleBottomConstraint.constant = 0
+        bgPurpleTrailingConstraint.constant = 0
+        
+        mainIconTopConstraint.constant = 94
+        mainIconBottomConstraint.constant = 193
+        
+        mainButtonBottomConstraint.constant = 130
+        
+        backButtonLeadingConstraint.constant = -90
+        tentangButtonTrailingConstraint.constant = 22
+        
+        bgRedLeadingConstraint.constant = widthScreen
+        bgRedTrailingConstraint.constant = widthScreen
+        bgBlueLeadingConstraint.constant = widthScreen
+        bgBlueTrailingConstraint.constant = widthScreen
+        
+        viewHelperSingleLeadingConstraint.constant = -widthScreen
+        viewHelperSingleTrailingConstraint.constant = widthScreen
+        viewHelperDualLeadingConstraint.constant = widthScreen
+        viewHelperDualTrailingConstraint.constant = -widthScreen
+        
+        viewHelperSingleTopConstraint.constant = 44
+        viewHelperSingleBottomConstraint.constant = 34
+        viewHelperDualTopConstraint.constant = 44
+        viewHelperDualBottomConstraint.constant = 34
+        
+        view.alpha = 1
+//        let helperview = UIView()
+//        helperview.backgroundColor = UIColor.white
+//        helperview.frame = CGRect(x: bgBlueLeadingConstraint.constant, y: 0, width: 20, height: 20)
+//        view.addSubview(helperview)
         
         buttonMain.isEnabled = true
         backButton.isEnabled = false
@@ -214,11 +280,11 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
         }
         
         //multiPeer = (UIApplication.shared.delegate as! AppDelegate).multiPeer
-        
-        if let username = UserDefaults.standard.value(forKey: "Username") as? String{
-            usernameTextField.text = username
-            //multiPeer.namaPlayer = username
-        }
+//
+//        if let username = UserDefaults.standard.value(forKey: "Username") as? String{
+//            //usernameTextField.text = username
+//            //multiPeer.namaPlayer = username
+//        }
         //multiPeer.setupPeerId()
         //multiPeer.setupPeerId()
 //        usernameTextField.delegate = self
@@ -303,74 +369,126 @@ extension ViewController{
     //buttonMain x : 124 -> 142 , y : 570 -> 567 , width : 127 -> 91, height : 78 -> 56
     
     func selectedDualDevice(){
-        bgRed.frame = CGRect.init(x: 187, y: 0, width: 375, height: 812)
-        bgBlue.frame = CGRect.init(x: -188, y: 0, width: 375, height: 812)
-        iconSingleDevice.frame = CGRect.init(x: 48, y: 260, width: 92, height: 203)
-        iconDualDevice.frame = CGRect.init(x: 235, y: 260, width: 92, height: 203)
-        buttonSingleDevice.frame = CGRect.init(x: 35, y: 489, width: 118, height: 73)
-        buttonDualDevice.frame = CGRect.init(x: 222, y: 489, width: 118, height: 73)
-        backButton.frame = CGRect.init(x: 22, y: 60, width: 90, height: 44)
+//        bgRed.frame = CGRect.init(x: 187, y: 0, width: 375, height: 812)
+//        bgBlue.frame = CGRect.init(x: -188, y: 0, width: 375, height: 812)
+//        iconSingleDevice.frame = CGRect.init(x: 48, y: 260, width: 92, height: 203)
+//        iconDualDevice.frame = CGRect.init(x: 235, y: 260, width: 92, height: 203)
+//        buttonSingleDevice.frame = CGRect.init(x: 35, y: 489, width: 118, height: 73)
+//        buttonDualDevice.frame = CGRect.init(x: 222, y: 489, width: 118, height: 73)
+//        backButton.frame = CGRect.init(x: 22, y: 60, width: 90, height: 44)
         
         UIView.animate(withDuration: 0.5, animations: {
             //back out
-            self.backButton.frame = CGRect.init(x: -90, y: 60, width: 90, height: 44)
+//            self.backButton.frame = CGRect.init(x: -90, y: 60, width: 90, height: 44)
+//
+//            //blue out
+//            self.bgBlue.frame = CGRect.init(x: -375, y: 0, width: 375, height: 812)
+//            self.iconSingleDevice.frame = CGRect.init(x: -105, y: 260, width: 92, height: 203)
+//            self.buttonSingleDevice.frame = CGRect.init(x: -118, y: 489, width: 118, height: 73)
+//
+//            //red in
+//            self.bgRed.frame = CGRect.init(x: 0, y: 0, width: 375, height: 812)
+//            self.iconDualDevice.frame = CGRect.init(x: 141, y: 260, width: 92, height: 203)
+//            self.buttonDualDevice.frame = CGRect.init(x: 128, y: 489, width: 118, height: 73)
             
-            //blue out
-            self.bgBlue.frame = CGRect.init(x: -375, y: 0, width: 375, height: 812)
-            self.iconSingleDevice.frame = CGRect.init(x: -105, y: 260, width: 92, height: 203)
-            self.buttonSingleDevice.frame = CGRect.init(x: -118, y: 489, width: 118, height: 73)
+            self.backButtonLeadingConstraint.constant = -90
             
-            //red in
-            self.bgRed.frame = CGRect.init(x: 0, y: 0, width: 375, height: 812)
-            self.iconDualDevice.frame = CGRect.init(x: 141, y: 260, width: 92, height: 203)
-            self.buttonDualDevice.frame = CGRect.init(x: 128, y: 489, width: 118, height: 73)
+            self.bgBlueLeadingConstraint.constant = -self.widthScreen
+            self.bgBlueTrailingConstraint.constant = self.widthScreen
+            self.viewHelperSingleLeadingConstraint.constant = -self.widthScreen/2
+            self.viewHelperSingleTrailingConstraint.constant = self.widthScreen
+            
+            
+            self.bgRedLeadingConstraint.constant = 0
+            self.bgRedTrailingConstraint.constant = 0
+            self.viewHelperDualLeadingConstraint.constant = 0
+            self.viewHelperDualTrailingConstraint.constant = 0
+            
+            self.view.layoutIfNeeded()
             
            
             
         }) { (true) in
-            UIView.animate(withDuration: 2.0, animations: {
-                self.bgBlue.frame = CGRect.init(x: -375, y: 0, width: 375, height: 812)
+            UIView.animate(withDuration: 1.5, animations: {
+                self.backButtonLeadingConstraint.constant = -100
+                self.view.layoutIfNeeded()
             }, completion: { (true) in
-                self.performSegue(withIdentifier: "menuToGame", sender: self)
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.viewHelperDualBottomConstraint.constant = self.widthScreen * 3
+                    self.viewHelperDualTopConstraint.constant = self.widthScreen * 3
+                    self.viewHelperDualLeadingConstraint.constant = -self.widthScreen * 3
+                    self.viewHelperDualTrailingConstraint.constant = -self.widthScreen * 3
+                    self.view.layoutIfNeeded()
+                }, completion: { (true) in
+                    self.performSegue(withIdentifier: "menuToGame", sender: self)
+                })
             })
         }
     }
     
     
     func selectedSingleDevice(){
-        bgRed.frame = CGRect.init(x: 187, y: 0, width: 375, height: 812)
-        bgBlue.frame = CGRect.init(x: -188, y: 0, width: 375, height: 812)
-        iconSingleDevice.frame = CGRect.init(x: 48, y: 260, width: 92, height: 203)
-        iconDualDevice.frame = CGRect.init(x: 235, y: 260, width: 92, height: 203)
-        buttonSingleDevice.frame = CGRect.init(x: 35, y: 489, width: 118, height: 73)
-        buttonDualDevice.frame = CGRect.init(x: 222, y: 489, width: 118, height: 73)
-        backButton.frame = CGRect.init(x: 22, y: 60, width: 70, height: 44)
+//        bgRed.frame = CGRect.init(x: 187, y: 0, width: 375, height: 812)
+//        bgBlue.frame = CGRect.init(x: -188, y: 0, width: 375, height: 812)
+//        iconSingleDevice.frame = CGRect.init(x: 48, y: 260, width: 92, height: 203)
+//        iconDualDevice.frame = CGRect.init(x: 235, y: 260, width: 92, height: 203)
+//        buttonSingleDevice.frame = CGRect.init(x: 35, y: 489, width: 118, height: 73)
+//        buttonDualDevice.frame = CGRect.init(x: 222, y: 489, width: 118, height: 73)
+//        backButton.frame = CGRect.init(x: 22, y: 60, width: 70, height: 44)
         
         
         UIView.animate(withDuration: 0.5, animations: {
             //back out
-            self.backButton.frame = CGRect.init(x: -70, y: 60, width: 70, height: 44)
+//            self.backButton.frame = CGRect.init(x: -70, y: 60, width: 70, height: 44)
+//
+//            //red out
+//            self.bgRed.frame = CGRect.init(x: 375, y: 0, width: 375, height: 812)
+//            self.iconDualDevice.frame = CGRect.init(x: 388, y: 260, width: 92, height: 203)
+//            self.buttonDualDevice.frame = CGRect.init(x: 375, y: 489, width: 118, height: 73)
+//
+//            //blue in
+//            self.bgBlue.frame = CGRect.init(x: 0, y: 0, width: 375, height: 812)
+//            self.iconSingleDevice.frame = CGRect.init(x: 141, y: 260, width: 92, height: 203)
+//            self.buttonSingleDevice.frame = CGRect.init(x: 128, y: 489, width: 118, height: 73)
             
-            //red out
-            self.bgRed.frame = CGRect.init(x: 375, y: 0, width: 375, height: 812)
-            self.iconDualDevice.frame = CGRect.init(x: 388, y: 260, width: 92, height: 203)
-            self.buttonDualDevice.frame = CGRect.init(x: 375, y: 489, width: 118, height: 73)
+            self.backButtonLeadingConstraint.constant = -90
             
-            //blue in
-            self.bgBlue.frame = CGRect.init(x: 0, y: 0, width: 375, height: 812)
-            self.iconSingleDevice.frame = CGRect.init(x: 141, y: 260, width: 92, height: 203)
-            self.buttonSingleDevice.frame = CGRect.init(x: 128, y: 489, width: 118, height: 73)
+            self.bgRedLeadingConstraint.constant = self.widthScreen
+            self.bgRedTrailingConstraint.constant = self.widthScreen
+            self.viewHelperDualLeadingConstraint.constant = self.widthScreen
+            self.viewHelperDualTrailingConstraint.constant = -self.widthScreen/2
+            
+            self.bgBlueLeadingConstraint.constant = 0
+            self.bgBlueTrailingConstraint.constant = 0
+            self.viewHelperSingleLeadingConstraint.constant = 0
+            self.viewHelperSingleTrailingConstraint.constant = 0
+            
+            self.view.layoutIfNeeded()
+            
         }) { (true) in
-            UIView.animate(withDuration: 2.0, animations: {
-                self.bgRed.frame = CGRect.init(x: 376, y: 0, width: 375, height: 812)
+            UIView.animate(withDuration: 1.5, animations: {
+                self.backButtonLeadingConstraint.constant = -100
+                self.view.layoutIfNeeded()
             }, completion: { (true) in
-                self.performSegue(withIdentifier: "menuToGame", sender: self)
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.viewHelperSingleTopConstraint.constant = self.widthScreen * 3
+                    self.viewHelperSingleBottomConstraint.constant = self.widthScreen * 3
+                    self.viewHelperSingleTrailingConstraint.constant = -self.widthScreen * 3
+                    self.viewHelperSingleLeadingConstraint.constant = -self.widthScreen * 3
+                    self.view.layoutIfNeeded()
+                }, completion: { (true) in
+                    self.performSegue(withIdentifier: "menuToGame", sender: self)
+                })
             })
         }
     }
     
     
     func inAnimateSelectionDevice(){
+        //autolayout
+        
+        
+        
         //init Position
 //        bgRed.frame = CGRect.init(x: widthScreen, y: 0, width: widthScreen, height: heightScreen)
 //        bgBlue.frame = CGRect.init(x: -widthScreen, y: 0, width: widthScreen, height: heightScreen)
@@ -411,19 +529,19 @@ extension ViewController{
 //        let buttonMainY = 570/812 * heightScreen
 //
 //        buttonMain.frame = CGRect.init(x: widthScreen/2 - buttonMainWidth/2, y: buttonMainY, width: buttonMainWidth, height: buttonMainHeight)
-        
-        bgRed.frame = CGRect.init(x: 375, y: 0, width: 375, height: 812)
-        bgBlue.frame = CGRect.init(x: -375, y: 0, width: 375, height: 812)
-        iconSingleDevice.frame = CGRect.init(x: -105, y: 260, width: 90, height: 203)
-        iconDualDevice.frame = CGRect.init(x: 388, y: 260, width: 92, height: 203)
-        buttonSingleDevice.frame = CGRect.init(x: -118, y: 489, width: 118, height: 73)
-        buttonDualDevice.frame = CGRect.init(x: 375, y: 489, width: 118, height: 73)
-        backButton.frame = CGRect.init(x: -90, y: 60, width: 90, height: 44)
-        
-        bgPurple.frame = CGRect.init(x: 0, y: 0, width: 375, height: 812)
-        mainMenuIcon.frame = CGRect.init(x: 61, y: 138, width: 253, height: 447)
-        buttonMain.frame = CGRect.init(x: 124, y: 570, width: 127, height: 78)
-        
+//
+//        bgRed.frame = CGRect.init(x: 375, y: 0, width: 375, height: 812)
+//        bgBlue.frame = CGRect.init(x: -375, y: 0, width: 375, height: 812)
+//        iconSingleDevice.frame = CGRect.init(x: -105, y: 260, width: 90, height: 203)
+//        iconDualDevice.frame = CGRect.init(x: 388, y: 260, width: 92, height: 203)
+//        buttonSingleDevice.frame = CGRect.init(x: -118, y: 489, width: 118, height: 73)
+//        buttonDualDevice.frame = CGRect.init(x: 375, y: 489, width: 118, height: 73)
+//        backButton.frame = CGRect.init(x: -90, y: 60, width: 90, height: 44)
+//
+//        bgPurple.frame = CGRect.init(x: 0, y: 0, width: 375, height: 812)
+//        mainMenuIcon.frame = CGRect.init(x: 61, y: 138, width: 253, height: 447)
+//        buttonMain.frame = CGRect.init(x: 124, y: 570, width: 127, height: 78)
+//
         
 //        bgRed.alpha = 0
 //        bgBlue.alpha = 0
@@ -436,16 +554,41 @@ extension ViewController{
 //        let toBgPurpleWidth = 318/375 * widthScreen
 //        let toBgPurpleHeight = toBgPurpleWidth/318 * 690
 //        let toBgPurpleY = 61/812 * heightScreen
-//        
+//
 //        let toMainMenuIconWidth = 218/375 * widthScreen
 //        let toMainMenuIconHeight = toMainMenuIconWidth/218 * 384
 //        let toMainMenuIconY = 178/812 * heightScreen
-//        
+//
 //        let toButtonMainWidth = 91/375 * widthScreen
 //        let toButtonMainHeight = toButtonMainWidth/91 * 56
 //        let toButtonMainY = 567/812 * heightScreen
         
+        
+        
         UIView.animate(withDuration: 0.5, animations: {
+            
+           
+            self.bgPurpleTopConstraint.constant = 150
+            self.bgPurpleBottomConstraint.constant = 150
+            self.bgPurpleLeadingConstraint.constant = 125
+            self.bgPurpleTrailingConstraint.constant = 125
+            
+            self.mainIconTopConstraint.constant = 160
+            self.mainIconBottomConstraint.constant = 285
+        
+            self.mainButtonBottomConstraint.constant = 250
+            self.tentangButtonTrailingConstraint.constant = -90
+            
+            self.bgRedLeadingConstraint.constant = self.widthScreen/2
+            self.bgRedTrailingConstraint.constant = self.widthScreen/2
+            
+            self.bgBlueLeadingConstraint.constant = self.widthScreen/2
+            self.bgBlueTrailingConstraint.constant = self.widthScreen/2
+            
+            
+            
+            self.view.layoutIfNeeded()
+            
 //            self.bgRed.frame = CGRect.init(x: self.widthScreen/2, y: 0, width: self.widthScreen, height: self.heightScreen)
 //            self.bgBlue.frame = CGRect.init(x: -(self.widthScreen/2), y: 0, width: self.widthScreen, height: self.heightScreen)
 //
@@ -453,12 +596,13 @@ extension ViewController{
 //            self.mainMenuIcon.frame = CGRect.init(x: self.widthScreen/2 - toMainMenuIconWidth/2, y: toMainMenuIconY, width: toMainMenuIconWidth, height: toMainMenuIconHeight)
 //            self.buttonMain.frame = CGRect.init(x: self.widthScreen/2 - toButtonMainWidth/2, y: toButtonMainY, width: toButtonMainWidth, height: toButtonMainHeight)
             
-            self.bgRed.frame = CGRect.init(x: 187, y: 0, width: 375, height: 812)
-            self.bgBlue.frame = CGRect.init(x: -188, y: 0, width: 375, height: 812)
-
-            self.bgPurple.frame = CGRect.init(x: 28, y: 61, width: 318, height: 690)
-            self.mainMenuIcon.frame = CGRect.init(x: 78, y: 178, width: 218, height: 384)
-            self.buttonMain.frame = CGRect.init(x: 142, y: 567, width: 91, height: 56)
+//            self.bgRed.frame = CGRect.init(x: 187, y: 0, width: 375, height: 812)
+//            self.bgBlue.frame = CGRect.init(x: -188, y: 0, width: 375, height: 812)
+//
+//            self.bgPurple.frame = CGRect.init(x: 28, y: 61, width: 318, height: 690)
+//            self.mainMenuIcon.frame = CGRect.init(x: 78, y: 178, width: 218, height: 384)
+//            self.buttonMain.frame = CGRect.init(x: 142, y: 567, width: 91, height: 56)
+            
             self.bgPurple.alpha = 0.5
             self.mainMenuIcon.alpha = 0.5
             self.buttonMain.alpha = 0.5
@@ -472,11 +616,20 @@ extension ViewController{
 //                self.buttonDualDevice.frame = CGRect.init(x: (self.widthScreen/4 * 3) - buttonDeviceWidth/2, y: buttonDeviceY, width: buttonDeviceWidth, height: buttonDeviceHeight)
 //                self.backButton.frame = CGRect.init(x: backButtonX, y: backButtonY, width: backButtonWidth, height: backButtonHeight)
                 
-                self.iconSingleDevice.frame = CGRect.init(x: 48, y: 260, width: 92, height: 203)
-                self.iconDualDevice.frame = CGRect.init(x: 235, y: 260, width: 92, height: 203)
-                self.buttonSingleDevice.frame = CGRect.init(x: 35, y: 489, width: 118, height: 73)
-                self.buttonDualDevice.frame = CGRect.init(x: 222, y: 489, width: 118, height: 73)
-                self.backButton.frame = CGRect.init(x: 22, y: 60, width: 90, height: 44)
+//                self.iconSingleDevice.frame = CGRect.init(x: 48, y: 260, width: 92, height: 203)
+//                self.iconDualDevice.frame = CGRect.init(x: 235, y: 260, width: 92, height: 203)
+//                self.buttonSingleDevice.frame = CGRect.init(x: 35, y: 489, width: 118, height: 73)
+//                self.buttonDualDevice.frame = CGRect.init(x: 222, y: 489, width: 118, height: 73)
+//                self.backButton.frame = CGRect.init(x: 22, y: 60, width: 90, height: 44)
+                self.viewHelperSingleLeadingConstraint.constant = 0
+                self.viewHelperSingleTrailingConstraint.constant = self.widthScreen/2
+                self.viewHelperDualLeadingConstraint.constant = self.widthScreen/2
+                self.viewHelperDualTrailingConstraint.constant = 0
+                self.backButtonLeadingConstraint.constant = 22
+                
+                self.view.layoutIfNeeded()
+                
+                
                 
                 self.buttonMain.isEnabled = false
                 self.tentangButton.isEnabled = false
@@ -485,17 +638,17 @@ extension ViewController{
     }
     
     func outAnimateSelectionDevice(){
-        iconSingleDevice.frame = CGRect.init(x: 48, y: 260, width: 92, height: 203)
-        iconDualDevice.frame = CGRect.init(x: 235, y: 260, width: 92, height: 203)
-        buttonSingleDevice.frame = CGRect.init(x: 35, y: 489, width: 118, height: 73)
-        buttonDualDevice.frame = CGRect.init(x: 222, y: 489, width: 118, height: 73)
-        bgRed.frame = CGRect.init(x: 187, y: 0, width: 375, height: 812)
-        bgBlue.frame = CGRect.init(x: -188, y: 0, width: 375, height: 812)
-        backButton.frame = CGRect.init(x: 22, y: 60, width: 90, height: 44)
-        
-        bgPurple.frame = CGRect.init(x: 28, y: 61, width: 318, height: 690)
-        mainMenuIcon.frame = CGRect.init(x: 78, y: 178, width: 218, height: 384)
-        buttonMain.frame = CGRect.init(x: 142, y: 567, width: 91, height: 56)
+//        iconSingleDevice.frame = CGRect.init(x: 48, y: 260, width: 92, height: 203)
+//        iconDualDevice.frame = CGRect.init(x: 235, y: 260, width: 92, height: 203)
+//        buttonSingleDevice.frame = CGRect.init(x: 35, y: 489, width: 118, height: 73)
+//        buttonDualDevice.frame = CGRect.init(x: 222, y: 489, width: 118, height: 73)
+//        bgRed.frame = CGRect.init(x: 187, y: 0, width: 375, height: 812)
+//        bgBlue.frame = CGRect.init(x: -188, y: 0, width: 375, height: 812)
+//        backButton.frame = CGRect.init(x: 22, y: 60, width: 90, height: 44)
+//
+//        bgPurple.frame = CGRect.init(x: 28, y: 61, width: 318, height: 690)
+//        mainMenuIcon.frame = CGRect.init(x: 78, y: 178, width: 218, height: 384)
+//        buttonMain.frame = CGRect.init(x: 142, y: 567, width: 91, height: 56)
         
         bgPurple.alpha = 0.75
         mainMenuIcon.alpha = 0.75
@@ -509,21 +662,49 @@ extension ViewController{
         tentangButton.isEnabled = true
         
         UIView.animate(withDuration: 0.5, animations: {
-            self.iconSingleDevice.frame = CGRect.init(x: -105, y: 260, width: 90, height: 203)
-            self.iconDualDevice.frame = CGRect.init(x: 388, y: 260, width: 92, height: 203)
-            self.buttonSingleDevice.frame = CGRect.init(x: -118, y: 489, width: 118, height: 73)
-            self.buttonDualDevice.frame = CGRect.init(x: 375, y: 489, width: 118, height: 73)
-            self.backButton.frame = CGRect.init(x: -90, y: 60, width: 70, height: 44)
+//            self.iconSingleDevice.frame = CGRect.init(x: -105, y: 260, width: 90, height: 203)
+//            self.iconDualDevice.frame = CGRect.init(x: 388, y: 260, width: 92, height: 203)
+//            self.buttonSingleDevice.frame = CGRect.init(x: -118, y: 489, width: 118, height: 73)
+//            self.buttonDualDevice.frame = CGRect.init(x: 375, y: 489, width: 118, height: 73)
+//            self.backButton.frame = CGRect.init(x: -90, y: 60, width: 70, height: 44)
+            
+            
+            
+            self.viewHelperSingleLeadingConstraint.constant = -self.widthScreen
+            self.viewHelperSingleTrailingConstraint.constant = self.widthScreen
+            self.viewHelperDualLeadingConstraint.constant = self.widthScreen
+            self.viewHelperDualTrailingConstraint.constant = -self.widthScreen
+            self.backButtonLeadingConstraint.constant = -90
+            
+            self.view.layoutIfNeeded()
+            
         }) { (true) in
             UIView.animate(withDuration: 0.5, animations: {
-                self.bgRed.frame = CGRect.init(x: 375, y: 0, width: 375, height: 812)
-                self.bgBlue.frame = CGRect.init(x: -375, y: 0, width: 375, height: 812)
-//                self.bgRed.alpha = 0
-//                self.bgBlue.alpha = 0
+//                self.bgRed.frame = CGRect.init(x: 375, y: 0, width: 375, height: 812)
+//                self.bgBlue.frame = CGRect.init(x: -375, y: 0, width: 375, height: 812)
+//
+//                self.bgPurple.frame = CGRect.init(x: 0, y: 0, width: 375, height: 812)
+//                self.mainMenuIcon.frame = CGRect.init(x: 61, y: 138, width: 253, height: 447)
+//                self.buttonMain.frame = CGRect.init(x: 124, y: 570, width: 127, height: 78)
                 
-                self.bgPurple.frame = CGRect.init(x: 0, y: 0, width: 375, height: 812)
-                self.mainMenuIcon.frame = CGRect.init(x: 61, y: 138, width: 253, height: 447)
-                self.buttonMain.frame = CGRect.init(x: 124, y: 570, width: 127, height: 78)
+                self.bgRedLeadingConstraint.constant = self.widthScreen
+                self.bgRedTrailingConstraint.constant = self.widthScreen
+                self.bgBlueLeadingConstraint.constant = self.widthScreen
+                self.bgBlueTrailingConstraint.constant = self.widthScreen
+                
+                self.bgPurpleLeadingConstraint.constant = 0
+                self.bgPurpleTopConstraint.constant = 0
+                self.bgPurpleBottomConstraint.constant = 0
+                self.bgPurpleTrailingConstraint.constant = 0
+                
+                self.mainIconTopConstraint.constant = 94
+                self.mainIconBottomConstraint.constant = 193
+                
+                self.mainButtonBottomConstraint.constant = 130
+                self.tentangButtonTrailingConstraint.constant = 22
+                
+                
+                self.view.layoutIfNeeded()
                 
                 self.bgPurple.alpha = 1
                 self.mainMenuIcon.alpha = 1
@@ -552,6 +733,4 @@ extension ViewController{
         }
         
     }
-   
-    
 }
