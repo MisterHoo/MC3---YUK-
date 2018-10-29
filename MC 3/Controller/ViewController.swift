@@ -334,9 +334,9 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
         func viewDidAppear(_ animated: Bool) {
             super.viewDidAppear(animated)
         
-//        AppUtility.lockOrientation(.portrait)
-        // Or to rotate and lock
-        // AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
+        AppUtility.lockOrientation(.portrait)
+//         Or to rotate and lock
+         AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
         }
     
         func viewWillDisappear(_ animated: Bool) {
@@ -732,5 +732,9 @@ extension ViewController{
             })
         }
         
+    }
+    // Home Bar
+    override func preferredScreenEdgesDeferringSystemGestures() -> UIRectEdge {
+        return UIRectEdge.bottom
     }
 }

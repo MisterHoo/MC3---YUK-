@@ -119,6 +119,11 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         return .default
     }
     
+    // Home Bar
+    override func preferredScreenEdgesDeferringSystemGestures() -> UIRectEdge {
+        return UIRectEdge.bottom
+    }
+    
     @IBAction func backButtonAction(_ sender: UIButton)
     {
         
