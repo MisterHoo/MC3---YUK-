@@ -306,6 +306,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         let data = try NSKeyedArchiver.archivedData(withRootObject: worldMap, requiringSecureCoding: true)
         try data.write(to: url)
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
