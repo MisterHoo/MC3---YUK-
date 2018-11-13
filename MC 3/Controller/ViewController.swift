@@ -8,8 +8,9 @@
 
 import UIKit
 import MultipeerConnectivity
+import GoogleMobileAds
 
-class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControllerDelegate, UIScrollViewDelegate {
+class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControllerDelegate, UIScrollViewDelegate, GADInterstitialDelegate {
     
     @IBOutlet var CreditView: UIView!
     @IBOutlet weak var visualEffectOutlet: UIVisualEffectView!
@@ -76,8 +77,20 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     var isSingleDeviceSelected : Bool = false
     var isDualDeviceSelected : Bool = false
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    // Ad View Variable
+    var interstitialAd : GADInterstitial?
+    
+    // Ad Purpose
+    func createAndLoadInterstitial() -> GADInterstitial {
+        let request = GADRequest()
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-8141183117363932/2351484026")
+        interstitial.delegate = self
+        interstitial.load(request)
+        return interstitial
+    }
+    
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        interstitialAd = createAndLoadInterstitial()
     }
     
     @IBAction func ikutButtonAction(_ sender: UIButton) {
@@ -89,11 +102,11 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     
     @IBAction func mainButtonAction(_ sender: UIButton) {
         //multiPeer.hosting()
+        
         isServer = true
         DispatchQueue.main.async {
             self.inAnimateSelectionDevice()
         }
-//        performSegue(withIdentifier: "menuToGame", sender: self)
     }
     
     @IBAction func backButtonAction(_ sender: Any) {
@@ -119,6 +132,7 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
             self.selectedDualDevice()
         }
     }
+    
     func animateIn(){
         visualEffectOutlet.isHidden = false
         self.view.addSubview(CreditView)
@@ -179,19 +193,20 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     
     //VC
     
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        textField.resignFirstResponder()
-//
-//        UserDefaults.standard.set(usernameTextField.text, forKey: "Username")
-//
-//        return true
-//    }
-//
+    //    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    //        textField.resignFirstResponder()
+    //
+    //        UserDefaults.standard.set(usernameTextField.text, forKey: "Username")
+    //
+    //        return true
+    //    }
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination as? GameplayViewController
         
         destination?.isServer = isServer
         destination?.isMultipeer = isMultipeer
+        destination?.interstitialAd = interstitialAd
     }
     
     public class MyClass {
@@ -201,7 +216,7 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     public class MyClass2 {
         static let myNotification = Notification.Name("MPC_DidRecieveDataNotification")
     }
-
+    
     func addGradientViewBelow(){
         let layer = CAGradientLayer()
         layer.frame = view.bounds
@@ -243,27 +258,27 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        NotificationCenter.default.addObserver(self, selector: #selector(moveToGameVC), name: NSNotification.Name(rawValue: "MPC_DidRecieveDataNotification"), object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(moveToGameVC), name: NSNotification.Name(rawValue: "MPC_DidChangeStateNotification"), object: nil)
+        //        NotificationCenter.default.addObserver(self, selector: #selector(moveToGameVC), name: NSNotification.Name(rawValue: "MPC_DidRecieveDataNotification"), object: nil)
+        //        NotificationCenter.default.addObserver(self, selector: #selector(moveToGameVC), name: NSNotification.Name(rawValue: "MPC_DidChangeStateNotification"), object: nil)
         DispatchQueue.main.async {
             self.initPosition()
             self.didLoadAnimate()
         }
     }
-
+    
     func initPosition(){
-//        bgRed.frame = CGRect.init(x: 375, y: 0, width: 375, height: 812)
-//        bgBlue.frame = CGRect.init(x: -375, y: 0, width: 375, height: 812)
-//        iconSingleDevice.frame = CGRect.init(x: -105, y: 260, width: 90, height: 203)
-//        iconDualDevice.frame = CGRect.init(x: 388, y: 260, width: 92, height: 203)
-//        buttonSingleDevice.frame = CGRect.init(x: -118, y: 489, width: 118, height: 73)
-//        buttonDualDevice.frame = CGRect.init(x: 375, y: 489, width: 118, height: 73)
-//        backButton.frame = CGRect.init(x: -70, y: 60, width: 70, height: 44)
-//
-//        bgPurple.frame = CGRect.init(x: 0, y: 0, width: 375, height: 812)
-//        mainMenuIcon.frame = CGRect.init(x: 61, y: 138, width: 253, height: 447)
-//        buttonMain.frame = CGRect.init(x: 124, y: 570, width: 127, height: 78)
-//
+        //        bgRed.frame = CGRect.init(x: 375, y: 0, width: 375, height: 812)
+        //        bgBlue.frame = CGRect.init(x: -375, y: 0, width: 375, height: 812)
+        //        iconSingleDevice.frame = CGRect.init(x: -105, y: 260, width: 90, height: 203)
+        //        iconDualDevice.frame = CGRect.init(x: 388, y: 260, width: 92, height: 203)
+        //        buttonSingleDevice.frame = CGRect.init(x: -118, y: 489, width: 118, height: 73)
+        //        buttonDualDevice.frame = CGRect.init(x: 375, y: 489, width: 118, height: 73)
+        //        backButton.frame = CGRect.init(x: -70, y: 60, width: 70, height: 44)
+        //
+        //        bgPurple.frame = CGRect.init(x: 0, y: 0, width: 375, height: 812)
+        //        mainMenuIcon.frame = CGRect.init(x: 61, y: 138, width: 253, height: 447)
+        //        buttonMain.frame = CGRect.init(x: 124, y: 570, width: 127, height: 78)
+        //
         
         isInit = true
         isSelectionDevice = false
@@ -299,10 +314,10 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
         viewHelperDualBottomConstraint.constant = 34
         
         view.alpha = 1
-//        let helperview = UIView()
-//        helperview.backgroundColor = UIColor.white
-//        helperview.frame = CGRect(x: bgBlueLeadingConstraint.constant, y: 0, width: 20, height: 20)
-//        view.addSubview(helperview)
+        //        let helperview = UIView()
+        //        helperview.backgroundColor = UIColor.white
+        //        helperview.frame = CGRect(x: bgBlueLeadingConstraint.constant, y: 0, width: 20, height: 20)
+        //        view.addSubview(helperview)
         
         buttonMain.isEnabled = true
         backButton.isEnabled = false
@@ -313,82 +328,28 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        interstitialAd = createAndLoadInterstitial()
         effect = visualEffectOutlet.effect
         visualEffectOutlet.effect = nil
         visualEffectOutlet.isHidden = true
         DispatchQueue.main.async {
             self.addGradientViewBelow()
+            AppUtility.lockOrientation(.portrait)
+            //        Or to rotate and lock
+            AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
         }
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        //multiPeer = (UIApplication.shared.delegate as! AppDelegate).multiPeer
-//
-//        if let username = UserDefaults.standard.value(forKey: "Username") as? String{
-//            //usernameTextField.text = username
-//            //multiPeer.namaPlayer = username
-//        }
-        //multiPeer.setupPeerId()
-        //multiPeer.setupPeerId()
-//        usernameTextField.delegate = self
         
-//        imageArray = [UIImage(named: "AssetCongklak"),UIImage(named: "AssetGundu"),UIImage(named: "AssetGasing")] as! [UIImage]
-        
-//        print(scrollView.frame.width)
-//        print(scrollView.frame.height)
-//
-//        for i in 0..<imageArray.count
-//        {
-//            let imageView = UIImageView()
-//            imageView.image = imageArray[i]
-//            let xPosition = self.scrollView.frame.width * CGFloat(i)
-//            print("\(xPosition)")
-//            imageView.frame = CGRect(x: xPosition, y: 0, width: self.scrollView.bounds.width, height: self.scrollView.bounds.height)
-//            imageView.contentMode = .scaleAspectFit
-//
-//            imageView.translatesAutoresizingMaskIntoConstraints = true
-//
-//            scrollView.contentSize.width = scrollView.frame.width * CGFloat(i + 1)
-//
-//            scrollView.addSubview(imageView)
-//        }
-//        self.scrollView.delegate = self
-//
-//    }
+    }
     
-//    func scrollViewDidScroll(_ scrollView: UIScrollView)
-//    {
-//        let pageNumber = scrollView.contentOffset.x / scrollView.frame.size.width
-//        pageControl.currentPage = Int(pageNumber)
-//    }
-//
-//    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView)
-//    {
-//
-//    }
-    
-    
-    
-    
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        usernameTextField.resignFirstResponder()
-//    }
-    
-        func viewDidAppear(_ animated: Bool) {
-            super.viewDidAppear(animated)
-        
-        AppUtility.lockOrientation(.portrait)
-//         Or to rotate and lock
-         AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
-        }
-    
-        func viewWillDisappear(_ animated: Bool) {
-            super.viewWillDisappear(animated)
-            
-            // Don't forget to reset when view is being removed
-        }
-        
-        func didReceiveMemoryWarning() {
-            super.didReceiveMemoryWarning()
-        }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Don't forget to reset when view is being removed
     }
 }
 
@@ -457,7 +418,7 @@ extension ViewController{
     }
     
     func selectedDualDevice(){
-
+        
         
         isInit = false
         isSelectionDevice = false
@@ -482,7 +443,7 @@ extension ViewController{
             self.view.layoutIfNeeded()
             
             
-           
+            
             
         }) { (true) in
             UIView.animate(withDuration: 1.5, animations: {
@@ -511,7 +472,7 @@ extension ViewController{
         isSingleDeviceSelected = true
         
         UIView.animate(withDuration: 0.5, animations: {
-
+            
             
             self.backButtonLeadingConstraint.constant = -90
             
@@ -548,7 +509,7 @@ extension ViewController{
     
     func inAnimateSelectionDevice(){
         //autolayout
-    
+        
         backButton.isEnabled = true
         buttonDualDevice.isEnabled = true
         buttonSingleDevice.isEnabled = true
@@ -560,7 +521,7 @@ extension ViewController{
         
         UIView.animate(withDuration: 0.5, animations: {
             
-           
+            
             self.bgPurpleTopConstraint.constant = 150
             self.bgPurpleBottomConstraint.constant = 150
             self.bgPurpleLeadingConstraint.constant = 125
@@ -568,7 +529,7 @@ extension ViewController{
             
             self.mainIconTopConstraint.constant = 160
             self.mainIconBottomConstraint.constant = 285
-        
+            
             self.mainButtonBottomConstraint.constant = 250
             self.tentangButtonTrailingConstraint.constant = -90
             
@@ -585,8 +546,8 @@ extension ViewController{
             self.bgPurple.alpha = 0.5
             self.mainMenuIcon.alpha = 0.5
             self.buttonMain.alpha = 0.5
-//            self.bgRed.alpha = 1
-//            self.bgBlue.alpha = 1
+            //            self.bgRed.alpha = 1
+            //            self.bgBlue.alpha = 1
         }) { (true) in
             UIView.animate(withDuration: 0.5, animations: {
                 self.viewHelperSingleLeadingConstraint.constant = 0
@@ -616,10 +577,10 @@ extension ViewController{
         isSingleDeviceSelected = false
         isDualDeviceSelected = false
         
-//        bgRed.alpha = 1
-//        bgBlue.alpha = 1
-//
-       
+        //        bgRed.alpha = 1
+        //        bgBlue.alpha = 1
+        //
+        
         buttonMain.isEnabled = true
         tentangButton.isEnabled = true
         
