@@ -35,6 +35,7 @@
 		CFCC5925212A9B6D0036C6B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFCC5923212A9B6D0036C6B2 /* Assets.xcassets */; };
 		CFCC5926212A9B6D0036C6B2 /* ModelAsset.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = CFCC5924212A9B6D0036C6B2 /* ModelAsset.scnassets */; };
 		CFD305B22123EE7A008B820B /* LobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD305B12123EE7A008B820B /* LobbyViewController.swift */; };
+		CFD3BD19219AA19D00C6D924 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFD3BD18219AA19D00C6D924 /* GoogleService-Info.plist */; };
 		ED69F1C2D28AD54B530E2D09 /* Pods_MC_3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D60EC7CF826BD94D69CDDAD9 /* Pods_MC_3.framework */; };
 		FDFF572D7D2C01E87F71DED3 /* Pods_MC_3UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A32DE2B95878A8095B5C6D04 /* Pods_MC_3UITests.framework */; };
 /* End PBXBuildFile section */
@@ -98,6 +99,7 @@
 		CFCC5923212A9B6D0036C6B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "MC 3/Support/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
 		CFCC5924212A9B6D0036C6B2 /* ModelAsset.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; name = ModelAsset.scnassets; path = "MC 3/Support/ModelAsset.scnassets"; sourceTree = SOURCE_ROOT; };
 		CFD305B12123EE7A008B820B /* LobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyViewController.swift; sourceTree = "<group>"; };
+		CFD3BD18219AA19D00C6D924 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D60EC7CF826BD94D69CDDAD9 /* Pods_MC_3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MC_3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F129C44A4B73161A9C36EA4E /* Pods-MC 3Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MC 3Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MC 3Tests/Pods-MC 3Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -233,6 +235,7 @@
 			children = (
 				6697DB072122B32500E3EF32 /* MC_3.xcdatamodeld */,
 				6697DB0F2122B32800E3EF32 /* Info.plist */,
+				CFD3BD18219AA19D00C6D924 /* GoogleService-Info.plist */,
 				CFCC5922212A9B4C0036C6B2 /* Support */,
 				CF3964DC2122B7A0005E868C /* View */,
 				6697DAFF2122B32500E3EF32 /* Controller */,
@@ -377,6 +380,7 @@
 			files = (
 				66E943A8215A55FA001773E2 /* Put Seed.aiff in Resources */,
 				6697A7972122E73200DA0814 /* Main.storyboard in Resources */,
+				CFD3BD19219AA19D00C6D924 /* GoogleService-Info.plist in Resources */,
 				CFCC5925212A9B6D0036C6B2 /* Assets.xcassets in Resources */,
 				CFCC5926212A9B6D0036C6B2 /* ModelAsset.scnassets in Resources */,
 				66E943A9215A55FA001773E2 /* Turn Change.wav in Resources */,
