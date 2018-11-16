@@ -289,6 +289,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         //debugOptions
         //        var option = SCNDebugOptions.showPhysicsShapes
         //        sceneView.debugOptions = option
+        sceneView.showsStatistics = true
         
         //configure Tap Gesture
         let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(self.tapped(tapRecognizer:)))
