@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.15" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,6 +26,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Main Menu Congklak - ungu" translatesAutoresizingMaskIntoConstraints="NO" id="bI0-do-zpe">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <color key="backgroundColor" red="0.25664669275283813" green="0.027481455355882645" blue="0.43924239277839661" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <variation key="heightClass=regular-widthClass=regular" image="BG Purple Ipad"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Main Menu Icon" translatesAutoresizingMaskIntoConstraints="NO" id="eki-sI-6Sz">
                                 <rect key="frame" x="61" y="138" width="253" height="447"/>
@@ -45,9 +46,11 @@
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BG Solo" translatesAutoresizingMaskIntoConstraints="NO" id="O92-4Y-TcQ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <variation key="heightClass=regular-widthClass=regular" image="BG Solo Ipad"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BG Duo" translatesAutoresizingMaskIntoConstraints="NO" id="bKA-W4-beY">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <variation key="heightClass=regular-widthClass=regular" image="BG Duo Ipad"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vrr-sd-5Ha" userLabel="ViewGedheSingle">
                                 <rect key="frame" x="0.0" y="0.0" width="188" height="812"/>
@@ -745,7 +748,10 @@
     </scenes>
     <resources>
         <image name="BG Duo" width="1500" height="3248"/>
+        <image name="BG Duo Ipad" width="4096" height="5464"/>
+        <image name="BG Purple Ipad" width="4096" height="5464"/>
         <image name="BG Solo" width="1500" height="3248"/>
+        <image name="BG Solo Ipad" width="4096" height="5464"/>
         <image name="Button Main Congklak" width="470" height="290"/>
         <image name="Gabung" width="555" height="250"/>
         <image name="Giliran P1 BG" width="1500" height="272"/>

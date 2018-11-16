@@ -11,8 +11,9 @@ import SceneKit
 import ARKit
 import MultipeerConnectivity
 import AVFoundation
+import GoogleMobileAds
 
-class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserViewControllerDelegate{
+class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserViewControllerDelegate, GADInterstitialDelegate{
     
     // Test for Mr HOO
     //var view score
@@ -61,7 +62,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     
     var currentPlayerPoss: CGPoint!
     var nextPlayerPoss: CGPoint!
-
+    
     var worldMap : ARWorldMap!
     var worldMapData : Data!
     
@@ -113,10 +114,30 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     
     @IBOutlet weak var blackBackground: UIImageView!
     @IBOutlet weak var giliranPlayer: UILabel!
-
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
+    }
+    
+    // Ad View Variable
+    var interstitialAd : GADInterstitial?
+    
+    // Ad Purpose
+    func showAd(){
+        guard let interAd = interstitialAd else{return}
+        if interAd != nil {
+            if interAd.isReady {
+                print("Ad Showed")
+                interAd.present(fromRootViewController: self)
+            }else{
+                print("Ad Error")
+            }
+        }
+    }
+    
+    // Home Bar
+    override func preferredScreenEdgesDeferringSystemGestures() -> UIRectEdge {
+        return UIRectEdge.bottom
     }
     
     @IBAction func backButtonAction(_ sender: UIButton)
@@ -177,6 +198,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
     }
     
     @IBAction func audioButton(_ sender: Any) {
+        //showAd()
         print(audioOutlet.image(for: .normal))
         if audioOutlet.image(for: .normal) == UIImage(named: "sound") && isAudioInited == true{
             DispatchQueue.main.async {
@@ -217,7 +239,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
                 self.gabungOutlet.isEnabled = true
             }
         }
-
+        
         
         print(player2.center)
         print(player1.center)
@@ -302,9 +324,13 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         let data = try NSKeyedArchiver.archivedData(withRootObject: worldMap, requiringSecureCoding: true)
         try data.write(to: url)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        showAd()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         //AppUtility.lockOrientation(.all)
         
         //        if multiPeer.session.connectedPeers.count != nil {
@@ -333,16 +359,16 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
             //            sceneView.session.run(configuration)
         }
         
-//        UIView.animate(withDuration: 0.5) {
-//            self.view.alpha = 1
-//        }
+        //        UIView.animate(withDuration: 0.5) {
+        //            self.view.alpha = 1
+        //        }
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         sceneView.session.pause()
     }
-  
+    
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         var node : SCNNode?
         
@@ -390,7 +416,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
                 
                 //                gameNode = node!
                 //                gameAnchor = planeAnchor
-    
+                
             }
         }else if anchor.name == "congklak"{
             node = gameBoard
@@ -455,13 +481,13 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         }else {
             print("bukan player 1")
         }
-       
+        
     }
     func updateMaterial(){
         let material = self.planeGeometry.materials.first!
         material.diffuse.contentsTransform = SCNMatrix4MakeScale(Float(self.planeGeometry.width), Float(self.planeGeometry.height), 1)
     }
-
+    
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         print("masuk")
         if let name = anchor.name, name.hasPrefix("congklak"){
@@ -482,11 +508,11 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
             let newPosition = SCNVector3(self.gameAnchor.transform.columns.3.x, self.gameAnchor.transform.columns.3.y, self.gameAnchor.transform.columns.3.z)
             self.gameBoard.position = newPosition
             
-//            if multipeerSession.session.connectedPeers.count < 1 {
-//                saveWorldMapToUserDefault()
-//            }else{
-//                sendMapFromUserDefault()
-//            }
+            //            if multipeerSession.session.connectedPeers.count < 1 {
+            //                saveWorldMapToUserDefault()
+            //            }else{
+            //                sendMapFromUserDefault()
+            //            }
             DispatchQueue.main.async {
                 self.sendMapFromUserDefault()
                 self.gameBoard.loadModel()
@@ -494,23 +520,23 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
             }
         }
     }
-// mutliplayer
-//    @IBAction func multiplayer(_ sender: Any) {
-//       
-//        multipeerSession.sessionBrowser()
-//        multipeerSession.mcBrowser.delegate = self
-//        present(multipeerSession.mcBrowser, animated: false)
-//    }
-//    
-//    @IBAction func sendWorldMap(_ sender: Any) {
-//        sceneView.session.getCurrentWorldMap { worldMap, error in
-//            guard let map = worldMap
-//                else { print("Error: \(error!.localizedDescription)"); return }
-//            guard let data = try? NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
-//                else { fatalError("can't encode map") }
-//            self.multipeerSession.sendToAllPeers(data)
-//        }
-//    }
+    // mutliplayer
+    //    @IBAction func multiplayer(_ sender: Any) {
+    //
+    //        multipeerSession.sessionBrowser()
+    //        multipeerSession.mcBrowser.delegate = self
+    //        present(multipeerSession.mcBrowser, animated: false)
+    //    }
+    //
+    //    @IBAction func sendWorldMap(_ sender: Any) {
+    //        sceneView.session.getCurrentWorldMap { worldMap, error in
+    //            guard let map = worldMap
+    //                else { print("Error: \(error!.localizedDescription)"); return }
+    //            guard let data = try? NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
+    //                else { fatalError("can't encode map") }
+    //            self.multipeerSession.sendToAllPeers(data)
+    //        }
+    //    }
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         thisPlayer = 2
         DispatchQueue.main.async {
@@ -533,16 +559,16 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         present(multipeerSession.mcBrowser, animated: false)
         
     }
-//    @IBAction func sendWorldMap(_ sender: Any) {
-//        //send Button
-//        sceneView.session.getCurrentWorldMap { worldMap, error in
-//            guard let map = worldMap
-//                else { print("Error: \(error!.localizedDescription)"); return }
-//            guard let data = try? NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
-//                else { fatalError("can't encode map") }
-//            self.multipeerSession.sendToAllPeers(data)
-//        }
-//    }
+    //    @IBAction func sendWorldMap(_ sender: Any) {
+    //        //send Button
+    //        sceneView.session.getCurrentWorldMap { worldMap, error in
+    //            guard let map = worldMap
+    //                else { print("Error: \(error!.localizedDescription)"); return }
+    //            guard let data = try? NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
+    //                else { fatalError("can't encode map") }
+    //            self.multipeerSession.sendToAllPeers(data)
+    //        }
+    //    }
     func addNodeAtLocation (location : CGPoint){
         guard anchors.count > 0 else{
             print("anchors are not created yet")
@@ -561,7 +587,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         }
         
     }
-
+    
     func initModel(){
         //Kacang
         
@@ -604,8 +630,8 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         planeNode?.removeFromParentNode()
         
     }
-
-// MARK: - send world Map
+    
+    // MARK: - send world Map
     func sendWorldMapData(_ worldData : Data!){
         if multipeerSession.session.connectedPeers.count > 0 {
             do{
@@ -615,7 +641,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
             }
         }else{print("not connected to any device")}
     }
-// mengolah data
+    // mengolah data
     func receivedData(_ data: Data, from peer: MCPeerID) {
         do {
             print(data)
@@ -662,76 +688,76 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         //            }
         //        }
     }
-
-//    func loadWorldMap(from archivedData: Data) {
-//        do {
-//            let uncompressedData = try archivedData.decompressed()
-//            if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: uncompressedData) {
-//                // Run the session with the received world map.
-//                let configuration = ARWorldTrackingConfiguration()
-//                configuration.planeDetection = .horizontal
-//                configuration.initialWorldMap = worldMap
-//                sceneView?.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
-//            }
-//            else
-//                if let anchor = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARAnchor.self, from: uncompressedData) {
-//                    // Add anchor to the session, ARSCNView delegate adds visible content.
-//                    sceneView.session.add(anchor: anchor)
-//                }else{
-//                    print("fail")
-//            }
-//        } catch {
-//            DispatchQueue.main.async {
-//                print("error load map")
-//            }
-//        }
-//    }
-
-//    private func fetchArchivedWorldMap(from url: URL, _ closure: @escaping (Data?, Error?) -> Void) {
-//        DispatchQueue.global().async {
-//            do {
-//                _ = url.startAccessingSecurityScopedResource()
-//                defer { url.stopAccessingSecurityScopedResource() }
-//                let data = try Data(contentsOf: url)
-//                closure(data, nil)
-//
-//            } catch {
-//                DispatchQueue.main.async {
-//                    print("error")
-//                }
-//                closure(nil, error)
-//            }
-//        }
-//    }
-//
-//    func getCurrentWorldMapData(_ closure: @escaping (Data?, Error?) -> Void) {
-//        // When loading a map, send the loaded map and not the current extended map
-//        if let worldMap = worldMap {
-//            compressWorldMap(map: worldMap, closure)
-//            return
-//        } else {
-//            sceneView.session.getCurrentWorldMap { map, error in
-//                if let error = error {
-//                    closure(nil, error)
-//                }
-//                guard let map = map else {return }
-//                self.compressWorldMap(map: map, closure)
-//            }
-//        }
-//    }
-//
-//    func compressWorldMap(map: ARWorldMap, _ closure: @escaping (Data?, Error?) -> Void){
-//        DispatchQueue.global().async {
-//            do {
-//                let data = try NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
-//                let compressData = data.compressed()
-//                closure(compressData,nil)
-//            } catch {
-//                print("error")
-//                closure(nil, error)
-//            }
-//        }
-//    }
+    
+    //    func loadWorldMap(from archivedData: Data) {
+    //        do {
+    //            let uncompressedData = try archivedData.decompressed()
+    //            if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: uncompressedData) {
+    //                // Run the session with the received world map.
+    //                let configuration = ARWorldTrackingConfiguration()
+    //                configuration.planeDetection = .horizontal
+    //                configuration.initialWorldMap = worldMap
+    //                sceneView?.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+    //            }
+    //            else
+    //                if let anchor = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARAnchor.self, from: uncompressedData) {
+    //                    // Add anchor to the session, ARSCNView delegate adds visible content.
+    //                    sceneView.session.add(anchor: anchor)
+    //                }else{
+    //                    print("fail")
+    //            }
+    //        } catch {
+    //            DispatchQueue.main.async {
+    //                print("error load map")
+    //            }
+    //        }
+    //    }
+    
+    //    private func fetchArchivedWorldMap(from url: URL, _ closure: @escaping (Data?, Error?) -> Void) {
+    //        DispatchQueue.global().async {
+    //            do {
+    //                _ = url.startAccessingSecurityScopedResource()
+    //                defer { url.stopAccessingSecurityScopedResource() }
+    //                let data = try Data(contentsOf: url)
+    //                closure(data, nil)
+    //
+    //            } catch {
+    //                DispatchQueue.main.async {
+    //                    print("error")
+    //                }
+    //                closure(nil, error)
+    //            }
+    //        }
+    //    }
+    //
+    //    func getCurrentWorldMapData(_ closure: @escaping (Data?, Error?) -> Void) {
+    //        // When loading a map, send the loaded map and not the current extended map
+    //        if let worldMap = worldMap {
+    //            compressWorldMap(map: worldMap, closure)
+    //            return
+    //        } else {
+    //            sceneView.session.getCurrentWorldMap { map, error in
+    //                if let error = error {
+    //                    closure(nil, error)
+    //                }
+    //                guard let map = map else {return }
+    //                self.compressWorldMap(map: map, closure)
+    //            }
+    //        }
+    //    }
+    //
+    //    func compressWorldMap(map: ARWorldMap, _ closure: @escaping (Data?, Error?) -> Void){
+    //        DispatchQueue.global().async {
+    //            do {
+    //                let data = try NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
+    //                let compressData = data.compressed()
+    //                closure(compressData,nil)
+    //            } catch {
+    //                print("error")
+    //                closure(nil, error)
+    //            }
+    //        }
+    //    }
 }
 extension GameplayViewController: MPCHandelerDelegate{
     func showThisPlayer() {
@@ -750,19 +776,19 @@ extension GameplayViewController: MPCHandelerDelegate{
 }
 
 extension GameplayViewController : ARSessionDelegate{
-//    func session(_ session: ARSession, didUpdate frame: ARFrame) {
-//        for i in 0...1{
-//            for j in 0...6{
-//                if gameAnchor != nil{
-//                    guard let textNode = gameBoard.holeBox[i][j].childNode(withName: "SumBeanNode", recursively: false) else {
-//                        return
-//                    }
-//                    textNode.look(at: (sceneView.pointOfView?.position)!)
-//                }else{
-//                    break
-//                }
-//            }
-//        }
-//    }
-
+    //    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+    //        for i in 0...1{
+    //            for j in 0...6{
+    //                if gameAnchor != nil{
+    //                    guard let textNode = gameBoard.holeBox[i][j].childNode(withName: "SumBeanNode", recursively: false) else {
+    //                        return
+    //                    }
+    //                    textNode.look(at: (sceneView.pointOfView?.position)!)
+    //                }else{
+    //                    break
+    //                }
+    //            }
+    //        }
+    //    }
+    
 }
