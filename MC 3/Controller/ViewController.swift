@@ -157,7 +157,8 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     }
     
     @IBAction func creditButton(_ sender: Any) {
-        animateIn()
+        //animateIn()
+        performSegue(withIdentifier: "MenuToTentang", sender: Any.self)
     }
     @IBAction func dismisButton(_ sender: Any) {
         animateOut()

@@ -29,8 +29,11 @@
 		66E943A9215A55FA001773E2 /* Turn Change.wav in Resources */ = {isa = PBXBuildFile; fileRef = 66E943A6215A55FA001773E2 /* Turn Change.wav */; };
 		66E943AA215A55FA001773E2 /* Tembak-Ambil.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 66E943A7215A55FA001773E2 /* Tembak-Ambil.aiff */; };
 		CD3C2404215B9CF100BE6C52 /* gameplayVC Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C2403215B9CF100BE6C52 /* gameplayVC Switch.swift */; };
+		CD61EEBE219EC8BC00376BF5 /* Tentang.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD61EEBD219EC8BC00376BF5 /* Tentang.storyboard */; };
+		CD61EEC3219ED3FC00376BF5 /* ExplainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD61EEC2219ED3FC00376BF5 /* ExplainViewController.swift */; };
 		CD9EE326216C97840051552F /* ObjectToSend.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9EE325216C97840051552F /* ObjectToSend.swift */; };
 		CDDA749C212AAC8A00A6B003 /* MultiPeerHandeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA749B212AAC8900A6B003 /* MultiPeerHandeler.swift */; };
+		CDE31FA7219EC63600D76938 /* TentangViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE31FA6219EC63600D76938 /* TentangViewController.swift */; };
 		CF8A8F28212BE15000FFFFE5 /* LockOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8A8F27212BE15000FFFFE5 /* LockOrientation.swift */; };
 		CFCC5925212A9B6D0036C6B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFCC5923212A9B6D0036C6B2 /* Assets.xcassets */; };
 		CFCC5926212A9B6D0036C6B2 /* ModelAsset.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = CFCC5924212A9B6D0036C6B2 /* ModelAsset.scnassets */; };
@@ -93,8 +96,11 @@
 		9AF33AD3B21D03424A00CB8C /* Pods-MC 3Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MC 3Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MC 3Tests/Pods-MC 3Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A32DE2B95878A8095B5C6D04 /* Pods_MC_3UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MC_3UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD3C2403215B9CF100BE6C52 /* gameplayVC Switch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "gameplayVC Switch.swift"; sourceTree = "<group>"; };
+		CD61EEBD219EC8BC00376BF5 /* Tentang.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tentang.storyboard; sourceTree = "<group>"; };
+		CD61EEC2219ED3FC00376BF5 /* ExplainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplainViewController.swift; sourceTree = "<group>"; };
 		CD9EE325216C97840051552F /* ObjectToSend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectToSend.swift; sourceTree = "<group>"; };
 		CDDA749B212AAC8900A6B003 /* MultiPeerHandeler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiPeerHandeler.swift; sourceTree = "<group>"; };
+		CDE31FA6219EC63600D76938 /* TentangViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TentangViewController.swift; sourceTree = "<group>"; };
 		CF8A8F27212BE15000FFFFE5 /* LockOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockOrientation.swift; sourceTree = "<group>"; };
 		CFCC5923212A9B6D0036C6B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "MC 3/Support/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
 		CFCC5924212A9B6D0036C6B2 /* ModelAsset.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; name = ModelAsset.scnassets; path = "MC 3/Support/ModelAsset.scnassets"; sourceTree = SOURCE_ROOT; };
@@ -157,6 +163,7 @@
 		6697DAFF2122B32500E3EF32 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CD61EEC1219ED3CE00376BF5 /* Tentang Controller */,
 				66DD9466212C084600859DB5 /* Asset Controller */,
 				66DD9465212C083D00859DB5 /* Helper */,
 				CDDA749B212AAC8900A6B003 /* MultiPeerHandeler.swift */,
@@ -221,9 +228,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CD61EEC1219ED3CE00376BF5 /* Tentang Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CDE31FA6219EC63600D76938 /* TentangViewController.swift */,
+				CD61EEC2219ED3FC00376BF5 /* ExplainViewController.swift */,
+			);
+			path = "Tentang Controller";
+			sourceTree = "<group>";
+		};
 		CF3964DC2122B7A0005E868C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CD61EEBD219EC8BC00376BF5 /* Tentang.storyboard */,
 				6697A7952122E73200DA0814 /* Main.storyboard */,
 				6697DB0C2122B32800E3EF32 /* LaunchScreen.storyboard */,
 			);
@@ -379,6 +396,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD61EEBE219EC8BC00376BF5 /* Tentang.storyboard in Resources */,
 				66E943A8215A55FA001773E2 /* Put Seed.aiff in Resources */,
 				6697A7972122E73200DA0814 /* Main.storyboard in Resources */,
 				CFD3BD19219AA19D00C6D924 /* GoogleService-Info.plist in Resources */,
@@ -495,8 +513,10 @@
 				66CB45B8212E9E0500A183AE /* GameManager.swift in Sources */,
 				6697DB032122B32500E3EF32 /* ViewController.swift in Sources */,
 				CF8A8F28212BE15000FFFFE5 /* LockOrientation.swift in Sources */,
+				CD61EEC3219ED3FC00376BF5 /* ExplainViewController.swift in Sources */,
 				6697DB012122B32500E3EF32 /* AppDelegate.swift in Sources */,
 				669B3BEA21350AC00045580A /* KacangObject.swift in Sources */,
+				CDE31FA7219EC63600D76938 /* TentangViewController.swift in Sources */,
 				668399172133B6F800BDBC13 /* MPCHandeler.swift in Sources */,
 				66BDD2EF212AAF3A00680D43 /* GameBoard.swift in Sources */,
 				6697A7992123D30B00DA0814 /* GameplayViewController.swift in Sources */,

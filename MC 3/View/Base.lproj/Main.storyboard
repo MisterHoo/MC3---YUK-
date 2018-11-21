@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -155,7 +155,7 @@
                                     <action selector="backButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M1v-q5-VRy"/>
                                 </connections>
                             </button>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cEA-jt-Tpy">
+                            <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cEA-jt-Tpy">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="7nd-Gt-jdf">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
@@ -252,6 +252,7 @@
                         <outlet property="viewHelperSingleTrailingConstraint" destination="IGZ-uX-2Ow" id="86c-Xp-3WK"/>
                         <outlet property="visualEffectOutlet" destination="cEA-jt-Tpy" id="ntx-dT-WFa"/>
                         <segue destination="oHS-1f-FFs" kind="show" identifier="menuToGame" animates="NO" id="jtD-Xf-w9m"/>
+                        <segue destination="bID-Ad-JFg" kind="show" identifier="MenuToTentang" id="oWU-dz-mgd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -422,6 +423,7 @@
         <!--Gameplay View Controller-->
         <scene sceneID="2uv-AX-PwS">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R4J-X9-M1p" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="gamePlay" id="oHS-1f-FFs" customClass="GameplayViewController" customModule="MC_3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E5i-0k-DhP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
@@ -741,9 +743,16 @@
                         <outlet property="statusLabel" destination="DYC-mO-0JL" id="aLt-V9-L3A"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="R4J-X9-M1p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1882.4000000000001" y="131.52709359605913"/>
+            <point key="canvasLocation" x="1446" y="293"/>
+        </scene>
+        <!--Tentang-->
+        <scene sceneID="goi-g9-FzC">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Tentang" id="bID-Ad-JFg" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kmj-Fz-Q5T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="710" y="-89"/>
         </scene>
     </scenes>
     <resources>
