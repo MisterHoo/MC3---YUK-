@@ -42,4 +42,7 @@ class ExplainViewController: UIViewController {
         cobaLabel.text = labelTulis
     }
 
+    @IBAction func backToTentang(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
 }

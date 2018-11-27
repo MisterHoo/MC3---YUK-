@@ -15,7 +15,7 @@ class TentangViewController: UIViewController {
 
     }
     @IBAction func backToMainMenu(_ sender: Any) {
-        performSegue(withIdentifier: "backToMain", sender: self)
+        dismiss(animated: true, completion: nil)
     }
     @IBAction func satuPerangkat(_ sender: Any) {
         angka = 1

@@ -139,7 +139,7 @@
                                 <rect key="frame" x="165" y="717" width="45" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="zBk-M3-NJv" kind="show" id="EAi-Kp-EiS"/>
+                                    <action selector="backToTentang:" destination="T1T-Zd-eau" eventType="touchUpInside" id="FAe-TP-tKW"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4UH-od-180">
