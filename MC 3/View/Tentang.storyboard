@@ -17,43 +17,101 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zNU-NB-Vrs">
-                                <rect key="frame" x="170" y="700" width="34" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Main Menu Congklak - ungu" translatesAutoresizingMaskIntoConstraints="NO" id="991-g1-YGZ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <variation key="heightClass=regular-widthClass=regular" image="BG Purple Ipad"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zNU-NB-Vrs">
+                                <rect key="frame" x="170" y="698" width="35" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="Huj-CD-4OP">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="70"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="30" id="nu7-aK-uXQ">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                    </constraint>
+                                </constraints>
                                 <state key="normal" title="Back"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                </variation>
                                 <connections>
                                     <action selector="backToMainMenu:" destination="zBk-M3-NJv" eventType="touchUpInside" id="8EV-6W-j8e"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ye-bg-xJ5">
-                                <rect key="frame" x="103" y="149" width="168" height="96"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ye-bg-xJ5">
+                                <rect key="frame" x="103.66666666666669" y="242" width="168" height="96"/>
                                 <color key="backgroundColor" red="0.5908350912" green="0.40202268839999999" blue="0.56104654919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="168" id="M7G-tz-qyp">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="336"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="96" id="yrj-XU-0GS">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="192"/>
+                                    </constraint>
+                                </constraints>
                                 <state key="normal" title="Petunjuk Satu Perangkat"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                </variation>
                                 <connections>
                                     <action selector="satuPerangkat:" destination="zBk-M3-NJv" eventType="touchUpInside" id="1A2-fq-psX"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MK1-SW-Mlp">
-                                <rect key="frame" x="103" y="286" width="168" height="96"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MK1-SW-Mlp">
+                                <rect key="frame" x="103.66666666666669" y="363" width="168" height="96"/>
                                 <color key="backgroundColor" red="0.5908350912" green="0.40202268839999999" blue="0.56104654919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="96" id="Piu-E1-GBJ">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="192"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="168" id="qZh-LO-Sr1">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="336"/>
+                                    </constraint>
+                                </constraints>
                                 <state key="normal" title="Petunjuk Dua Perangkat"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                </variation>
                                 <connections>
                                     <action selector="duaPerangkat:" destination="zBk-M3-NJv" eventType="touchUpInside" id="p5R-Wl-Ayw"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pnT-Uj-1yT">
-                                <rect key="frame" x="103" y="438" width="168" height="96"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pnT-Uj-1yT">
+                                <rect key="frame" x="103.66666666666669" y="474" width="168" height="96"/>
                                 <color key="backgroundColor" red="0.5908350912" green="0.40202268835616439" blue="0.56104654919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="96" id="DIV-55-7N3">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="192"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="168" id="Mx7-sS-Jbp">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="336"/>
+                                    </constraint>
+                                </constraints>
                                 <state key="normal" title="Tentang Kami"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                </variation>
                                 <connections>
                                     <action selector="tentangKami:" destination="zBk-M3-NJv" eventType="touchUpInside" id="V3P-Rv-CgY"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="zNU-NB-Vrs" firstAttribute="centerX" secondItem="YLL-qf-lns" secondAttribute="centerX" id="39f-42-lrr"/>
+                            <constraint firstItem="pnT-Uj-1yT" firstAttribute="top" secondItem="MK1-SW-Mlp" secondAttribute="bottom" constant="15" id="4wL-Yg-HJN"/>
+                            <constraint firstItem="991-g1-YGZ" firstAttribute="top" secondItem="hHm-gR-bmN" secondAttribute="top" id="Bok-ta-oH3"/>
+                            <constraint firstItem="YLL-qf-lns" firstAttribute="bottom" secondItem="zNU-NB-Vrs" secondAttribute="bottom" constant="50" id="Mjf-9n-M5o"/>
+                            <constraint firstItem="991-g1-YGZ" firstAttribute="leading" secondItem="YLL-qf-lns" secondAttribute="leading" id="Vok-SW-52Y"/>
+                            <constraint firstItem="MK1-SW-Mlp" firstAttribute="top" secondItem="3ye-bg-xJ5" secondAttribute="bottom" constant="25" id="btk-J5-14g"/>
+                            <constraint firstAttribute="bottom" secondItem="991-g1-YGZ" secondAttribute="bottom" id="fm8-UI-Cg5"/>
+                            <constraint firstItem="pnT-Uj-1yT" firstAttribute="centerX" secondItem="YLL-qf-lns" secondAttribute="centerX" id="jQs-gu-h5I"/>
+                            <constraint firstItem="3ye-bg-xJ5" firstAttribute="centerX" secondItem="YLL-qf-lns" secondAttribute="centerX" id="maQ-zF-Trc"/>
+                            <constraint firstItem="991-g1-YGZ" firstAttribute="trailing" secondItem="YLL-qf-lns" secondAttribute="trailing" id="o3v-T5-HuX"/>
+                            <constraint firstItem="MK1-SW-Mlp" firstAttribute="centerY" secondItem="YLL-qf-lns" secondAttribute="centerY" id="t8y-Pz-7Sf"/>
+                            <constraint firstItem="MK1-SW-Mlp" firstAttribute="centerX" secondItem="YLL-qf-lns" secondAttribute="centerX" id="uk4-6i-4zY"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="YLL-qf-lns"/>
                     </view>
                     <connections>
@@ -63,7 +121,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9nY-0c-opN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="114" y="-537"/>
+            <point key="canvasLocation" x="112.8" y="-537.192118226601"/>
         </scene>
         <!--Explain View Controller-->
         <scene sceneID="K7u-Av-ZVn">
@@ -73,6 +131,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Main Menu Congklak - ungu" translatesAutoresizingMaskIntoConstraints="NO" id="xUu-b4-twB">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <variation key="heightClass=regular-widthClass=regular" image="BG Purple Ipad"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aAj-A9-HeH">
                                 <rect key="frame" x="165" y="717" width="45" height="30"/>
                                 <state key="normal" title="Button"/>
@@ -96,11 +158,15 @@
                             <constraint firstItem="aAj-A9-HeH" firstAttribute="top" secondItem="nUK-jw-ite" secondAttribute="bottom" constant="21" id="BiW-EP-sb4"/>
                             <constraint firstItem="nUK-jw-ite" firstAttribute="top" secondItem="V0s-zs-Xb6" secondAttribute="top" id="M5u-K3-31j"/>
                             <constraint firstItem="V0s-zs-Xb6" firstAttribute="trailing" secondItem="aAj-A9-HeH" secondAttribute="trailing" constant="165" id="Nxx-7y-qbS"/>
+                            <constraint firstItem="xUu-b4-twB" firstAttribute="trailing" secondItem="V0s-zs-Xb6" secondAttribute="trailing" id="OdM-sb-gTm"/>
                             <constraint firstItem="aAj-A9-HeH" firstAttribute="centerX" secondItem="nUK-jw-ite" secondAttribute="centerX" id="R9d-xK-cVU"/>
                             <constraint firstItem="V0s-zs-Xb6" firstAttribute="trailing" secondItem="nUK-jw-ite" secondAttribute="trailing" id="S1z-La-toU"/>
                             <constraint firstItem="nUK-jw-ite" firstAttribute="leading" secondItem="V0s-zs-Xb6" secondAttribute="leading" id="ZrK-qh-V4L"/>
+                            <constraint firstItem="xUu-b4-twB" firstAttribute="top" secondItem="i19-Y7-MBm" secondAttribute="top" id="giP-PF-Vpj"/>
                             <constraint firstItem="aAj-A9-HeH" firstAttribute="top" secondItem="4UH-od-180" secondAttribute="top" id="gnA-jO-Ma5"/>
                             <constraint firstItem="aAj-A9-HeH" firstAttribute="leading" secondItem="4UH-od-180" secondAttribute="trailing" constant="55" id="ih0-VL-4eu"/>
+                            <constraint firstItem="xUu-b4-twB" firstAttribute="leading" secondItem="V0s-zs-Xb6" secondAttribute="leading" id="t20-hn-Xm1"/>
+                            <constraint firstAttribute="bottom" secondItem="xUu-b4-twB" secondAttribute="bottom" id="yzr-1R-e1y"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="V0s-zs-Xb6"/>
                     </view>
@@ -122,4 +188,8 @@
             <point key="canvasLocation" x="758" y="-537"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="BG Purple Ipad" width="4096" height="5464"/>
+        <image name="Main Menu Congklak - ungu" width="1500" height="3248"/>
+    </resources>
 </document>
