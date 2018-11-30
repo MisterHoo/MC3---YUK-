@@ -44,9 +44,6 @@ extension GameplayViewController {
             player1.center = currentPlayerPoss
             player2.center = nextPlayerPoss
         }
-        //set Position
-//        changePlayerNotif.center = CGPoint.init(x: (self.screenWidth/2), y: (self.screenHeight/2)) //set BG to center
-//        changePlayerNotifText.center = CGPoint.init(x: -(self.changePlayerNotifText.bounds.width/2), y: self.screenHeight/2)
         changePlayerNotifText.alpha = 1
         
         //tambahin view
@@ -70,9 +67,6 @@ extension GameplayViewController {
             stepOne(widthText: 167)
         }
     
-//           timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(stepOne), userInfo: nil, repeats: false)
-        
-
     }
     
     func stepOne(widthText : CGFloat){
@@ -82,7 +76,6 @@ extension GameplayViewController {
             self.isPaused = true
             print("step 1 masuk")
             self.changePlayerNotif.alpha = 1
-            //self.changePlayerNotifText.center = CGPoint.init(x: (self.screenWidth/2), y: (self.screenHeight/2))
             self.changePlayerNotifTextTrailingConstraint.constant = self.screenWidth/2 - widthText/2
             self.changePlayerNotifTextLeadingConstraint.constant = self.screenWidth/2 - widthText/2
             self.view.layoutIfNeeded()

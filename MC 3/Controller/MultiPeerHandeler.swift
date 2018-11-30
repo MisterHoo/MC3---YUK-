@@ -10,22 +10,11 @@ import UIKit
 import MultipeerConnectivity
 
 class MultiPeerHandeler: NSObject, MCSessionDelegate, MCBrowserViewControllerDelegate{
-//    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-//        print(peerID)
-//        print(info)
-//    }
-//
-//    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-//        print(peerID)
-//    }
-//
-//    , MCNearbyServiceBrowserDelegate
     
     
     var peerID:MCPeerID!
     var mcSession:MCSession!
     var mcAdvertiserAssistant:MCAdvertiserAssistant!
-//    var mcServiceBrowser:MCNearbyServiceBrowser!
     var mcBrowser:MCBrowserViewController!
     
     var namaPlayer:String = UIDevice.current.name
@@ -38,8 +27,6 @@ class MultiPeerHandeler: NSObject, MCSessionDelegate, MCBrowserViewControllerDel
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .none)
         mcSession.delegate = self
         print(mcSession)
-//        mcServiceBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: "hws-kb")
-//        mcServiceBrowser.delegate = self
     }
     
     func startHosting() {
@@ -50,40 +37,7 @@ class MultiPeerHandeler: NSObject, MCSessionDelegate, MCBrowserViewControllerDel
     func joinSession() {
         mcBrowser = MCBrowserViewController(serviceType: "hws-kb", session: mcSession)
         mcBrowser.delegate = self
-        
-//        mcServiceBrowser.startBrowsingForPeers()
-        
     }
-   
-    
-//    func joinSession(){
-//        browser = MCBrowserViewController(serviceType: "ba-td", session: self.mcSession)
-//    }
-//    func host(advertise: Bool) {
-//        if advertise {
-//            self.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "ba-td", discoveryInfo: nil, session: self.mcSession)
-//            self.mcAdvertiserAssistant.start()
-//        }else{
-//            self.mcAdvertiserAssistant.stop()
-//            self.mcAdvertiserAssistant = nil
-//        }
-//    }
-    
-    // MARK: - Send Data
-//    func sendImage(img: UIImage) {
-//        if mcSession.connectedPeers.count > 0 {
-//            if let imageData = UIImagePNGRepresentation(img) {
-//                do {
-//                    try mcSession.send(imageData, toPeers: mcSession.connectedPeers, with: .reliable)
-//                } catch let error as NSError {
-//                    let ac = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
-//                    ac.addAction(UIAlertAction(title: "OK", style: .default))
-//                    present(ac, animated: true)
-//                }
-//            }
-//        }
-//    }
-   
     // MARK: - MC Delegate Func
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         

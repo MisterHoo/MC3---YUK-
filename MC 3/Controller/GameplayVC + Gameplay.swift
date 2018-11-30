@@ -17,8 +17,6 @@ extension GameplayViewController {
     
     @objc func tapped (tapRecognizer : UITapGestureRecognizer){
         let location = tapRecognizer.location(in: sceneView)
-        
-        //print(location)
         //when board hasn't delploy
         if boardFlag == false {
             addNodeAtLocation(location: location)
@@ -40,7 +38,6 @@ extension GameplayViewController {
             DispatchQueue.main.async {
                 self.updateLabel(label: self.currentBeanInHandLabel, input: self.counterHand)
             }
-            //print("\(counterHand),\(indexHoleColumn)|\(indexHoleRow)")
         }
     }
     
@@ -320,32 +317,6 @@ extension GameplayViewController {
         }else {
             putSeed.play()
         }
-        
-
-//        var newPerson = [NamaLubang]()
-//
-//        //add some values into custom class.
-//        newPerson.append(NamaLubang(name: nama, age: 45))
-//        let newPerson = NamaLubang(name: nama, age: 0)
-//
-//
-//
-//        //store you class object into NSUserDefaults.
-//        let personData = NSKeyedArchiver.archivedData(withRootObject: newPerson)
-//        UserDefaults().set(personData, forKey: "personData")
-        
-//        multipeerSession.sendToAllPeers(personData)
-//
-//        let willSendObject = NamaLubang(name: nama)
-//        do {
-//            let data = try? NSKeyedArchiver.archivedData(withRootObject: willSendObject, requiringSecureCoding: true)
-//        } catch {
-//            print("error archived Data")
-//        }
-        
-//        guard let data = try? NSKeyedArchiver.archivedData(withRootObject: nodeKacang, requiringSecureCoding: true)
-//            else { fatalError("can't encode node") }
-//
     }
     
     // MARK: send Selected Hole to MultiPeer
@@ -407,10 +378,8 @@ extension GameplayViewController {
         
         if currentPlayer == 1{
             currentPlayer = 2
-            //updateLabel(label: currentPlayerLabel, input: currentPlayer)
         }else{
             currentPlayer = 1
-            //updateLabel(label: currentPlayerLabel, input: currentPlayer)
         }
         print(currentPlayer)
         DispatchQueue.main.async {
@@ -434,7 +403,6 @@ extension GameplayViewController {
             addKacang(parentNode: gameBoard.goalPostBoxA, style: .heavy )
             counterA += 1
             DispatchQueue.main.async {
-                //self.updateIndicatorGoalPost()
                 self.clearHighlight(parentNode: selectedHole)
                 self.highlightZeroInHand()
                 self.updateLabel(label: self.scoreALabel, input: self.counterA)
@@ -444,7 +412,6 @@ extension GameplayViewController {
             addKacang(parentNode: gameBoard.goalPostBoxB, style: .heavy )
             counterB += 1
             DispatchQueue.main.async {
-                //self.updateIndicatorGoalPost()
                 self.clearHighlight(parentNode: selectedHole)
                 self.highlightZeroInHand()
                 self.updateLabel(label: self.scoreBLabel, input: self.counterB)
@@ -458,7 +425,6 @@ extension GameplayViewController {
         indexHoleRow = 0
         counterA += 1
         DispatchQueue.main.async {
-            //self.updateIndicatorGoalPost()
             self.updateLabel(label: self.scoreALabel, input: self.counterA)
         }
         
@@ -470,7 +436,6 @@ extension GameplayViewController {
         indexHoleRow = 0
         counterB += 1
         DispatchQueue.main.async {
-            //self.updateIndicatorGoalPost()
             self.updateLabel(label: self.scoreBLabel, input: self.counterB)
         }
     }
@@ -513,7 +478,6 @@ extension GameplayViewController {
         checkGameOver()
         if isGameOver == false {
             for i in 0...6{
-                //clearHighlight(parentNode: gameBoard.holeBox[currentPlayer-1][i])
                 if gameBoard.holeBox[currentPlayer-1][i].childNodes.count != 8{
                     let highlight = gameBoard.holeBox[currentPlayer-1][i].childNode(withName: "Highlight", recursively: false)
                     highlight?.isHidden = false
@@ -709,42 +673,12 @@ extension GameplayViewController {
         }
     }
     
-//    func updateIndicatorGoalPost(){
-//
-//        DispatchQueue.global(qos: .userInitiated).async {
-//            var counterBean = 0
-//            for child in self.gameBoard.goalPostBoxA.childNodes{
-//                if child.name == nil{
-//                    counterBean += 1
-//                }
-//            }
-//            let txtNodeA = self.gameBoard.goalPostBoxA.childNode(withName: "SumBeanNode", recursively: false)
-//            DispatchQueue.main.async {
-//                  txtNodeA?.geometry = self.createSCNTextforNumberBean(value: counterBean, color: UIColor(red: 90/255, green: 140/255, blue: 255/255, alpha: 1))
-//            }
-//
-//            counterBean = 0
-//            for child in self.gameBoard.goalPostBoxB.childNodes{
-//                if child.name == nil{
-//                    counterBean += 1
-//                }
-//            }
-//            let txtNodeB = self.gameBoard.goalPostBoxB.childNode(withName: "SumBeanNode", recursively: false)
-//            DispatchQueue.main.async {
-//                txtNodeB?.geometry = self.createSCNTextforNumberBean(value: counterBean, color: UIColor.red)
-//            }
-//
-//        }
-//    }
-    
     func createSCNTextforNumberBean(value : Int, color : UIColor) -> SCNText{
         var txtNote = SCNText()
         txtNote.string = String(value)
         txtNote.font = UIFont.systemFont(ofSize: 3)
-        //txtNote.font = UIFont.init(name: "Yuanti SC", size: 255)
         txtNote.extrusionDepth = 0.2
         txtNote.materials.first?.diffuse.contents = color.withAlphaComponent(0.8)
-        //txtNote.containerFrame = CGRect(x: 0, y: 0.05, width: 200, height: 200)
         txtNote.isWrapped = true
         txtNote.alignmentMode = kCAAlignmentCenter
         
@@ -755,10 +689,8 @@ extension GameplayViewController {
         var txtNote = SCNText()
         txtNote.string = value
         txtNote.font = UIFont.systemFont(ofSize: 3)
-        //txtNote.font = UIFont.init(name: "Yuanti SC", size: 255)
         txtNote.extrusionDepth = 0.2
         txtNote.materials.first?.diffuse.contents = color.withAlphaComponent(0.8)
-        //txtNote.containerFrame = CGRect(x: 0, y: 0.05, width: 200, height: 200)
         txtNote.isWrapped = true
         txtNote.alignmentMode = kCAAlignmentCenter
         
@@ -767,17 +699,11 @@ extension GameplayViewController {
     
     func createIndicatorGoalPost(){
         DispatchQueue.global(qos: .userInitiated).async {
-//            var counterBean = 0
-//            for child in self.gameBoard.goalPostBoxA.childNodes{
-//                if child.name == nil{
-//                    counterBean += 1
-//                }
-//            }
+
             let txtNodeA = SCNNode()
             txtNodeA.geometry = self.createSCNTextforGoalPost(value: "P1", color: UIColor(red: 90/255, green: 140/255, blue: 255/255, alpha: 1))
             txtNodeA.position = SCNVector3(0.02,0.01,-0.05)
             txtNodeA.eulerAngles = SCNVector3(67.5,135.05,0)
-            //txtNodeA.name = "SumBeanNode"
             txtNodeA.name = "GoalPostIndicator"
             txtNodeA.scale = SCNVector3(0.01, 0.01, 0.01)
             
@@ -785,12 +711,6 @@ extension GameplayViewController {
                 self.gameBoard.goalPostBoxA.addChildNode(txtNodeA)
             }
             
-//            counterBean = 0
-//            for child in self.gameBoard.goalPostBoxB.childNodes{
-//                if child.name == nil{
-//                    counterBean += 1
-//                }
-//            }
             let txtNodeB = SCNNode()
             txtNodeB.geometry = self.createSCNTextforGoalPost(value: "P2", color: UIColor.red)
             txtNodeB.position = SCNVector3(-0.015,0.01,0.05 )
@@ -805,7 +725,6 @@ extension GameplayViewController {
     }
     
     func createIndicatorBean(){
-        //let beanView = UIView()
         
         for i in 0...1{
             for j in 0...6{

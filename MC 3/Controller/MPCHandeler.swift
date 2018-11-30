@@ -43,13 +43,6 @@ class MPCHandeler: NSObject, MCSessionDelegate,MCBrowserViewControllerDelegate, 
         mcAdvertiserAssistant.delegate = self
         mcAdvertiserAssistant.start()
         
-//        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: MPCHandeler.serviceType)
-//        serviceAdvertiser.delegate = self
-//        serviceAdvertiser.startAdvertisingPeer()
-        
-//        serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: MPCHandeler.serviceType)
-//        serviceBrowser.delegate = self
-//        serviceBrowser.startBrowsingForPeers()
     }
     func sendToAllPeers(_ data: Data) {
         do {
@@ -134,26 +127,6 @@ class MPCHandeler: NSObject, MCSessionDelegate,MCBrowserViewControllerDelegate, 
         
         invitationHandler (true, session)
     }
-    
-    /*
-    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        switch state {
-        case MCSessionState.connected:
-            print("Connected: \(peerID.displayName)")
-            
-        case MCSessionState.connecting:
-            print("Connecting: \(peerID.displayName)")
-            
-        case MCSessionState.notConnected:
-            print("Not Connected: \(peerID.displayName)")
-        }
-    }
-    */
-    /*
-    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        receivedData = data
-    }
-    */
     
     func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID, certificateHandler: @escaping (Bool) -> Void){
         certificateHandler(true)
