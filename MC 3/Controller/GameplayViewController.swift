@@ -239,7 +239,6 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         multipeerSession.mpcHandelerDelgate = self
     
         sceneView.delegate = self
-        sceneView.session.delegate = self
         
         let scene = SCNScene()
         sceneView.scene = scene
