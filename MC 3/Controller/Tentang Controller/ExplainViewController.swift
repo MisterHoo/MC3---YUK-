@@ -16,7 +16,20 @@ class ExplainViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var cobaLabel: UILabel!
     @IBOutlet weak var pageControll: UIPageControl!
     
-    var tutorialText = ["satu","dua","tiga","empat", "lima"]
+    var tutorialTextSolo = ["Tekan Tombol Main"
+        ,"Pilih “Satu Perangkat”"
+        ,"Cari bidang datar, sampai muncul bidang persegi berwarna putih di layar perangkat"
+        ,"Tekan Bidang tersebut untuk meletakkan papan congklak"
+        , " Congklak Muncul! Selamat Bermain!"]
+    var tutorialTextDuo = ["Tekan Tombol Main","Pilih “Dua Perangkat”"
+        ,"Untuk bermain bersama, tekan “gabung” pada salah satu perangkat, hingga muncul jendela baru"
+        ,"Cari perangkat , dan tekan nama perangkat tersebut untuk gabung dalam permainan perangkat lain"
+        , "Tunggu hingga muncul tulisan connected, lalu tekan done"
+        ,"Pemain yang bergabung akan menjadi P2, dan pemain lainnya akan menjadi P1"
+        ," Untuk pemain P1, cari bidang datar, sampai muncul bidang persegi berwarna putih di layar perangkat."
+        ,"Tekan bidang tersebut untuk meletakkan papan congklak"
+        ," Untuk pemain P2, arahkan perangkat dari sudut kamera yang sama, hingga muncul papan congklak secara otomatis"
+        ,"Selamat Bermain!","NB : Jika gagal dalam mencari papan congklak, silahkan ulangi dari awal"]
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -53,26 +66,12 @@ class ExplainViewController: UIViewController, UIScrollViewDelegate {
         let pageNumber = scrollView.contentOffset.x / scrollView.frame.size.width
         pageControll.currentPage = Int(pageNumber)
         
-        switch pageNumber
-        {
-        case 0:
-            cobaLabel.text = tutorialText[0]
-            break
-        case 1:
-            cobaLabel.text = tutorialText[1]
-            break
-        case 2:
-            cobaLabel.text = tutorialText[2]
-            break
-        case 3:
-            cobaLabel.text = tutorialText[3]
-            break
-        case 4:
-            cobaLabel.text = tutorialText[4]
-            break
-        default:
-            break
+        if text == 1 {
+            cobaLabel.text = tutorialTextSolo[Int(pageNumber)]
+        }else if(text == 2) {
+            cobaLabel.text = tutorialTextDuo[Int(pageNumber)]
         }
+        
         
     }
 
