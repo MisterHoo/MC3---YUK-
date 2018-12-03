@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <variation key="heightClass=regular-widthClass=regular" image="BG Purple Ipad"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zNU-NB-Vrs">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zNU-NB-Vrs">
                                 <rect key="frame" x="170" y="698" width="35" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="Huj-CD-4OP">
@@ -31,7 +31,7 @@
                                         <variation key="heightClass=regular-widthClass=regular" constant="60"/>
                                     </constraint>
                                 </constraints>
-                                <state key="normal" title="Back"/>
+                                <state key="normal" image="Kembali"/>
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 </variation>
@@ -39,7 +39,7 @@
                                     <action selector="backToMainMenu:" destination="zBk-M3-NJv" eventType="touchUpInside" id="8EV-6W-j8e"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ye-bg-xJ5">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ye-bg-xJ5">
                                 <rect key="frame" x="103.66666666666669" y="242" width="168" height="96"/>
                                 <color key="backgroundColor" red="0.5908350912" green="0.40202268839999999" blue="0.56104654919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -50,7 +50,7 @@
                                         <variation key="heightClass=regular-widthClass=regular" constant="192"/>
                                     </constraint>
                                 </constraints>
-                                <state key="normal" title="Petunjuk Satu Perangkat"/>
+                                <state key="normal" image="satu perangkat"/>
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 </variation>
@@ -58,7 +58,7 @@
                                     <action selector="satuPerangkat:" destination="zBk-M3-NJv" eventType="touchUpInside" id="1A2-fq-psX"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MK1-SW-Mlp">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MK1-SW-Mlp">
                                 <rect key="frame" x="103.66666666666669" y="363" width="168" height="96"/>
                                 <color key="backgroundColor" red="0.5908350912" green="0.40202268839999999" blue="0.56104654919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -69,7 +69,7 @@
                                         <variation key="heightClass=regular-widthClass=regular" constant="336"/>
                                     </constraint>
                                 </constraints>
-                                <state key="normal" title="Petunjuk Dua Perangkat"/>
+                                <state key="normal" image="dua perangkat"/>
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 </variation>
@@ -77,7 +77,7 @@
                                     <action selector="duaPerangkat:" destination="zBk-M3-NJv" eventType="touchUpInside" id="p5R-Wl-Ayw"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pnT-Uj-1yT">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pnT-Uj-1yT">
                                 <rect key="frame" x="103.66666666666669" y="474" width="168" height="96"/>
                                 <color key="backgroundColor" red="0.5908350912" green="0.40202268835616439" blue="0.56104654919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -88,7 +88,7 @@
                                         <variation key="heightClass=regular-widthClass=regular" constant="336"/>
                                     </constraint>
                                 </constraints>
-                                <state key="normal" title="Tentang Kami"/>
+                                <state key="normal" image="tentangdalambantuan"/>
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 </variation>
@@ -367,5 +367,8 @@
         <image name="Tentang - Tim Isi" width="504" height="720"/>
         <image name="Tentang - Tim Judul" width="462" height="168"/>
         <image name="background tutorial" width="1357" height="3087"/>
+        <image name="dua perangkat" width="470" height="290"/>
+        <image name="satu perangkat" width="470" height="290"/>
+        <image name="tentangdalambantuan" width="470" height="290"/>
     </resources>
 </document>

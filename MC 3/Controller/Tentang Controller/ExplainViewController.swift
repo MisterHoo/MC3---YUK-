@@ -59,7 +59,11 @@ class ExplainViewController: UIViewController, UIScrollViewDelegate {
         pageControll.numberOfPages = imageArray.count
         self.mainScrollView.delegate = self
         let labelTulis = String(text)
-        cobaLabel.text = labelTulis
+        if text == 1 {
+            cobaLabel.text = tutorialTextSolo[0]
+        }else if(text == 2) {
+            cobaLabel.text = tutorialTextDuo[0]
+        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

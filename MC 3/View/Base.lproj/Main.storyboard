@@ -59,13 +59,13 @@
                                         <rect key="frame" x="15" y="237" width="158" height="340"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon solo" translatesAutoresizingMaskIntoConstraints="NO" id="eQK-iN-MVr">
-                                                <rect key="frame" x="22.666666666666657" y="0.0" width="112.66666666666669" height="248.66666666666666"/>
+                                                <rect key="frame" x="22.666666666666664" y="0.0" width="112.66666666666669" height="248.66666666666666"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="eQK-iN-MVr" secondAttribute="height" multiplier="92:203" id="cnO-GO-h0o"/>
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M4Y-Lv-MLx">
-                                                <rect key="frame" x="11.666666666666686" y="256.66666666666669" width="134.66666666666663" height="83.333333333333314"/>
+                                                <rect key="frame" x="11.666666666666671" y="256.66666666666669" width="134.66666666666663" height="83.333333333333314"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="M4Y-Lv-MLx" secondAttribute="height" multiplier="118:73" id="EVt-ux-tqJ"/>
                                                 </constraints>
@@ -100,7 +100,7 @@
                                         <rect key="frame" x="15" y="235" width="158" height="342"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon duo" translatesAutoresizingMaskIntoConstraints="NO" id="lUB-Wg-tva">
-                                                <rect key="frame" x="22.333333333333343" y="0.0" width="113.33333333333331" height="250"/>
+                                                <rect key="frame" x="22.333333333333336" y="0.0" width="113.33333333333331" height="250"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="lUB-Wg-tva" secondAttribute="height" multiplier="92:203" id="7Lc-pn-3vc"/>
                                                 </constraints>
@@ -139,7 +139,7 @@
                                     <constraint firstAttribute="height" constant="44" id="eWG-Ma-QPX"/>
                                     <constraint firstAttribute="width" constant="90" id="nXL-yF-wHG"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="tentang"/>
+                                <state key="normal" title="Button" image="bantuan"/>
                                 <connections>
                                     <action selector="creditButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zzi-wD-f16"/>
                                 </connections>
@@ -773,6 +773,7 @@
         <image name="P2 Poin" width="320" height="440"/>
         <image name="Sisa" width="320" height="320"/>
         <image name="Status BG Ipad" width="3968" height="444"/>
+        <image name="bantuan" width="555" height="250"/>
         <image name="bantuan textfield" width="1051" height="440"/>
         <image name="credit BG" width="1412" height="1944"/>
         <image name="dua perangkat" width="470" height="290"/>
@@ -783,6 +784,5 @@
         <image name="quit" width="240" height="240"/>
         <image name="satu perangkat" width="470" height="290"/>
         <image name="sound" width="240" height="240"/>
-        <image name="tentang" width="360" height="175"/>
     </resources>
 </document>
