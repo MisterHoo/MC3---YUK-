@@ -27,7 +27,7 @@ class TentangViewController: UIViewController {
     }
     @IBAction func tentangKami(_ sender: Any) {
         angka = 3
-        performSegue(withIdentifier: "Explanation", sender: self)
+        performSegue(withIdentifier: "ToTentangKami", sender: self)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         

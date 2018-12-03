@@ -172,10 +172,6 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
             
             self.dismiss(animated: true, completion: nil)
             self.moveToGame()
-            
-            //            browserViewController.delegate = self
-            //            self.isServer = false
-            //            NotificationCenter.default.post(name: Notification.Name(rawValue: "MOVE"), object: nil)
         }
     }
     func moveToGame(){
@@ -191,17 +187,7 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
         dismiss(animated: false, completion: nil)
     }
-    
-    //VC
-    
-    //    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    //        textField.resignFirstResponder()
-    //
-    //        UserDefaults.standard.set(usernameTextField.text, forKey: "Username")
-    //
-    //        return true
-    //    }
-    //
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination as? GameplayViewController
         
@@ -259,8 +245,6 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //        NotificationCenter.default.addObserver(self, selector: #selector(moveToGameVC), name: NSNotification.Name(rawValue: "MPC_DidRecieveDataNotification"), object: nil)
-        //        NotificationCenter.default.addObserver(self, selector: #selector(moveToGameVC), name: NSNotification.Name(rawValue: "MPC_DidChangeStateNotification"), object: nil)
         DispatchQueue.main.async {
             self.initPosition()
             self.didLoadAnimate()
@@ -315,10 +299,6 @@ class ViewController: UIViewController, UITextFieldDelegate,MCBrowserViewControl
         viewHelperDualBottomConstraint.constant = 34
         
         view.alpha = 1
-        //        let helperview = UIView()
-        //        helperview.backgroundColor = UIColor.white
-        //        helperview.frame = CGRect(x: bgBlueLeadingConstraint.constant, y: 0, width: 20, height: 20)
-        //        view.addSubview(helperview)
         
         buttonMain.isEnabled = true
         backButton.isEnabled = false

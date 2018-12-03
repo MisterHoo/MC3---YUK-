@@ -117,6 +117,7 @@
                     <connections>
                         <segue destination="GE3-C1-Nfh" kind="show" identifier="backToMain" id="wJy-WT-aDL"/>
                         <segue destination="T1T-Zd-eau" kind="showDetail" identifier="Explanation" id="a36-yp-77O"/>
+                        <segue destination="kDr-GD-SgD" kind="show" identifier="ToTentangKami" id="qbJ-8S-oWj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9nY-0c-opN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -237,11 +238,134 @@
             </objects>
             <point key="canvasLocation" x="758" y="-537"/>
         </scene>
+        <!--Tentang Kami View Controller-->
+        <scene sceneID="4Hm-l4-Uvh">
+            <objects>
+                <viewController id="kDr-GD-SgD" customClass="TentangKamiViewController" customModule="MC_3" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ksa-fe-859">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Main Menu Congklak - ungu" translatesAutoresizingMaskIntoConstraints="NO" id="Hpu-QC-LPC">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gls-36-dtr">
+                                <rect key="frame" x="22" y="109" width="331" height="669"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContentCell" rowHeight="549" id="Wzd-HW-5ih" customClass="TentangKamiTableViewCell" customModule="MC_3" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="331" height="549"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Wzd-HW-5ih" id="Tk6-Pt-ZLe">
+                                            <rect key="frame" x="0.0" y="0.0" width="331" height="548.66666666666663"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tentang - Judul" translatesAutoresizingMaskIntoConstraints="NO" id="Fa5-XI-kUI">
+                                                    <rect key="frame" x="88.666666666666686" y="16" width="154" height="55"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="55" id="7xc-bc-5h8">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="165"/>
+                                                        </constraint>
+                                                        <constraint firstAttribute="width" constant="154" id="BVR-me-Eef">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="462"/>
+                                                        </constraint>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tentang - Tim Isi" translatesAutoresizingMaskIntoConstraints="NO" id="DMa-Ta-lzT">
+                                                    <rect key="frame" x="81.666666666666686" y="258.66666666666669" width="168" height="240"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="168" id="VhC-vj-176">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="504"/>
+                                                        </constraint>
+                                                        <constraint firstAttribute="height" constant="240" id="Zjg-zv-Hkn">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="720"/>
+                                                        </constraint>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tentang - Tim Judul" translatesAutoresizingMaskIntoConstraints="NO" id="786-b7-Ffz">
+                                                    <rect key="frame" x="88.666666666666686" y="152.66666666666666" width="154" height="56"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="56" id="kRD-qS-FNb">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="168"/>
+                                                        </constraint>
+                                                        <constraint firstAttribute="width" constant="154" id="v5f-xY-BWl">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="462"/>
+                                                        </constraint>
+                                                    </constraints>
+                                                </imageView>
+                                                <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZQ1-Sc-wnW">
+                                                    <rect key="frame" x="0.0" y="96" width="331" height="6.6666666666666714"/>
+                                                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <wkWebViewConfiguration key="configuration">
+                                                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                                        <wkPreferences key="preferences"/>
+                                                    </wkWebViewConfiguration>
+                                                </wkWebView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="ZQ1-Sc-wnW" firstAttribute="top" secondItem="Fa5-XI-kUI" secondAttribute="bottom" constant="25" id="Fbp-gO-0w9"/>
+                                                <constraint firstItem="Fa5-XI-kUI" firstAttribute="top" secondItem="Tk6-Pt-ZLe" secondAttribute="topMargin" constant="5" id="Qz6-rO-b7k"/>
+                                                <constraint firstItem="786-b7-Ffz" firstAttribute="top" secondItem="ZQ1-Sc-wnW" secondAttribute="bottom" constant="50" id="Uds-kO-VCG"/>
+                                                <constraint firstAttribute="bottom" secondItem="DMa-Ta-lzT" secondAttribute="bottom" constant="50" id="VPs-tO-hmh"/>
+                                                <constraint firstItem="ZQ1-Sc-wnW" firstAttribute="leading" secondItem="Tk6-Pt-ZLe" secondAttribute="leading" id="Wd9-IB-5gG"/>
+                                                <constraint firstItem="DMa-Ta-lzT" firstAttribute="centerX" secondItem="Tk6-Pt-ZLe" secondAttribute="centerX" id="XSn-U4-dCx"/>
+                                                <constraint firstItem="Fa5-XI-kUI" firstAttribute="centerX" secondItem="Tk6-Pt-ZLe" secondAttribute="centerX" id="b1y-xZ-r2m"/>
+                                                <constraint firstItem="DMa-Ta-lzT" firstAttribute="top" secondItem="786-b7-Ffz" secondAttribute="bottom" constant="50" id="kvg-ko-Po9"/>
+                                                <constraint firstAttribute="trailing" secondItem="ZQ1-Sc-wnW" secondAttribute="trailing" id="mzb-RN-vGH"/>
+                                                <constraint firstItem="786-b7-Ffz" firstAttribute="centerX" secondItem="Tk6-Pt-ZLe" secondAttribute="centerX" id="vrv-yA-lia"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="contentTentangKami" destination="ZQ1-Sc-wnW" id="dXK-8e-veM"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="phc-XZ-Fnu">
+                                <rect key="frame" x="22" y="60" width="90" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="cD6-6m-STR"/>
+                                    <constraint firstAttribute="height" constant="44" id="jHG-ke-jSp"/>
+                                </constraints>
+                                <state key="normal" image="Kembali"/>
+                                <connections>
+                                    <action selector="tombolDismiss:" destination="kDr-GD-SgD" eventType="touchUpInside" id="YXA-iT-nUU"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="phc-XZ-Fnu" firstAttribute="top" secondItem="ANL-VO-m6c" secondAttribute="top" constant="16" id="2co-X2-pO2"/>
+                            <constraint firstItem="Hpu-QC-LPC" firstAttribute="top" secondItem="ksa-fe-859" secondAttribute="top" id="5Xo-LS-yNc"/>
+                            <constraint firstItem="Hpu-QC-LPC" firstAttribute="leading" secondItem="ksa-fe-859" secondAttribute="leading" id="Aeh-lC-98T"/>
+                            <constraint firstItem="gls-36-dtr" firstAttribute="top" secondItem="phc-XZ-Fnu" secondAttribute="bottom" constant="5" id="ElX-oB-0eB"/>
+                            <constraint firstAttribute="trailing" secondItem="Hpu-QC-LPC" secondAttribute="trailing" id="MK8-Hi-ZyB"/>
+                            <constraint firstItem="phc-XZ-Fnu" firstAttribute="leading" secondItem="ANL-VO-m6c" secondAttribute="leading" constant="22" id="SMY-Pk-wLB"/>
+                            <constraint firstItem="gls-36-dtr" firstAttribute="leading" secondItem="ANL-VO-m6c" secondAttribute="leading" constant="22" id="UWS-5i-g36"/>
+                            <constraint firstItem="ANL-VO-m6c" firstAttribute="bottom" secondItem="gls-36-dtr" secondAttribute="bottom" id="Xr7-T8-VPs"/>
+                            <constraint firstItem="ANL-VO-m6c" firstAttribute="trailing" secondItem="gls-36-dtr" secondAttribute="trailing" constant="22" id="dAh-2m-fBE"/>
+                            <constraint firstAttribute="bottom" secondItem="Hpu-QC-LPC" secondAttribute="bottom" id="e8l-8k-4s1"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ANL-VO-m6c"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="gls-36-dtr" id="GKG-ol-vTc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H0Q-mn-inm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1024.8" y="-164.03940886699507"/>
+        </scene>
     </scenes>
     <resources>
         <image name="BG Purple Ipad" width="4096" height="5464"/>
         <image name="Kembali" width="360" height="175"/>
         <image name="Main Menu Congklak - ungu" width="1500" height="3248"/>
+        <image name="Tentang - Judul" width="462" height="165"/>
+        <image name="Tentang - Tim Isi" width="504" height="720"/>
+        <image name="Tentang - Tim Judul" width="462" height="168"/>
         <image name="background tutorial" width="1357" height="3087"/>
     </resources>
 </document>
