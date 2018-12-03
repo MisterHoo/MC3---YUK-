@@ -145,12 +145,17 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c6F-3m-9LZ" userLabel="image Container View">
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="408"/>
                                         <subviews>
-                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUK-jw-ite">
-                                                <rect key="frame" x="0.0" y="0.0" width="315" height="410"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUK-jw-ite">
+                                                <rect key="frame" x="0.0" y="0.0" width="315" height="408"/>
                                             </scrollView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="nUK-jw-ite" firstAttribute="top" secondItem="c6F-3m-9LZ" secondAttribute="top" id="KgH-R6-0b2"/>
+                                            <constraint firstAttribute="trailing" secondItem="nUK-jw-ite" secondAttribute="trailing" id="ZwD-AU-UPS"/>
+                                            <constraint firstAttribute="bottom" secondItem="nUK-jw-ite" secondAttribute="bottom" id="bQM-Ih-4DW"/>
+                                            <constraint firstItem="nUK-jw-ite" firstAttribute="leading" secondItem="c6F-3m-9LZ" secondAttribute="leading" id="udW-xi-xFd"/>
+                                        </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4UH-od-180">
                                         <rect key="frame" x="0.0" y="418" width="315" height="230"/>
