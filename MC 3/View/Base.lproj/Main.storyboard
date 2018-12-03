@@ -139,7 +139,7 @@
                                     <constraint firstAttribute="height" constant="44" id="eWG-Ma-QPX"/>
                                     <constraint firstAttribute="width" constant="90" id="nXL-yF-wHG"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="bantuan"/>
+                                <state key="normal" image="bantuan"/>
                                 <connections>
                                     <action selector="creditButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zzi-wD-f16"/>
                                 </connections>

@@ -51,8 +51,22 @@ extension TentangKamiViewController : UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let sizeCell = rectForText(text: tentangCongklak, font: UIFont.systemFont(ofSize: 16), maxSize: CGSize(width: tableView.frame.width, height: 3000))
-        return sizeCell.height + 550
+        
+        if self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClass.regular && self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClass.regular {
+            
+            let sizeCell = rectForText(text: tentangCongklak, font: UIFont.systemFont(ofSize: 51), maxSize: CGSize(width: tableView.frame.width, height: 10000))
+            
+            print(sizeCell.height)
+            
+            return sizeCell.height + 1100
+        }else{
+            
+            let sizeCell = rectForText(text: tentangCongklak, font: UIFont.systemFont(ofSize: 18), maxSize: CGSize(width: tableView.frame.width, height: 10000))
+            
+            print(sizeCell.height)
+            
+            return sizeCell.height + 550
+        }
     }
     
     func rectForText(text: String, font: UIFont, maxSize: CGSize) -> CGSize {

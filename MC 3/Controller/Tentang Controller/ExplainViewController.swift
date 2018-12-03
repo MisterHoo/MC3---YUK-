@@ -45,7 +45,17 @@ class ExplainViewController: UIViewController, UIScrollViewDelegate {
         default:
             break
         }
+        
+    }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        print(mainScrollView.frame.width)
+        
         for i in 0..<imageArray.count{
             let imageView = UIImageView()
             imageView.image = imageArray[i]
@@ -54,8 +64,11 @@ class ExplainViewController: UIViewController, UIScrollViewDelegate {
             imageView.frame = CGRect(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
             
             mainScrollView.contentSize.width = mainScrollView.frame.width * CGFloat(i + 1)
+            
+            print(imageView.frame.width)
             mainScrollView.addSubview(imageView)
         }
+        
         pageControll.numberOfPages = imageArray.count
         self.mainScrollView.delegate = self
         let labelTulis = String(text)
@@ -64,9 +77,13 @@ class ExplainViewController: UIViewController, UIScrollViewDelegate {
         }else if(text == 2) {
             cobaLabel.text = tutorialTextDuo[0]
         }
+        
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        print(mainScrollView.frame.width)
+        
         let pageNumber = scrollView.contentOffset.x / scrollView.frame.size.width
         pageControll.currentPage = Int(pageNumber)
         
