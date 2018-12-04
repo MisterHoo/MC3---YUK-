@@ -285,7 +285,7 @@ class GameplayViewController: UIViewController, ARSCNViewDelegate, MCBrowserView
         
         
         //debugOptions
-        sceneView.showsStatistics = true
+        //sceneView.showsStatistics = true
         
         //configure Tap Gesture
         let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(self.tapped(tapRecognizer:)))
