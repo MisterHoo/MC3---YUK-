@@ -39,9 +39,7 @@ class ExplainViewController: UIViewController, UIScrollViewDelegate {
         case 1:
             imageArray = [#imageLiteral(resourceName: "1p step 1"),#imageLiteral(resourceName: "1p step 2"),#imageLiteral(resourceName: "1p step 3"),#imageLiteral(resourceName: "1p step 4"),#imageLiteral(resourceName: "1p step 5")]
         case 2:
-            imageArray = [#imageLiteral(resourceName: "BG Duo"),#imageLiteral(resourceName: "BG Splash & Main Menu - ungu"),#imageLiteral(resourceName: "BG Solo Ipad")]
-        case 3:
-            imageArray = [#imageLiteral(resourceName: "BG Solo Ipad"),#imageLiteral(resourceName: "BG Duo")]
+            imageArray = [UIImage(named: "2p step 1"),UIImage(named: "2p step 2"),UIImage(named: "2p step 3"),UIImage(named: "2p step 4"),UIImage(named: "2p step 5"),UIImage(named: "2p step 6"),UIImage(named: "2p step 7"),UIImage(named: "2p step 8"),UIImage(named: "2p step 9"),UIImage(named: "2p step 10")] as! [UIImage]
         default:
             break
         }
@@ -54,7 +52,6 @@ class ExplainViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        print(mainScrollView.frame.width)
         
         for i in 0..<imageArray.count{
             let imageView = UIImageView()
@@ -64,8 +61,6 @@ class ExplainViewController: UIViewController, UIScrollViewDelegate {
             imageView.frame = CGRect(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
             
             mainScrollView.contentSize.width = mainScrollView.frame.width * CGFloat(i + 1)
-            
-            print(imageView.frame.width)
             mainScrollView.addSubview(imageView)
         }
         
@@ -81,8 +76,6 @@ class ExplainViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        print(mainScrollView.frame.width)
         
         let pageNumber = scrollView.contentOffset.x / scrollView.frame.size.width
         pageControll.currentPage = Int(pageNumber)
